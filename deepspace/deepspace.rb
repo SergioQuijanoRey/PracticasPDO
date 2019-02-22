@@ -36,9 +36,9 @@ module WeaponType
 	end
 
 	# Tipos de armas que acepta nuestro juego
-	LASER=		:Type.new(2.0)
-	MISSILE=	:Type.new(3.0)
-	PLASMA=		:Type.new(4.0)
+	LASER=		Type.new(2.0)
+	MISSILE=	Type.new(3.0)
+	PLASMA=		Type.new(4.0)
 end
 
 # WIP -- HASTA AQUI
@@ -189,9 +189,7 @@ class ShieldBooster
 		@name = _name
 		@boost = _boost
 		@uses = _uses
-	endDice
-	Esta clase tiene la responsabilidad de tomar todas las decisiones que dependen del azar en el juego.
-	Es como
+	end
 
 	# Getters
 	#===========================================================================
@@ -332,6 +330,7 @@ class Dice
 			return 2
 		else
 			return 3
+		end
 
 		# Security check
 		puts "WARNING! UNEXPECTED CONDITION AT Dice.initWIthNWeapons"
@@ -360,7 +359,7 @@ class Dice
 	#	Determines which player will start the match randomly.
 	# Return
 	#	Integer, from 0 to nPlayers-1
-	def whoStarts(int nPlayers)
+	def whoStarts(nPlayers)
 		return @generator.rand(nPlayers)		
 	end
 
@@ -378,10 +377,6 @@ class Dice
 	
 	# WIP
 	def spaceStationMovers(speed)
-		if @generator.rand < speed
-			return true
-		else
-			return false
-		end
+		return @generator.rand < speed
 	end
 end
