@@ -1,6 +1,6 @@
 #encondig:utf-8
 
-# WIP -- Translatio
+# WIP -- Translation
 # Clase que representa el botin que se obtiene al vencer a una nave enemiga
 class Loot
 
