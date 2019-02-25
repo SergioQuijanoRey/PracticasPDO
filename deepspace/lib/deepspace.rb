@@ -1,48 +1,5 @@
 #encoding:utf-8
 
-# WIP -- DESDE AQUI : Meterlo en otro archivo
-# Enum to control the possible combat outcomes
-module CombatResult
-	ENEMYWINS=		:enemywins
-	NOCOMBAT=		:nocombat
-	STATIONESCAPES=	:stationescapes
-	STATIONWINS=	:stationwins
-end
-
-# Enumerado para representar los dos tipos de jugadores que admite el juego
-module GameCharacter
-	SPACESTATION=	:spacestation
-	ENEMYSTARSHIP=	:enemystarship
-end
-
-# Enumerado para representar el resultado de un disparo recibido por una nave
-# enemiga o una estación espacial
-module ShotResult
-	DONOTRESIST=	:donotresist
-	RESIST=			:resist
-end
-
-# Enumerado para representar los tipos de armas
-module WeaponType
-	# Clase que representa los tipos de armas
-	class Type
-		def initialize(pow)
-			@POWER = pow
-		end
-		
-		def power
-			return @POWER
-		end
-	end
-
-	# Tipos de armas que acepta nuestro juego
-	LASER=		Type.new(2.0)
-	MISSILE=	Type.new(3.0)
-	PLASMA=		Type.new(4.0)
-end
-
-# WIP -- HASTA AQUI
-
 # Clase que representa el botin que se obtiene al vencer a una nave enemiga
 class Loot
 
