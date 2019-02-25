@@ -1,5 +1,6 @@
 #encoding:utf-8
 
+# WIP -- Documentation needed
 # Class to represent the weapons that a space station can dispose of to
 # increment its energy when shooting
 class Weapon
