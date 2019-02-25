@@ -42,7 +42,7 @@ do
 			# We found a coincidence, we do not look for more coincidences, thus break
 			if [ ! "$coincidence" ] 
 			then
-				echo "File $path/$file is not finished! It contains a $keyword mark"
+				echo "File $path is not finished! It contains a $keyword mark"
 				break
 			fi
 		done
