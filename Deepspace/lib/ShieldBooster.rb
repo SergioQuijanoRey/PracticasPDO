@@ -9,9 +9,9 @@ class ShieldBooster
 	# Description:
 	# 	Class initializer
 	# Parameters:
-	# 	name: WIP
-	# 	boost: WIP
-	# 	uses: integer to parametrize shield power
+	# 	name: String, name of the shield booster
+	# 	boost: Float, percentage of damage absorbed by the shield
+	# 	uses: Integer, how many uses the ShieldBooster have
 	# Return:
 	# 	Nil
 	def initialize(_name, _boost, _uses)
@@ -19,10 +19,8 @@ class ShieldBooster
 		@boost = _boost
 		@uses = _uses
 	end
-
-	# Getters
-	#===========================================================================
-
+	
+	# WIP -- BUG -- I think @ should not appear
 	# Description:
 	# 	Copy Constructor
 	# Parameters:
@@ -32,6 +30,9 @@ class ShieldBooster
 	def newCopy(origin)
 		return ShieldBooster.new(@origin.name, @origin.boost, @origin.uses)
 	end
+
+	# Getters
+	#===========================================================================
 
 	# Description:
 	# 	Getter for boost
@@ -49,14 +50,25 @@ class ShieldBooster
 		return @uses
 	end
 
-	# WIP
+	# WIP -- En el guion no dice nada de que haya un getter para Name
+	# WIP -- pero seria recomendable para el constructor de copia
+
+	# SETTERS
 	#===========================================================================
 
+	# Description:
+	# 	Uses our shield booster
+	# 	If is still available (uses is greater than 0), we can use the boost
+	# 	Otherwise, we cannot use the boost
+	# Return:
+	# 	Float:
+	# 		Boost if uses > 0
+	#		1.0 if uses == 0
 	def useIt
-		if @uses > 0
-			@uses -= 1
+		if @uses > 0 # We can use our shield booster
+			@uses = @uses - 1
 			return @boost
-		else
+		else				# Shield booster is drained
 			return 1.0
 		end
 	end
