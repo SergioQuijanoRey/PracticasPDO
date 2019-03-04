@@ -1,5 +1,7 @@
 #encoding:utf-8
 
+# WIP -- Check english comments (posbile mistakes :D )
+
 # Enum to control the possible combat outcomes
 module CombatResult
 	ENEMYWINS=		:enemywins
@@ -8,37 +10,43 @@ module CombatResult
 	STATIONWINS=	:stationwins
 end
 
-# WIP -- English translation
-# Enumerado para representar los dos tipos de jugadores que admite el juego
+# Enum to represent the two types of characters of the game
 module GameCharacter
 	SPACESTATION=	:spacestation
 	ENEMYSTARSHIP=	:enemystarship
 end
 
-# WIP -- English translation
-# Enumerado para representar el resultado de un disparo recibido por una nave
-# enemiga o una estación espacial
+# Enum to represent the result of a shot taken
 module ShotResult
-	DONOTRESIST=	:donotresist
+	DONOTRESIST=		:donotresist
 	RESIST=			:resist
 end
 
-# WIP -- English translation
-# Enumerado para representar los tipos de armas
+# Enum to represent the types of weapons available on the game
 module WeaponType
-	# Clase que representa los tipos de armas
+	# Class to represent the types of weapons
 	class Type
+		# Description:
+		# 	Initializer of the class
+		# Parameters:	
+		# 	pow: integer to represent the power of the weapon
+		# Return:
+		# 	Nil
 		def initialize(pow)
 			@POWER = pow
 		end
 		
+		# Description:
+		# 	Power getter
+		# Return:
+		# 	An integer containing the power of the weapon
 		def power
 			return @POWER
 		end
 	end
 
-	# Tipos de armas que acepta nuestro juego
-	LASER=		Type.new(2.0)
-	MISSILE=	Type.new(3.0)
-	PLASMA=		Type.new(4.0)
+	# Types of weapons available on our game
+	LASER =		Type.new(2.0)
+	MISSILE =	Type.new(3.0)
+	PLASMA =	Type.new(4.0)
 end
