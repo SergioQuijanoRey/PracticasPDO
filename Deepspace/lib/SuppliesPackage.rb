@@ -1,7 +1,9 @@
 #encoding:utf-8
-# WIP -- Translation
-# Clase que representa a un paquete de suministros para una estacion espacial.
-# Puede contener armamento, combustible y/o energia para los escudos
+
+# WIP -- Check english comments (posible mistakes :D )
+
+# Class to represent a Supplies Package
+# It can contain ammo, fuel or shield energy
 class SuppliesPackage
 	
 	# Constructors
