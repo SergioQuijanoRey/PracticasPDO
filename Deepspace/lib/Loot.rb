@@ -1,20 +1,21 @@
 #encondig:utf-8
 
-# WIP -- Translation
-# Clase que representa el botin que se obtiene al vencer a una nave enemiga
+# WIP -- Check English comments (possible mistakes :D )
+
+# Class to represent the loot obtained by defeating a enemy ship
 class Loot
 
 	# Constructores
 	#===========================================================================
 
 	# Description:
-	# 	Inicializador de la clase 
+	# 	Class Initializer
 	# Parameters:
-	# 	nSupplies: entero para parametrizar el numero de Supplies que da un botin
-	# 	nWeapons: entero para parametrizar el numero de Weapons que da un botin
-	# 	nShields: entero que parametriza el numero de Shields que da un botin
-	# 	nHangars: entero que parametriza el numero de Hangars que da un botin
-	# 	nMedals: entero que parametriza el numero de Medals que da un botin
+	# 	nSupplies: integer representing number of Supplies given by a loot
+	# 	nWeapons: integer representing number of Weapons given by a loot
+	# 	nShields: integer representing number of Shields given by a loot
+	# 	nHangars: integer representing number of Hangars given by a loot
+	# 	nMedals: integer representing number of Medals given by a loot
 	# Return:
 	# 	Nil
 	def initialize(_nSupplies, _nWeapons, _nShields, _nHangars, _nMedals)
@@ -29,41 +30,41 @@ class Loot
 	#===========================================================================
 
 	# Description:
-	# 	Consultor publico para numero de Supplies
+	# 	Number of Supplies Getter
 	# Return
-	#	Entero con el numero de Supplies
+	#	Integer, number of Supplies given by a loot
 	def nSupplies
 		return @nSupplies
 	end
 
 	# Description:
-	# 	Consultor publico para numero de Weapons
+	# 	Number of Weapons getter
 	# Return
-	#	Entero con el numero de Weapons
+	#	Integer, number of Weapons given by a loot
 	def nWeapons
 		return @nWeapons
 	end
 	
 	# Description:
-	# 	Consultor publico para numero de Shields
+	# 	Number of Shields getter
 	# Return
-	#	Entero con el numero de Shields
+	#	Integer, number of Shields given by a loot
 	def nShields
 		return @nShields
 	end
 
 	# Description:
-	# 	Consultor publico para numero de Hangars
+	# 	Number of Hangars getter
 	# Return
-	#	Entero con el numero de Hangars
+	#	Integer, number of Hangars given by a loot
 	def nHangars
 		return @nHangars
 	end
 
 	# Description:
-	# 	Consultor publico para numero de Medals
+	# 	Number of Medals Getter
 	# Return
-	#	Entero con el numero de Medals
+	#	Integer, number of Medals given by a loot
 	def nMedals
 		return @nMedals
 	end
