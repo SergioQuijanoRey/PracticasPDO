@@ -29,7 +29,7 @@ module WeaponType
 		# Description:
 		# 	Initializer of the class
 		# Parameters:	
-		# 	pow: integer to represent the power of the weapon
+		# 	pow: Float,representing the power of the weapon
 		# Return:
 		# 	Nil
 		def initialize(pow)
@@ -39,7 +39,7 @@ module WeaponType
 		# Description:
 		# 	Power getter
 		# Return:
-		# 	An integer containing the power of the weapon
+		# 	Float, containing the power of the weapon
 		def power
 			return @POWER
 		end
