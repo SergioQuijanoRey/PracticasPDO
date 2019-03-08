@@ -1,6 +1,8 @@
 import java.util.Random;
+import GameCharacter;
 
 // WIP -- Lack of documentation
+// WIP -- Bug on import
 
 public class Dice{
 		// Private attributes
@@ -10,6 +12,7 @@ public class Dice{
 		private final float NWEAPONSPROB;
 		private final float FIRSTSHOTPROB;
 		private Random generator;
+
 		// Constructors
 		//======================================================================
 		public Dice(){
@@ -50,7 +53,7 @@ public class Dice{
 				}else if(rand_value < 2*NWEAPONSPROB){
 						return 2;
 				}else{
-						return 3
+						return 3;
 				}
 
 				System.out.println("WARNING! Unexpected condition at Dice.initWithNWeapons()");
@@ -79,7 +82,7 @@ public class Dice{
 		 * @return an integer in the interval [0, nPlayers)
 		 * */
 		public int whoStarts(int nPlayers){
-				return rand_index = generator.nextInt(nPlayers);
+				return generator.nextInt(nPlayers);
 
 		}
 
