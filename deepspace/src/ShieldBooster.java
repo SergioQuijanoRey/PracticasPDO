@@ -17,7 +17,7 @@ public class ShieldBooster{
 	}
 
 	public ShieldBooster(ShieldBooster other){
-		this(other.name, other.getBoost(), other.getUses());
+		this(other.name, other.boost, other.uses);
 	}
 
 	// Getters
