@@ -1,8 +1,11 @@
 
 // WIP -- Lack of documentation
 
+/**
+ * @brief class to represent the loot given at victory on enemy ship
+ * */
 public class Loot{
-	// Private atributes
+	// Private attributes
 	//======================================================================
 	private int nSupplies;
 	private int nWeapons;
