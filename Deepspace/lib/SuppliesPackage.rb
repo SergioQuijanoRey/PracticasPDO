@@ -64,7 +64,7 @@ class SuppliesPackage
 	# 		Displays debug info
 	# 		It uses getters to get parameters values
 	# Returns:
-	# 		A string containing the object data
+	# 		String: containing the object data
 	def to_s
 		return "SuppliesPackage(#{ammoPower}, #{fuelUnits}, #{shieldPower})"
 	end

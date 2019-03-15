@@ -73,7 +73,7 @@ class Loot
 	# 	Displays debuf info of the object
 	# 	It uses getters to get the parameters value
 	# Returns:
-	# 	Nil
+	# 	String, containing all the relevant data
 	def to_s
 		return "Loot(#{nSupplies}, #{nWeapons}, #{nShields}, #{nHangars}, #{nMedals})"
 	end
