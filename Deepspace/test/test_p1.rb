@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/Loot.rb'
+require_relative '../lib/SuppliesPackage.rb'
 
 # WIP -- Need to develop unit testing
 # WIP -- Preguntar si tenemos libertad para desarrollar los test
@@ -18,26 +19,27 @@ class TestP1
 		loot_test = Loot.new(2, 2, 2, 2, 2)
 		puts "Result: #{loot_test.to_s}"
 		 
-		# # Testing class SuppliesPackage
-		# puts "TESTING CLASS: SuppliesPackage\n"
-		# puts "Creating SuppliesPackage instance with the following parameters:"
-		# supplies_test = SuppliesPackage.new(2, 2, 2)
-		# puts "Instance created successfully"
-		# puts "Getters testing:"
-		# puts "    ammoPower=#{supplies_test.ammoPower}"
-		# puts "    fuelUnits=#{supplies_test.fuelUnits}"
-		# puts "    shieldPower=#{supplies_test.shieldPower}"
-		# puts "Creating SuppliesPackage instance as duplicate of previous instance..."
-		# supplies_test2 = SuppliesPackage.new(supplies_test)
-		# puts "Instance created successfully"
-		# if (supplies_test.ammoPower == supplies_test2.ammoPower) &&
-		#    (supplies_test.fuelUnits == supplies_test2.fuelUnits) &&
-		#    (supplies_test.shieldPower == supplies_test2.shieldPower)
-		# 	puts "Correct copy"			
-		# else
-		# 	puts "The copy is incorrect"
-		# end
-		# puts "\n\n"
+		# Testing class SuppliesPackage
+		puts "TESTING CLASS: SuppliesPackage\n"
+		puts "================================================================================"
+		puts "Creating SuppliesPackage(2, 2, 2)"
+		supplies_test = SuppliesPackage.new(2, 2, 2)
+		puts "Instance created successfully"
+		puts "Getters testing:"
+		puts "    ammoPower=#{supplies_test.ammoPower}"
+		puts "    fuelUnits=#{supplies_test.fuelUnits}"
+		puts "    shieldPower=#{supplies_test.shieldPower}"
+		puts "Creating SuppliesPackage instance as duplicate of previous instance..."
+		supplies_test2 = SuppliesPackage.new(supplies_test)
+		puts "Instance created successfully"
+		if (supplies_test.ammoPower == supplies_test2.ammoPower) &&
+		   (supplies_test.fuelUnits == supplies_test2.fuelUnits) &&
+		   (supplies_test.shieldPower == supplies_test2.shieldPower)
+			puts "Correct copy"			
+		else
+			puts "The copy is incorrect"
+		end
+		puts "\n\n"
 
 		# # Testing class ShieldBooster
 		# puts "TESTING CLASS: ShieldBooster\n"
