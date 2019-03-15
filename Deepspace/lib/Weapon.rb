@@ -59,6 +59,14 @@ class Weapon
 		return @type.power
 	end
 
+	# Description:
+	# 	Displays relevant data
+	# Returns
+	# 	String: values of the parameters
+	def to_s
+			return "Weapon(#{@name}, #{type}, #{uses})"
+	end
+
 	# Setters
 	#=======================================================================
 	

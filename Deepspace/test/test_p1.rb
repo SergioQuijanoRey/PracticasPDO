@@ -3,6 +3,8 @@
 require_relative '../lib/Loot.rb'
 require_relative '../lib/SuppliesPackage.rb'
 require_relative '../lib/ShieldBooster.rb'
+require_relative '../lib/Weapon.rb'
+require_relative '../lib/enums.rb'
 
 # WIP -- Need to develop unit testing
 # WIP -- Preguntar si tenemos libertad para desarrollar los test
@@ -47,8 +49,11 @@ class TestP1
 		puts "Original state: #{shieldbooster_test.to_s}"
 		puts "Copy state: #{shieldbooster_test2.to_s}"
 
-		# # Testing class Weapon
-		# # --WIP--
+		# Testing class Weapon
+		puts "TESTING CLASS: Weapon"
+		puts "Creating Weapon(\"weapon1\", LASER, 3)"
+		weapon_test = Weapon.new("weapon1", WeaponType::LASER, 3)
+		puts "Result: #{weapon_test.to_s}"
 
 		# # Testing class Dice
 		# # --WIP--
