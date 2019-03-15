@@ -30,7 +30,7 @@ class SuppliesPackage
 	# Return:
 	# 	A SuppliesPackage instance holding a copy of origin
 	def self.newCopy(origin)
-		return SuppliesPackage.new(@origin.ammoPower, @origin.fuelUnits, @origin.shieldPower)
+		return SuppliesPackage.new(origin.ammoPower, origin.fuelUnits, origin.shieldPower)
 	end
 
 	# Getters

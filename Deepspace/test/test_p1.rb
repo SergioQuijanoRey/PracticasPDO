@@ -24,24 +24,12 @@ class TestP1
 		puts "================================================================================"
 		puts "Creating SuppliesPackage(2, 2, 2)"
 		supplies_test = SuppliesPackage.new(2, 2, 2)
-		puts "Instance created successfully"
-		puts "Getters testing:"
-		puts "    ammoPower=#{supplies_test.ammoPower}"
-		puts "    fuelUnits=#{supplies_test.fuelUnits}"
-		puts "    shieldPower=#{supplies_test.shieldPower}"
+		puts "Result: #{supplies_test.to_s}"
 		puts "Creating SuppliesPackage instance as duplicate of previous instance..."
-		supplies_test2 = SuppliesPackage.new(supplies_test)
-		puts "Instance created successfully"
-		if (supplies_test.ammoPower == supplies_test2.ammoPower) &&
-		   (supplies_test.fuelUnits == supplies_test2.fuelUnits) &&
-		   (supplies_test.shieldPower == supplies_test2.shieldPower)
-			puts "Correct copy"			
-		else
-			puts "The copy is incorrect"
-		end
-		puts "\n\n"
+		supplies_test2 = SuppliesPackage.newCopy(supplies_test)
+		puts "Result: #{supplies_test2.to_s}"
 
-		# # Testing class ShieldBooster
+		# Testing class ShieldBooster
 		# puts "TESTING CLASS: ShieldBooster\n"
 		# puts "Creating ShieldBooster instance with the following parameters:"
 		# shieldbooster_test = ShieldBooster.new("shield_test", 56.4, 2)
