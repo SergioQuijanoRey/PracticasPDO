@@ -2,6 +2,7 @@
 
 require_relative '../lib/Loot.rb'
 require_relative '../lib/SuppliesPackage.rb'
+require_relative '../lib/ShieldBooster.rb'
 
 # WIP -- Need to develop unit testing
 # WIP -- Preguntar si tenemos libertad para desarrollar los test
@@ -20,7 +21,7 @@ class TestP1
 		puts "Result: #{loot_test.to_s}"
 		 
 		# Testing class SuppliesPackage
-		puts "TESTING CLASS: SuppliesPackage\n"
+		puts "TESTING CLASS: SuppliesPackage"
 		puts "================================================================================"
 		puts "Creating SuppliesPackage(2, 2, 2)"
 		supplies_test = SuppliesPackage.new(2, 2, 2)
@@ -30,27 +31,21 @@ class TestP1
 		puts "Result: #{supplies_test2.to_s}"
 
 		# Testing class ShieldBooster
-		# puts "TESTING CLASS: ShieldBooster\n"
-		# puts "Creating ShieldBooster instance with the following parameters:"
-		# shieldbooster_test = ShieldBooster.new("shield_test", 56.4, 2)
-		# puts "Instance created successfully"
-		# puts "Getters testing:"
-		# puts "    boost=#{shieldbooster_test.boost}"
-		# puts "    uses=#{shieldbooster_test.uses}"
-		# puts "Creating ShieldBooster instance as duplicate of previous instance..."
-		# shieldbooster_test2 = ShieldBooster.new(shieldbooster_test)
-		# puts "Instance created successfully"
-		# if (shieldbooster_test.boost == shieldbooster_test2.boost) &&
-		#    (shieldbooster_test.uses == shieldbooster_test2.uses)
-		# 	puts "Correct copy"			
-		# else
-		# 	puts "The copy is incorrect"
-		# end
-		# puts "Setters testing:"
-		# puts "Executing useIt function ---WIP--- times:"
-		# for i in 0..5
-		# 	puts "useIt return=#{shieldbooster_test.useIt}"
-		# puts "\n\n"
+		puts "TESTING CLASS: ShieldBooster"
+		puts "================================================================================"
+		puts "Creating ShieldBooster(\"shield_test\", 56.4, 2)"
+		shieldbooster_test = ShieldBooster.new("shield_test", 56.4, 2)
+		puts "Result: #{shieldbooster_test.to_s}"
+		puts "Creating a copy of previous shieldbooster"
+		shieldbooster_test2 = ShieldBooster.newCopy(shieldbooster_test)
+		puts "Result: #{shieldbooster_test2.to_s}"
+		puts "Setters testing:"
+		for i in 0..3
+				puts "useIt returns #{shieldbooster_test.useIt}"
+		end
+		puts "Checking for linked values between copies"
+		puts "Original state: #{shieldbooster_test.to_s}"
+		puts "Copy state: #{shieldbooster_test2.to_s}"
 
 		# # Testing class Weapon
 		# # --WIP--

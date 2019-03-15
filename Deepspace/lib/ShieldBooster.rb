@@ -20,15 +20,14 @@ class ShieldBooster
 		@uses = _uses
 	end
 	
-	# WIP -- BUG -- I think @ should not appear
 	# Description:
 	# 	Copy Constructor
 	# Parameters:
 	# 	origin: ShieldBooster instance which is going to be copied
 	# Return:
 	# 	A ShieldBooster instance holding a copy of origin
-	def newCopy(origin)
-		return ShieldBooster.new(@origin.name, @origin.boost, @origin.uses)
+	def self.newCopy(origin)
+		return ShieldBooster.new(origin.name, origin.boost, origin.uses)
 	end
 
 	# Getters
@@ -51,11 +50,19 @@ class ShieldBooster
 	end
 
 	# Description:
+	# 	Getter for name
+	# Returns:
+	#	String: name of the shield booster
+	def name
+			return @name
+	end
+
+	# Description:
 	# 	Displays all the relevant data of the object
 	# Returns:
 	# 	String, containing all parameters value
 	def to_s
-		return "ShieldBooster(\"#{@name}\", #{boost}, #{uses})"
+		return "ShieldBooster(\"#{name}\", #{boost}, #{uses})"
 	end
 
 	# SETTERS
