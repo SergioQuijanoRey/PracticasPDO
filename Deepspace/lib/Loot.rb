@@ -68,4 +68,13 @@ class Loot
 	def nMedals
 		return @nMedals
 	end
+
+	# Description:
+	# 	Displays debuf info of the object
+	# 	It uses getters to get the parameters value
+	# Returns:
+	# 	Nil
+	def to_s
+		return "Loot(#{nSupplies}, #{nWeapons}, #{nShields}, #{nHangars}, #{nMedals})"
+	end
 end
