@@ -50,8 +50,13 @@ class ShieldBooster
 		return @uses
 	end
 
-	# WIP -- En el guion no dice nada de que haya un getter para Name
-	# WIP -- pero seria recomendable para el constructor de copia
+	# Description:
+	# 	Displays all the relevant data of the object
+	# Returns:
+	# 	String, containing all parameters value
+	def to_s
+		return "ShieldBooster(\"#{@name}\", #{boost}, #{uses})"
+	end
 
 	# SETTERS
 	#===========================================================================
