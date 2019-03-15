@@ -8,3 +8,6 @@ help:
 		@echo "	make check: checks for marks on the code"
 check: ./utilities/check
 		@./utilities/check
+test: ./test/test_p1.rb
+		@echo "Running game test!"
+		@./test/test_p1.rb
