@@ -11,9 +11,6 @@ require_relative '../lib/enums.rb'
 
 # Class for holding main program
 class TestP1
-	def initalize
-	end
-
 	def main
 		# Testing class Loot
 		puts "TESTING CLASS: Loot"
@@ -21,6 +18,8 @@ class TestP1
 		puts "Creating Loot.new(2, 2, 2, 2, 2)"
 		loot_test = Loot.new(2, 2, 2, 2, 2)
 		puts "Result: #{loot_test.to_s}"
+		puts ""
+		puts ""
 		 
 		# Testing class SuppliesPackage
 		puts "TESTING CLASS: SuppliesPackage"
@@ -31,6 +30,8 @@ class TestP1
 		puts "Creating SuppliesPackage instance as duplicate of previous instance..."
 		supplies_test2 = SuppliesPackage.newCopy(supplies_test)
 		puts "Result: #{supplies_test2.to_s}"
+		puts ""
+		puts ""
 
 		# Testing class ShieldBooster
 		puts "TESTING CLASS: ShieldBooster"
@@ -48,9 +49,12 @@ class TestP1
 		puts "Checking for linked values between copies"
 		puts "Original state: #{shieldbooster_test.to_s}"
 		puts "Copy state: #{shieldbooster_test2.to_s}"
+		puts ""
+		puts ""
 
 		# Testing class Weapon
 		puts "TESTING CLASS: Weapon"
+		puts "================================================================================"
 		puts "Creating Weapon(\"weapon1\", LASER, 3)"
 		weapon_test = Weapon.new("weapon1", WeaponType::LASER, 3)
 		puts "Result: #{weapon_test.to_s}"
@@ -64,10 +68,14 @@ class TestP1
 		puts "Checking for linked values between copies"
 		puts "Original weapon: #{weapon_test.to_s}"
 		puts "Copy of weapon: #{weapon_test2.to_s}"
+		puts ""
+		puts ""
 
-		# # Testing class Dice
-		# # --WIP--
-		# end
+		# Testing class Dice
+		puts "TESTING CLASS: Dice"
+		puts "================================================================================"
+		values = (0..100).map{|i| i}
+		puts values
 	end
 end
 
