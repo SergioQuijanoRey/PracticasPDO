@@ -54,6 +54,16 @@ class TestP1
 		puts "Creating Weapon(\"weapon1\", LASER, 3)"
 		weapon_test = Weapon.new("weapon1", WeaponType::LASER, 3)
 		puts "Result: #{weapon_test.to_s}"
+		puts "Creating a copy of the weapon"
+		weapon_test2 = Weapon.newCopy(weapon_test)
+		puts "Result: #{weapon_test2.to_s}"
+		puts "Testing setters"
+		for i in 0..3
+				puts "useIt() returns #{weapon_test.useIt}"
+		end
+		puts "Checking for linked values between copies"
+		puts "Original weapon: #{weapon_test.to_s}"
+		puts "Copy of weapon: #{weapon_test2.to_s}"
 
 		# # Testing class Dice
 		# # --WIP--

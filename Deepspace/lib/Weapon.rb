@@ -28,8 +28,8 @@ class Weapon
 	# 	origin: Weapon, weapon we want to copy
 	# Return:
 	# 	Weapon, a copy of origin
-	def newCopy(origin)
-		return Weapon.new(@origin.name, @origin.type, @origin.uses)
+	def self.newCopy(origin)
+		return Weapon.new(origin.name, origin.type, origin.uses)
 	end
 
 	# Getters
@@ -57,6 +57,14 @@ class Weapon
 	# 	Integer, power of the WeaponType of the object
 	def power
 		return @type.power
+	end
+
+	# Description:
+	# 	Displays object relevant data
+	# Returns:
+	# 	String, containing parameters values
+	def name
+			return @name
 	end
 
 	# Description:
