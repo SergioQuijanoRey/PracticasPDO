@@ -2,6 +2,8 @@
 
 # WIP -- Check english comments (possible mistakes)
 
+module Deepspace
+
 # Class to represent the weapons that a space station can dispose of to
 # increment its energy when shooting
 class Weapon
@@ -92,3 +94,5 @@ class Weapon
 		end
 	end
 end
+
+end # module Deepspace

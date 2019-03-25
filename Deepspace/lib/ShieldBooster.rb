@@ -1,5 +1,7 @@
 #encoding:utf-8
 
+module Deepspace
+
 # Class to represent the shield boosters that space stations can have
 class ShieldBooster
 
@@ -85,3 +87,5 @@ class ShieldBooster
 		end
 	end
 end
+
+end # module deepspace

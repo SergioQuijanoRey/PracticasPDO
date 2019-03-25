@@ -2,6 +2,8 @@
 
 # WIP -- Check English comments (possible mistakes :D )
 
+module Deepspace
+
 # Class to represent the loot obtained by defeating a enemy ship
 class Loot
 
@@ -78,3 +80,5 @@ class Loot
 		return "Loot(#{nSupplies}, #{nWeapons}, #{nShields}, #{nHangars}, #{nMedals})"
 	end
 end
+
+end # module deepspace

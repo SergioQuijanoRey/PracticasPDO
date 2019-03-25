@@ -2,6 +2,8 @@
 
 # WIP -- Check english comments (posible mistakes :D )
 
+module Deepspace
+
 # Class to represent a Supplies Package
 # It can contain ammo, fuel or shield energy
 class SuppliesPackage
@@ -70,3 +72,5 @@ class SuppliesPackage
 	end
 
 end
+
+end # module Deepspace

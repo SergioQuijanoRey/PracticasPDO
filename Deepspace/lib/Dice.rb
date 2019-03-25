@@ -2,6 +2,8 @@
 
 # WIP -- Check english comments (possible mistakes :D )
 
+module Deepspace
+
 # Class to take all random decisions on the game
 class Dice 
 
@@ -128,3 +130,5 @@ class Dice
 		return @generator.rand < speed
 	end
 end
+
+end # module deepspace
