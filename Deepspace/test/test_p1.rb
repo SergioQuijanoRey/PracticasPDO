@@ -7,6 +7,8 @@ require_relative '../lib/Weapon.rb'
 require_relative '../lib/enums.rb'
 require_relative '../lib/Dice.rb'
 
+include Deepspace
+
 # Class for holding main program
 class TestP1
 	def main
