@@ -1,4 +1,3 @@
-# WIP -- Not finished
 # WIP -- lack of documentation
 
 require_relative "../lib/Weapon.rb"
