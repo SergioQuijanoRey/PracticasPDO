@@ -73,8 +73,6 @@ class Hangar
 				return HangarToUI.new(self)
 		end
 
-
-
 		# Description:
 		# 	Returns a string representation of the object
 		# Returns:
@@ -107,12 +105,12 @@ class Hangar
 		# Parameters:
 		# 	w: Integer
 		# Returns:
-		# 	Weapon:	empty weapon, if position is invalid
+		# 	Weapon:	Nil, if position is invalid
 		# 			the weapon deleted, if position is valid
 		def removeWeapon(w)
 				if w >= w.lenght or w < 0
 						puts "WARNING! Invalid position to specify a weapon, on Hangar.removeWeapon(w: Integer)"
-						return Weapon.new
+						return Nil
 				else
 						return @weapons.delete_at(w)
 				end
@@ -139,12 +137,12 @@ class Hangar
 		# Parameters:
 		# 	s: Integer, position of the shield to remove
 		# Returns:
-		# 	ShielBooster,	empty shieldBooster if position is not valid
+		# 	ShielBooster,	Nil, if position is not valid
 		# 					the shieldBooster which has been deleted
 		def removeShieldBooster(s)
 				if s >= @shieldBoosters.lenght or s < 0
 						puts "WARNING! Invalid position to specify a shield, on Hangar.removeShieldBooster(s: Integer)"
-						return ShielBooster.new
+						return Nil
 				else
 						return  @shieldBoosters.delete_at(s)
 				end
