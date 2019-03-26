@@ -53,6 +53,15 @@ class ShieldBooster
 	# WIP -- En el guion no dice nada de que haya un getter para Name
 	# WIP -- pero seria recomendable para el constructor de copia
 
+
+	# Description:
+	# 	Gets the UI representation of the ShieldBooster object
+	# Returns:
+	#	ShieldToUI: the UI representation
+	def getUIVersion
+		return ShieldToUI.new(self)
+	end
+
 	# SETTERS
 	#===========================================================================
 
@@ -65,10 +74,10 @@ class ShieldBooster
 	# 		Boost if uses > 0
 	#		1.0 if uses == 0
 	def useIt
-		if @uses > 0 # We can use our shield booster
+		if @uses > 0			# We can use our shield booster
 			@uses = @uses - 1
 			return @boost
-		else				# Shield booster is drained
+		else					# Shield booster is drained
 			return 1.0
 		end
 	end
