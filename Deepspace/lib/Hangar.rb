@@ -10,9 +10,11 @@ class Hangar
 		# Description:
 		# 		Initializer of the class
 		# Parameters:
-		# 		capacity: Integer
+		# 		capacity: Integer, max number of shieldBoosters and weapons
 		def initialize(capacity)
 				@maxElements = capacity
+				@shieldBoosters = []
+				@weapons = []
 		end
 
 		# Description:
@@ -22,7 +24,16 @@ class Hangar
 		# Returns:
 		# 		Hangar, a copy of the hangar parameter given
 		def self.newCopy(h)
-				return Hangar.new(h.maxElements)
+				copy =  Hangar.new(h.maxElements)
+				for shieldBooster in @shieldBoosters
+						copy.addShieldBooster(shieldBooster)
+				end
+
+				for weapon in @weapons
+						copy.addWeapon(weapon)
+				end
+
+				return copy
 		end
 
 		# Getters
@@ -31,32 +42,114 @@ class Hangar
 				return @maxElements
 		end
 
+		def shieldBoosters
+				return @shieldBoosters
+		end
+
+		# WIP -- Not in the UML diagram -- Because of DRY
+		private
+		def used_capacity
+				return @weapons.lenght + @shieldBoosters.lenght
+		end
+
+		def weapons
+				return @weapons
+		end
+
 		# Description:
+		# 	Checks if there's space left for more elements at the hangar
 		# Returns:
-		# 		Boolean
+		# 		Boolean:	true, if there's space left for at least one more element
+		# 					false, if the hangar is full
 		def spaceAvailable
+				return @maxElements - used_capacity() > 0
+		end
+
+		# Description:
+		# 	Gets the UI representation of the object
+		# Returns
+		# 	HangarToUI: the associated UI representation 
+		def getUIversion
+				return HangarToUI.new(self)
+		end
+
+
+
+		# Description:
+		# 	Returns a string representation of the object
+		# Returns:
+		# 	String: a representation of the object
+		def to_s
+				return "Hangar(#{@maxElements}) with #{@weapons} weapons and #{@shieldBoosters} shields"
 		end
 
 		# Setters
 		#=======================================================================
-		
+
 		# Description:
+		# 	Adds a new weapon to the Hangar
 		# Parameters:
-		# 		s: Integer
-		def removeShieldBooster(s)
+		# 		w: Weapon, the weapon to be added
+		# Returns:
+		# 		Boolean:	true, if the operation runs successfully
+		# 					false, if something fails (no room for another weapon)
+		def addWeapon(w)
+				if spaceAvailable()
+						@weapons << w
+						return true
+				else
+						return false
+				end
 		end
 
 		# Description:
+		# 	Removes a weapon from the Hangar
 		# Parameters:
-		# 		w: Integer
+		# 	w: Integer
+		# Returns:
+		# 	Weapon:	empty weapon, if position is invalid
+		# 			the weapon deleted, if position is valid
 		def removeWeapon(w)
+				if w >= w.lenght or w < 0
+						puts "WARNING! Invalid position to specify a weapon, on Hangar.removeWeapon(w: Integer)"
+						return Weapon.new
+				else
+						return @weapons.delete_at(w)
+				end
 		end
 
-		def to_s
+		# Description:
+		# 	Adds a new shieldBooster to the Hangar
+		# Parameters:
+		# 		s: ShielBooster, the shield to be added
+		# Returns:
+		# 		Boolean:	true, if the operation runs successfully
+		# 					false, if something fails (no room for another shield)
+		def addShieldBooster(s)
+				if spaceAvailable()
+						@shieldBoosters << s
+						return true
+				else
+						return false
+				end
 		end
 
-		def getUIversion
+		# Description:
+		# 	Removes a shield from the Hangar
+		# Parameters:
+		# 	s: Integer, position of the shield to remove
+		# Returns:
+		# 	ShielBooster,	empty shieldBooster if position is not valid
+		# 					the shieldBooster which has been deleted
+		def removeShieldBooster(s)
+				if s >= @shieldBoosters.lenght or s < 0
+						puts "WARNING! Invalid position to specify a shield, on Hangar.removeShieldBooster(s: Integer)"
+						return ShielBooster.new
+				else
+						return  @shieldBoosters.delete_at(s)
+				end
 		end
+
 end
 
 end # module Deepspace
