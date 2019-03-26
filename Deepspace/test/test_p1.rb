@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+#enconding:utf-8
 
 require_relative '../lib/Loot.rb'
 require_relative '../lib/SuppliesPackage.rb'
