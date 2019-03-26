@@ -12,8 +12,7 @@ class TestP2
 				puts "================================================================================"
 
 				hangar_test = Hangar.new(3)
-				puts "Hangar created:"
-				puts "\t#{hangar_test}"
+				puts "Hangar created: #{hangar_test}"
 
 				puts "Adding 7 times same weapon"
 				weapon = Weapon.new("Laser", WeaponType::LASER, 10)
@@ -44,8 +43,7 @@ class TestP2
 								puts "\tShield can be added on iteration #{i}"
 						end
 				end
-				puts "Hangar state is:"
-				puts "\t#{hangar_test}"
+				puts "Hangar state is: #{hangar_test}"
 
 				puts "Removing two shields"
 				2.times do

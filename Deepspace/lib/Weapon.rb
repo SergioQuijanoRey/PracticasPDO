@@ -2,6 +2,8 @@
 
 # WIP -- Check english comments (possible mistakes)
 
+require_relative "../lib/WeaponToUI.rb"
+
 module Deepspace
 
 # Class to represent the weapons that a space station can dispose of to
@@ -75,6 +77,14 @@ class Weapon
 	# 	String: values of the parameters
 	def to_s
 			return "Weapon(#{@name}, #{type}, #{uses})"
+	end
+
+	# Description:
+	# 	Gets a UI representation of the object
+	# Returns
+	# 	WeaponToUI: the object representation
+	def getUIVersion
+			return WeaponToUI.new(self)
 	end
 
 	# Setters

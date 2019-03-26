@@ -1,6 +1,11 @@
 # WIP -- Not finished
 # WIP -- lack of documentation
 
+require_relative "../lib/Weapon.rb"
+require_relative "../lib/ShieldBooster.rb"
+require_relative "../lib/enums.rb"
+require_relative "../lib/HangarToUI.rb"
+
 module Deepspace
 
 class Hangar
@@ -46,12 +51,6 @@ class Hangar
 				return @shieldBoosters
 		end
 
-		# WIP -- Not in the UML diagram -- Because of DRY
-		private
-		def used_capacity
-				return @weapons.lenght + @shieldBoosters.lenght
-		end
-
 		def weapons
 				return @weapons
 		end
@@ -81,6 +80,11 @@ class Hangar
 				return "Hangar(#{@maxElements}) with #{@weapons} weapons and #{@shieldBoosters} shields"
 		end
 
+		# WIP -- Not in the UML diagram -- Because of DRY
+		private def used_capacity
+				return @weapons.length + @shieldBoosters.length
+		end
+
 		# Setters
 		#=======================================================================
 
@@ -108,7 +112,7 @@ class Hangar
 		# 	Weapon:	Nil, if position is invalid
 		# 			the weapon deleted, if position is valid
 		def removeWeapon(w)
-				if w >= w.lenght or w < 0
+				if w >= @weapons.length or w < 0
 						puts "WARNING! Invalid position to specify a weapon, on Hangar.removeWeapon(w: Integer)"
 						return Nil
 				else
@@ -140,7 +144,7 @@ class Hangar
 		# 	ShielBooster,	Nil, if position is not valid
 		# 					the shieldBooster which has been deleted
 		def removeShieldBooster(s)
-				if s >= @shieldBoosters.lenght or s < 0
+				if s >= @shieldBoosters.length or s < 0
 						puts "WARNING! Invalid position to specify a shield, on Hangar.removeShieldBooster(s: Integer)"
 						return Nil
 				else

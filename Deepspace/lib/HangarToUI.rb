@@ -14,7 +14,7 @@ class HangarToUI
     @maxElements=h.maxElements
     
     for w in h.weapons do
-      @weapons.push(w.getUIversion())
+      @weapons.push(w.getUIVersion())
     end
     
     for s in h.shieldBoosters do
