@@ -1,5 +1,7 @@
 #encoding:utf-8
 
+require_relative "../lib/DamageToUI.rb"
+
 module Deepspace
 
 # WIP -- Not ended
@@ -23,10 +25,22 @@ class Damage
 				@weapons = _weapons
 		end
 		
-		def newNumericWeapons
+		# Description:
+		# 	Creates a Damage where weapon types are not known
+		# Parameters:
+		# 	_nWeawpons: Integer, number of weapons to loose
+		# 	_nShields: Integer, number of shields to loose
+		def newNumericWeapons(_nWeapons, _nShields)
+				return new(_nWeapons, _nShields, [])
 		end
 
-		def newSpecificWeapons
+		# Description:
+		# 	Creates a Damage object where weapon types are specified
+		# Parameters:
+		# 	_weapons: WeaponType[], types of weapons to discard
+		# 	_nShields: Integer, number of shields to loose
+		def newSpecificWeapons(weapons, _nShields)
+				return new(0, _nShields, weapons)
 		end
 
 		# Description:
@@ -52,27 +66,64 @@ class Damage
 				return @weapons
 		end
 
+		# Description:
+		# 	Returns the UI representation of the object
+		# Returns:
+		# 	DamageToUI: the UI representation of the object
 		def getUIVersion
+				return DamageToUI(self)
 		end
 
-		# Descriptio:
+		# Description:
+		# 	Searchs the first element of WeaponType array to match a given type
 		# Parameters:
-		# 	w: Weapon[]
-		# 	t: WeaponType
+		# 	w: Weapon[], the array of weapon types where we search
+		# 	t: WeaponType, the type we're looking for
 		# Returns:
-		# 	Int:
+		# 	Int:	position, if the element is found
+		# 			-1, if no element is found
 		private def arrayContainsType(w, t)
+				for index in 0..w.length-1
+						# Fist position found
+						if w[index] == t
+								return index
+						end
+				end
+
+				# No element found
+				return -1
 		end
 		
-		# Setters+getWeapons()
+		# Setters
 		#=======================================================================
 		# Description:
+		# 	Creates a copy of current objet where weapons and shields which are
+		# 	not included in arrays given as parameters are discarded. That's to say,
+		# 	we srink the Damage to the parameters
 		# Parameters:
-		# 	w: Weapon[]
-		# 	s: shieldBooster
+		# 	w: Weapon[], weapons to fit
+		# 	s: shieldBooster[], shields to fit
 		# Returns:
-		# 	Damage:
+		# 	Damage: a copy of the object adjusted as explained above
 		def adjust(w, s)
+				# Copy of the current object
+				copy = Damage.newCopy(self)
+
+				# Weapons adjust
+				for weapon in w
+						if copy.weapons.include? weapon == false
+								copy.discardWeapon(weapon)
+						end
+				end
+
+				# Shields adjust
+				for shield in s
+						if copy.shieldBoosters.include? shield == false
+								copy.discardShieldBooster(shield)
+						end
+				end
+
+				return copy
 		end
 
 		# Description:
@@ -82,12 +133,19 @@ class Damage
 		# 	w: WeaponType, the weapon type to be removed # WIP -- No concuerda con el guion de la practica!
 		def discardWeapon(w)
 				if @weapons.length != 0
-						@weapons.delete(w)
+						position = arrayContainsType(weapons, w)
+						if position != -1
+								@weapons.delete_at(position)
+						else
+								puts "WARNING! No weapon type match at Damage.discardWeapon()"
+						end
+
 				else
 						if @nWeapons > 0
 								@nWeapons = @nWeapons - 1
 						else
 								puts "WARNING! You tryied to have negative weapons at Damage.discardWeapon()"
+						end
 				end
 		end
 
@@ -98,12 +156,16 @@ class Damage
 						@nShields = @nShields - 1
 				else
 						puts "WARNING! You tryied to have negative shieldBoosters at Damage.discardShieldBooster()"
+				end
 		end
 
 		# Description:
+		# 	Checks wether or not damage is affecting
 		# Returns:
-		# 	Boolean:
-		def hasNoEffect()
+		# 	Boolean:	true, if damage has effective effect
+		# 				false, if damage has no effective effect
+		def hasNoEffect
+				return @nShields + @nWeapons > 0
 		end
 end
 
