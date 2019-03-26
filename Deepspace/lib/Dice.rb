@@ -1,6 +1,6 @@
 #encondig:utf-8
 
-# WIP -- Check english comments (possible mistakes :D )
+module Deepspace
 
 # Class to take all random decisions on the game
 class Dice 
@@ -43,7 +43,7 @@ class Dice
 		end
 
 		# Security check
-		puts "WARNING! UNEXPECTED CONDITION AT Dice.initWithNHangars"
+		puts "WARNING! Unexpected condition at Dice.initWithNHangars"
 	end
 
 	
@@ -68,7 +68,7 @@ class Dice
 		end
 
 		# Security check
-		puts "WARNING! UNEXPECTED CONDITION AT Dice.initWIthNWeapons"
+		puts "WARNING! Unexpected condition at Dice.initWithNWeapons"
 	end
 
 	# Description:
@@ -87,7 +87,7 @@ class Dice
 		end
 
 		# Security check
-		puts "WARNING! UNEXPECTED CONDITION AT Dice.initWIthNWeapons"
+		puts "WARNING! Unexpected condition at Dice.initWithNShields"
 	end
 
 	# Description:
@@ -113,7 +113,7 @@ class Dice
 		end
 
 		# Security check
-		puts "WARNING! UNEXPECTED CONDITION AT Dice.firstShot"
+		puts "WARNING! Unexpected condition at Dice.firstShot"
 
 	end
 	
@@ -128,3 +128,5 @@ class Dice
 		return @generator.rand < speed
 	end
 end
+
+end		# Deepspace module
