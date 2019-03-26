@@ -6,8 +6,8 @@ module Deepspace
 # @author Profe
   
 class GameUniverseToUI 
-  
-  attr_reader :currentStation, :currentEnemy
+
+	attr_reader :currentStation, :currentEnemy
     
     def initialize(station,enemy) 
         @currentStation = station.getUIversion()
@@ -17,9 +17,9 @@ class GameUniverseToUI
     public
     
     def to_s
-      out = "Estación actual -> #{@currentStation}\n"
-      out +="Enemigo actual --> #{@currentEnemy}"
-      return out
+    	out = "Estación actual -> #{@currentStation}\n"
+		out +="Enemigo actual --> #{@currentEnemy}"
+    	return out
     end
     
     
