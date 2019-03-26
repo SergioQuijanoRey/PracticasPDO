@@ -16,9 +16,11 @@ class Damage
 		# Parameters:
 		# 	_nWeapons: Integer, number of lost weapons
 		# 	_nShields: Integer, number of lost shields
-		private def initialize(_nWeapons, _nShields)
+		# 	_weapons: WeaponType[], types of weapons to be discard
+		private def initialize(_nWeapons, _nShields, _weapons)
 				@nWeapons = _nWeapons
 				@nShields = _nShields
+				@weapons = _weapons
 		end
 		
 		def newNumericWeapons
@@ -46,10 +48,8 @@ class Damage
 				return @nShields
 		end
 
-		# Description:
-		# Returns:
-		# 	WeaponType[]
-		def getWeapons
+		def weapons
+				return @weapons
 		end
 
 		def getUIVersion
@@ -76,13 +76,28 @@ class Damage
 		end
 
 		# Description:
+		# 	Removes a given type of weapon
+		# 	If a list of weapon types is not available, the number of weapons to be deleted decreases by 1
 		# Parameters:
-		# 	w: Weapon
+		# 	w: WeaponType, the weapon type to be removed # WIP -- No concuerda con el guion de la practica!
 		def discardWeapon(w)
+				if @weapons.length != 0
+						@weapons.delete(w)
+				else
+						if @nWeapons > 0
+								@nWeapons = @nWeapons - 1
+						else
+								puts "WARNING! You tryied to have negative weapons at Damage.discardWeapon()"
+				end
 		end
 
 		# Description:
-		def discardShieldBooster()
+		# 	Reduces by 1 the number of shieldBoosters to be removed
+		def discardShieldBooster
+				if @nShields > 0
+						@nShields = @nShields - 1
+				else
+						puts "WARNING! You tryied to have negative shieldBoosters at Damage.discardShieldBooster()"
 		end
 
 		# Description:
@@ -91,6 +106,5 @@ class Damage
 		def hasNoEffect()
 		end
 end
-
 
 end	# module Deepspace
