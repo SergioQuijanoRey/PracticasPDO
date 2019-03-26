@@ -19,7 +19,7 @@ class Damage
 		# 	_nWeapons: Integer, number of lost weapons
 		# 	_nShields: Integer, number of lost shields
 		# 	_weapons: WeaponType[], types of weapons to be discard
-		private def initialize(_nWeapons, _nShields, _weapons)
+		def initialize(_nWeapons, _nShields, _weapons)
 				@nWeapons = _nWeapons
 				@nShields = _nShields
 				@weapons = _weapons
@@ -30,7 +30,7 @@ class Damage
 		# Parameters:
 		# 	_nWeawpons: Integer, number of weapons to loose
 		# 	_nShields: Integer, number of shields to loose
-		def newNumericWeapons(_nWeapons, _nShields)
+		def self.newNumericWeapons(_nWeapons, _nShields)
 				return new(_nWeapons, _nShields, [])
 		end
 
@@ -39,7 +39,7 @@ class Damage
 		# Parameters:
 		# 	_weapons: WeaponType[], types of weapons to discard
 		# 	_nShields: Integer, number of shields to loose
-		def newSpecificWeapons(weapons, _nShields)
+		def self.newSpecificWeapons(weapons, _nShields)
 				return new(0, _nShields, weapons)
 		end
 
@@ -50,6 +50,11 @@ class Damage
 		# Returns
 		# 	Damage: a copy of the given instance
 		def self.newCopy(d)
+				if d.weapons.empty?
+						return newNumericWeapons(d.nWeapons, d.nShields)
+				else
+						return newSpecificWeapons(d.weapons, d.nShields)
+				end
 		end
 
 		# Getters
@@ -71,7 +76,7 @@ class Damage
 		# Returns:
 		# 	DamageToUI: the UI representation of the object
 		def getUIVersion
-				return DamageToUI(self)
+				return DamageToUI.new(self)
 		end
 
 		# Description:
@@ -93,6 +98,17 @@ class Damage
 				# No element found
 				return -1
 		end
+
+		def to_s
+				if @weapons.empty?
+						return "Damage.newNumericWeapons(#{@nWeapons}, #{@nShields})"
+				else
+						return "Damage.newSpecificWeapons(#{@weapons}, #{@nShields})"
+				end
+
+				# Security condition
+				return ""
+		end
 		
 		# Setters
 		#=======================================================================
@@ -105,23 +121,24 @@ class Damage
 		# 	s: shieldBooster[], shields to fit
 		# Returns:
 		# 	Damage: a copy of the object adjusted as explained above
-		def adjust(w, s)
+		def adjust(w, s)	# WIP -- Not working properly
 				# Copy of the current object
 				copy = Damage.newCopy(self)
 
-				# Weapons adjust
+				# Weapons adjust 
 				for weapon in w
 						if copy.weapons.include? weapon == false
 								copy.discardWeapon(weapon)
 						end
 				end
 
+				# WIP -- No sense
 				# Shields adjust
-				for shield in s
-						if copy.shieldBoosters.include? shield == false
-								copy.discardShieldBooster(shield)
-						end
-				end
+				# for shield in s
+				# 		if copy.shieldBoosters.include? shield == false
+				# 				copy.discardShieldBooster(shield)
+				# 		end
+				# end
 
 				return copy
 		end
@@ -167,6 +184,10 @@ class Damage
 		def hasNoEffect
 				return @nShields + @nWeapons > 0
 		end
+
+		# Visibility specifiers
+		#=======================================================================
+		private_class_method :new
 end
 
 end	# module Deepspace

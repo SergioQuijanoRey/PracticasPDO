@@ -2,6 +2,7 @@
 #encoding:utf-8
 
 require_relative "../lib/Hangar.rb"
+require_relative "../lib/Damage.rb"
 
 include Deepspace
 
@@ -60,6 +61,53 @@ class TestP2
 				puts "\tSpace available: #{hangar_test.spaceAvailable}"
 				puts "\tUI version: #{hangar_test.getUIversion}"
 
+				puts "TEST CLASS: Damage"
+				puts "================================================================================"
+
+				puts "Creating both types of damage"
+				numeric_damage_test = Damage.newNumericWeapons(3, 10)
+				type_damage_test = Damage.newSpecificWeapons([WeaponType::LASER, WeaponType::MISSILE, WeaponType::PLASMA], 3)
+				copy_test = Damage.newCopy(numeric_damage_test)
+
+				puts "Numeric Damage: \n\t#{numeric_damage_test}"
+				puts "Specific damage: \n\t#{type_damage_test}"
+				puts ""
+
+				puts "Creating a copy of Numeric Damage"
+				copy_test = Damage.newCopy(numeric_damage_test)
+				puts "Copy Damage: \n\t#{copy_test}"
+				puts ""
+
+				puts "Creating UI version"
+				ui_damage_test = numeric_damage_test.getUIVersion
+				puts "UI version: #{ui_damage_test}"
+				puts ""
+
+				# WIP -- Not working!
+				puts "Adjusting the Specific Damage"
+				srink_damage_test = type_damage_test.adjust([WeaponType::LASER, WeaponType::MISSILE], ["test", "this does nothing"])
+				puts "\tAdjusted Damage: #{srink_damage_test}"
+				puts "\tAdjusted Damage Weapons: #{srink_damage_test.weapons}"
+				puts "" 
+
+				puts "Testing hasNoEffect"
+				puts "Has no effect: #{numeric_damage_test.hasNoEffect}"
+				puts ""
+
+				puts "Testing discardShieldBooster()"
+				10.times do
+						numeric_damage_test.discardShieldBooster
+				end
+				puts "Has no effect: #{numeric_damage_test.hasNoEffect}"
+				puts ""
+
+				puts "Testing discardWeapon"
+				10.times do
+						numeric_damage_test.discardWeapon("trash")
+				end
+				puts "Has no effect: #{numeric_damage_test.hasNoEffect}"
+
+				
 		end
 end
 
