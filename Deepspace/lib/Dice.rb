@@ -2,8 +2,6 @@
 
 module Deepspace
 
-module Deepspace
-
 # Class to take all random decisions on the game
 class Dice 
 
