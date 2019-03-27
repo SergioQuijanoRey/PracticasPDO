@@ -1,7 +1,5 @@
 #encoding:utf-8
 
-# WIP -- Check english comments (posbile mistakes :D )
-
 # Enum to control the possible combat outcomes
 module CombatResult
 	ENEMYWINS=		:enemywins
