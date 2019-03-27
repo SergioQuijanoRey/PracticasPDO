@@ -2,20 +2,17 @@
 
 module Deepspace
 
-module Deepspace
-
-# Description:
-# 	Class to take all random decisions on the game
+# Class to take all random decisions on the game
 class Dice 
 
 	# Constructors
 	#=======================================================================
 
-	# Description:
-	# 	Initializer of the class
-	# 	All parameters are floats except the random number generator
-	# Return:
-	# 	Nil
+	 # Description:
+	 # 	Initializer of the class
+	 # 	All parameters are floats except the random number generator
+	 # Return:
+	 # 	Nil
 	def initialize
 		@NHANGARSPROB = 0.25
 		@NSHIELDSPROB = 0.25
@@ -24,6 +21,7 @@ class Dice
 
 		# Random number generator
 		@generator = Random.new()
+
 	end
 
 	# Getters
@@ -103,7 +101,7 @@ class Dice
 	end
 
 	# Description:
-	# 	Determines who shoots first
+	# 	Determines who shots first
 	# Return:
 	# 	GameCharacter, SPACESTATION if the player shoots first
 	#                        ENEMYSTARSHIP if the enemy shoots first
@@ -116,19 +114,19 @@ class Dice
 
 		# Security check
 		puts "WARNING! Unexpected condition at Dice.firstShot"
+
 	end
 	
 	# Description:
 	# 	Determines if spacestation moves in order to avoid a shoot
 	# Parameters:
-	# 	speed: Float, speed of the space station
+	# 	speed: float, speed of the space station
 	# Return:
-	# 	Boolean,	true if space statint avoids the shoot
-	# 				false, otherwise
+	# 	Boolean, true if space statint avoids the shoot
+	#                  false, otherwise
 	def spaceStationMoves(speed)
 		return @generator.rand < speed
 	end
+end
 
-end # class Dice
-
-end # module Deepspace
+end # module deepspace

@@ -57,6 +57,7 @@ class ShieldBooster
 	#	ShieldToUI: the UI representation
 	def getUIVersion
 		return ShieldToUI.new(self)
+	end
 
 	# Description:
 	# 	Getter for name
@@ -82,8 +83,8 @@ class ShieldBooster
 			return ShieldToUI.new(self)
 	end
 
-	# Setters
-	#=======================================================================
+	# SETTERS
+	#===========================================================================
 
 	# Description:
 	# 	Uses our shield booster
