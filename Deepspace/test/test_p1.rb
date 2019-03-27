@@ -3,16 +3,16 @@
 
 require_relative '../lib/Loot.rb'
 require_relative '../lib/SuppliesPackage.rb'
-require_relative '../lib/ShieldBooster.rb'
 require_relative '../lib/Weapon.rb'
-require_relative '../lib/enums.rb'
 require_relative '../lib/Dice.rb'
+require_relative '../lib/ShieldBooster.rb'
+require_relative '../lib/enums.rb'
 
 include Deepspace
 
 # Class for holding main program
 class TestP1
-	def main
+		def main
 		# Testing class Loot
 		puts "TESTING CLASS: Loot"
 		puts "================================================================================"

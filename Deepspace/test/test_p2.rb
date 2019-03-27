@@ -4,6 +4,7 @@
 require_relative "../lib/Hangar.rb"
 require_relative "../lib/Damage.rb"
 require_relative "../lib/EnemyStarShip.rb"
+require_relative "../lib/GameUniverse.rb"
 
 include Deepspace
 
@@ -138,6 +139,12 @@ class TestP2
 						result = enemy_test.receiveShot(power)
 						puts "\tResult: #{result}"
 				end
+
+				puts "TEST CLASS: EnemyStarShip"
+				puts "================================================================================"
+				puts "Creating a Game universe"
+				universe_test = GameUniverse.new
+				puts "Game Universe: #{universe_test}"
 		end
 end
 
