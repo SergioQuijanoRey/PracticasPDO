@@ -3,6 +3,7 @@
 
 require_relative "../lib/Hangar.rb"
 require_relative "../lib/Damage.rb"
+require_relative "../lib/EnemyStarShip.rb"
 
 include Deepspace
 
@@ -105,8 +106,38 @@ class TestP2
 						numeric_damage_test.discardWeapon("trash")
 				end
 				puts "Has no effect: #{numeric_damage_test.hasNoEffect}"
+				puts ""
 
+				puts "TEST CLASS: EnemyStarShip"
+				puts "================================================================================"
 				
+				puts "Creating an enemy starship"
+				enemy_test = EnemyStarShip.new("enemy tank ship", 1.123, 2.123124, Loot.new(1,2,3,4,5), Damage.newNumericWeapons(3,3))
+				puts "Enemy starship: #{enemy_test}"
+				puts ""
+
+				puts "Creating a copy of the enemy starship"
+				enemy_copy = EnemyStarShip.newCopy(enemy_test)
+				puts "Copy: #{enemy_copy}"
+				puts ""
+
+				puts "Creating an UI version of the ship"
+				enemy_UI = enemy_test.getUIVersion
+				puts "UI version: #{enemy_UI}"
+				puts ""
+
+				puts "Protecting: #{enemy_test.protection}"
+				puts ""
+
+				puts "Firing: #{enemy_test.fire}"
+				puts ""
+
+				puts "Testing EnemyStarShip.receiveShot()"
+				10.times do |power|
+						puts "\tAttacking with #{power} power!"
+						result = enemy_test.receiveShot(power)
+						puts "\tResult: #{result}"
+				end
 		end
 end
 

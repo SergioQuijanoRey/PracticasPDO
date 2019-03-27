@@ -11,8 +11,8 @@ class EnemyToUI
     @name=enemy.name
     @ammoPower=enemy.ammoPower
     @shieldPower=enemy.shieldPower
-    @loot=enemy.loot.getUIversion()
-    @damage = enemy.damage.getUIversion()
+    @loot=enemy.loot.getUIVersion()
+    @damage = enemy.damage.getUIVersion()
   end
 
   def to_s

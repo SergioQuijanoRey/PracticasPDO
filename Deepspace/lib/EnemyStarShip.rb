@@ -2,6 +2,7 @@
 
 require_relative "../lib/enums.rb"
 require_relative "../lib/EnemyToUI.rb"
+require_relative "../lib/Loot.rb"
 
 module Deepspace
 
@@ -24,7 +25,8 @@ class EnemyStarShip
 				@damage = _damage
 		end
 
-		def self.newCopy
+		def self.newCopy(enemy)
+				return EnemyStarShip.new(enemy.name, enemy.ammoPower, enemy.shieldPower, enemy.loot, enemy.damage)
 		end
 		
 		# Getters
@@ -71,6 +73,10 @@ class EnemyStarShip
 		# 	Float: the protection it takes
 		def protection
 				return @shieldPower
+		end
+
+		def to_s
+				return "EnemyStarShip(\"#{@name}\", #{@ammoPower}, #{@shieldPower}, #{@loot}, #{@damage})"
 		end
 
 		# Setters

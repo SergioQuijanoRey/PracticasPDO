@@ -121,6 +121,7 @@ class Damage
 		# 	s: shieldBooster[], shields to fit
 		# Returns:
 		# 	Damage: a copy of the object adjusted as explained above
+		# WIP -- not finished
 		def adjust(w, s)
 				if @weapons.empty? == false
 						# Intersection is computed
