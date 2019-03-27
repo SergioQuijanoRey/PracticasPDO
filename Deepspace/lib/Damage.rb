@@ -121,26 +121,22 @@ class Damage
 		# 	s: shieldBooster[], shields to fit
 		# Returns:
 		# 	Damage: a copy of the object adjusted as explained above
-		def adjust(w, s)	# WIP -- Not working properly
-				# Copy of the current object
-				copy = Damage.newCopy(self)
-
-				# Weapons adjust 
-				for weapon in w
-						if copy.weapons.include? weapon == false
-								copy.discardWeapon(weapon)
+		def adjust(w, s)
+				if @weapons.empty? == false
+						# Intersection is computed
+						new_weapons = []
+						for weapon in w
+								if @weapons.include? weapon
+										new_weapons.push(weapon)
+								end
 						end
+
+						# New object is created
+						copy = Damage.newSpecificWeapons(new_weapons, @nShields)
+				else
+						puts "WARNING! No specific weapons to adjust, at Damage.adjust()"
+						return Nil
 				end
-
-				# WIP -- No sense
-				# Shields adjust
-				# for shield in s
-				# 		if copy.shieldBoosters.include? shield == false
-				# 				copy.discardShieldBooster(shield)
-				# 		end
-				# end
-
-				return copy
 		end
 
 		# Description:
