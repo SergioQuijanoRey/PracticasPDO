@@ -74,6 +74,14 @@ class ShieldBooster
 		return "ShieldBooster(\"#{name}\", #{boost}, #{uses})"
 	end
 
+	# Description:
+	# 	Gets the UI representation of the object
+	# Returns:
+	# 	ShieldToUI: the UI representation
+	def getUIVersion
+			return ShieldToUI.new(self)
+	end
+
 	# SETTERS
 	#===========================================================================
 

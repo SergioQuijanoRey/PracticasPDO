@@ -2,6 +2,8 @@
 
 # WIP -- Check English comments (possible mistakes :D )
 
+require_relative "../lib/LootToUI.rb"
+
 module Deepspace
 
 # Class to represent the loot obtained by defeating a enemy ship
@@ -78,6 +80,10 @@ class Loot
 	# 	String, containing all the relevant data
 	def to_s
 		return "Loot(#{nSupplies}, #{nWeapons}, #{nShields}, #{nHangars}, #{nMedals})"
+	end
+
+	def getUIVersion
+			return LootToUI.new(self)
 	end
 end
 
