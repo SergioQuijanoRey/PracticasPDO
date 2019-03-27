@@ -1,5 +1,7 @@
 #encoding:utf-8
 
+require_relative "../lib/SpaceStationToUI.rb"
+
 module Deepspace
 
 class SpaceStation
@@ -14,30 +16,32 @@ class SpaceStation
 		# Description:
 		# 	Initializer of the class
 		# Parameters:
-		# 	_ammoPower: Float
-		#	_fuelUnits: Float
-		#	_name: String
-		#	_nMedals: Integer
-		#	_shieldPower: Float
-		#	_pendingDamage: Damage
-		#	_weapons: Weapon[]
-		#	_shieldBoosters: ShieldBooster[]
-		#	_hangar: Hangar
-		def initialize
-				@ammoPower = _ammoPower
-				@fuelUnits = _fuelUnits
-				@name = _name
-				@nMedals = _nMedals
-				@shieldPower = _shieldPower
-				@pendingDamage = _pendingDamage
-				@weapons = _weapons
-				@shieldBoosters = _shieldBoosters
-				@hangar = _hangar
+		#	_name: String, name of the SpaceStation
+		# 	_supplies: SuppliesPackage, starting fuel units, weapons and shields
+		def initialize(_name, _supplies)
+				# Name is set
+				@name = _name			# String
+
+				# Rest of attributes are set
+				@ammoPower = 0.0		# Float
+				@fuelUnits = 0.0		# Float
+				@nMedals = 0			# Integer
+				@shieldPower = 0.0		# Float
+				@pendingDamage = nil	# Damage
+				@weapons = []			# Weapon[]
+				@shieldBoosters = []	# ShieldBooster[]
+				@hangar = nil			# Hangar
+				
+				# Supplies are added
+				receiveSupplies(_supplies)
 		end
 
 		# Getters
 		#=======================================================================
-		
+
+		# Attribute readers
+		attr_reader :ammoPower, :fuelUnits, :hangar, :name, :nMedals, :pendingDamage, :shieldBooster, :shieldPower, :weapons
+
 		# Description:
 		# 	Gets the speed of the SpaceStation
 		# 	Speed is calculated as fraction of fuel units and max fuel possible
@@ -60,6 +64,14 @@ class SpaceStation
 		# 				false, otherwise
 		def validState
 				return @pendingDamage.nil? or @pendingDamage.length == 0 or @pendingDamage.hasNoEffect
+		end
+
+		# Description
+		# 	Gets UI representation of the object
+		# Returns
+		# 	SpaceStationToUI, the UI representation
+		def getUIVersion
+				return SpaceStationToUI.new(self)
 		end
 		
 		# Setters
@@ -198,7 +210,7 @@ class SpaceStation
 		# Description:
 		# 	The spaceships moves. Therefore, fuel units decrease
 		def move
-				@fuelUnits = (@fuelUnits * (1-@speed)).round
+				@fuelUnits = @fuelUnits * (1-@speed)
 		end
 
 		# Description:
