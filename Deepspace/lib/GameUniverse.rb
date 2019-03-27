@@ -1,5 +1,8 @@
 #encoding:utf-8
 
+require_relative "../lib/GameStateController.rb"
+require_relative "../lib/Dice.rb"
+
 module Deepspace
 
 class GameUniverse
@@ -16,10 +19,10 @@ class GameUniverse
 				@turns = 0
 				@dice = Dice.new
 
-				@currentStationIndex = Nil	# Integer
-				@currentStation = Nil		# SpaceStation
-				@spaceStations = Nil		# SpaceStation[]
-				@currentEnemy = Nil			# EnemyStarShip
+				@currentStationIndex = nil	# Integer
+				@currentStation = nil		# SpaceStation
+				@spaceStations = nil		# SpaceStation[]
+				@currentEnemy = nil			# EnemyStarShip
 		end
 
 		# Getters

@@ -1,6 +1,6 @@
 #encoding:utf-8
 
-require_relative 'GameState'
+require_relative "../lib/GameState.rb"
 
 module Deepspace
 
@@ -11,8 +11,8 @@ class GameStateController
 
     attr_reader :state
     
-    def initialize () 
-        @state=GameState::CANNOTPLAY;        
+    def initialize
+        @state=GameState::CANNOTPLAY;
     end
 
     
