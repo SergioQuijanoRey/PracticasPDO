@@ -82,8 +82,8 @@ class ShieldBooster
 			return ShieldToUI.new(self)
 	end
 
-	# SETTERS
-	#===========================================================================
+	# Setters
+	#=======================================================================
 
 	# Description:
 	# 	Uses our shield booster
