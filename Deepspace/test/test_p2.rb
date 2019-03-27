@@ -140,11 +140,19 @@ class TestP2
 						puts "\tResult: #{result}"
 				end
 
+				# WIP -- Not tested properly
 				puts "TEST CLASS: EnemyStarShip"
 				puts "================================================================================"
 				puts "Creating a Game universe"
 				universe_test = GameUniverse.new
 				puts "Game Universe: #{universe_test}"
+				puts ""
+
+				puts "Testing getters:"
+				puts "\tGame State: #{universe_test.gameState}"
+				puts ""
+
+				puts "Have a winner: #{universe_test.haveAWinner}"
 		end
 end
 

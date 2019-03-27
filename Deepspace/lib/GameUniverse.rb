@@ -1,6 +1,7 @@
 #encoding:utf-8
 
 require_relative "../lib/GameStateController.rb"
+require_relative "../lib/GameUniverseToUI.rb"
 require_relative "../lib/Dice.rb"
 
 module Deepspace
@@ -53,7 +54,7 @@ class GameUniverse
 		# Returns:
 		# 	GameUniverseToUI: the UI representation
 		def getUIVersion
-				return GameUniverseToUI.new(self)
+				return GameUniverseToUI.new(@currentStation, @currentEnemy)
 		end
 
 		# Description:
@@ -62,16 +63,19 @@ class GameUniverse
 		# 	Boolean	true, if the space ship has won
 		# 			false, otherwise
 		def haveAWinner
-				if @currentStation.nMedals >= @@WIN
-						return true
+				if @currentStation.nil?
+						puts "Warning! @currentStation nil on GameUniverse.haveAWinner()"
 				else
-						return false
+						if @currentStation.nMedals >= @@WIN
+								return true
+						else
+								return false
+						end
 				end
 		end
 
 		def to_s
-				# We use the UI version
-				return "#{getUIVersion.to_s}"
+				return "GameUniverse(#{@gameState}, #{@turns}, #{@dice})"
 		end
 
 		# Setters
