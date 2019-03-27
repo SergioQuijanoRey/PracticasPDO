@@ -20,7 +20,7 @@ keywords=(
 	"WIP"
 	"BUG"
 	"DEBUG"
-	"<<"
+	"<<<<"
 	"HEAD"
 	"sergio"
 )
@@ -34,7 +34,6 @@ do
 	for file in $(ls $dir)
 	do
 		path="$dir/$file" 		# Path to file
-		text=$(cat "$dir/$file")	# Text of file
 
 		# Cheking for keywords in files
 		for keyword in ${keywords[@]}
