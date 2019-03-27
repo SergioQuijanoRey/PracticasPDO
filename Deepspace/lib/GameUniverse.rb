@@ -46,6 +46,10 @@ class GameUniverse
 		def combat()
 		end
 
+		# Description:
+		# 	Gets the UI representation of the object
+		# Returns:
+		# 	GameUniverseToUI: the UI representation
 		def getUIVersion
 				return GameUniverseToUI.new(self)
 		end
@@ -64,6 +68,8 @@ class GameUniverse
 		end
 
 		def to_s
+				# We use the UI version
+				return "#{getUIVersion.to_s}"
 		end
 
 		# Setters
