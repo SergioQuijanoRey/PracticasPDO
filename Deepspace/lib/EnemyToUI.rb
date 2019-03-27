@@ -5,23 +5,23 @@ module Deepspace
   
 class EnemyToUI 
   
-  attr_reader :name, :ammoPower, :shieldPower, :loot, :damage
+	attr_reader :name, :ammoPower, :shieldPower, :loot, :damage
     
-  def initialize(enemy) 
-    @name=enemy.name
-    @ammoPower=enemy.ammoPower
-    @shieldPower=enemy.shieldPower
-    @loot=enemy.loot.getUIVersion()
-    @damage = enemy.damage.getUIVersion()
-  end
+	def initialize(enemy) 
+		@name=enemy.name
+		@ammoPower=enemy.ammoPower
+		@shieldPower=enemy.shieldPower
+		@loot=enemy.loot.getUIVersion()
+		@damage = enemy.damage.getUIVersion()
+	end
 
-  def to_s
-    return "Name: #{@name}, " + \
-        "Ammo Power: #{@ammoPower}, " + \
-        "Shield Power: #{@shieldPower}\n" + \
-        "\tLoot..: #{@loot}\n" + \
-        "\tDamage: #{@damage}"
-  end
+	def to_s
+		return "Name: #{@name}, " + \
+			"Ammo Power: #{@ammoPower}, " + \
+			"Shield Power: #{@shieldPower}\n" + \
+			"\tLoot..: #{@loot}\n" + \
+			"\tDamage: #{@damage}"
+	end
     
 end # class
 

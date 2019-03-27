@@ -38,11 +38,11 @@ end # class
 end # module
 
 if $0 == __FILE__ then
-  gsc = Deepspace::GameStateController.new()
-  puts gsc.state
-  20.times {
-    i = rand(5)+1
-    puts "Turno " + i.to_s + " de 5 jugadores"
-    puts gsc.next(i,5)
-  }
+    gsc = Deepspace::GameStateController.new()
+    puts gsc.state
+    20.times {
+        i = rand(5)+1
+        puts "Turno " + i.to_s + " de 5 jugadores"
+        puts gsc.next(i,5)
+    }
 end
