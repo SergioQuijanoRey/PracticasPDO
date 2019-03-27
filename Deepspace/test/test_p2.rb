@@ -2,9 +2,9 @@
 #encoding:utf-8
 
 require_relative "../lib/Hangar.rb"
-require_relative "../lib/Damage.rb"
 require_relative "../lib/EnemyStarShip.rb"
 require_relative "../lib/GameUniverse.rb"
+require_relative "../lib/Damage.rb"
 
 include Deepspace
 

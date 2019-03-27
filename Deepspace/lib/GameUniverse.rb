@@ -1,8 +1,7 @@
 #encoding:utf-8
 
-require "../lib/GameUniverse.rb"
-
 module Deepspace
+
 class GameUniverse
 		# Class atributes
 		#=======================================================================
@@ -164,4 +163,5 @@ class GameUniverse
 		def init(names)
 		end
 end
+
 end # module Deepspace

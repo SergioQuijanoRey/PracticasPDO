@@ -48,6 +48,10 @@ class Hangar
 				return @weapons
 		end
 
+		def maxElements
+				return @maxElements
+		end
+
 		# Description:
 		# 	Checks if there's space left for more elements at the hangar
 		# Returns:
@@ -144,5 +148,7 @@ class Hangar
 						return  @shieldBoosters.delete_at(s)
 				end
 		end
+
+end
 
 end
