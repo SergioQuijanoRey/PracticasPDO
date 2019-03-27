@@ -1,6 +1,7 @@
 #encoding:utf-8
 
 require_relative "../lib/SpaceStationToUI.rb"
+require_relative "../lib/SuppliesPackage.rb"
 
 module Deepspace
 
@@ -63,7 +64,15 @@ class SpaceStation
 		# 	Boolean,	true, if SpaceShip is on valid state
 		# 				false, otherwise
 		def validState
-				return @pendingDamage.nil? or @pendingDamage.length == 0 or @pendingDamage.hasNoEffect
+				if @pendingDamage.nil?
+						return false
+				elsif @pendingDamage.length == 0 
+						return false
+				elsif @pendingDamage.hasNoEffect
+						return false
+				else
+						return true
+				end
 		end
 
 		# Description
@@ -71,7 +80,25 @@ class SpaceStation
 		# Returns
 		# 	SpaceStationToUI, the UI representation
 		def getUIVersion
-				return SpaceStationToUI.new(self)
+				if validState
+						return SpaceStationToUI.new(self)
+				else
+						puts "WARNING! Not UI version for space station on invalid state"
+						return nil
+				end
+		end
+
+		def to_s
+				return "Space Station
+				\tname: #{@name}
+				\tammoPower: #{@ammoPower}
+				\tfuelUnits: #{@fuelUnits}
+				\tnmedals: #{@nMedals}
+				\tshieldPower: #{@shieldPower}
+				\tpendingDamage: #{@pendingDamage}
+				\tweapons: #{@weapons}
+				\tshieldBoosters: #{@shieldBoosters}
+				\thangar: #{@hangar}"
 		end
 		
 		# Setters
@@ -210,7 +237,7 @@ class SpaceStation
 		# Description:
 		# 	The spaceships moves. Therefore, fuel units decrease
 		def move
-				@fuelUnits = @fuelUnits * (1-@speed)
+				@fuelUnits = @fuelUnits * (1-speed)
 		end
 
 		# Description:

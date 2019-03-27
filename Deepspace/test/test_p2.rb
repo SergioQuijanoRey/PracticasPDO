@@ -5,6 +5,7 @@ require_relative "../lib/Hangar.rb"
 require_relative "../lib/EnemyStarShip.rb"
 require_relative "../lib/GameUniverse.rb"
 require_relative "../lib/Damage.rb"
+require_relative "../lib/SpaceStation.rb"
 
 include Deepspace
 
@@ -140,8 +141,37 @@ class TestP2
 						puts "\tResult: #{result}"
 				end
 
-				# WIP -- Not tested properly
-				puts "TEST CLASS: EnemyStarShip"
+				# WIP -- Not tested properly -- Practica 3
+				puts "TEST CLASS: Space Station"
+				puts "================================================================================"
+
+				puts "Creating an Space Station"
+				space_test = SpaceStation.new("my tanky space station", SuppliesPackage.new(14, 12, 40))
+				puts "Space Station: #{space_test}"
+				puts ""
+
+				puts "Testing speed"
+				puts "Speed: #{space_test.speed}"
+				puts "Space station state: #{space_test}"
+				puts "Valid state: #{space_test.validState}"
+				puts ""
+
+				puts "Testing move"
+				space_test.move
+				puts "Space station state: #{space_test}"
+
+				puts "Testing receive Hangar"
+				space_test.receiveHangar(Hangar.new(5))
+				puts "Space station: #{space_test}"
+				puts ""
+
+				puts "Testing UI version"
+				puts "UI: #{space_test.getUIVersion}"
+				puts ""
+
+
+				# WIP -- Not tested properly -- Practica 3
+				puts "TEST CLASS: GameUniverse"
 				puts "================================================================================"
 				puts "Creating a Game universe"
 				universe_test = GameUniverse.new
@@ -153,6 +183,7 @@ class TestP2
 				puts ""
 
 				puts "Have a winner: #{universe_test.haveAWinner}"
+				puts ""
 		end
 end
 
