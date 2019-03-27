@@ -203,7 +203,8 @@ class SpaceStation
         # WIP
     end
 
-    # assign private modules
+    # Visibility specifiers
+	#=======================================================================
     private :assignFuelValue, :cleanPendingDamage
 
 end # class SpaceStation
