@@ -28,7 +28,7 @@ class ShieldBooster
 	# 	origin: ShieldBooster instance which is going to be copied
 	# Return:
 	# 	A ShieldBooster instance holding a copy of origin
-	def newCopy(origin)
+	def self.newCopy(origin)
 		return ShieldBooster.new(origin.name, origin.boost, origin.uses)
 	end
 
@@ -57,6 +57,21 @@ class ShieldBooster
 	#	ShieldToUI: the UI representation
 	def getUIVersion
 		return ShieldToUI.new(self)
+
+	# Description:
+	# 	Getter for name
+	# Returns:
+	#	String: name of the shield booster
+	def name
+			return @name
+	end
+
+	# Description:
+	# 	Displays all the relevant data of the object
+	# Returns:
+	# 	String, containing all parameters value
+	def to_s
+		return "ShieldBooster(\"#{name}\", #{boost}, #{uses})"
 	end
 
 	# SETTERS

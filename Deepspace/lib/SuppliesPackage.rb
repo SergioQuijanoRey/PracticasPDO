@@ -2,6 +2,8 @@
 
 # WIP -- Check english comments (posible mistakes :D )
 
+module Deepspace
+
 # Class to represent a Supplies Package
 # It can contain ammo, fuel or shield energy
 class SuppliesPackage
@@ -30,7 +32,7 @@ class SuppliesPackage
 	# Return:
 	# 	A SuppliesPackage instance holding a copy of origin
 	def self.newCopy(origin)
-		return SuppliesPackage.new(@origin.ammoPower, @origin.fuelUnits, @origin.shieldPower)
+		return SuppliesPackage.new(origin.ammoPower, origin.fuelUnits, origin.shieldPower)
 	end
 
 	# Getters
@@ -60,4 +62,15 @@ class SuppliesPackage
 		return @shieldPower
 	end
 
+	# Description:
+	# 		Displays debug info
+	# 		It uses getters to get parameters values
+	# Returns:
+	# 		String: containing the object data
+	def to_s
+		return "SuppliesPackage(#{ammoPower}, #{fuelUnits}, #{shieldPower})"
+	end
+
 end
+
+end # module Deepspace

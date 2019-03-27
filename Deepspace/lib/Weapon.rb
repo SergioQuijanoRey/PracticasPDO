@@ -2,6 +2,8 @@
 
 # WIP -- Check english comments (possible mistakes)
 
+module Deepspace
+
 # Class to represent the weapons that a space station can dispose of to
 # increment its energy when shooting
 class Weapon
@@ -28,8 +30,8 @@ class Weapon
 	# 	origin: Weapon, weapon we want to copy
 	# Return:
 	# 	Weapon, a copy of origin
-	def newCopy(origin)
-		return Weapon.new(@origin.name, @origin.type, @origin.uses)
+	def self.newCopy(origin)
+		return Weapon.new(origin.name, origin.type, origin.uses)
 	end
 
 	# Getters
@@ -59,6 +61,22 @@ class Weapon
 		return @type.power
 	end
 
+	# Description:
+	# 	Displays object relevant data
+	# Returns:
+	# 	String, containing parameters values
+	def name
+			return @name
+	end
+
+	# Description:
+	# 	Displays relevant data
+	# Returns
+	# 	String: values of the parameters
+	def to_s
+			return "Weapon(#{@name}, #{type}, #{uses})"
+	end
+
 	# Setters
 	#=======================================================================
 	
@@ -76,3 +94,5 @@ class Weapon
 		end
 	end
 end
+
+end # module Deepspace

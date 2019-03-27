@@ -2,6 +2,8 @@
 
 module Deepspace
 
+module Deepspace
+
 # Class to take all random decisions on the game
 class Dice 
 
@@ -129,4 +131,4 @@ class Dice
 	end
 end
 
-end		# Deepspace module
+end # module deepspace
