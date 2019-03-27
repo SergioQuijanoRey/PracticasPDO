@@ -1,5 +1,7 @@
 #encoding:utf-8
 
+module Deepspace
+
 # Class to represent the shield boosters that space stations can have
 class ShieldBooster
 
@@ -20,7 +22,6 @@ class ShieldBooster
 		@uses = _uses
 	end
 	
-	# WIP -- BUG -- I think @ should not appear
 	# Description:
 	# 	Copy Constructor
 	# Parameters:
@@ -28,7 +29,7 @@ class ShieldBooster
 	# Return:
 	# 	A ShieldBooster instance holding a copy of origin
 	def newCopy(origin)
-		return ShieldBooster.new(@origin.name, @origin.boost, @origin.uses)
+		return ShieldBooster.new(origin.name, origin.boost, origin.uses)
 	end
 
 	# Getters
@@ -49,10 +50,6 @@ class ShieldBooster
 	def uses
 		return @uses
 	end
-
-	# WIP -- En el guion no dice nada de que haya un getter para Name
-	# WIP -- pero seria recomendable para el constructor de copia
-
 
 	# Description:
 	# 	Gets the UI representation of the ShieldBooster object
@@ -81,4 +78,6 @@ class ShieldBooster
 			return 1.0
 		end
 	end
-end
+end # class
+
+end # module
