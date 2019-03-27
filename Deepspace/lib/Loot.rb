@@ -1,12 +1,11 @@
 #encondig:utf-8
 
-# WIP -- Check English comments (possible mistakes :D )
-
-require_relative "../lib/LootToUI.rb"
+require_relative 'LootToUI'
 
 module Deepspace
 
-# Class to represent the loot obtained by defeating a enemy ship
+# Description:
+# 	Class to represent the loot obtained by defeating an enemy's ship
 class Loot
 
 	# Constructores
@@ -34,7 +33,7 @@ class Loot
 	#===========================================================================
 
 	# Description:
-	# 	Number of Supplies Getter
+	# 	Number of Supplies getter
 	# Return
 	#	Integer, number of Supplies given by a loot
 	def nSupplies
@@ -85,6 +84,7 @@ class Loot
 	def getUIVersion
 			return LootToUI.new(self)
 	end
-end
+	
+end # class Loot
 
 end # module deepspace
