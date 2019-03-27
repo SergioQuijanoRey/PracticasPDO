@@ -1,21 +1,8 @@
 #encoding:utf-8
 
-<<<<<<< HEAD
-class Damage
-
-    def initialize(w, s)
-        @nShields = s
-        @nWeapons = w
-    end
-
-    #superWIP JAJA
-end
-=======
 require_relative "../lib/DamageToUI.rb"
 
 module Deepspace
-
-# WIP -- Not ended
 
 # Description:
 # 	Represents damages done on a spaceShip after loosing a combat
@@ -199,4 +186,3 @@ class Damage
 end
 
 end	# module Deepspace
->>>>>>> sergio
