@@ -29,7 +29,7 @@ class ShieldBooster
 	# Return:
 	# 	A ShieldBooster instance holding a copy of origin
 	def self.newCopy(origin)
-		return ShieldBooster.new(origin.name, origin.boost, origin.uses)
+		return new(origin.name, origin.boost, origin.uses)
 	end
 
 	# Getters
@@ -72,7 +72,10 @@ class ShieldBooster
 	# Returns:
 	# 	String, containing all parameters value
 	def to_s
-		return "ShieldBooster(\"#{name}\", #{boost}, #{uses})"
+		return "ShieldBooster
+		\tname: #{name}
+		\tboost: #{boost}
+		\tuses: #{uses}"
 	end
 
 	# Description:
@@ -80,7 +83,7 @@ class ShieldBooster
 	# Returns:
 	# 	ShieldToUI: the UI representation
 	def getUIVersion
-			return ShieldToUI.new(self)
+		return ShieldToUI.new(self)
 	end
 
 	# SETTERS
@@ -96,12 +99,13 @@ class ShieldBooster
 	#		1.0 if uses == 0
 	def useIt
 		if @uses > 0			# We can use our shield booster
-			@uses = @uses - 1
+			@uses -= 1
 			return @boost
 		else					# Shield booster is drained
 			return 1.0
 		end
 	end
-end # class
 
-end # module
+end # class ShieldBooster
+
+end # module Deepspace

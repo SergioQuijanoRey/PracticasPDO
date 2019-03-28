@@ -1,14 +1,14 @@
 #encoding:utf-8
 
-# WIP -- Check english comments (possible mistakes)
-
-require_relative "../lib/WeaponToUI.rb"
+require_relative "WeaponToUI"
+#require_relative "enums"
 
 module Deepspace
 
 # Class to represent the weapons that a space station can dispose of to
 # increment its energy when shooting
 class Weapon
+
 	# Constructors
 	#=======================================================================
 
@@ -33,7 +33,7 @@ class Weapon
 	# Return:
 	# 	Weapon, a copy of origin
 	def self.newCopy(origin)
-		return Weapon.new(origin.name, origin.type, origin.uses)
+		return new(origin.name, origin.type, origin.uses)
 	end
 
 	# Getters
@@ -68,7 +68,7 @@ class Weapon
 	# Returns:
 	# 	String, containing parameters values
 	def name
-			return @name
+		return @name
 	end
 
 	# Description:
@@ -76,7 +76,10 @@ class Weapon
 	# Returns
 	# 	String: values of the parameters
 	def to_s
-			return "Weapon(#{@name}, #{type}, #{uses})"
+		return "Weapon
+		\tname: #{@name}
+		\ttype: #{type}
+		\tuses: #{uses}"
 	end
 
 	# Description:
@@ -84,7 +87,7 @@ class Weapon
 	# Returns
 	# 	WeaponToUI: the object representation
 	def getUIVersion
-			return WeaponToUI.new(self)
+		return WeaponToUI.new(self)
 	end
 
 	# Setters

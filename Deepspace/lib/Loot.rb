@@ -79,12 +79,18 @@ class Loot
 	# Returns:
 	# 	String, containing all the relevant data
 	def to_s
-		return "Loot(#{nSupplies}, #{nWeapons}, #{nShields}, #{nHangars}, #{nMedals})"
+		return "Loot
+		\tnSupplies: #{nSupplies}
+		\tnWeapons: #{nWeapons}
+		\tnShields: #{nShields}
+		\tnHangars: #{nHangars}
+		\tnMedals: #{nMedals})"
 	end
 
 	def getUIVersion
-			return LootToUI.new(self)
+		return LootToUI.new(self)
 	end
-end
 
-end # module deepspace
+end # class Loot
+
+end # module Deepspace

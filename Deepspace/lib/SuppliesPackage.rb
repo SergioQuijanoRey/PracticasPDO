@@ -1,7 +1,5 @@
 #encoding:utf-8
 
-# WIP -- Check english comments (posible mistakes :D )
-
 module Deepspace
 
 # Class to represent a Supplies Package
@@ -32,7 +30,7 @@ class SuppliesPackage
 	# Return:
 	# 	A SuppliesPackage instance holding a copy of origin
 	def self.newCopy(origin)
-		return SuppliesPackage.new(origin.ammoPower, origin.fuelUnits, origin.shieldPower)
+		return new(origin.ammoPower, origin.fuelUnits, origin.shieldPower)
 	end
 
 	# Getters
@@ -68,9 +66,12 @@ class SuppliesPackage
 	# Returns:
 	# 		String: containing the object data
 	def to_s
-		return "SuppliesPackage(#{ammoPower}, #{fuelUnits}, #{shieldPower})"
+		return "SuppliesPackage
+		\tammoPower: #{ammoPower}
+		\tfuelUnits: #{fuelUnits}
+		\tshieldPower: #{shieldPower})"
 	end
 
-end
+end # class SuppliesPackage
 
 end # module Deepspace

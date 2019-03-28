@@ -1,8 +1,8 @@
 #encoding:utf-8
 
-require_relative "../lib/GameStateController.rb"
-require_relative "../lib/GameUniverseToUI.rb"
-require_relative "../lib/Dice.rb"
+require_relative "GameStateController"
+require_relative "GameUniverseToUI"
+require_relative "Dice"
 
 module Deepspace
 
@@ -16,20 +16,20 @@ class GameUniverse
 		# Description:
 		# 	Initializer of the class
 		def initialize
-				@gameState = GameStateController.new
-				@turns = 0
-				@dice = Dice.new
+			@gameState = GameStateController.new
+			@turns = 0
+			@dice = Dice.new
 
-				@currentStationIndex = nil	# Integer
-				@currentStation = nil		# SpaceStation
-				@spaceStations = nil		# SpaceStation[]
-				@currentEnemy = nil			# EnemyStarShip
+			@currentStationIndex = -1	# Integer
+			@currentStation = nil		# SpaceStation
+			@spaceStations = []			# SpaceStation[]
+			@currentEnemy = nil			# EnemyStarShip
 		end
 
 		# Getters
 		#=======================================================================
 		def gameState
-				return @gameState
+			return @gameState
 		end
 
 		# WIP -- Practica 3
@@ -46,7 +46,7 @@ class GameUniverse
 		# Description:
 		# Returns:
 		# 	CombatResult
-		def combat()
+		def combat
 		end
 
 		# Description:
@@ -54,7 +54,7 @@ class GameUniverse
 		# Returns:
 		# 	GameUniverseToUI: the UI representation
 		def getUIVersion
-				return GameUniverseToUI.new(@currentStation, @currentEnemy)
+			return GameUniverseToUI.new(@currentStation, @currentEnemy)
 		end
 
 		# Description:
@@ -63,19 +63,22 @@ class GameUniverse
 		# 	Boolean	true, if the space ship has won
 		# 			false, otherwise
 		def haveAWinner
-				if @currentStation.nil?
-						puts "Warning! @currentStation nil on GameUniverse.haveAWinner()"
+			if @currentStation.nil?
+				puts "Warning! @currentStation nil on GameUniverse.haveAWinner()"
+			else
+				if @currentStation.nMedals >= @@WIN
+					return true
 				else
-						if @currentStation.nMedals >= @@WIN
-								return true
-						else
-								return false
-						end
+					return false
 				end
+			end
 		end
 
 		def to_s
-				return "GameUniverse(#{@gameState}, #{@turns}, #{@dice})"
+			return "GameUniverse
+			\tgameState: #{@gameState}
+			\tturns: #{@turns}
+			\tdice: #{@dice}"
 		end
 
 		# Setters
@@ -85,9 +88,9 @@ class GameUniverse
 		# 	The current space station discards an Hangar if GameState is INIT or AFTERCOMBAT
 		# 	Otherwise, this method has no effect
 		def discardHangar
-				if @gameState == GameState::INIT or GameState::AFTERCOMBAT
-						@currentStation.discardHangar
-				end
+			if @gameState == GameState::INIT or GameState::AFTERCOMBAT
+				@currentStation.discardHangar
+			end
 		end
 
 		# Description:
@@ -96,9 +99,9 @@ class GameUniverse
 		# Parameters:
 		# 	i: Integer, position of the shield booster to discard
 		def discardShieldBooster(i)
-				if @gameState == GameState::INIT or GameState::AFTERCOMBAT
-						@currentStation.discardShieldBooster(i)
-				end
+			if @gameState == GameState::INIT or GameState::AFTERCOMBAT
+				@currentStation.discardShieldBooster(i)
+			end
 		end
 
 		# Description:
@@ -107,9 +110,9 @@ class GameUniverse
 		# Parameters:
 		# 	i: Integer, position of the shield booster to discard
 		def discardShieldBoosterInHangar(i)
-				if @gameState == GameState::INIT or GameState::AFTERCOMBAT
-						@currentStation.discardShieldBoosterInHangar(i)
-				end
+			if @gameState == GameState::INIT or GameState::AFTERCOMBAT
+				@currentStation.discardShieldBoosterInHangar(i)
+			end
 		end
 
 		# Description:
@@ -118,9 +121,9 @@ class GameUniverse
 		# Parameters:
 		# 	i: Integer, position of the weapon to discard
 		def discardWeapon(i)
-				if @gameState == GameState::INIT or GameState::AFTERCOMBAT
-						@currentStation.discardWeapon(i)
-				end
+			if @gameState == GameState::INIT or GameState::AFTERCOMBAT
+				@currentStation.discardWeapon(i)
+			end
 		end
 
 		# Description:
@@ -129,9 +132,9 @@ class GameUniverse
 		# Parameters:
 		# 	i: Integer, position of the weapon to discard
 		def discardWeaponInHangar(i)
-				if @gameState == GameState::INIT or GameState::AFTERCOMBAT
-						@currentStation.discardWeaponInHangar(i)
-				end
+			if @gameState == GameState::INIT or GameState::AFTERCOMBAT
+				@currentStation.discardWeaponInHangar(i)
+			end
 		end
 
 		# Description:
@@ -140,9 +143,9 @@ class GameUniverse
 		# Parameters:
 		# 	i: Integer, position of the shield booster to mount
 		def mountShieldBooster(i)
-				if @gameState == GameState::INIT or GameState::AFTERCOMBAT
-						@currentStation.mountShieldBooster(i)
-				end
+			if @gameState == GameState::INIT or GameState::AFTERCOMBAT
+				@currentStation.mountShieldBooster(i)
+			end
 		end
 
 		# Description:
@@ -151,16 +154,16 @@ class GameUniverse
 		# Parameters:
 		# 	i: Integer, position of the weapon to mount
 		def mountWeapon(i)
-				if @gameState == GameState::INIT or GameState::AFTERCOMBAT
-						@currentStation.mountWeapon(i)
-				end
+			if @gameState == GameState::INIT or GameState::AFTERCOMBAT
+				@currentStation.mountWeapon(i)
+			end
 		end
 
 		# WIP -- Practica 3
 		# Description:
 		# Returns:
 		# 	Boolean
-		def nexTurn
+		def nextTurn
 		end
 
 		# WIP -- Practica 3
@@ -169,6 +172,7 @@ class GameUniverse
 		# 	names: String[]
 		def init(names)
 		end
-end
+
+end # class GameUniverse
 
 end # module Deepspace

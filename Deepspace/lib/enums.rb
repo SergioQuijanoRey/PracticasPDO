@@ -16,7 +16,7 @@ end
 
 # Enum to represent the result of a shot taken
 module ShotResult
-	DONOTRESIST=		:donotresist
+	DONOTRESIST=	:donotresist
 	RESIST=			:resist
 end
 

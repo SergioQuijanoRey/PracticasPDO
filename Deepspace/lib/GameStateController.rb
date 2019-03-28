@@ -1,6 +1,6 @@
 #encoding:utf-8
 
-require_relative "../lib/GameState.rb"
+require_relative "GameState"
 
 module Deepspace
 

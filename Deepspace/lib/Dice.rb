@@ -1,5 +1,7 @@
 #encondig:utf-8
 
+#require_relative "GameCharacter"
+
 module Deepspace
 
 # Class to take all random decisions on the game
@@ -61,7 +63,7 @@ class Dice
 
 		if randval <= @NWEAPONSPROB
 			return 1
-		elsif randval > @NWEAPONSPROB and randval <= @NWEAPONSPROB*2
+		elsif randval <= @NWEAPONSPROB*2
 			return 2
 		else
 			return 3
