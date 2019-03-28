@@ -41,7 +41,7 @@ class SpaceStation
 	#=======================================================================
 
 	# Attribute readers
-	attr_reader :ammoPower, :fuelUnits, :hangar, :name, :nMedals, :pendingDamage, :shieldBooster, :shieldPower, :weapons
+	attr_reader :ammoPower, :fuelUnits, :hangar, :name, :nMedals, :pendingDamage, :shieldBoosters, :shieldPower, :weapons
 
 	# Description:
 	# 	Gets the speed of the SpaceStation
