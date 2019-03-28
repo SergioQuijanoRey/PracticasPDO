@@ -118,7 +118,7 @@ class Hangar
 	# 		Boolean:	true, if the operation runs successfully
 	# 					false, if something fails (no room for another shield)
 	def addShieldBooster(s)
-		if spaceAvailable()
+		if spaceAvailable
 			@shieldBoosters << s
 			return true
 		else

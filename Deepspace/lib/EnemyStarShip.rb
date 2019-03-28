@@ -66,7 +66,7 @@ class EnemyStarShip
 		\tname: #{@name}
 		\tammoPower: #{@ammoPower}
 		\tshieldPower: #{@shieldPower}
-		\tloot: #{@loot}
+		\tloot: {\n\t		#{@loot}\n		\t}
 		\tdamage: #{@damage}"
 	end
 

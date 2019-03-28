@@ -74,89 +74,126 @@ module Deepspace
       end
       damagenull=Damage.newNumericWeapons(0,0)
       if(damagenull.hasNoEffect)
-         puts"Tambien Funciona"
+        puts"Tambien Funciona"
       end
       if(!damage1.hasNoEffect)
-        #puts"Sigue funcionando"
+        puts"Sigue funcionando"
       end
       if(!damage2.hasNoEffect)
-        #puts"Definitivamente funciona"
+        puts"Definitivamente funciona"
       end
       
       puts "\n\nPrueba de EnemyStarShip"
       
       loot=Loot.new(3,2,4,2,7) #3 suplementos, 2 armas, 4 escudos, 2 hangares, 7 medallas
+      puts loot.to_s
       enemyStarShip=EnemyStarShip.new("HalconMilenario",30,25,loot,damage2)
-      #puts enemyStarShip.to_s
+      puts enemyStarShip.to_s
       
-      #puts"Prueba de fire: #{enemyStarShip.fire}, Prueba de protection: #{enemyStarShip.protection}"
-      #puts"\nPrueba de receiveShot"
+      puts"Prueba de fire: #{enemyStarShip.fire}, Prueba de protection: #{enemyStarShip.protection}"
+      puts"\nPrueba de receiveShot"
       if(enemyStarShip.receiveShot(30)==ShotResult::RESIST)
-       # puts"No funciona"
+       puts"No funciona"
       elsif(enemyStarShip.receiveShot(20)==ShotResult::RESIST && enemyStarShip.receiveShot(30)==ShotResult::DONOTRESIST)
-       # puts"Funciona"
+       puts"Funciona"
       end
       
       puts"\n\nPrueba de SpaceStation"
       suppliesPackage=SuppliesPackage.new(30,150,25)
+      puts suppliesPackage.to_s
       suppliesPackage1=SuppliesPackage.new(2,20,17)
+      puts suppliesPackage1.to_s
       suppliesPackage2=SuppliesPackage.new(3,3,3)
+      puts suppliesPackage2.to_s
       
       spaceStation=SpaceStation.new("Skylab",suppliesPackage)
-      
+      puts spaceStation.to_s
+      puts "This is damage1"
+      puts damage1.to_s
       spaceStation.setPendingDamage(damage1)
       spaceStation.receiveHangar(hangar1)
-      #puts spaceStation.to_s
+      puts "After pending damage and received hangar"
+      puts spaceStation.to_s
       spaceStation.move
       spaceStation.receiveSupplies(suppliesPackage1)
       spaceStation.move
-      #puts spaceStation.to_s
+      puts "After move, receiveSupplies, move"
+      puts spaceStation.to_s
+      puts "Comprobando validState"
       if(spaceStation.validState)
-        #puts"\nLa estacion esta bien"
+        puts"\nLa estacion esta bien"
       end
       
       arma4=Weapon.new("Bazooka",WeaponType::MISSILE,5)
+      puts "La arma4 es:"
+      puts arma4.to_s
       potenciador3=ShieldBooster.new("CapaExtra",5,7)
+      puts "El potenciador3 es:"
+      puts potenciador3.to_s
       if spaceStation.receiveWeapon(arma4)
         puts"Algo falla"
+      else
+        puts "Maravilloso! ;)"
       end
+      puts "spaceStation before:"
+      puts spaceStation.to_s
+      puts "Mounting weapon 0"
       spaceStation.mountWeapon(0)
+      puts spaceStation.to_s
+      puts "Mounting weapon 0"
       spaceStation.mountWeapon(0)
+      puts spaceStation.to_s
+      puts "Mounting weapon 0"
       spaceStation.mountWeapon(0)
+      puts spaceStation.to_s
+      puts "Mounting shieldBooster 0"
       spaceStation.mountShieldBooster(0)
+      puts spaceStation.to_s
+      puts "Mounting shieldBooster 0"
       spaceStation.mountShieldBooster(0)
-      #puts"\n\nDespues de montarlo todo:\n"
-      #puts spaceStation.to_s
+      puts spaceStation.to_s
+      puts"\n\nDespues de montarlo todo:\n"
+      puts spaceStation.to_s
       if(spaceStation.receiveShieldBooster(potenciador3) && spaceStation.receiveWeapon(arma4))
-        #puts"\n\nDespues de anadir un potenciador y un arma\n"
-        #puts spaceStation.to_s
+        puts"\n\nDespues de anadir un potenciador y un arma\n"
+        puts spaceStation.to_s
         spaceStation.discardWeaponInHangar(0)
         spaceStation.discardShieldBoosterInHangar(0)
-        #puts"\n\nDespues de unos descartes en el hangar:\n"
-        #puts spaceStation.to_s
+        puts"\n\nDespues de unos descartes en el hangar:\n"
+        puts spaceStation.to_s
       end
-      
+
+      puts "spaceStation before use"
+      puts "Use weapon at 0:"      
       spaceStation.weapons.at(0).useIt
+      puts spaceStation.to_s
+      puts "Use weapon at 0:"      
       spaceStation.weapons.at(0).useIt
+      puts spaceStation.to_s
+      puts "Use shieldBooster at 0:"
       spaceStation.shieldBoosters.at(0).useIt
+      puts spaceStation.to_s
+      puts "cleanUpMountedItems"
       spaceStation.cleanUpMountedItems
-      #puts"\n\nDespues de unos usos y una limpieza:"
+      puts"\n\nDespues de unos usos y una limpieza:"
       
-      #spaceStation.discardHangar
+      spaceStation.discardHangar
       
-      #puts spaceStation.to_s
+      puts spaceStation.to_s
+
+      puts ";)"
       
       loot=Loot.new(2,2,0,1,2)
       spaceStation.setLoot(loot)
-      #puts spaceStation.to_s
+      puts spaceStation.to_s
       puts "AmmoPower: #{spaceStation.ammoPower}"
       puts "\n FUEGOOOO #{spaceStation.fire}"
       puts "\n PROTECCIOOON #{spaceStation.protection}"
-      #puts spaceStation.to_s
+      puts spaceStation.to_s
       spaceStation.mountShieldBooster(0)
       spaceStation.mountWeapon(0)
       spaceStation.setPendingDamage(Damage.newSpecificWeapons([WeaponType::PLASMA, WeaponType::LASER, WeaponType::MISSILE], 3))
-      #puts spaceStation.to_s
+      puts spaceStation.to_s
       spaceStation.discardShieldBooster(0)
       spaceStation.discardWeapon(0)
       puts spaceStation.to_s
@@ -175,9 +212,9 @@ module Deepspace
       spaceStation2=SpaceStation.new("Chetada",suppliesPackage2)
       result=gameUniverse.combatGo(spaceStation2,enemyStarShip2)
       puts result
-      puts damage2.getUIversion.to_s
+      puts damage2.getUIVersion.to_s
       puts "===================================================================="
-      #puts gameUniverse.to_s
+      puts gameUniverse.to_s
       if gameUniverse.nextTurn
         puts "TURNO SIGUIENTE"
       else

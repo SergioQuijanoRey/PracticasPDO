@@ -46,7 +46,7 @@ class Loot
 		\tnWeapons: #{nWeapons}
 		\tnShields: #{nShields}
 		\tnHangars: #{nHangars}
-		\tnMedals: #{nMedals})"
+		\tnMedals: #{nMedals}"
 	end
 
 	def getUIVersion

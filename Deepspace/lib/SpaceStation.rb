@@ -53,7 +53,7 @@ class SpaceStation
 			puts "WARNING, zero division at SpaceStation.speed()"
 			return 0
 		else
-			return @fuelUnits / @@MAXFUEL
+			return @fuelUnits.to_f / @@MAXFUEL
 		end
 	end
 
@@ -61,10 +61,15 @@ class SpaceStation
 	# 	Checks the state of SpaceShip
 	# 	Valid state means no pending damage or pending damage with no effect
 	# Returns:
-	# 	Boolean,	true, if SpaceShip is on valid state
-	# 				false, otherwise
+	# 	Boolean: true, if SpaceShip is on valid state
+	# 			 false, otherwise
 	def validState
-		return @pendingDamage.nil? || @pendingDamage.length == 0 || @pendingDamage.hasNoEffect
+		if @pendingDamage.nil?
+			return false
+		else
+			#TEST return @pendingDamage.length == 0 || @pendingDamage.hasNoEffect
+			return @pendingDamage.hasNoEffect
+		end
 	end
 
 	# Description
@@ -121,8 +126,10 @@ class SpaceStation
 	# Description:
 	# 	If pending damage has no effect, fixes the atribute to nil
 	def cleanPendingDamage
-		if @pendingDamage.hasNoEffect
+		if !@pendingDamage.nil?
+			if @pendingDamage.hasNoEffect
 				@pendingDamage = nil
+			end
 		end
 	end
 
@@ -250,6 +257,9 @@ class SpaceStation
 	# 	The spaceships moves. Therefore, fuel units decrease
 	def move
 		@fuelUnits -= @fuelUnits*speed
+		if @fuelUnits <= 0
+			@fuelUnits = 0
+		end
 	end
 
 	# Description:
@@ -281,28 +291,28 @@ class SpaceStation
 	# 	shot: Float
 	# Returns:
 	# 	ShotResult
-	def receiveShot
+	def receiveShot(shot)
 	end
 
 	# WIP -- Práctica 3
 	# Description
 	# Parameters:
 	# 	loot: Loot
-	def setLoot
+	def setLoot(loot)
 	end
 
 	# WIP -- Práctica 3
 	# Description:
 	# Parameters:
 	# 	i: Integer
-	def discardWeapon
+	def discardWeapon(i)
 	end
 
 	# WIP -- Práctica 3
 	# Description:
 	# Parameters:
 	# 	i: Integer
-	def discardShieldBooster
+	def discardShieldBooster(i)
 	end
 
 	# Private Specifiers
