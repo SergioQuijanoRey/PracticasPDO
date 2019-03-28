@@ -26,7 +26,8 @@ class TestP1
 			puts "Creating Loot.new(#{nSupplies}, #{nWeapons}, #{nShields}, #{nHangars}, #{nMedals})"
 			loot_test = Loot.new(nSupplies, nWeapons, nShields, nHangars, nMedals)
 			puts "Result: #{loot_test.to_s}"
-			puts "--------------------------------------------------------------------------------"		end
+			puts "--------------------------------------------------------------------------------"
+		end
 		puts ""
 			
 		# Testing class SuppliesPackage
