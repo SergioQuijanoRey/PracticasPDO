@@ -53,7 +53,7 @@ class SpaceStation
 			puts "WARNING, zero division at SpaceStation.speed()"
 			return 0
 		else
-			return @fuelUnits / @@MAXFUEL		# WIP comprobar división float / entero
+			return @fuelUnits / @@MAXFUEL
 		end
 	end
 

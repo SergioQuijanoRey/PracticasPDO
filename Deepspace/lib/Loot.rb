@@ -33,46 +33,8 @@ class Loot
 	# Getters
 	#===========================================================================
 
-	# Description:
-	# 	Number of Supplies Getter
-	# Return
-	#	Integer, number of Supplies given by a loot
-	def nSupplies
-		return @nSupplies
-	end
-
-	# Description:
-	# 	Number of Weapons getter
-	# Return
-	#	Integer, number of Weapons given by a loot
-	def nWeapons
-		return @nWeapons
-	end
+	attr_reader :nSupplies, :nWeapons, :nShields, :nHangars, :nMedals
 	
-	# Description:
-	# 	Number of Shields getter
-	# Return
-	#	Integer, number of Shields given by a loot
-	def nShields
-		return @nShields
-	end
-
-	# Description:
-	# 	Number of Hangars getter
-	# Return
-	#	Integer, number of Hangars given by a loot
-	def nHangars
-		return @nHangars
-	end
-
-	# Description:
-	# 	Number of Medals Getter
-	# Return
-	#	Integer, number of Medals given by a loot
-	def nMedals
-		return @nMedals
-	end
-
 	# Description:
 	# 	Displays debuf info of the object
 	# 	It uses getters to get the parameters value

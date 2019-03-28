@@ -39,21 +39,7 @@ class Weapon
 	# Getters
 	#=======================================================================
 
-	# Description:
-	# 	Getter for type
-	# Return
-	#	WeaponType, type of the object
-	def type
-		return @type
-	end
-
-	# Description:
-	# 	Getter for uses
-	# Returns:
-	#	Integer, number of uses left
-	def uses
-		return @uses
-	end
+	attr_reader :type, :uses, :name
 
 	# Description:
 	# 	Getter for power
@@ -64,22 +50,14 @@ class Weapon
 	end
 
 	# Description:
-	# 	Displays object relevant data
-	# Returns:
-	# 	String, containing parameters values
-	def name
-		return @name
-	end
-
-	# Description:
 	# 	Displays relevant data
 	# Returns
 	# 	String: values of the parameters
 	def to_s
 		return "Weapon
 		\tname: #{@name}
-		\ttype: #{type}
-		\tuses: #{uses}"
+		\ttype: #{@type}
+		\tuses: #{@uses}"
 	end
 
 	# Description:

@@ -61,17 +61,8 @@ class Damage
 
 	# Getters
 	#=======================================================================
-	def nWeapons
-		return @nWeapons
-	end
-
-	def nShields
-		return @nShields
-	end
-
-	def weapons
-		return @weapons
-	end
+	
+	attr_reader :nWeapons, :nShields, :weapons
 
 	# Description:
 	# 	Returns the UI representation of the object

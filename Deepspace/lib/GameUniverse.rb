@@ -28,9 +28,8 @@ class GameUniverse
 
 		# Getters
 		#=======================================================================
-		def gameState
-			return @gameState
-		end
+		
+		attr_reader :gameState
 
 		# WIP -- Practica 3
 		# Description:

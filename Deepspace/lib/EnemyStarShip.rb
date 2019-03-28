@@ -34,25 +34,8 @@ class EnemyStarShip
 	
 	# Getters
 	#=======================================================================
-	def name
-		return @name
-	end
 
-	def ammoPower
-		return @ammoPower
-	end
-
-	def shieldPower
-		return @shieldPower
-	end
-
-	def loot
-		return @loot
-	end
-
-	def damage
-		return @damage
-	end
+	attr_reader :name, :ammoPower, :shieldPower, :loot, :damage
 
 	# Description:
 	# 	Gets UI representation of the object

@@ -35,21 +35,7 @@ class ShieldBooster
 	# Getters
 	#===========================================================================
 
-	# Description:
-	# 	Getter for boost
-	# Return
-	#	Float with boost
-	def boost
-		return  @boost
-	end
-
-	# Description:
-	# 	Getter for uses
-	# Returns:
-	#	Int with uses
-	def uses
-		return @uses
-	end
+	attr_reader :boost, :uses, :name
 
 	# Description:
 	# 	Gets the UI representation of the ShieldBooster object
@@ -57,14 +43,6 @@ class ShieldBooster
 	#	ShieldToUI: the UI representation
 	def getUIVersion
 		return ShieldToUI.new(self)
-	end
-
-	# Description:
-	# 	Getter for name
-	# Returns:
-	#	String: name of the shield booster
-	def name
-			return @name
 	end
 
 	# Description:
@@ -86,7 +64,7 @@ class ShieldBooster
 		return ShieldToUI.new(self)
 	end
 
-	# SETTERS
+	# Setters
 	#===========================================================================
 
 	# Description:

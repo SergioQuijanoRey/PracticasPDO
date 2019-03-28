@@ -36,29 +36,7 @@ class SuppliesPackage
 	# Getters
 	#===========================================================================
 
-	# Description:
-	# 	Getter for ammoPower
-	# Return
-	#	Integer with ammoPower
-	def ammoPower
-		return @ammoPower
-	end
-
-	# Description:
-	# 	Getter for fuelUnits
-	# Return
-	#	Integer with fuelUnits
-	def fuelUnits
-		return @fuelUnits
-	end
-
-	# Description:
-	# 	Getter for shieldPower
-	# Return
-	#	Integer with shieldPower
-	def shieldPower
-		return @shieldPower
-	end
+	attr_reader :ammoPower, :fuelUnits, :shieldPower
 
 	# Description:
 	# 		Displays debug info
