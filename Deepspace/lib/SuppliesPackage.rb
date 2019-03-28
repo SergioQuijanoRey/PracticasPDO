@@ -47,7 +47,7 @@ class SuppliesPackage
 		return "SuppliesPackage
 		\tammoPower: #{ammoPower}
 		\tfuelUnits: #{fuelUnits}
-		\tshieldPower: #{shieldPower})"
+		\tshieldPower: #{shieldPower}"
 	end
 
 end # class SuppliesPackage
