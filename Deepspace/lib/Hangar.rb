@@ -1,4 +1,4 @@
-# WIP -- lack of documentation
+#encoding:utf-8
 
 require_relative "Weapon.rb"
 require_relative "ShieldBooster"
@@ -46,17 +46,10 @@ class Hangar
 		return copy
 	end
 
-	def shieldBoosters
-		return @shieldBoosters
-	end
+	# Getters
+	#=======================================================================
 
-	def weapons
-		return @weapons
-	end
-
-	def maxElements
-		return @maxElements
-	end
+	attr_reader :shieldBoosters, :weapons, :maxElements
 
 	# Description:
 	# 	Checks if there's space left for more elements at the hangar
