@@ -29,18 +29,14 @@ class Hangar
 	# Returns:
 	# 	Hangar, a copy of the hangar parameter given
 	def self.newCopy(h)
-		copy = Hangar.new(h.maxElements)
+		copy = new(h.maxElements)
 
-		if !@shieldBoosters.nil?
-			for shieldBooster in @shieldBoosters
-				copy.addShieldBooster(shieldBooster)
-			end
+		for shieldBooster in h.shieldBoosters
+			copy.addShieldBooster(shieldBooster)
 		end
 
-		if !@weapons.nil?
-			for weapon in @weapons
-				copy.addWeapon(weapon)
-			end
+		for weapon in h.weapons
+			copy.addWeapon(weapon)
 		end
 
 		return copy

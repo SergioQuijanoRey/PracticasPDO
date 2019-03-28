@@ -30,17 +30,17 @@ class Damage
 	# Description:
 	# 	Creates a Damage where weapon types are not known
 	# Parameters:
-	# 	_nWeawpons: Integer, number of weapons to loose
-	# 	_nShields: Integer, number of shields to loose
+	# 	_nWeapons: Integer, number of weapons to lose
+	# 	_nShields: Integer, number of shields to lose
 	def self.newNumericWeapons(_nWeapons, _nShields)
-		return new(_nWeapons, _nShields, [])
+		return new(_nWeapons, _nShields, nil)
 	end
 
 	# Description:
 	# 	Creates a Damage object where weapon types are specified
 	# Parameters:
 	# 	_weapons: WeaponType[], types of weapons to discard
-	# 	_nShields: Integer, number of shields to loose
+	# 	_nShields: Integer, number of shields to lose
 	def self.newSpecificWeapons(weapons, _nShields)
 		return new(0, _nShields, weapons)
 	end
@@ -52,7 +52,7 @@ class Damage
 	# Returns
 	# 	Damage: a copy of the given instance
 	def self.newCopy(d)
-		if d.weapons.empty?
+		if d.weapons == nil
 			return newNumericWeapons(d.nWeapons, d.nShields)
 		else
 			return newSpecificWeapons(d.weapons, d.nShields)
@@ -95,7 +95,7 @@ class Damage
 	end
 
 	def to_s
-		if @weapons.empty?
+		if @weapons == nil
 			return "Damage.newNumericWeapons(#{@nWeapons}, #{@nShields})"
 		else
 			return "Damage.newSpecificWeapons(#{@weapons}, #{@nShields})"
@@ -107,54 +107,70 @@ class Damage
 	
 	# Setters
 	#=======================================================================
+
 	# Description:
 	# 	Creates a copy of current objet where weapons and shields which are
 	# 	not included in arrays given as parameters are discarded. That's to say,
 	# 	we srink the Damage to the parameters
 	# Parameters:
 	# 	w: Weapon[], weapons to fit
-	# 	s: shieldBooster[], shields to fit
+	# 	s: ShieldBooster[], shields to fit
 	# Returns:
 	# 	Damage: a copy of the object adjusted as explained above
-	# WIP -- not finished
 	def adjust(w, s)
-		if @weapons.empty? == false
-			# Intersection is computed
+		# we check which new the object has been constructed with:
+		#   if weapons == nil, it has been constructed with newNumericWeapons
+		#   else, it has been constructed with newSpecificWeapons
+		if @weapons == nil
+			if w.length > @nWeapons
+				new_nWeapons = @nWeapons
+			else
+				new_nWeapons = w.length
+			end
+
+			if s.length > @nShields
+				new_nShields = @nShields
+			else
+				new_nShields = s.length
+			end
+			
+			copy = Damage.newNumericWeapons(new_nWeapons, new_nShields)
+		else
+			# we compute the intersection
 			new_weapons = []
 			for weapon in w
-				if @weapons.include? weapon
-					new_weapons.push(weapon)
+				if arrayContainsType(@weapons, weapon)
+					new_weapons << weapon
 				end
 			end
 
-			# New object is created
-			copy = Damage.newSpecificWeapons(new_weapons, @nShields)
-		else
-			puts "WARNING! No specific weapons to adjust, at Damage.adjust()"
-			return nil
+			if s.length > @nShields
+				new_nShields = @nShields
+			else
+				new_nShields = s.length
+			end
+
+			copy = Damage.newSpecificWeapons(new_weapons, new_nShields)
 		end
+
+		return copy
 	end
 
 	# Description:
 	# 	Removes a given type of weapon
 	# 	If a list of weapon types is not available, the number of weapons to be deleted decreases by 1
 	# Parameters:
-	# 	w: WeaponType, the weapon type to be removed # WIP -- No concuerda con el guion de la practica!
+	# 	w: Weapon, the weapon whose type wants to be removed
 	def discardWeapon(w)
-		if @weapons.length != 0
-			position = arrayContainsType(weapons, w)
-			if position != -1
-				@weapons.delete_at(position)
-			else
-				puts "WARNING! No weapon type match at Damage.discardWeapon()"
-			end
-
-		else
+		if weapons == nil
 			if @nWeapons > 0
 				@nWeapons -= 1
 			else
 				puts "WARNING! You tried to have negative weapons at Damage.discardWeapon()"
 			end
+		else
+			# we delete every weapon in @weapons of type w.type
+			@weapons.delete(w.type)
 		end
 	end
 
@@ -171,10 +187,10 @@ class Damage
 	# Description:
 	# 	Checks wether or not damage is affecting
 	# Returns:
-	# 	Boolean: true, if damage has effect
-	# 			 false, if damage has no effect
+	# 	Boolean: true, if damage has no effect
+	# 			 false, if damage has effect
 	def hasNoEffect
-		return @nShields + @nWeapons > 0
+		return @nShields + @nWeapons == 0
 	end
 
 	# Visibility specifiers
