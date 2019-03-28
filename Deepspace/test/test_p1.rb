@@ -74,10 +74,9 @@ class TestP1
 		# Testing class Weapon
 		puts "TESTING CLASS: Weapon"
 		puts "================================================================================"
-		weaponType_arr = [WeaponType::LASER, WeaponType::MISSILE, WeaponType::PLASMA]
 		3.times do
 			name = "weaponTest"
-			type = weaponType_arr[rand(3)]
+			type = [WeaponType::LASER, WeaponType::MISSILE, WeaponType::PLASMA][rand(3)]
 			uses = rand(10)
 			puts "Creating Weapon(#{name}, #{type}, #{uses})"
 			weapon_test = Weapon.new(name, type, uses)

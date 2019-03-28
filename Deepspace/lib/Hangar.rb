@@ -64,7 +64,7 @@ class Hangar
 	# 	Gets the UI representation of the object
 	# Returns
 	# 	HangarToUI: the associated UI representation 
-	def getUIversion
+	def getUIVersion
 		return HangarToUI.new(self)
 	end
 
@@ -140,7 +140,7 @@ class Hangar
 	def removeShieldBooster(s)
 		if s >= @shieldBoosters.length || s < 0
 			puts "WARNING! Invalid position to specify a shield, on Hangar.removeShieldBooster(s: Integer)"
-			return Nil
+			return nil
 		else
 			return  @shieldBoosters.delete_at(s)
 		end

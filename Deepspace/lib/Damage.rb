@@ -61,7 +61,7 @@ class Damage
 
 	# Getters
 	#=======================================================================
-	
+
 	attr_reader :nWeapons, :nShields, :weapons
 
 	# Description:
@@ -164,7 +164,7 @@ class Damage
 		if @nShields > 0
 			@nShields -= 1
 		else
-			puts "WARNING! You tryied to have negative shieldBoosters at Damage.discardShieldBooster()"
+			puts "WARNING! You tried to have negative shieldBoosters at Damage.discardShieldBooster()"
 		end
 	end
 

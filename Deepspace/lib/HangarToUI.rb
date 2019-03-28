@@ -18,7 +18,7 @@ class HangarToUI
     end
     
     for s in h.shieldBoosters do
-      @shieldBoosters.push(s.getUIversion())
+      @shieldBoosters.push(s.getUIVersion())
     end
   end
   
