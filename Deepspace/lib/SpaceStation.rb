@@ -64,15 +64,7 @@ class SpaceStation
 	# 	Boolean,	true, if SpaceShip is on valid state
 	# 				false, otherwise
 	def validState
-		if @pendingDamage.nil?
-			return false
-		elsif @pendingDamage.length == 0 
-			return false
-		elsif @pendingDamage.hasNoEffect
-			return false
-		else
-			return true
-		end
+		return @pendingDamage.nil? || @pendingDamage.length == 0 || @pendingDamage.hasNoEffect
 	end
 
 	# Description
@@ -257,7 +249,7 @@ class SpaceStation
 	# Description:
 	# 	The spaceships moves. Therefore, fuel units decrease
 	def move
-		@fuelUnits = @fuelUnits * (1-speed)
+		@fuelUnits -= @fuelUnits*speed
 	end
 
 	# Description:
