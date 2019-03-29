@@ -69,7 +69,7 @@ class Hangar
 	# Returns:
 	# 	String: a representation of the object
 	def to_s
-		return "[Hangar]-> Max. elements: #{@maxElements}, Weapons: [#{@weapons.join(", ")}],  Shields: [#{@shieldBoosters.join(", ")}]"
+		return "[Hangar]-> Max. elements: #{@maxElements}, Weapons: [#{@weapons.join("; ")}],  Shields: [#{@shieldBoosters.join("; ")}]"
 	end
 
 	# Setters

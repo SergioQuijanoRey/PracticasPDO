@@ -54,10 +54,7 @@ class Weapon
 	# Returns
 	# 	String: values of the parameters
 	def to_s
-		return "Weapon
-		\tname: #{@name}
-		\ttype: #{@type}
-		\tuses: #{@uses}"
+		return "[Weapon]-> Name: #{@name}, Type: #{@type}, Power: #{power}, Uses: #{@uses}"
 	end
 
 	# Description:
