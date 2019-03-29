@@ -44,10 +44,7 @@ class SuppliesPackage
 	# Returns:
 	# 		String: containing the object data
 	def to_s
-		return "SuppliesPackage
-		\tammoPower: #{ammoPower}
-		\tfuelUnits: #{fuelUnits}
-		\tshieldPower: #{shieldPower}"
+		return "ammoPower: #{ammoPower}, fuelUnits: #{fuelUnits}, shieldPower: #{shieldPower}"
 	end
 
 end # class SuppliesPackage

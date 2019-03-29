@@ -62,12 +62,7 @@ class EnemyStarShip
 	end
 
 	def to_s
-		return "EnemyStarShip
-		\tname: #{@name}
-		\tammoPower: #{@ammoPower}
-		\tshieldPower: #{@shieldPower}
-		\tloot: {\n\t		#{@loot}\n		\t}
-		\tdamage: #{@damage}"
+		getUIVersion().to_s
 	end
 
 	# Setters
