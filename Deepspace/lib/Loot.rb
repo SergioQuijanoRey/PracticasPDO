@@ -41,12 +41,7 @@ class Loot
 	# Returns:
 	# 	String, containing all the relevant data
 	def to_s
-		return "Loot
-		\tnSupplies: #{nSupplies}
-		\tnWeapons: #{nWeapons}
-		\tnShields: #{nShields}
-		\tnHangars: #{nHangars}
-		\tnMedals: #{nMedals}"
+		return "[Loot]-> Supplies: #{@nSupplies}, Weapons: #{@nWeapons}, Shields: #{@nShields}, Hangars: #{@nHangars}, Medals: #{@nHangars}"
 	end
 
 	def getUIVersion

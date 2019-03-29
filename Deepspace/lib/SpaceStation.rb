@@ -86,16 +86,14 @@ class SpaceStation
 	end
 
 	def to_s
-		return "Space Station
-		\tname: #{@name}
-		\tammoPower: #{@ammoPower}
-		\tfuelUnits: #{@fuelUnits}
-		\tnmedals: #{@nMedals}
-		\tshieldPower: #{@shieldPower}
-		\tpendingDamage: #{@pendingDamage}
-		\tweapons: #{@weapons}
-		\tshieldBoosters: #{@shieldBoosters}
-		\thangar: #{@hangar}"
+		out = "[Space Station]-> Name: #{@name}\n"
+		out += "\tNo. Medals: #{@nMedals}, Fuel units: #{@fuelUnits.round(2)}, Power: #{@ammoPower}, Shields: #{@shieldPower}\n"
+		out += "\tWeapons: [#{@weapons.join(' ,')}]\n"
+		out += "\tShieldBoosters: [#{@shieldBoosters.join(', ')}]\n"
+		out += "\tHangars: #{@hangar}\n"
+		out += "\tPendingDamage: #{@pendingDamage}\n"
+		out += "-------- end of Space Station >> #{@name} << --------"
+		return out
 	end
 	
 	# Setters

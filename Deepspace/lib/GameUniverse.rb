@@ -74,10 +74,10 @@ class GameUniverse
 	end
 
 	def to_s
-		return "GameUniverse
-		\tgameState: #{@gameState}
-		\tturns: #{@turns}
-		\tdice: #{@dice}"
+		out = "[GameUniverse]-> Game state: #{@gameState}, Turns: #{@turns}, Dice: #{@dice}\n"
+		out += "\tCurrent station: #{@currentStation}\n"
+		out += "\tCurrent enemy: #{@currentEnemy}"
+		return out
 	end
 
 	# Setters

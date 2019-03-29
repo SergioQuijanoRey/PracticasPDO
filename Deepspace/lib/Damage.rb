@@ -42,7 +42,8 @@ class Damage
 	# 	_weapons: WeaponType[], types of weapons to discard
 	# 	_nShields: Integer, number of shields to lose
 	def self.newSpecificWeapons(weapons, _nShields)
-		return new(0, _nShields, weapons)
+		return new(-1, _nShields, weapons)
+		# -1 value for distinction
 	end
 
 	# Description:
@@ -83,7 +84,7 @@ class Damage
 	def arrayContainsType(w, t)
 		i = 0
 		w.each do |weapon_aux|
-			if weapon_aux == t
+			if weapon_aux.type == t
 				return i
 			else
 				i += 1
@@ -95,14 +96,7 @@ class Damage
 	end
 
 	def to_s
-		if @weapons == nil
-			return "Damage.newNumericWeapons(#{@nWeapons}, #{@nShields})"
-		else
-			return "Damage.newSpecificWeapons(#{@weapons}, #{@nShields})"
-		end
-
-		# Security condition
-		return ""
+		getUIVersion().to_s
 	end
 	
 	# Setters
@@ -138,8 +132,8 @@ class Damage
 		else
 			# we compute the intersection
 			new_weapons = []
-			for weapon in w
-				if arrayContainsType(@weapons, weapon)
+			for weapon in @weapons
+				if arrayContainsType(w, weapon)
 					new_weapons << weapon
 				end
 			end
@@ -162,15 +156,21 @@ class Damage
 	# Parameters:
 	# 	w: Weapon, the weapon whose type wants to be removed
 	def discardWeapon(w)
-		if weapons == nil
+		if @weapons == nil
 			if @nWeapons > 0
 				@nWeapons -= 1
 			else
 				puts "WARNING! You tried to have negative weapons at Damage.discardWeapon()"
 			end
 		else
-			# we delete every weapon in @weapons of type w.type
-			@weapons.delete(w.type)
+			if @weapons.length != 0
+				position = @weapons.index(w.type)
+				if position != nil
+					@weapons.delete_at(position)
+				else
+					puts "WARNING! No weapon type match at Damage.discardWeapon()"
+				end
+			end
 		end
 	end
 

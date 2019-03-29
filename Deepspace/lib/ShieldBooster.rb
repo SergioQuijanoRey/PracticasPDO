@@ -50,10 +50,7 @@ class ShieldBooster
 	# Returns:
 	# 	String, containing all parameters value
 	def to_s
-		return "ShieldBooster
-		\tname: #{name}
-		\tboost: #{boost}
-		\tuses: #{uses}"
+		return "[ShieldBooster]-> Boost: #{@boost}, Uses: #{@uses}"
 	end
 
 	# Description:
