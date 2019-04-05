@@ -1,6 +1,13 @@
-// WIP -- Lack of documentation
+/**
+ * @author Sergio Quijano Rey
+ * */
 
-public class SuppliesPackage{
+package Deepspace;
+
+/**
+ * @brief Class to represent a supplies package given to a space station
+ * */
+class SuppliesPackage{
 	// Private attributes
 	//======================================================================
 	private float ammoPower;
@@ -9,7 +16,7 @@ public class SuppliesPackage{
 
 	// Constructors
 	//======================================================================
-	public SuppliesPackage(float _ammoPower, float _fuelUnits, float _shieldPower){
+	SuppliesPackage(float _ammoPower, float _fuelUnits, float _shieldPower){
 		ammoPower = _ammoPower;
 		fuelUnits = _fuelUnits;
 		shieldPower = _shieldPower;
@@ -20,7 +27,7 @@ public class SuppliesPackage{
 	 * @param other: the other SuppliesPackage object to copy
 	 * @post the object has a copy of @other
 	 * */
-	public SuppliesPackage(SuppliesPackage other){
+	SuppliesPackage(SuppliesPackage other){
 		this(other.getAmmoPower(), other.getFuelUnits(), other.getShieldPower());
 
 	}

@@ -1,7 +1,13 @@
+/**
+ * @author Sergio Quijano Rey
+ * */
 
-// WIP -- Lack of documentation
+package Deepspace;
 
-public class ShieldBooster{
+/**
+ * @brief Class to represent shield booster that space stations can have
+ * */
+class ShieldBooster{
 	// Private attributes
 	//======================================================================
 	private String name;
@@ -10,13 +16,18 @@ public class ShieldBooster{
 
 	// Constructors
 	//======================================================================
-	public ShieldBooster(String _name, float _boost, int _uses){
+	ShieldBooster(String _name, float _boost, int _uses){
 		name = _name;
 		boost = _boost;
 		uses = _uses;
 	}
 
-	public ShieldBooster(ShieldBooster other){
+	/**
+	 * @brief Copy constructor
+	 * @param other: the ShieldBooster to be copied
+	 * @post the object has an exact copy of the other given object
+	 * */
+	ShieldBooster(ShieldBooster other){
 		this(other.name, other.boost, other.uses);
 	}
 
@@ -34,11 +45,11 @@ public class ShieldBooster{
 	//======================================================================
 	/**
 	 * @brief method to use the shield booster
-	 * @return boost, if there are uses left
-	 * 	   1.0 (neutral boost) otherwise
+	 * @return 	boost, if there are uses left
+	 * 	   		1.0 (neutral boost) otherwise
 	 * */
 	public float useIt(){
-		if(uses > 1){
+		if(uses > 0){
 			uses = uses - 1;
 			return boost;
 		}else{
