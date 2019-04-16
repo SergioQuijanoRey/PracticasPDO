@@ -1,0 +1,89 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package deepspace;
+
+/**
+ * Class to represent the weapons that a space station can dispose of to
+ * increment its energy when shooting
+ * 
+ * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
+ */
+class Weapon {
+    /**
+     * Name of weapon
+     */
+    private String name;
+    
+    /**
+     * Type of weapon
+     */
+    private WeaponType type;
+    
+    /**
+     * Number of uses of weapon
+     */
+    private int uses;
+    
+    // -------------------------------------------------------------------------
+    // Constructors
+    // -------------------------------------------------------------------------
+    
+    /**
+     * Class initializer
+     * @param _name name of weapon
+     * @param _type type of weapon
+     * @param _uses number of uses of weapon
+     */
+    Weapon(String _name, WeaponType _type, int _uses) {
+        name = _name;
+        type = _type;
+        uses = _uses;
+    }
+    
+    /**
+     * Copy constructor
+     * @param w instance which is going to be copied
+     */
+    Weapon(Weapon w) {
+        this.name = w.name;
+        this.type = w.type;
+        this.uses = w.uses;
+    }
+    
+    // -------------------------------------------------------------------------
+    // Getters
+    // -------------------------------------------------------------------------
+    
+    public WeaponType getType() {
+        return type;
+    }
+    
+    public int getUses() {
+        return uses;
+    }
+    
+    public float power() {
+        return type.getPower();
+    }
+    
+    // -------------------------------------------------------------------------
+    // Setters
+    // -------------------------------------------------------------------------
+    
+    /**
+     * Uses the shield booster
+     *   If it is still available (uses is greater than 0), we can use the boost
+     *   Otherwise, we cannot use the boost
+     * @return boost if uses > 0, 1.0 if uses == 0
+     */
+    public float useIt() {
+        if ( uses > 0 ) {
+            uses--;
+            return power();
+        } else
+            return (float) 1.0;
+    }
+}

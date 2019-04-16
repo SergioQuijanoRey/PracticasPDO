@@ -12,9 +12,9 @@ class SuppliesPackage
 	# Description:
 	# 	Class initializer
 	# Parameters:
-	# 	ammoPower: integer to parametrize ammunition power
-	# 	fuelUnits: integer to count fuel units
-	# 	shieldPower: integer to parametrize shield power
+	# 	ammoPower: float to parametrize ammunition power
+	# 	fuelUnits: float to count fuel units
+	# 	shieldPower: float to parametrize shield power
 	# Return:
 	# 	Nil
 	def initialize(_ammoPower, _fuelUnits, _shieldPower)

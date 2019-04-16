@@ -57,7 +57,7 @@ class Dice
 	#		- 2 else if random_value <= 2*NWEAPONSPROB
 	#		- 3 otherwise
 	# Return
-	#	Integer, 1, 2 or 3 as specified above
+	#	Integer, 1, 2 or 3, as specified above
 	def initWithNWeapons
 		randval = @generator.rand
 
@@ -93,7 +93,7 @@ class Dice
 	end
 
 	# Description:
-	#	Determines which player will start the match randomly.
+	#	Determines which player will start the match randomly
 	# Parameters:
 	# 	nPlayers: Integer, number of players
 	# Return
@@ -103,10 +103,10 @@ class Dice
 	end
 
 	# Description:
-	# 	Determines who shots first
+	# 	Determines who shoots first
 	# Return:
 	# 	GameCharacter, SPACESTATION if the player shoots first
-	#                        ENEMYSTARSHIP if the enemy shoots first
+	#                  ENEMYSTARSHIP if the enemy shoots first
 	def firstShot
 		if @generator.rand <= @FIRSTSHOTPROB
 			return GameCharacter::SPACESTATION

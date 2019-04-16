@@ -49,10 +49,43 @@ module Test
 
             puts "(3.b) #{damage}"
 
-            
+
+        end
+    end
+
+    class Examen
+        @@contador = 0
+        def self.principal
+            12.times do
+            puts "Before: #{@@contador}"
+            contabilizar
+            puts "After: #{contador}"
+            end
+
+            puts "EJ2"
+            puts Deepspace::EnumeradoExamen::CUADRADO
+            arr = [Deepspace::EnumeradoExamen::CIRCULO, Deepspace::EnumeradoExamen::CUADRADO, Deepspace::EnumeradoExamen::HEXAGONO]
+            puts arr
+            mag_med = arr.at(0).getMagnitud + arr.at(1).getMagnitud + arr.at(2).getMagnitud
+            mag_med /=3.0
+            puts mag_med
+        end
+
+        def self.contador
+            @@contador
+        end
+
+        def self.contabilizar
+            @@contador += 1
+            if @@contador > 10
+                @@contador = 10
+            end
         end
     end
 end
 
 test = Test::Examen3.new
 test.principal
+
+puts "EXAMEN"
+Test::Examen.principal
