@@ -2,30 +2,30 @@
 
 module Deepspace
 
-# 2.3.17 - Translation from Java
-# @author Profe
-    
-class HangarToUI 
-  attr_reader :maxElements, :weapons, :shieldBoosters
-    
-  def initialize(h) 
-    @weapons=Array.new()
-    @shieldBoosters=Array.new()
-    @maxElements=h.maxElements
-    
-    for w in h.weapons do
-      @weapons.push(w.getUIVersion())
+  # 2.3.17 - Translation from Java
+  # @author Profe
+      
+  class HangarToUI 
+    attr_reader :maxElements, :weapons, :shieldBoosters
+      
+    def initialize(h) 
+      @weapons=Array.new()
+      @shieldBoosters=Array.new()
+      @maxElements=h.maxElements
+      
+      for w in h.weapons do
+        @weapons.push(w.getUIVersion())
+      end
+      
+      for s in h.shieldBoosters do
+        @shieldBoosters.push(s.getUIVersion())
+      end
     end
     
-    for s in h.shieldBoosters do
-      @shieldBoosters.push(s.getUIVersion())
+    def to_s
+      return "Max Elements: #{@maxElements}, Weapons: [#{@weapons.join(", ")}], Shields: [#{@shieldBoosters.join(", ")}]"
     end
-  end
   
-  def to_s
-    return "Max Elements: #{@maxElements}, Weapons: [#{@weapons.join(", ")}], Shields: [#{@shieldBoosters.join(", ")}]"
-  end
-
-end # class
-
+  end # class
+  
 end # module

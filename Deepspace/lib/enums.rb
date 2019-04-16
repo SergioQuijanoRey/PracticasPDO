@@ -57,42 +57,4 @@ module Deepspace
 		PLASMA =	Type.new(4.0, "PLASMA")
 	end
 
-	module EnumeradoExamen
-		# Class to represent the types of weapons
-		class Type
-			# Description:
-			# 	Initializer of the class
-			# Parameters:	
-			# 	pow: Float,representing the power of the weapon
-			# 	_name: String, name of the weapon type
-			# Return:
-			# 	Nil
-			def initialize(_dimension, _magnitud)
-				@dimension = _dimension
-				@magnitud = _magnitud
-			end
-			
-			# Description:
-			# 	Power getter
-			# Return:
-			# 	Float, containing the power of the weapon
-			def getDimension
-				return @dimension
-			end
-
-			def getMagnitud
-				return @magnitud
-			end
-
-			def to_s
-					return "Enum: dim #{getDimension}, mag: #{getMagnitud}"
-			end
-		end
-
-		# Types of weapons available on our game
-		CIRCULO =	Type.new("Radio", 5)
-		CUADRADO =	Type.new("Lado", 2)
-		HEXAGONO =	Type.new("Apotema", 3)
-	end
-
 end # module Deepspace

@@ -1,7 +1,7 @@
 #encoding:utf-8
 
-#require_relative "enums"
-#require_relative "Weapon"
+require_relative "enums"
+require_relative "Weapon"
 require_relative "DamageToUI"
 
 module Deepspace

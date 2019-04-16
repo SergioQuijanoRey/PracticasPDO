@@ -1,7 +1,5 @@
 #encondig:utf-8
 
-# WIP -- Check English comments (possible mistakes :D )
-
 require_relative "../lib/LootToUI.rb"
 
 module Deepspace

@@ -12,9 +12,9 @@ class SuppliesPackage
 	# Description:
 	# 	Class initializer
 	# Parameters:
-	# 	ammoPower: float to parametrize ammunition power
-	# 	fuelUnits: float to count fuel units
-	# 	shieldPower: float to parametrize shield power
+	# 	ammoPower: integer to parametrize ammunition power
+	# 	fuelUnits: integer to count fuel units
+	# 	shieldPower: integer to parametrize shield power
 	# Return:
 	# 	Nil
 	def initialize(_ammoPower, _fuelUnits, _shieldPower)
@@ -48,5 +48,5 @@ class SuppliesPackage
 	end
 
 end # class SuppliesPackage
-
+	
 end # module Deepspace

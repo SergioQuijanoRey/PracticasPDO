@@ -13,7 +13,7 @@ class ShieldBooster
 	# Parameters:
 	# 	name: String, name of the shield booster
 	# 	boost: Float, percentage of damage absorbed by the shield
-	# 	uses: Integer, how many uses the ShieldBooster has
+	# 	uses: Integer, how many uses the ShieldBooster have
 	# Return:
 	# 	Nil
 	def initialize(_name, _boost, _uses)
@@ -65,8 +65,8 @@ class ShieldBooster
 	#===========================================================================
 
 	# Description:
-	# 	Uses the shield booster
-	# 	If it is still available (uses is greater than 0), we can use the boost
+	# 	Uses shield booster
+	# 	If is still available (uses is greater than 0), we can use the boost
 	# 	Otherwise, we cannot use the boost
 	# Return:
 	# 	Float:
@@ -82,5 +82,5 @@ class ShieldBooster
 	end
 
 end # class ShieldBooster
-
+	
 end # module Deepspace
