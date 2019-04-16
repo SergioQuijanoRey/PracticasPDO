@@ -80,4 +80,27 @@ class Loot {
         return nMedals;
     }
     
+    // -------------------------------------------------------------------------
+    // String representation, UI version
+    // -------------------------------------------------------------------------
+    
+    /**
+     * String representation of the object
+     * @return string representation
+     */
+    public String toString() {
+        String message = "[Loot] -> Supplies: " + nSupplies
+                + ", Weapons: " + nWeapons
+                + ", Shields: " + nShields
+                + ", Hangars: " + nHangars
+                + ", Medals: " + nMedals;
+        return message;
+    }
+    
+    /**
+     * To UI
+     */
+    public LootToUI getUIVersion() {
+        return new LootToUI(this);
+    }
 }

@@ -68,4 +68,19 @@ class SuppliesPackage {
     public float getShieldPower() {
         return shieldPower;
     }
+    
+    // -------------------------------------------------------------------------
+    // String representation
+    // -------------------------------------------------------------------------
+    
+    /**
+     * String representation of the object
+     * @return string representation
+     */
+    public String toString() {
+        String message = "[SuppliesPackage] -> ammoPower: " + ammoPower
+                + ", fuelUnits: " + fuelUnits
+                + ", shieldPower: " + shieldPower;
+        return message;
+    }
 }
