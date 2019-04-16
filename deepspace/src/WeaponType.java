@@ -1,4 +1,10 @@
 /**
+ * @author Sergio Quijano Rey
+ * */
+
+package Deepspace;
+
+/**
  * @brief Enumerated to represent the type of weapons of our game
  * 
  * Each weapon type has a getter of it's power: getPower()
@@ -11,11 +17,11 @@ public enum WeaponType{
 	private float power;
 
 	// Constructor
-	private WeaponType(float _power){
+	WeaponType(float _power){
 		power = _power;
 	}
 
-	public float getPower(){
+	float getPower(){
 		return power;
 	}
 }

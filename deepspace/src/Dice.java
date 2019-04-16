@@ -1,21 +1,30 @@
+/**
+ * @author Sergio Quijano Rey
+ * */
+
+package Deepspace;
+
 import java.util.Random;
-import GameCharacter;
 
-// WIP -- Lack of documentation
-// WIP -- Bug on import
-
-public class Dice{
-		// Private attributes
+/**
+ * @brief Class to take all random decisions of the game
+ * */
+class Dice{
+		// Private class attributes
 		//======================================================================
 		private final float NHANGARSPROB;
 		private final float NSHIELDSPROB;
 		private final float NWEAPONSPROB;
 		private final float FIRSTSHOTPROB;
+
+		// Private attributes
+		//======================================================================
 		private Random generator;
 
 		// Constructors
 		//======================================================================
-		public Dice(){
+		// WIP -- Deberia asignarse los valores constantes arriba, en la declaracion de los atributos
+		Dice(){
 				NHANGARSPROB = 0.25;
 				NSHIELDSPROB = 0.25;
 				NWEAPONSPROB = 0.33;
@@ -27,9 +36,9 @@ public class Dice{
 		// Getters
 		//======================================================================
 		/**
-		 * @brief WIP -- What does this does?
-		 * @return 	0 with a probability of NHANGARSPROB
-		 * 			1 otherwise
+		 * @brief determines the number of hangars that a space station receives at creation
+		 * @return 	0, with NHANGARSPROB probability
+		 * 			1, with 1 - NHANGARSPROB probability
 		 * */
 		public int initWithNHangars(){
 				if(generator.nextFloat() < NHANGARSPROB){
@@ -40,10 +49,10 @@ public class Dice{
 		}
 
 		/**
-		 * @brief WIP -- What does this does?
-		 * @return 	1 with NWEAPONSPROB probability
-		 * 			2 with NWEAPONSPROB probability
-		 * 			3 with 1 - 2*NWEAPONSPROB probability
+		 * @brief determines the number of weapons given to a space station on creation
+		 * @return 	1, with NWEAPONSPROB probability
+		 * 			2, with NWEAPONSPROB probability
+		 * 			3, with 1 - 2*NWEAPONSPROB probability, that's to say, otherwise
 		 * */
 		public int initWithNWeapons(){
 				float rand_value = generator.nextFloat();
@@ -58,13 +67,12 @@ public class Dice{
 
 				System.out.println("WARNING! Unexpected condition at Dice.initWithNWeapons()");
 				return 1;
-				
 		}
 
 		/**
-		 * @brief WIP -- What does this does?
-		 * @return 	0 with NSHIELDSPROB probability
-		 * 			1 otherwise
+		 * @brief Determines the number of shield boosters given to a space station on creation
+		 * @return 	0, with NSHIELDSPROB probability
+		 * 			1, with 1 - NSHIELDSPROB probability
 		 * */
 		public int initWithNShields(){
 				if(generator.nextFloat() < NSHIELDSPROB){
@@ -100,8 +108,6 @@ public class Dice{
 
 				System.out.println("WARNING! Unexpected condition at Dice.firstShot()");
 				return GameCharacter.SPACESTATION;
-
-
 		}
 
 		/**

@@ -1,7 +1,13 @@
+/**
+ * @author Sergio Quijano Rey
+ * */
 
-// WIP -- Lack of documentation
+package Deepspace;
 
-public class Weapon{
+/**
+ * @brief Class to represent weapons that space station can have
+ * */
+class Weapon{
 	// Private attributes
 	//======================================================================
 	private String name;
@@ -10,13 +16,18 @@ public class Weapon{
 	
 	// Constructors
 	//======================================================================
-	public Weapon(String _name, WeaponType _type, int _uses){
+	Weapon(String _name, WeaponType _type, int _uses){
 		name = _name;
 		type = _type;
 		uses = _uses;
 	}
 
-	public Weapon(Weapon other){
+	/**
+	 * @brief Copy constructor
+	 * @param other: object to be copied
+	 * @post the object has a copy of given parameter object
+	 * */
+	Weapon(Weapon other){
 		this(other.name, other.type, other.uses);
 	}
 
@@ -30,6 +41,10 @@ public class Weapon{
 		return uses;
 	}
 
+	/**
+	 * @brief Gets the power of the weapontype of the weapon, hence, the power of the weapon
+	 * @return the power of the weapon type
+	 * */
 	public float power(){
 		return type.getPower();
 	}
@@ -39,7 +54,7 @@ public class Weapon{
 	/**
 	 * @brief method to use the weapon
 	 * @return	the power of the weapon, if uses > 0
-	 * 			1.0 (no weapon power), otherwise
+	 * 			1.0 (neutral weapon power), otherwise
 	 * */
 	public float useIt(){
 			if(uses > 0){
@@ -49,7 +64,7 @@ public class Weapon{
 					return 1.0;
 			}
 
-				System.out.printl("WARNING! Unexpected condition at Weapon.useIt()");
-				return 1.0;
+			System.out.printl("WARNING! Unexpected condition at Weapon.useIt()");
+			return 1.0;
 	}
 }

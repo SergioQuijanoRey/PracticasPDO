@@ -1,10 +1,13 @@
+/**
+ * @author Sergio Quijano Rey
+ * */
 
-// WIP -- Lack of documentation
+package Deepspace;
 
 /**
  * @brief class to represent the loot given at victory on enemy ship
  * */
-public class Loot{
+class Loot{
 	// Private attributes
 	//======================================================================
 	private int nSupplies;
@@ -15,7 +18,7 @@ public class Loot{
 
 	// Constructors
 	//======================================================================
-	public Loot(int _nSupplies, int _nWeapons, int _nShields, int _nHangars, int _nMedals){
+	Loot(int _nSupplies, int _nWeapons, int _nShields, int _nHangars, int _nMedals){
 		nSupplies = _nSupplies;
 		nWeapons = _nWeapons;
 		nShields = _nShields;
