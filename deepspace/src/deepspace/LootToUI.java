@@ -42,7 +42,6 @@ public class LootToUI {
 
     public int getnMedals() {
         return nMedals;
-    }
-    
+    }  
     
 }

@@ -56,10 +56,18 @@ class ShieldBooster {
     // Getters
     // -------------------------------------------------------------------------
     
+    /**
+     * Getter for boost
+     * @return boost
+     */
     public float getBoost() {
         return boost;
     }
     
+    /**
+     * Getter for uses
+     * @return uses
+     */
     public int getUses() {
         return uses;
     }
@@ -79,7 +87,7 @@ class ShieldBooster {
             uses--;
             return boost;
         } else
-            return (float) 1.0;
+            return 1f;
     }
     
     // -------------------------------------------------------------------------
@@ -99,7 +107,7 @@ class ShieldBooster {
     /**
      * To UI
      */
-    public ShieldToUI getUIVersion() {
+    ShieldToUI getUIversion() {
         return new ShieldToUI(this);
     }
 }

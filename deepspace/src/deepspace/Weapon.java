@@ -57,14 +57,26 @@ class Weapon {
     // Getters
     // -------------------------------------------------------------------------
     
+    /**
+     * Getter for type
+     * @return type
+     */
     public WeaponType getType() {
         return type;
     }
     
+    /**
+     * Getter for uses
+     * @return uses
+     */
     public int getUses() {
         return uses;
     }
     
+    /**
+     * Get type's power
+     * @return type's power
+     */
     public float power() {
         return type.getPower();
     }
@@ -106,7 +118,7 @@ class Weapon {
     /**
      * To UI
      */
-    public WeaponToUI getUIVersion() {
+    WeaponToUI getUIversion() {
         return new WeaponToUI(this);
     }
 }

@@ -60,22 +60,42 @@ class Loot {
     // Getters
     // -------------------------------------------------------------------------
     
+    /**
+     * Getter for nSupplies
+     * @return nSupplies
+     */
     public int getNSupplies() {
         return nSupplies;
     }
     
+    /**
+     * Getter for nWeapons
+     * @return nWeapons
+     */
     public int getNWeapons() {
         return nWeapons;
     }
     
+    /**
+     * Getter for nShields
+     * @return nShields
+     */
     public int getNShields() {
         return nShields;
     }
     
+    /**
+     * Getter for nHangars
+     * @return nHangars
+     */
     public int getNHangars() {
         return nHangars;
     }
     
+    /**
+     * Getter for nMedals
+     * @return nMedals
+     */
     public int getNMedals() {
         return nMedals;
     }
@@ -100,7 +120,7 @@ class Loot {
     /**
      * To UI
      */
-    public LootToUI getUIVersion() {
+    LootToUI getUIversion() {
         return new LootToUI(this);
     }
 }

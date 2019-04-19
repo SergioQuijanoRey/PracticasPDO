@@ -77,14 +77,26 @@ class Damage {
     // Getters
     // -------------------------------------------------------------------------
     
-    public int getNWeapons() {
-        return nWeapons;
-    }
-    
+    /**
+     * Getter for nShields
+     * @return nShields
+     */
     public int getNShields() {
         return nShields;
     }
     
+    /**
+     * Getter for nWeapons
+     * @return nWeapons
+     */
+    public int getNWeapons() {
+        return nWeapons;
+    }
+    
+    /**
+     * Getter for weapons
+     * @return weapons
+     */
     public ArrayList<WeaponType> getWeapons() {
         // Reference protection
         ArrayList<WeaponType> weapons_copy = new ArrayList<>();
@@ -188,5 +200,60 @@ class Damage {
         }
     }
     
+    /**
+     * Removes a given type of weapon.
+     * If a list of weapons is not available (object is Numeric-constructed
+     * instead of Specific-construced), the number of weapons decreases by 1
+     * @param w weapon whose type wants to be removed
+     */
+    public void discardWeapon(Weapon w) {
+        if ( nWeapons == -1 ) {
+            // object is Specific-constructed
+            if ( weapons.size() != 0 ) {
+                int position = weapons.indexOf(w.getType());
+                if ( position != -1 )
+                    weapons.remove(position);
+            }
+        } else {
+            // object is Numeric-construced
+            if ( nWeapons > 0 )
+                nWeapons--;
+        }
+    }
     
+    /**
+     * Reduces by 1 the number of shield boosters to be removed
+     */
+    public void discardShieldBooster() {
+        if ( nShields > 0 )
+            nShields--;
+    }
+    
+    // -------------------------------------------------------------------------
+    // String representation, UI version
+    // -------------------------------------------------------------------------
+    
+    /**
+     * String representation of the object
+     * @return string representation
+     */
+    public String toString() {
+        String message = "[Damage ";
+        if ( nWeapons == -1 )
+            message = message + " (Specific-constructed)] -> "
+                    + "Number of shields: " + nShields
+                    + ", Weapons: " + weapons.toString();
+        else
+            message = message + " (Numeric-constructed)] -> "
+                    + "Number of shields: " + nShields
+                    + ", Number of weapons: " + nWeapons;
+        return message;
+    }
+    
+    /**
+     * To UI
+     */
+    DamageToUI getUIversion() {
+        return new DamageToUI(this);
+    }
 }

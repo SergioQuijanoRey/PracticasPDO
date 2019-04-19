@@ -57,14 +57,26 @@ class SuppliesPackage {
     // Getters
     // -------------------------------------------------------------------------
     
+    /**
+     * Getter for ammoPower
+     * @return ammoPower
+     */
     public float getAmmoPower() {
         return ammoPower;
     }
     
+    /**
+     * Getter for fuelUnits
+     * @return fuelUnits
+     */
     public float getFuelUnits() {
         return fuelUnits;
     }
     
+    /**
+     * Getter for shieldPower
+     * @return shieldPower
+     */
     public float getShieldPower() {
         return shieldPower;
     }

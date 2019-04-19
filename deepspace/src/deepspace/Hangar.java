@@ -20,12 +20,12 @@ class Hangar {
     /**
      * Array of shield boosters the hangar has
      */
-    private ArrayList<ShieldBooster> shieldBoosters = new ArrayList<>();
+    private ArrayList<ShieldBooster> shieldBoosters;
     
     /**
      * Array of weapons the hangar has
      */
-    private ArrayList<Weapon> weapons = new ArrayList<>();
+    private ArrayList<Weapon> weapons;
     
     // -------------------------------------------------------------------------
     // Constructors
@@ -37,6 +37,8 @@ class Hangar {
      */
     Hangar(int capacity) {
         maxElements = capacity;
+        shieldBoosters = new ArrayList<>();
+        weapons = new ArrayList<>();
     }
     
     /**
@@ -46,10 +48,12 @@ class Hangar {
     Hangar(Hangar h) {
         maxElements = h.maxElements;
         
+        shieldBoosters = new ArrayList<>();
         h.shieldBoosters.forEach(shieldBooster -> {
             shieldBoosters.add(shieldBooster);
         });
         
+        weapons = new ArrayList<>();
         h.weapons.forEach(weapon -> {
             weapons.add(weapon);
         });
@@ -59,14 +63,26 @@ class Hangar {
     // Getters
     // -------------------------------------------------------------------------
     
+    /**
+     * Getter for maxElements
+     * @return maxElements
+     */
     public int getMaxElements() {
         return maxElements;
     }
     
+    /**
+     * Getter for shieldBoosters
+     * @return shieldBoosters
+     */
     public ArrayList<ShieldBooster> getShieldBoosters() {
         return shieldBoosters;
     }
     
+    /**
+     * Getter for weapons
+     * @return weapons
+     */
     public ArrayList<Weapon> getWeapons() {
         return weapons;
     }
@@ -133,7 +149,7 @@ class Hangar {
         if ( s >= shieldBoosters.size() )
             return null;
         else
-            return shieldBoosters.remove(s);
+            return shieldBoosters.remove(s);    // WIP - ERROR
     }
     
     // -------------------------------------------------------------------------
@@ -154,7 +170,7 @@ class Hangar {
     /**
      * To UI
      */
-    public HangarToUI getUIVersion() {
+    HangarToUI getUIversion() {
         return new HangarToUI(this);
     }
 }

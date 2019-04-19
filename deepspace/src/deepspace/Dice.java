@@ -13,10 +13,29 @@ import java.util.Random;
  * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
  */
 class Dice {
+    /**
+     * Probability constant for hangars
+     */
     private final float NHANGARSPROB;
+    
+    /**
+     * Probability constat for shields
+     */
     private final float NSHIELDSPROB;
+    
+    /**
+     * Probability constant for weapons
+     */
     private final float NWEAPONSPROB;
+    
+    /**
+     * Probability constant for first shot
+     */
     private final float FIRSTSHOTPROB;
+    
+    /**
+     * Random numbers generator
+     */
     private Random generator;
     
     // -------------------------------------------------------------------------
@@ -27,10 +46,10 @@ class Dice {
      * Class initializer
      */
     Dice() {
-        NHANGARSPROB = (float) 0.25;
-        NSHIELDSPROB = (float) 0.25;
-        NWEAPONSPROB = (float) 0.33;
-        FIRSTSHOTPROB = (float) 0.5;
+        NHANGARSPROB = 0.25f;
+        NSHIELDSPROB = 0.25f;
+        NWEAPONSPROB = 0.33f;
+        FIRSTSHOTPROB = 0.5f;
         
         generator = new Random();
     }
@@ -113,5 +132,15 @@ class Dice {
             return GameCharacter.SPACESTATION;
         else
             return GameCharacter.ENEMYSTARSHIP;
+    }
+    
+    /**
+     * Determines if space station moves in order to avoid a shot
+     * @param speed speed of the space station
+     * @return true, if the space avoids the shot; false, otherwise
+     */
+    public boolean spaceStationMoves(float speed) {
+        float prob = generator.nextFloat();
+        return prob < speed;
     }
 }

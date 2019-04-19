@@ -52,11 +52,9 @@ class EnemyStarShip {
         ammoPower = _ammoPower;
         shieldPower = _shieldPower;
         loot = _loot;
-        /*
-        WIP - Reference protection necessary?
-        loot = new Loot(_loot);
-        */
-        damage = _damage;
+        // Reference protection
+        // WIP - Is this necessary?
+        damage = new Damage(_damage);
     }
     
     /**
@@ -76,39 +74,67 @@ class EnemyStarShip {
     // Getters
     // -------------------------------------------------------------------------
     
+    /**
+     * Getter for name
+     * @return name
+     */
     public String getName() {
         return name;
     }
     
+    /**
+     * Getter for ammoPower
+     * @return ammoPower
+     */
     public float getAmmoPower() {
         return ammoPower;
     }
     
+    /**
+     * Getter for shieldPower
+     * @return shieldPower
+     */
     public float getShieldPower() {
         return shieldPower;
     }
     
+    /**
+     * Getter for loot
+     * @return loot
+     */
     public Loot getLoot() {
         // Reference protection
         return new Loot(loot.getNSupplies(), loot.getNWeapons(),
                 loot.getNShields(), loot.getNHangars(), loot.getNMedals());
     }
     
+    /**
+     * Getter for damage
+     * @return damage
+     */
     public Damage getDamage() {
         // Reference protection
         return new Damage(damage);
     }
     
+    /**
+     * Returns star ship's ammoPower
+     * @return ammoPower
+     */
     public float fire() {
         return ammoPower;
     }
     
+    /**
+     * Return star ship's shieldPower
+     * @return shieldPower
+     */
     public float protection() {
         return shieldPower;
     }
     
     /**
-     * 
+     * Returns whether the star ship receives a certain shot or not
      * @param shot power of shot taken
      * @return ShotResult.RESIST, if shieldPower >= shot;
      *         ShotResult.DONOTRESIST, if shieldPower < shot
@@ -137,7 +163,7 @@ class EnemyStarShip {
         return message;
     }
     
-    public EnemyToUI getUIVersion() {
+    EnemyToUI getUIversion() {
         return new EnemyToUI(this);
     }
 }

@@ -25,12 +25,12 @@ class SpaceStation {
     /**
      * Parametrizes ammunition power
      */
-    private float ammoPower = 0f;
+    private float ammoPower;
     
     /**
      * Parametrizes fuel units
      */
-    private float fuelUnits = 0f;
+    private float fuelUnits;
     
     /**
      * Name of the station
@@ -40,32 +40,32 @@ class SpaceStation {
     /**
      * Number of medals
      */
-    private int nMedals = 0;
+    private int nMedals;
     
     /**
      * Parametrizes shield power
      */
-    private float shieldPower = 0f;
+    private float shieldPower;
     
     /**
      * Pending damage
      */
-    private Damage pendingDamage = null;
+    private Damage pendingDamage;
     
     /**
      * Array of weapons
      */
-    private ArrayList<Weapon> weapons = new ArrayList<>();
+    private ArrayList<Weapon> weapons;
     
     /**
      * Array of shield boosters
      */
-    private ArrayList<ShieldBooster> shieldBoosters = new ArrayList<>();
+    private ArrayList<ShieldBooster> shieldBoosters;
     
     /**
      * Hangar
      */
-    private Hangar hangar = null;
+    private Hangar hangar;
     
     // -------------------------------------------------------------------------
     // Constructors
@@ -78,6 +78,15 @@ class SpaceStation {
      */
     SpaceStation(String _name, SuppliesPackage _supplies) {
         name = _name;
+        ammoPower = 0f;
+        fuelUnits = 0f;
+        nMedals = 0;
+        shieldPower = 0f;
+        weapons = new ArrayList<>();
+        shieldBoosters = new ArrayList<>();
+        pendingDamage = null;
+        hangar = null;
+        
         receiveSupplies(_supplies);
     }
     
@@ -85,32 +94,61 @@ class SpaceStation {
     // Getters
     // -------------------------------------------------------------------------
     
+    /**
+     * Getter for name
+     * @return name
+     */
     public String getName() {
         return name;
     }
     
+    /**
+     * Getter for ammoPower
+     * @return ammoPower
+     */
     public float getAmmoPower() {
         return ammoPower;
     }
     
+    /**
+     * Getter for fuelUnits
+     * @return fuelUnits
+     */
     public float getFuelUnits() {
         return fuelUnits;
     }
     
+    /**
+     * Getter for hangar
+     * @return hangar
+     */
     public Hangar getHangar() {
         // Reference protection
         return new Hangar(hangar);
     }
     
+    /**
+     * Getter nMedals
+     * @return nMedals
+     */
     public int getNMedals() {
         return nMedals;
     }
     
+    /**
+     * Getter for pendingDamage
+     * @return pendingDamage
+     */
     public Damage getPendingDamage() {
         // Reference protection
-        return new Damage(pendingDamage);
+        return pendingDamage;
+        /*return new Damage(pendingDamage);*/
     }
     
+    /**
+     * Getter for shieldBoosters
+     * @return shieldBoosters
+     */
     public ArrayList<ShieldBooster> getShieldBoosters() {
         // Reference protection
         ArrayList<ShieldBooster> shields_copy = new ArrayList<>();
@@ -121,6 +159,10 @@ class SpaceStation {
         return shields_copy;
     }
     
+    /**
+     * Getter for weapons
+     * @return weapons
+     */
     public ArrayList<Weapon> getWeapons() {
         // Reference protection
         ArrayList<Weapon> weapons_copy = new ArrayList<>();
@@ -131,6 +173,10 @@ class SpaceStation {
         return weapons_copy;
     }
     
+    /**
+     * Getter for shieldPower
+     * @return shieldPower
+     */
     public float getShieldPower() {
         return shieldPower;
     }
@@ -159,35 +205,6 @@ class SpaceStation {
             return false;
         else
             return pendingDamage.hasNoEffect();
-    }
-    
-    // -------------------------------------------------------------------------
-    // String representation, UI version
-    // -------------------------------------------------------------------------
-    
-    /**
-     * String representation of the object
-     * @return string representation
-     */
-    public String toString() {
-        String message = "[SpaceStation] -> Name: " + name
-                + "\n\tNo. Medals: " + nMedals
-                + ", Fuel units: " + fuelUnits
-                + ", ammoPower: " + ammoPower
-                + ", shieldPower: " + shieldPower
-                + "\n\tWeapons: " + weapons.toString()
-                + "\n\tShield Boosters: " + shieldBoosters.toString()
-                + "\n\tHangar: " + hangar.toString()
-                + "\n\tPending damage: " + pendingDamage.toString()
-                + "\n-------- end of Space Station >> " + name + " << --------";
-        return message;
-    }
-    
-    /**
-     * To UI
-     */
-    public SpaceStationToUI getUIVersion() {
-        return new SpaceStationToUI(this);
     }
     
     // -------------------------------------------------------------------------
@@ -355,27 +372,144 @@ class SpaceStation {
     
     /* WIP - SE IMPLEMENTARÁN EN LA PRÁCTICA SIGUIENTE */
     
+    /**
+     * Makes a shot
+     * @return the shot power
+     */
     public float fire() {
-        throw new UnsupportedOperationException();
+        float factor = 1f;
+        
+        for ( Weapon w : weapons )
+            factor *= w.useIt();
+        
+        return factor;
     }
     
+    /**
+     * Use protection shield
+     * @return the shield's energy
+     */
     public float protection() {
-        throw new UnsupportedOperationException();
+        float factor = 1f;
+        
+        for ( ShieldBooster s : shieldBoosters )
+            factor *= s.useIt();
+        
+        return factor;
     }
     
+    /**
+     * Makes the operations related to the reception of an enemy's impact
+     * @param shot enemy's impact shot power
+     * @return true, if the shield resisted the impact; else, otherwise
+     */
     public ShotResult receiveShot(float shot) {
-        throw new UnsupportedOperationException();
+        float myProtection = protection();
+        
+        if ( myProtection >= shot ) {
+            shieldPower -= SHIELDLOSSPERUNITSHOT*shot;
+            if ( shieldPower < 0 )
+                shieldPower = 0;
+            
+            return ShotResult.RESIST;
+        } else {
+            shieldPower = 0;
+            
+            return ShotResult.DONOTRESIST;
+        }
     }
     
+    /**
+     * Receives a loot
+     * @param loot loot to be received
+     */
     public void setLoot(Loot loot) {
-        throw new UnsupportedOperationException();
+        CardDealer dealer = CardDealer.getInstance();
+        int h = loot.getNHangars();
+        
+        if ( h > 0 ) {
+            hangar = dealer.nextHangar();
+            receiveHangar(hangar);
+        }
+        
+        int elements = loot.getNSupplies();
+        for ( int i = 1; i <= elements; i++ ) {
+            SuppliesPackage sup = dealer.nextSuppliesPackage();
+            receiveSupplies(sup);
+        }
+        
+        elements = loot.getNWeapons();
+        for ( int i = 1; i <= elements; i++ ) {
+            Weapon weap = dealer.nextWeapon();
+            receiveWeapon(weap);
+        }
+        
+        elements = loot.getNShields();
+        for ( int i = 1; i <= elements; i++ ) {
+            ShieldBooster sh = dealer.nextShieldBooster();
+            receiveShieldBooster(sh);
+        }
+        
+        int medals = loot.getNMedals();
+        nMedals += medals;
     }
     
+    /**
+     * Discards weapon in certain position from the collection of weapons in use
+     * @param i index where the weapon that wants to be discarded is located
+     */
     public void discardWeapon(int i) {
-        throw new UnsupportedOperationException();
+        int size = weapons.size();
+        if ( i >= 0 && i < size ) {
+            Weapon w = weapons.remove(i);
+            if ( pendingDamage != null ) {
+                pendingDamage.discardWeapon(w);
+                cleanPendingDamage();                
+            }
+        }
     }
     
+    /**
+     * Discards booster in certain position from the collection of weapons in use
+     * @param i index where the booster that wants to be discarded is located
+     */
     public void discardShieldBooster(int i) {
-        throw new UnsupportedOperationException();
+        int size = shieldBoosters.size();
+        if ( i >= 0 && i < size ) {
+            ShieldBooster s = shieldBoosters.remove(i);
+            if ( pendingDamage != null ) {
+                pendingDamage.discardShieldBooster();
+                cleanPendingDamage();                
+            }
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    // String representation, UI version
+    // -------------------------------------------------------------------------
+    
+    /**
+     * String representation of the object
+     * @return string representation
+     */
+    public String toString() {
+        String message = "[SpaceStation] -> Name: " + name
+                + "\n\tNo. Medals: " + nMedals
+                + ", Fuel units: " + fuelUnits
+                + ", ammoPower: " + ammoPower
+                + ", shieldPower: " + shieldPower
+                + "\n\tWeapons: " + weapons.toString()
+                + "\n\tShield Boosters: " + shieldBoosters.toString()
+                + "\n\tHangar: " + hangar.toString()
+                + "\n\tPending damage: " + pendingDamage.toString()
+                + "\n-------- end of Space Station >> " + name + " << --------";
+        return message;
+    }
+    
+    /**
+     * To UI
+     */
+    public SpaceStationToUI getUIversion() {
+        return new SpaceStationToUI(this);
     }
 }
