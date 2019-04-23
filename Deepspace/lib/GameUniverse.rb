@@ -65,7 +65,7 @@ class GameUniverse
 	# Discard the hangar from the current space station
 	# Discarded if gameState is INIT or AFTERCOMBAT
 	def discardHangar
-		if @gameState.state == GameState::INIT or GameState::AFTERCOMBAT
+		if state == GameState::INIT or GameState::AFTERCOMBAT
 			@currentStation.discardHangar
 		end
 	end
@@ -74,7 +74,7 @@ class GameUniverse
 	# Discarded if gameState is INIT or AFTERCOMBAT
 	# @param i [Integer] position of the shield booster to be discarded
 	def discardShieldBooster(i)
-		if @gameState.state == GameState::INIT or GameState::AFTERCOMBAT
+		if state == GameState::INIT or GameState::AFTERCOMBAT
 			@currentStation.discardShieldBooster(i)
 		end
 	end
@@ -83,7 +83,7 @@ class GameUniverse
     # Discarded if gameState is INIT or AFTERCOMBAT
     # @param i [Integer] position of the shield booster to discard
     def discardShieldBoosterInHangar(i)
-		if @gameState.state == GameState::INIT or GameState::AFTERCOMBAT
+		if state == GameState::INIT or GameState::AFTERCOMBAT
             @currentStation.discardShieldBoosterInHangar(i)
 		end
 	end
@@ -92,7 +92,7 @@ class GameUniverse
     # Discarded if gameState is INIT or AFTERCOMBAT
     # @param i [Integer] position of the weapon to discard
     def discardWeapon(i)
-		if @gameState.state == GameState::INIT or GameState::AFTERCOMBAT
+		if state == GameState::INIT or GameState::AFTERCOMBAT
 			@currentStation.discardWeapon(i)
 		end
 	end
@@ -101,7 +101,7 @@ class GameUniverse
     # Discarded if gameState is INIT or AFTERCOMBAT
     # @param i [Integer] position of the weapon to discard
     def discardWeaponInHangar(i)
-		if @gameState.state == GameState::INIT or GameState::AFTERCOMBAT
+		if state == GameState::INIT or GameState::AFTERCOMBAT
             @currentStation.discardWeaponInHangar(i)
 		end
 	end
@@ -110,7 +110,7 @@ class GameUniverse
     # Mounted if gameState is INIT or AFTERCOMBAT
     # @param i [Integer] position of the shield booster to mount
     def mountShieldBooster(i)
-		if @gameState.state == GameState::INIT or GameState::AFTERCOMBAT
+		if state == GameState::INIT or GameState::AFTERCOMBAT
 			@currentStation.mountShieldBooster(i)
 		end
 	end
@@ -119,7 +119,7 @@ class GameUniverse
     # Mounted if gameState is INIT or AFTERCOMBAT
     # @param i [Integer] position of the weapon to mount
     def mountWeapon(i)
-		if @gameState.state == GameState::INIT or GameState::AFTERCOMBAT
+		if state == GameState::INIT or GameState::AFTERCOMBAT
 			@currentStation.mountWeapon(i)
 		end
 	end
@@ -144,7 +144,7 @@ class GameUniverse
 	# Starts a match
 	# @param names [Array<String>] collection with the names of the players
 	def init(names)
-		state = @gameState.state
+		# state = @gameState.state
 		
 		if state == GameState::CANNOTPLAY
 			dealer = CardDealer.instance # behaviour introduced by Singleton
@@ -178,7 +178,7 @@ class GameUniverse
 	# Takes turn to the next player, if there is no pending damage
 	# @return [Boolean] true, if the turn could be changed; else, otherwise
 	def nextTurn
-		state = @gameState.state
+		# state = @gameState.state
 
 		if state == GameState::AFTERCOMBAT
 			stationState = @currentStation.validState
@@ -210,7 +210,7 @@ class GameUniverse
 	# combat is allowed
 	# @return [CombatResult] combat result
 	def combat
-		state = @gameState.state
+		# state = @gameState.state
 
 		if state == GameState::BEFORECOMBAT or GameState::INIT
 			return combatGo(@currentStation, @currentEnemy)
