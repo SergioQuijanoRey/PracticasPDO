@@ -212,7 +212,7 @@ module Deepspace
       spaceStation2=SpaceStation.new("Chetada",suppliesPackage2)
       result=gameUniverse.combatGo(spaceStation2,enemyStarShip2)
       puts result
-      puts damage2.getUIVersion.to_s
+      puts damage2.getUIversion.to_s
       puts "===================================================================="
       puts gameUniverse.to_s
       if gameUniverse.nextTurn

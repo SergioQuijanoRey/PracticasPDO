@@ -46,14 +46,14 @@ class Loot
 	# String representation of the object
 	# @return [String] string representation
 	def to_s
-		message = "[Loot]-> Supplies: #{@nSupplies}, Weapons: #{@nWeapons}, "
-				+ "Shields: #{@nShields}, Hangars: #{@nHangars}, "
+		message = "[Loot]-> Supplies: #{@nSupplies}, Weapons: #{@nWeapons}, " \
+				+ "Shields: #{@nShields}, Hangars: #{@nHangars}, " \
 				+ "Medals: #{@nHangars}"
         return message
 	end
 
 	# To UI
-	def getUIVersion
+	def getUIversion
 		return LootToUI.new(self)
 	end
 end # class Loot

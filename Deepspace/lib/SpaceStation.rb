@@ -128,7 +128,7 @@ class SpaceStation
 	# @return [Boolean] true, if weapon is successfully added;
 	#                   false, if the operation fails
 	def receiveWeapon(w)
-		if hangar != nil
+		if !hangar.nil?
 			return @hangar.addWeapon(w)
 		else
 			return false
@@ -140,7 +140,7 @@ class SpaceStation
 	# @return [Boolean] true, if booster is successfully added;
 	#                   false, if the operation fails
 	def receiveShieldBooster(s)
-		if hangar != nil
+		if !hangar.nil?
 			return @hangar.addShieldBooster(s)
 		else
 			return false
@@ -152,7 +152,7 @@ class SpaceStation
 	# @param h [Hangar] the hangar to add
 	def receiveHangar(h)
 		if @hangar.nil?
-			@hangar = Hangar.newCopy(h) # Security copy
+			@hangar = h
 		end
 	end
 
@@ -198,15 +198,18 @@ class SpaceStation
 	# is added to the collection of weapons in use
 	# @param i [Integer] index of the weapon to mount
 	def mountWeapon(i)
-		if @hangar.nil?
-			raise "WARNING! No hangar available at SpaceStation.mountWeapon()"
-		else
-			# New weapon is deleted from the hangar
-			new_weapon = @hangar.removeWeapon(i) 
-			if !new_weapon.nil?
-				@weapons << new_weapon
+		puts "Trying to SpaceStation.mountWeapon(#{i})" #TEST
+		if i >= 0 && i < @hangar.weapons.length
+			if !@hangar.nil?
+				# New weapon is deleted from the hangar
+				new_weapon = @hangar.removeWeapon(i)
+				if !new_weapon.nil?
+					@weapons << new_weapon
+				else
+					raise "WARNING! Trying to add a nil weapon on SpaceStation.mountWeapon()"
+				end
 			else
-				raise "WARNING! Trying to add nil weapon on SpaceStation.mountWeapon()"
+				raise "WARNING! No hangar available at SpaceStation.mountWeapon()"
 			end
 		end
 	end
@@ -216,14 +219,17 @@ class SpaceStation
 	# is added to the collection of boosters in use
 	# @param i [Integer] index of the booster to mount
 	def mountShieldBooster(i)
-		if @hangar.nil?
-			raise "WARNING! No hangar available, at SpaceStation.mountShieldBooster()"
-		else
-			new_shield = @hangar.removeShieldBooster(i)
-			if new_shield.nil?
-				raise "WARNING! Trying to add nil shield on Spacestation.mountShieldBooster()"
+		if i >=0 && i < @hangar.shieldBoosters.length
+			if !@hangar.nil?
+				# New shield booster is deleted from the hangar
+				new_shield = @hangar.removeShieldBooster(i)
+				if !new_shield.nil?
+					@shieldBoosters << new_shield
+				else
+					raise "WARNING! Trying to add a nil shield on SpaceStation.mountShieldBooster()"
+				end
 			else
-				@shieldBoosters << new_shield
+				raise "WARNING! No hangar available at SpaceStation.mountShieldBooster()"
 			end
 		end
 	end
@@ -291,13 +297,14 @@ class SpaceStation
 
 	# Receives a loot
 	# @param [Loot] loot to be received
-	def loot=(loot)
+	def setLoot(loot)
+		puts "Entered setLoot" #TEST
 		dealer = CardDealer.instance # behaviour introduced by Singleton
-		h = loot.hHangars
+		h = loot.nHangars
 
-		if h < 0
-			@hangar = dealer.nextHangar
-			receiveHangar(@hangar)
+		if h > 0
+			hangar = dealer.nextHangar
+			receiveHangar(hangar)
 		end
 
 		elements = loot.nSupplies
@@ -354,19 +361,19 @@ class SpaceStation
 	# String representation of the object
 	# @return [String] string representation
 	def to_s
-		message = "[Space Station]-> Name: #{@name}\n"
-				+ "\tNo. Medals: #{@nMedals}, Fuel units: #{@fuelUnits.round(2)}, "
-				+ "ammoPower: #{@ammoPower}, shieldPower: #{@shieldPower}\n"
-				+ "\tWeapons: [#{@weapons.join(' ,')}]\n"
-				+ "\tShieldBoosters: [#{@shieldBoosters.join(', ')}]\n"
-				+ "\tHangar: #{@hangar}\n"
-				+ "\tPendingDamage: #{@pendingDamage}\n"
+		message = "[Space Station]-> Name: #{@name}\n" \
+				+ "\tNo. Medals: #{@nMedals}, Fuel units: #{@fuelUnits.round(2)}, " \
+				+ "ammoPower: #{@ammoPower}, shieldPower: #{@shieldPower}\n" \
+				+ "\tWeapons: [#{@weapons.join(' ,')}]\n" \
+				+ "\tShieldBoosters: [#{@shieldBoosters.join(', ')}]\n" \
+				+ "\tHangar: #{@hangar}\n" \
+				+ "\tPendingDamage: #{@pendingDamage}\n" \
 				+ "-------- end of Space Station >> #{@name} << --------"
         return message
 	end
 
 	# To UI
-	def getUIVersion
+	def getUIversion
 		return SpaceStationToUI.new(self)
 	end
 

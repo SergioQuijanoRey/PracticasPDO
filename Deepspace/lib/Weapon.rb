@@ -69,13 +69,13 @@ class Weapon
 	# String representation of the object
 	# @return [String] string representation
 	def to_s
-		message = "[Weapon]-> Name: #{@name}, Type: #{@type}, Power: #{power}, "
+		message = "[Weapon]-> Name: #{@name}, Type: #{@type}, Power: #{power}, " \
 				+ "Uses: #{@uses}"
         return message
 	end
 
 	# To UI
-	def getUIVersion
+	def getUIversion
 		return WeaponToUI.new(self)
 	end
 end # class Weapon

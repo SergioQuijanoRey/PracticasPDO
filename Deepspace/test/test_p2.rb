@@ -73,7 +73,7 @@ class TestP2
 			puts "\tShields: #{hangar_test.shieldBoosters}"
 			puts "\tMax elements: #{hangar_test.maxElements}"
 			puts "\tSpace available: #{hangar_test.spaceAvailable}"
-			puts "\tUI version: #{hangar_test.getUIVersion}"
+			puts "\tUI version: #{hangar_test.getUIversion}"
 			puts "--------------------------------------------------------------------------------"
 		end
 
@@ -104,7 +104,7 @@ class TestP2
 			puts ""
 
 			puts "Creating UI version"
-			ui_damage_test = numeric_damage_test.getUIVersion
+			ui_damage_test = numeric_damage_test.getUIversion
 			puts "UI version: #{ui_damage_test}"
 			puts ""
 
@@ -148,7 +148,7 @@ class TestP2
 		puts ""
 
 		puts "Creating an UI version of the ship"
-		enemy_UI = enemy_test.getUIVersion
+		enemy_UI = enemy_test.getUIversion
 		puts "UI version: #{enemy_UI}"
 		puts ""
 
@@ -190,7 +190,7 @@ class TestP2
 		puts ""
 
 		puts "Testing UI version"
-		puts "UI: #{space_test.getUIVersion}"
+		puts "UI: #{space_test.getUIversion}"
 		puts ""
 
 

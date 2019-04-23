@@ -44,7 +44,7 @@ class SuppliesPackage
 	# String representation of the object
 	# @return [String] string representation
 	def to_s
-		message = "[SuppliesPackage]-> ammoPower: #{@ammoPower}, "
+		message = "[SuppliesPackage]-> ammoPower: #{@ammoPower}, " \
 				+ "fuelUnits: #{@fuelUnits}, shieldPower: #{@shieldPower}"
         return message
 	end

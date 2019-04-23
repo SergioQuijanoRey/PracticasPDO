@@ -78,12 +78,12 @@ class Hangar
 	# @return [Weapon] nil, if position is invalid or removal operation is unsuccessful;
 	#                  the weapon deleted, if removal is successful
 	def removeWeapon(w)
-		if w >= @weapons.length || w < 0
-			raise "WARNING! Invalid position to specify a weapon, on Hangar.removeWeapon(w: Integer)"
-			return nil
-		else
+		#if w >= @weapons.length || w < 0
+		#	raise "WARNING! Invalid position to specify a weapon, on Hangar.removeWeapon(w: Integer)"
+		#	return nil
+		#else
 			return @weapons.delete_at(w)
-		end
+		#end
 	end
 
 	# Adds a new shield booster to the hangar
@@ -104,12 +104,12 @@ class Hangar
 	# @return [Weapon] nil, if position is invalid or removal operation is unsuccessful;
 	#                  the shield booster deleted, if removal is successful
 	def removeShieldBooster(s)
-		if s >= @shieldBoosters.length || s < 0
-			raise "WARNING! Invalid position to specify a shield, on Hangar.removeShieldBooster(s: Integer)"
-			return nil
-		else
-			return  @shieldBoosters.delete_at(s)
-		end
+		#if s >= @shieldBoosters.length || s < 0
+		#	raise "WARNING! Invalid position to specify a shield, on Hangar.removeShieldBooster(s: Integer)"
+		#	return nil
+		#else
+			return @shieldBoosters.delete_at(s)
+		#end
 	end
 
 	# String representation, UI version
@@ -118,14 +118,14 @@ class Hangar
 	# String representation of the object
 	# @return [String] string representation
 	def to_s
-		message = "[Hangar]-> Max. elements: #{@maxElements}, "
-				+ "Weapons: [#{@weapons.join("; ")}], "
+		message = "[Hangar]-> Max. elements: #{@maxElements}, " \
+				+ "Weapons: [#{@weapons.join("; ")}], " \
 				+ "Shields: [#{@shieldBoosters.join("; ")}]"
         return message
 	end
 
 	# To UI
-	def getUIVersion
+	def getUIversion
 		return HangarToUI.new(self)
 	end
 end # class Hangar

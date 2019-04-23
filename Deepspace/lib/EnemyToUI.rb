@@ -11,8 +11,8 @@ module Deepspace
       @name=enemy.name
       @ammoPower=enemy.ammoPower
       @shieldPower=enemy.shieldPower
-      @loot=enemy.loot.getUIVersion()
-      @damage = enemy.damage.getUIVersion()
+      @loot=enemy.loot.getUIversion()
+      @damage = enemy.damage.getUIversion()
     end
   
     def to_s

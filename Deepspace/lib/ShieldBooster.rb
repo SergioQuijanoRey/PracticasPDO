@@ -66,7 +66,7 @@ class ShieldBooster
 	end
 
 	# To UI
-	def getUIVersion
+	def getUIversion
 		return ShieldToUI.new(self)
 	end
 end # class ShieldBooster

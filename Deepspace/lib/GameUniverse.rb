@@ -3,6 +3,7 @@
 require_relative 'GameUniverseToUI'
 require_relative 'GameStateController'
 require_relative 'Dice'
+require_relative 'Loot'
 require_relative 'CombatResult'
 require_relative 'GameCharacter'
 require_relative 'ShotResult'
@@ -52,7 +53,11 @@ class GameUniverse
 	# Getters
 	# ==========================================================================
 	
-	attr_reader :gameState
+	# Getter for gameState
+	# @return [GameState] gameState
+	def state
+		return @gameState.state
+	end
 
 	# Setters
 	# ==========================================================================
@@ -68,7 +73,7 @@ class GameUniverse
 	# Discard a certain shield booster from the current space station
 	# Discarded if gameState is INIT or AFTERCOMBAT
 	# @param i [Integer] position of the shield booster to be discarded
-	def discardHangar(i)
+	def discardShieldBooster(i)
 		if @gameState.state == GameState::INIT or GameState::AFTERCOMBAT
 			@currentStation.discardShieldBooster(i)
 		end
@@ -115,7 +120,7 @@ class GameUniverse
     # @param i [Integer] position of the weapon to mount
     def mountWeapon(i)
 		if @gameState.state == GameState::INIT or GameState::AFTERCOMBAT
-			@currentStation.mountShieldBooster(i)
+			@currentStation.mountWeapon(i)
 		end
 	end
 
@@ -142,24 +147,28 @@ class GameUniverse
 		state = @gameState.state
 		
 		if state == GameState::CANNOTPLAY
-			spaceStations = []
 			dealer = CardDealer.instance # behaviour introduced by Singleton
 			names.each do |name|
+				puts "Init for #{name}" #TEST
 				supplies = dealer.nextSuppliesPackage
+				puts "Supplies: #{supplies.to_s}" #TEST
 				station = SpaceStation.new(name, supplies)
-				spaceStations.push(station)
+				puts "Station: #{station.to_s}" #TEST
+				@spaceStations.push(station)
 
 				nh = @dice.initWithNHangars
 				nw = @dice.initWithNWeapons
 				ns = @dice.initWithNShields
 
 				lo = Loot.new(0, nw, ns, nh, 0)
-				@station.loot = lo # WIP-setter como .loot= o .setLoot?
+				station.setLoot(lo)
+
+				puts "Station after loot set: #{station.to_s}" #TEST
 			end
 
 			nPlayers = names.length
-			@currentStationIndex = dice.whoStarts(nPlayers)
-			@currentStation = @spaceStations.at(currentStationIndex)
+			@currentStationIndex = @dice.whoStarts(nPlayers)
+			@currentStation = @spaceStations.at(@currentStationIndex)
 			@currentEnemy = dealer.nextEnemy
 
 			@gameState.next(@turns, @spaceStations.length)
@@ -213,9 +222,6 @@ class GameUniverse
 	# @param enemy [EnemyStarShip] enemy in combat
 	# @return [CombatResult] combat result
 	def combatGo(station, enemy)
-		station = args[0]
-		enemy = args[1]
-
 		ch = @dice.firstShot
 
 		if ch == GameCharacter::ENEMYSTARSHIP
@@ -238,8 +244,8 @@ class GameUniverse
 		end
 
 		if enemyWins
-			s = station.getSpeed
-			moves = dice.spaceStationMoves(s)
+			s = station.speed
+			moves = @dice.spaceStationMoves(s)
 
 			if !moves
 				damage = enemy.damage
@@ -253,7 +259,7 @@ class GameUniverse
 			end
 		else
 			aLoot = enemy.loot
-			station.loot = aLoot # WIP - depends on how we make setter
+			station.setLoot = aLoot
 
 			combatResult = CombatResult::STATIONWINS
 		end
@@ -270,22 +276,22 @@ class GameUniverse
 	# String representation of the object
 	# @return [String] string representation
 	def to_s
-		message = "[GameUniverse] -> Game state: #{@gameState.to_s},"
-				+ "Turns: #{@turns}, Dice: #{@dice.to_s}\n"
-				+ "\tCurrent station: #{@currentStation.to_s}\n"
+		message = "[GameUniverse] -> Game state: #{@gameState.to_s}," \
+				+ "Turns: #{@turns}, Dice: #{@dice.to_s}\n" \
+				+ "\tCurrent station: #{@currentStation.to_s}\n" \
 				+ "\tCurrent enemy: #{@currentEnemy.to_s}"
         return message
 	end
 
 	# To UI
-	def getUIVersion
+	def getUIversion
 		return EnemyToUI.new(self)
 	end
 	# Description:
 	# 	Gets the UI representation of the object
 	# Returns:
 	# 	GameUniverseToUI: the UI representation
-	def getUIVersion
+	def getUIversion
 		return GameUniverseToUI.new(@currentStation, @currentEnemy)
 	end
 end # class GameUniverse

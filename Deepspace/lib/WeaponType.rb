@@ -30,7 +30,7 @@ module WeaponType
         end
 
         def to_s
-                return "#{@name}"
+            return "#{@name}"
         end
     end
 

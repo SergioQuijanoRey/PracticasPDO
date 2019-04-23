@@ -14,11 +14,11 @@ module Deepspace
       @maxElements=h.maxElements
       
       for w in h.weapons do
-        @weapons.push(w.getUIVersion())
+        @weapons.push(w.getUIversion())
       end
       
       for s in h.shieldBoosters do
-        @shieldBoosters.push(s.getUIVersion())
+        @shieldBoosters.push(s.getUIversion())
       end
     end
     

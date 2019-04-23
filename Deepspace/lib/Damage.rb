@@ -61,19 +61,6 @@ class Damage
 		end
 	end
 
-	# WIP IN GETTERS:
-
-	=begin
-	# WIP - Better to return copy?
-	# For example:
-	def weapons
-		weapons_copy = []
-		for weapon in @weapons
-			weapons_copy << weapon
-		end
-		return weapons_copy
-	=end
-
 	# Getters
 	# ==========================================================================
 
@@ -192,19 +179,19 @@ class Damage
 	def to_s
 		message = "[Damage "
         if @nWeapons == -1
-            message = message + " (Specific-constructed)] -> "
-                    + "Number of shields: " + nShields
+            message = message + " (Specific-constructed)] -> " \
+                    + "Number of shields: " + nShields \
                     + ", Weapons: " + weapons.to_s
         else
-            message = message + " (Numeric-constructed)] -> "
-                    + "Number of shields: " + nShields
+            message = message + " (Numeric-constructed)] -> " \
+                    + "Number of shields: " + nShields \
 					+ ", Number of weapons: " + nWeapons
 		end
         return message
 	end
 
 	# To UI
-	def getUIVersion
+	def getUIversion
 		return DamageToUI.new(self)
 	end
 
