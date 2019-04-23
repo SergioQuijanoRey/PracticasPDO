@@ -7,72 +7,53 @@ module Deepspace
 
 # Class to represent the weapons that a space station can dispose of to
 # increment its energy when shooting
+#
+# @author Miguel Ángel Fernández Gutiérrez
 class Weapon
 
-	# Constructors
-	#=======================================================================
+	# Initializers
+	# ==========================================================================
 
-	# Description:
-	# 	Class initializer
-	# Parameters:
-	# 	_name: String, name of the weapon
-	# 	_type: WeaponType, type of weapon
-	# 	_uses: Integer, number of uses of weapon
-	# Return:
-	# 	Nil
+	# Class initializer
+	# @param _name [String] name of weapon
+	# @param _type [WeaponType] type of weapon
+	# @param _uses [Integer] number of uses of weapon
 	def initialize(_name, _type, _uses)
+		# @!attribute [String] name of weapon
 		@name = _name
+
+		# @!attribute [WeaponType] type of weapon
 		@type = _type
+
+		# @!attribute [Intenger] number of uses of weapon
 		@uses = _uses
 	end
 
-	# Description:
-	# 	Copy initializer of the class
-	# Parameter:
-	# 	origin: Weapon, weapon we want to copy
-	# Return:
-	# 	Weapon, a copy of origin
+	# Copy constructor
+	# @param origin [Weapon] instance which is going to be copied
+	# @return [Weapon] a copy of the given instance
 	def self.newCopy(origin)
 		return new(origin.name, origin.type, origin.uses)
 	end
 
 	# Getters
-	#=======================================================================
+	# ==========================================================================
 
 	attr_reader :type, :uses, :name
 
-	# Description:
-	# 	Getter for power
-	# Return:
-	# 	Integer, power of the WeaponType of the object
+	# Get type's power
+	# @return [Float] type's power
 	def power
 		return @type.power
 	end
 
-	# Description:
-	# 	Displays relevant data
-	# Returns
-	# 	String: values of the parameters
-	def to_s
-		return "[Weapon]-> Name: #{@name}, Type: #{@type}, Power: #{power}, Uses: #{@uses}"
-	end
-
-	# Description:
-	# 	Gets a UI representation of the object
-	# Returns
-	# 	WeaponToUI: the object representation
-	def getUIVersion
-		return WeaponToUI.new(self)
-	end
-
 	# Setters
-	#=======================================================================
+	# ==========================================================================
 	
-	# Description:
-	# 	Method for using the Weapon
-	# Return:
-	# 	Float, power if uses > 0
-	#               1.0 otherwise
+	# Uses the weapon
+	# If it is still available (uses is greater than 0), we can use the weapon
+	# Otherwise, we cannot use the weapon
+	# @return [Float] boost if uses > 0; 1.0 otherwise
 	def useIt
 		if @uses > 0
 			@uses = @uses - 1
@@ -81,6 +62,22 @@ class Weapon
 			return 1.0
 		end
 	end
-end
+
+	# String representation, UI version
+	# ==========================================================================
+
+	# String representation of the object
+	# @return [String] string representation
+	def to_s
+		message = "[Weapon]-> Name: #{@name}, Type: #{@type}, Power: #{power}, "
+				+ "Uses: #{@uses}"
+        return message
+	end
+
+	# To UI
+	def getUIVersion
+		return WeaponToUI.new(self)
+	end
+end # class Weapon
 
 end # module Deepspace

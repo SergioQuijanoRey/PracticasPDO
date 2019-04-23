@@ -16,7 +16,7 @@ class SpaceStation
 	@@MAXFUEL = 100
 
 	# @!attribute [Float] Shield units lost per each shot unit taken
-	@SHIELDLOSSPERUNITSHOT = 0.1
+	@@SHIELDLOSSPERUNITSHOT = 0.1
 
 	# Constructors
 	# ==========================================================================
@@ -67,7 +67,7 @@ class SpaceStation
 	# @param [Float] percentage of speed, that's to say, a number in [0, 1]
 	def speed
 		if @@MAXFUEL == 0
-			raise "WARNING, zero division at SpaceStation.speed()"
+			raise "Zero division at SpaceStation.speed(): MAXFUEL cannot be zero"
 			return 0
 		else
 			return @fuelUnits.to_f / @@MAXFUEL
@@ -87,30 +87,6 @@ class SpaceStation
 		end
 	end
 
-	# Description
-	# 	Gets UI representation of the object
-	# Returns
-	# 	SpaceStationToUI, the UI representation
-	def getUIVersion
-		if validState
-			return SpaceStationToUI.new(self)
-		else
-			puts "WARNING! Not UI version for space station on invalid state"
-			return nil
-		end
-	end
-
-	def to_s
-		out = "[Space Station]-> Name: #{@name}\n"
-		out += "\tNo. Medals: #{@nMedals}, Fuel units: #{@fuelUnits.round(2)}, ammoPower: #{@ammoPower}, shieldPower: #{@shieldPower}\n"
-		out += "\tWeapons: [#{@weapons.join(' ,')}]\n"
-		out += "\tShieldBoosters: [#{@shieldBoosters.join(', ')}]\n"
-		out += "\tHangar: #{@hangar}\n"
-		out += "\tPendingDamage: #{@pendingDamage}\n"
-		out += "-------- end of Space Station >> #{@name} << --------"
-		return out
-	end
-	
 	# Setters
 	# ==========================================================================
 
@@ -262,52 +238,134 @@ class SpaceStation
 		@shieldBoosters = @shieldBoosters.select{|shield| shield.uses > 0}
 	end
 
-	# WIP -- Práctica 3
-	# Description:
-	# Returns:
-	# 	Float
+	# Makes a shot
+	# @return [Float] the shot power
 	def fire
+		factor = 1.0
+
+		@weapons.each do |w|
+			factor *= w.useIt
+		end
+
+		return factor
 	end
 	
-	# Description:
-	# Returns:
-	# 	Float
+	# Use protection shield
+	# @return [Float] the shield's energy
 	def protection
+		factor = 1.0
+
+		@shieldBoosters.each do |s|
+			factor *= s.useIt
+		end
+
+		return factor
 	end
 
-	# WIP -- Práctica 3
-	# Description:
-	# Parameters:
-	# 	shot: Float
-	# Returns:
-	# 	ShotResult
+	# Make the operations related to the reception of an enemy's impact
+	# @param shot [Float] enemy's impact shot power
+	# @return [Boolean] true, if the shield resisted the impact; else, otherwise
 	def receiveShot(shot)
+		myProtection = protection
+
+		if myProtection >= shot
+			@shieldPower -= @@SHIELDLOSSPERUNITSHOT
+			if @shieldPower < 0
+				shieldPower = 0
+			end
+
+			return ShotResult::RESIST
+		else
+			@shieldPower = 0
+
+			return ShotResult::DONOTRESIST
+		end
 	end
 
-	# WIP -- Práctica 3
-	# Description
-	# Parameters:
-	# 	loot: Loot
-	def setLoot(loot)
+	# Receives a loot
+	# @param [Loot] loot to be received
+	def loot=(loot)
+		dealer = CardDealer.instance # behaviour introduced by Singleton
+		h = loot.hHangars
+
+		if h < 0
+			@hangar = dealer.nextHangar
+			receiveHangar(@hangar)
+		end
+
+		elements = loot.nSupplies
+		elements.times do
+			sup = dealer.nextSuppliesPackage
+			receiveSupplies(sup)
+		end
+
+		elements = loot.nWeapons
+		elements.times do
+			weap = dealer.nextWeapon
+			receiveWeapon(weap)
+		end
+
+		elements = loot.nShields
+		elements.times do
+			sh = dealer.nextShieldBooster
+			receiveShieldBooster(sh)
+		end
+
+		medals = loot.nMedals
+		@nMedals += medals
 	end
 
-	# WIP -- Práctica 3
-	# Description:
-	# Parameters:
-	# 	i: Integer
+	# Discards weapon in certain position from the collection of weapons in use
+	# @param i [Integer] index where the weapon that wants to be discarded is located
 	def discardWeapon(i)
+		size = @weapons.length
+		if i >= 0 && i < size
+			w = @weapons.delete_at(i)
+			if !@pendingDamage.nil?
+				@pendingDamage.discardWeapon(w)
+				cleanPendingDamage
+			end
+		end
 	end
 
-	# WIP -- Práctica 3
-	# Description:
-	# Parameters:
-	# 	i: Integer
+	# Discards shield in certain position from the collection of weapons in use
+	# @param i [Integer] index where the shield that wants to be discarded is located
 	def discardShieldBooster(i)
+		size = @shieldBoosters.length
+		if i >= 0 && i < size
+			s = @shieldBoosters.delete_at(i)
+			if !@pendingDamage.nil?
+				@pendingDamage.discardShieldBooster(s)
+				cleanPendingDamage
+			end
+		end
 	end
 
-	# Private Specifiers
-	#=======================================================================
+	# String representation, UI version
+	# ==========================================================================
+
+	# String representation of the object
+	# @return [String] string representation
+	def to_s
+		message = "[Space Station]-> Name: #{@name}\n"
+				+ "\tNo. Medals: #{@nMedals}, Fuel units: #{@fuelUnits.round(2)}, "
+				+ "ammoPower: #{@ammoPower}, shieldPower: #{@shieldPower}\n"
+				+ "\tWeapons: [#{@weapons.join(' ,')}]\n"
+				+ "\tShieldBoosters: [#{@shieldBoosters.join(', ')}]\n"
+				+ "\tHangar: #{@hangar}\n"
+				+ "\tPendingDamage: #{@pendingDamage}\n"
+				+ "-------- end of Space Station >> #{@name} << --------"
+        return message
+	end
+
+	# To UI
+	def getUIVersion
+		return SpaceStationToUI.new(self)
+	end
+
+	# Visibility specifiers
+	# ==========================================================================
 	private :assignFuelValue, :cleanPendingDamage
-end
+end # class SpaceStation
 
 end	# Deepspace

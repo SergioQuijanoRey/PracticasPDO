@@ -89,7 +89,6 @@ class EnemyStarShip
 	def getUIVersion
 		return EnemyToUI.new(self)
 	end
-
 end # class EnemyStarShip
 
 end	# module Deepspace
