@@ -1,6 +1,6 @@
 #encondig:utf-8
 
-require_relative "../lib/LootToUI.rb"
+require_relative 'LootToUI'
 
 module Deepspace
 

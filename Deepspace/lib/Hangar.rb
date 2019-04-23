@@ -1,9 +1,9 @@
 #encoding:utf-8
 
-require_relative "Weapon.rb"
-require_relative "ShieldBooster"
-require_relative "enums"
-require_relative "HangarToUI"
+require_relative 'Weapon'
+require_relative 'ShieldBooster'
+require_relative 'WeaponType'
+require_relative 'HangarToUI'
 
 module Deepspace
 

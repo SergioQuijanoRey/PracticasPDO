@@ -1,7 +1,14 @@
 #encoding:utf-8
 
-require_relative "SpaceStationToUI"
-require_relative "SuppliesPackage"
+require_relative 'SuppliesPackage'
+require_relative 'Hangar'
+require_relative 'Damage'
+require_relative 'Weapon'
+require_relative 'WeaponType'
+require_relative 'Loot'
+require_relative 'ShieldBooster'
+require_relative 'CardDealer'
+require_relative 'SpaceStationToUI'
 
 module Deepspace
 

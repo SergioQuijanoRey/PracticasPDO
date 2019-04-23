@@ -1,6 +1,6 @@
 #encondig:utf-8
 
-require_relative "enums"
+require_relative 'GameCharacter'
 
 module Deepspace
 

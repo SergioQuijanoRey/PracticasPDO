@@ -1,9 +1,9 @@
 #encoding:utf-8
 
-require_relative "enums"
-require_relative "EnemyToUI"
-require_relative "Loot"
-#require_relative "Damage"
+require_relative 'EnemyToUI'
+require_relative 'Damage'
+require_relative 'Loot'
+require_relative 'ShotResult'
 
 module Deepspace
 

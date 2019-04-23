@@ -1,8 +1,14 @@
 #encoding:utf-8
 
-require_relative "GameStateController"
-require_relative "GameUniverseToUI"
-require_relative "Dice"
+require_relative 'GameUniverseToUI'
+require_relative 'GameStateController'
+require_relative 'Dice'
+require_relative 'CombatResult'
+require_relative 'GameCharacter'
+require_relative 'ShotResult'
+require_relative 'SpaceStation'
+require_relative 'CardDealer'
+require_relative 'EnemyStarShip'
 
 module Deepspace
 
@@ -169,7 +175,7 @@ class GameUniverse
 			stationState = @currentStation.validState
 
 			if stationState
-				@currentStationIndex = ( @currentStationIndex + 1 )
+				@currentStationIndex = ( @currentStationIndex + 1 ) \
 						% @spaceStations.size
 				@turns += 1
 
@@ -190,75 +196,73 @@ class GameUniverse
 		return false
 	end
 
-	# @case The function has zero parameters
 	# Makes combat between the space station that holds the turn and the
 	# current enemy. The combat is realized if the app is on a state where
 	# combat is allowed
 	# @return [CombatResult] combat result
-	#
-	# @case The function has two parameters
+	def combat
+		state = @gameState.state
+
+		if state == GameState::BEFORECOMBAT or GameState::INIT
+			return combatGo(@currentStation, @currentEnemy)
+		end
+	end
+
 	# Executes combat, according to game rules
-	# @param args[0]==station [SpaceStation] station in combat
-	# @param args[1]==enemy [EnemyStarShip] enemy in combat
+	# @param station [SpaceStation] station in combat
+	# @param enemy [EnemyStarShip] enemy in combat
 	# @return [CombatResult] combat result
-	def combat(*args)
-		case args.size
-		when 0
-			state = @gameState.state
+	def combatGo(station, enemy)
+		station = args[0]
+		enemy = args[1]
 
-			if ( state == GameState::BEFORECOMBAT ) || ( state == GameState::INIT )
-				return combat(@currentStation, @currentEnemy)
-		when 2
-			station = args[0]
-			enemy = args[1]
+		ch = @dice.firstShot
 
-			ch = @dice.firstShot
+		if ch == GameCharacter::ENEMYSTARSHIP
+			fire = enemy.fire
+			result = station.receiveShot(fire)
 
-			if ch == GameCharacter::ENEMYSTARSHIP
-				fire = enemy.fire
-				result = station.receiveShot(fire)
-
-				if ( result == ShotResult::RESIST )
-					fire = station.fire
-					result = enemy.receiveShot(fire)
-
-					enemyWins = (result == ShotResult::RESIST)
-				else
-					enemyWins = true
-				end
-			else
+			if ( result == ShotResult::RESIST )
 				fire = station.fire
 				result = enemy.receiveShot(fire)
 
 				enemyWins = (result == ShotResult::RESIST)
-			end
-
-			if enemyWins
-				s = station.getSpeed
-				moves = dice.spaceStationMoves(s)
-
-				if !moves
-					damage = enemy.damage
-					station.setPendingDamage(damage)
-
-					combatResult = CombatResult::ENEMYWINS
-				else
-					station.move
-
-					combatResult = CombatResult::STATIONESCAPES
-				end
 			else
-				aLoot = enemy.loot
-				station.loot = aLoot # WIP - depends on how we make setter
-
-				combatResult = CombatResult::STATIONWINS
+				enemyWins = true
 			end
+		else
+			fire = station.fire
+			result = enemy.receiveShot(fire)
 
-			@gameState.next(@turns, @spaceStations.length)
-
-			return combatResult
+			enemyWins = (result == ShotResult::RESIST)
 		end
+
+		if enemyWins
+			s = station.getSpeed
+			moves = dice.spaceStationMoves(s)
+
+			if !moves
+				damage = enemy.damage
+				station.setPendingDamage(damage)
+
+				combatResult = CombatResult::ENEMYWINS
+			else
+				station.move
+
+				combatResult = CombatResult::STATIONESCAPES
+			end
+		else
+			aLoot = enemy.loot
+			station.loot = aLoot # WIP - depends on how we make setter
+
+			combatResult = CombatResult::STATIONWINS
+		end
+
+		@gameState.next(@turns, @spaceStations.length)
+
+		return combatResult
 	end
+
 
 	# String representation, UI version
 	# ==========================================================================

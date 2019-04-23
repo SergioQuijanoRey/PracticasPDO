@@ -1,5 +1,7 @@
 #encoding:utf-8
 
+require_relative 'ShieldToUI'
+
 module Deepspace
 
 # Class to represent the shield boosters that space stations can have
