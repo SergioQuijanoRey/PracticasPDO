@@ -86,9 +86,9 @@ class Weapon {
     // -------------------------------------------------------------------------
     
     /**
-     * Uses the shield booster
-     *   If it is still available (uses is greater than 0), we can use the boost
-     *   Otherwise, we cannot use the boost
+     * Uses the weapon.
+     * If it is still available (uses is greater than 0), we can use the weapon
+     * Otherwise, we cannot use the weapon
      * @return boost if uses > 0, 1.0 if uses == 0
      */
     public float useIt() {

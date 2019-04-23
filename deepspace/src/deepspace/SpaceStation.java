@@ -477,8 +477,8 @@ class SpaceStation {
     }
     
     /**
-     * Discards booster in certain position from the collection of weapons in use
-     * @param i index where the booster that wants to be discarded is located
+     * Discards shield in certain position from the collection of weapons in use
+     * @param i index where the shield that wants to be discarded is located
      */
     public void discardShieldBooster(int i) {
         int size = shieldBoosters.size();
