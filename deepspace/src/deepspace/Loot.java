@@ -22,7 +22,7 @@ class Loot {
     private int nWeapons;
     
     /**
-     * Number of shields given by a loot
+     * Number of boosters given by a loot
      */
     private int nShields;
     
@@ -43,7 +43,7 @@ class Loot {
     /**
      * Class initializer
      * @param _nSupplies number of supplies given by a loot
-     * @param _nWeapons number of weapons given by a loot
+     * @param _nWeapons number of boosters given by a loot
      * @param _nShields number of shields given by a loot
      * @param _nHangars number of hangars given by a loot
      * @param _nMedals number of medals given by a loot

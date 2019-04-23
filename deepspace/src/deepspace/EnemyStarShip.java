@@ -54,7 +54,8 @@ class EnemyStarShip {
         loot = _loot;
         // Reference protection
         // WIP - Is this necessary?
-        damage = new Damage(_damage);
+        /*damage = new Damage(_damage);*/
+        damage = _damage;
     }
     
     /**
@@ -104,8 +105,9 @@ class EnemyStarShip {
      */
     public Loot getLoot() {
         // Reference protection
-        return new Loot(loot.getNSupplies(), loot.getNWeapons(),
-                loot.getNShields(), loot.getNHangars(), loot.getNMedals());
+        return loot;
+        /*return new Loot(loot.getNSupplies(), loot.getNWeapons(),
+                loot.getNShields(), loot.getNHangars(), loot.getNMedals());*/
     }
     
     /**
@@ -114,7 +116,8 @@ class EnemyStarShip {
      */
     public Damage getDamage() {
         // Reference protection
-        return new Damage(damage);
+        /*return new Damage(damage);*/
+        return damage;
     }
     
     /**
@@ -134,7 +137,7 @@ class EnemyStarShip {
     }
     
     /**
-     * Returns whether the star ship receives a certain shot or not
+     * Returns whether the star ship resists a certain shot or not
      * @param shot power of shot taken
      * @return ShotResult.RESIST, if shieldPower >= shot;
      *         ShotResult.DONOTRESIST, if shieldPower < shot

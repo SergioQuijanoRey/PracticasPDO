@@ -123,8 +123,7 @@ class SpaceStation {
      * @return hangar
      */
     public Hangar getHangar() {
-        // Reference protection
-        return new Hangar(hangar);
+        return hangar;
     }
     
     /**
@@ -140,9 +139,7 @@ class SpaceStation {
      * @return pendingDamage
      */
     public Damage getPendingDamage() {
-        // Reference protection
         return pendingDamage;
-        /*return new Damage(pendingDamage);*/
     }
     
     /**
@@ -151,12 +148,14 @@ class SpaceStation {
      */
     public ArrayList<ShieldBooster> getShieldBoosters() {
         // Reference protection
-        ArrayList<ShieldBooster> shields_copy = new ArrayList<>();
+        /*ArrayList<ShieldBooster> shields_copy = new ArrayList<>();
         shieldBoosters.forEach(booster -> {
             shields_copy.add(booster);
         });
         
-        return shields_copy;
+        return shields_copy;*/
+        
+        return shieldBoosters;
     }
     
     /**
@@ -165,12 +164,14 @@ class SpaceStation {
      */
     public ArrayList<Weapon> getWeapons() {
         // Reference protection
-        ArrayList<Weapon> weapons_copy = new ArrayList<>();
+        /*ArrayList<Weapon> weapons_copy = new ArrayList<>();
         weapons.forEach(weapon -> {
             weapons_copy.add(weapon);
         });
         
-        return weapons_copy;
+        return weapons_copy;*/
+        
+        return weapons;
     }
     
     /**
@@ -307,7 +308,7 @@ class SpaceStation {
     }
     
     /**
-     * Shot, shield and fuel power increase by a certain SuppliesPackage
+     * Shot, shield and fuel power increase by a certain supplies package
      * @param s the supplies to add
      */
     public void receiveSupplies(SuppliesPackage s) {
@@ -323,11 +324,14 @@ class SpaceStation {
      * @param i index of the weapon to mount
      */
     public void mountWeapon(int i) {
-        if ( hangar != null ) {
-            Weapon new_weapon = hangar.removeWeapon(i);
-            
-            if ( new_weapon != null )
-                weapons.add(new_weapon);
+        Weapon new_weapon;
+        if ( i >= 0 && i < hangar.getWeapons().size() ) {
+            if ( hangar != null ) {
+                new_weapon = hangar.removeWeapon(i);
+
+                if ( new_weapon != null )
+                    weapons.add(new_weapon);
+            }
         }
     }
     
@@ -338,11 +342,14 @@ class SpaceStation {
      * @param i index of the booster to mount
      */
     public void mountShieldBooster(int i) {
-        if ( hangar != null ) {
-            ShieldBooster new_booster = hangar.removeShieldBooster(i);
-            
-            if ( new_booster != null )
-                shieldBoosters.add(new_booster);
+        ShieldBooster new_booster;
+        if ( i >= 0 && i < hangar.getShieldBoosters().size() ) {
+            if ( hangar != null ) {
+                new_booster = hangar.removeShieldBooster(i);
+                
+                if ( new_booster != null )
+                    shieldBoosters.add(new_booster);
+            }
         }
     }
     

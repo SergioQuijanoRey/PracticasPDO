@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * Represents damages done on a spaceShip after loosing a combat.
- * They indicate which elements are going to be lost after loosing the combat
+ * Represents damages done on a spaceship after loosing a combat.
+ * They indicate which elements are going to be lost after losing the combat
  * 
  * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
  */
@@ -48,8 +48,8 @@ class Damage {
     /**
      * Class initializer type Specific.
      * Initializes to use the class with an array of weapons and a number of shields
-     * @param _weapons
-     * @param _nShields
+     * @param _weapons array of weapons that will be lost
+     * @param _nShields number of shields that will be lost
      */
     Damage(ArrayList<WeaponType> _weapons, int _nShields) {
         nWeapons = -1;  // used for distinction from types Numeric and Specific
@@ -99,13 +99,14 @@ class Damage {
      */
     public ArrayList<WeaponType> getWeapons() {
         // Reference protection
-        ArrayList<WeaponType> weapons_copy = new ArrayList<>();
+        /*ArrayList<WeaponType> weapons_copy = new ArrayList<>();
         
         weapons.forEach( weapon -> {
             weapons_copy.add(weapon);
         });
         
-        return weapons_copy;
+        return weapons_copy;*/
+        return weapons;
     }
     
     /**
@@ -154,7 +155,7 @@ class Damage {
     /**
      * Creates a copy of current objet where weapons and shields which are
      * not included in arrays given as parameters are discarded. That's to say,
-     * we srink the Damage to the parameters
+     * we shrink the Damage to the parameters
      * @param w weapons to fit
      * @param s shields to fit
      * @return a copy of the object adjusted as explained above

@@ -48,15 +48,9 @@ class Hangar {
     Hangar(Hangar h) {
         maxElements = h.maxElements;
         
-        shieldBoosters = new ArrayList<>();
-        h.shieldBoosters.forEach(shieldBooster -> {
-            shieldBoosters.add(shieldBooster);
-        });
-        
-        weapons = new ArrayList<>();
-        h.weapons.forEach(weapon -> {
-            weapons.add(weapon);
-        });
+        // Call to getter creates copy
+        shieldBoosters = h.shieldBoosters;
+        weapons = h.weapons;
     }
     
     // -------------------------------------------------------------------------
@@ -76,6 +70,13 @@ class Hangar {
      * @return shieldBoosters
      */
     public ArrayList<ShieldBooster> getShieldBoosters() {
+        // Reference protection
+        /*ArrayList<ShieldBooster> shieldBoosters_copy = new ArrayList<>();
+        for ( ShieldBooster sh : shieldBoosters )
+            shieldBoosters_copy.add(sh);
+        
+        return shieldBoosters_copy;*/
+        
         return shieldBoosters;
     }
     
@@ -84,6 +85,13 @@ class Hangar {
      * @return weapons
      */
     public ArrayList<Weapon> getWeapons() {
+        // Reference protection
+        /*ArrayList<Weapon> weapons_copy = new ArrayList<>();
+        for ( Weapon weap : weapons )
+            weapons_copy.add(weap);
+        
+        return weapons_copy;*/
+        
         return weapons;
     }
     
@@ -130,7 +138,7 @@ class Hangar {
      * Adds a new shield booster to the hangar
      * @param w the shield booster to be added
      * @return true, if the operation runs successfully;
-     *         false, if something fails (no room for another shield)
+     *         false, if something fails (no room for another booster)
      */
     public boolean addShieldBooster(ShieldBooster s) {
         if ( spaceAvailable() )
@@ -141,15 +149,18 @@ class Hangar {
     
     /**
      * Removes a shield booster from the hangar
-     * @param w the position in which the shield that wants to be removed is located
+     * @param w the position in which the booster that wants to be removed is located
      * @return null if position is invalid or removal operation is unsuccessful;
      *         the shield booster, if removal is successful
      */
     public ShieldBooster removeShieldBooster(int s) {
+        ShieldBooster removed;
         if ( s >= shieldBoosters.size() )
-            return null;
+            removed = null;
         else
-            return shieldBoosters.remove(s);    // WIP - ERROR
+            removed = shieldBoosters.remove(s);
+        
+        return removed;
     }
     
     // -------------------------------------------------------------------------

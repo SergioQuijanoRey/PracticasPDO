@@ -194,7 +194,7 @@ public class GameUniverse {
             }
             
             int nPlayers = names.size();
-            int currentStationIndex = dice.whoStarts(nPlayers);
+            currentStationIndex = dice.whoStarts(nPlayers);
             currentStation = spaceStations.get(currentStationIndex);
             currentEnemy = dealer.nextEnemy();
             

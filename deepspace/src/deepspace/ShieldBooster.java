@@ -77,10 +77,10 @@ class ShieldBooster {
     // -------------------------------------------------------------------------
     
     /**
-     * Uses the shield booster
-     *   If it is still available (uses is greater than 0), we can use the boost
-     *   Otherwise, we cannot use the boost
-     * @return boost if uses > 0, 1.0 if uses == 0
+     * Uses the shield booster.
+     * If it is still available (uses is greater than 0), we can use the boost
+     * Otherwise, we cannot use the boost
+     * @return boost if uses > 0; 1.0 if uses == 0
      */
     public float useIt() {
         if ( uses > 0 ) {

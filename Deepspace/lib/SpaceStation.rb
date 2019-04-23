@@ -5,64 +5,79 @@ require_relative "SuppliesPackage"
 
 module Deepspace
 
+#
+# @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
 class SpaceStation
+
 	# Class atributes
-	#=======================================================================
-	@@MAXFUEL = 100					# Max fuel quantity that a space station can have
-	@SHIELDLOSSPERUNITSHOT = 0.1	# Shield units lost per each shot unit taken
+	# ==========================================================================
 
-	# Initializers
-	#=======================================================================
+	# @!attribute [Integer] Maximum fuel quantity that a space station can have
+	@@MAXFUEL = 100
+
+	# @!attribute [Float] Shield units lost per each shot unit taken
+	@SHIELDLOSSPERUNITSHOT = 0.1
+
+	# Constructors
+	# ==========================================================================
 	
-	# Description:
-	# 	Initializer of the class
-	# Parameters:
-	#	_name: String, name of the SpaceStation
-	# 	_supplies: SuppliesPackage, starting fuel units, weapons and shields
+	# Class initializer
+	# @param _name [String] name of the space station
+	# @param _supplies [SuppliesPackage] starting fuel units, weapons and shields
 	def initialize(_name, _supplies)
-		# Name is set
-		@name = _name			# String
+		# !@attribute [String] name of the space station
+		@name = _name
 
-		# Rest of attributes are set
-		@ammoPower = 0.0		# Float
-		@fuelUnits = 0.0		# Float
-		@nMedals = 0			# Integer
-		@shieldPower = 0.0		# Float
-		@pendingDamage = nil	# Damage
-		@weapons = []			# Weapon[]
-		@shieldBoosters = []	# ShieldBooster[]
-		@hangar = nil			# Hangar
+		# !@attribute [Float] Parametrizes ammunition power
+		@ammoPower = 0.0
+
+		# !@attribute [Float] Parametrizes fuel units
+		@fuelUnits = 0.0
+		
+		# !@attribute [Integer] Number of medals
+		@nMedals = 0
+		
+		# !@attribute [Float] Parametrizes shield power
+		@shieldPower = 0.0
+		
+		# !@attribute [Damage] Pending damage
+		@pendingDamage = nil
+
+		# !@attribute [Array<Weapon>] Array of weapons
+		@weapons = []
+
+		# !@attribute [Array<ShieldBooster] Array of shield boosters
+		@shieldBoosters = []
+		
+		# !@attribute [Hangar] Hangar
+		@hangar = nil
 		
 		# Supplies are added
 		receiveSupplies(_supplies)
 	end
 
 	# Getters
-	#=======================================================================
+	# ==========================================================================
 
-	# Attribute readers
-	attr_reader :ammoPower, :fuelUnits, :hangar, :name, :nMedals, :pendingDamage, :shieldBoosters, :shieldPower, :weapons
+	attr_reader :ammoPower, :fuelUnits, :hangar, :name, :nMedals,
+			:pendingDamage, :shieldBoosters, :shieldPower, :weapons
 
-	# Description:
-	# 	Gets the speed of the SpaceStation
-	# 	Speed is calculated as fraction of fuel units and max fuel possible
-	# Returns:
-	# 	Float: percentage of speed, that's to say, a number in [0, 1]
+	# Gets the speed of the space station.
+	# Speed is calculated as fraction of fuel units and max fuel possible
+	# @param [Float] percentage of speed, that's to say, a number in [0, 1]
 	def speed
 		if @@MAXFUEL == 0
-			puts "WARNING, zero division at SpaceStation.speed()"
+			raise "WARNING, zero division at SpaceStation.speed()"
 			return 0
 		else
 			return @fuelUnits.to_f / @@MAXFUEL
 		end
 	end
 
-	# Description:
-	# 	Checks the state of SpaceShip
-	# 	Valid state means no pending damage or pending damage with no effect
-	# Returns:
-	# 	Boolean: true, if SpaceShip is on valid state
-	# 			 false, otherwise
+	# Checks the state of the space ship.
+	# Valid state means no pending damage or pending damage with no effect
+	# @return [Boolean] true, if the space ship is on a valid state;
+	#                   false, otherwise
 	def validState
 		if @pendingDamage.nil?
 			return false
@@ -87,23 +102,20 @@ class SpaceStation
 
 	def to_s
 		out = "[Space Station]-> Name: #{@name}\n"
-		out += "\tNo. Medals: #{@nMedals}, Fuel units: #{@fuelUnits.round(2)}, Power: #{@ammoPower}, Shields: #{@shieldPower}\n"
+		out += "\tNo. Medals: #{@nMedals}, Fuel units: #{@fuelUnits.round(2)}, ammoPower: #{@ammoPower}, shieldPower: #{@shieldPower}\n"
 		out += "\tWeapons: [#{@weapons.join(' ,')}]\n"
 		out += "\tShieldBoosters: [#{@shieldBoosters.join(', ')}]\n"
-		out += "\tHangars: #{@hangar}\n"
+		out += "\tHangar: #{@hangar}\n"
 		out += "\tPendingDamage: #{@pendingDamage}\n"
 		out += "-------- end of Space Station >> #{@name} << --------"
 		return out
 	end
 	
 	# Setters
-	#=======================================================================
+	# ==========================================================================
 
-	# Description:
-	# 	Assigns the fuel of the space station
-	# 	Private method
-	# Parameters:
-	# 	f: Float
+	# Assigns the fuel of the space station
+	# @param f [Float] fuel value to be assigned
 	def assignFuelValue(f)
 		if f < @@MAXFUEL
 			@fuelUnits = f
@@ -112,17 +124,14 @@ class SpaceStation
 		end
 	end
 
-	# Description:
-	# 	Certain damage is adjusted to weapon list and shieldBoosters and it's
-	# 	value is stored in the object
-	# Parameters:
-	# 	d: Damage, the damage to set
+	# Adjusts certain damage to some weapon and shieldBoosters lists, and its
+	# value is stored in the object
+	# @param d [Damage] the damage to be set
 	def setPendingDamage(d)
 		@pendingDamage = d.adjust(@weapons, @shieldBoosters)
 	end
 
-	# Description:
-	# 	If pending damage has no effect, fixes the atribute to nil
+	# If pending damage has no effect, fixes the atribute to nil
 	def cleanPendingDamage
 		if !@pendingDamage.nil?
 			if @pendingDamage.hasNoEffect
@@ -131,13 +140,10 @@ class SpaceStation
 		end
 	end
 
-	# Description:
-	# 	Tries to add a weapon to the hangar
-	# Parameters:
-	# 	w: Weawpon, the weapon to add
-	# Returns:
-	# 	Boolean:	true, if weapon is succesfully added
-	# 				false, if weapon fails to be added
+	# Tries to add a weapon to the hangar
+	# @param [Weapon] the weapon to add
+	# @return [Boolean] true, if weapon is successfully added;
+	#                   false, if the operation fails
 	def receiveWeapon(w)
 		if hangar != nil
 			return @hangar.addWeapon(w)
@@ -146,13 +152,10 @@ class SpaceStation
 		end
 	end
 
-	# Description:
-	# 	Tries to add a shield booster
-	# Parameters:
-	# 	s: ShieldBooster, the shield we are trying to add
-	# Returns:
-	# 	Boolean:	true, if shield is succesfully added
-	# 				false, if shield fails to be added
+	# Tries to add a shield booster to the hangar
+	# @param [ShieldBooster] the shield booster to add
+	# @return [Boolean] true, if booster is successfully added;
+	#                   false, if the operation fails
 	def receiveShieldBooster(s)
 		if hangar != nil
 			return @hangar.addShieldBooster(s)
@@ -161,98 +164,88 @@ class SpaceStation
 		end
 	end
 
-	# Description:
-	# 	Tries to add an hangar
-	# 	If there's already an hangar, this method has no effect
-	# Parameters:
-	# 	h: Hangar, the hangar to add
+	# Tries to add a hangar.
+	# If there's already a hangar, this method has no effect
+	# @param h [Hangar] the hangar to add
 	def receiveHangar(h)
 		if @hangar.nil?
 			@hangar = Hangar.newCopy(h) # Security copy
 		end
 	end
 
-	# Description:
-	# 	Discards current hangar (nil reference)
+	# Discards current hangar (nil reference)
 	def discardHangar
 		@hangar = nil
 	end
 
-	# Description:
-	# 	If hangar is available, discars a weapon from it
-	# Parameters:
-	# 	i: Integer, index of the weapon at hangar to discard
+	# If a hangar is available, discards a weapon from it, in a certain
+	# position
+	# @param i [Integer] index where the weapon that wants to be discarded is
+	#                    located in the hangar
 	def discardWeaponInHangar(i)
 		if !@hangar.nil?
 			@hangar.removeWeapon(i)
 		else
-			puts "WARNING! Trying to discard a weapon where no hangar is available, at SpaceStation.discardWeaponInHangar()"
+			raise "WARNING! Trying to discard a weapon where no hangar is available, at SpaceStation.discardWeaponInHangar()"
 		end
 	end
 
-	# Description:
-	# 	If hangar is available, discars a shield booster from it
-	# Parameters:
-	# 	i: Integer, index of the shield booster at hangar to discard
+	# If a hangar is available, discards a shield booster from it, in a certain
+	# position
+	# @param i [Integer] index where the booster that wants to be discarded is
+	#                    located in the hangar
 	def discardShieldBoosterInHangar(i)
 		if !@hangar.nil?
 			@hangar.removeShieldBooster(i)
 		else
-			puts "WARNING! Trying to discard a shield booster where no hangar is available, at SpaceStation.discardShieldBoosterInHangar()"
+			raise "WARNING! Trying to discard a shield booster where no hangar is available, at SpaceStation.discardShieldBoosterInHangar()"
 		end
 	end
 
-	# Description:
-	# 	Shoot, shield and fuel power increase by a certain SuppliesPackage
-	# Parameters:
-	# 	s: SuppliesPackage, the supplies to add
+	# Shot, shield and fuel power increase by a certain supplies package
+	# @param s [SuppliesPackage] the supplies to add
 	def receiveSupplies(s)
 		@ammoPower += s.ammoPower
 		assignFuelValue(@fuelUnits+s.fuelUnits)
 		@shieldPower += s.shieldPower
 	end
 
-	# Description:
-	# 	A weapon from the hangar is mounted to be used
-	# 	If method runs succesfully, weapon is erased from Hangar, and the weapon
-	# 	is added to the collection of weapons in use
-	# Parameters:
-	# 	i: Integer, index of the weapon to mount
+	# A weapon from the hangar is mounted to be used.
+	# If method runs successfully, weapon is erased from Hangar, and the weapon
+	# is added to the collection of weapons in use
+	# @param i [Integer] index of the weapon to mount
 	def mountWeapon(i)
 		if @hangar.nil?
-			puts "WARNING! No hangar available at SpaceStation.mountWeapon()"
+			raise "WARNING! No hangar available at SpaceStation.mountWeapon()"
 		else
 			# New weapon is deleted from the hangar
 			new_weapon = @hangar.removeWeapon(i) 
 			if !new_weapon.nil?
 				@weapons << new_weapon
 			else
-				puts "WARNING! Trying to add nil weapon on SpaceStation.mountWeapon()"
+				raise "WARNING! Trying to add nil weapon on SpaceStation.mountWeapon()"
 			end
 		end
 	end
 
-	# Description:
-	# 	A ShieldBooster from the hangar is mounted
-	# 	If method runs succesfully, shield is removed from Hangar, and that shield
-	# 	is added to collection of shields in use
-	# Parameters:
-	# 	i: Integer, position of the shield to mount
+	# A shield booster from the hangar is mounted to be used.
+	# If method runs successfully, booster is erased from Hangar, and the weapon
+	# is added to the collection of boosters in use
+	# @param i [Integer] index of the booster to mount
 	def mountShieldBooster(i)
 		if @hangar.nil?
-			puts "WARNING! No hangar available, at SpaceStation.mountShieldBooster()"
+			raise "WARNING! No hangar available, at SpaceStation.mountShieldBooster()"
 		else
 			new_shield = @hangar.removeShieldBooster(i)
 			if new_shield.nil?
-				puts "WARNING! Trying to add nil shield on Spacestation.mountShieldBooster()"
+				raise "WARNING! Trying to add nil shield on Spacestation.mountShieldBooster()"
 			else
 				@shieldBoosters << new_shield
 			end
 		end
 	end
 
-	# Description:
-	# 	The spaceships moves. Therefore, fuel units decrease
+	# The spaceships moves. Therefore, fuel units decrease
 	def move
 		@fuelUnits -= @fuelUnits*speed
 		if @fuelUnits <= 0
@@ -260,8 +253,7 @@ class SpaceStation
 		end
 	end
 
-	# Description:
-	# 	Deletes all mounted weapons and mounted shields with no uses left
+	# Deletes all mounted weapons and mounted shields with no uses left
 	def cleanUpMountedItems
 		# Filtering weapons
 		@weapons = @weapons.select{|weapon|  weapon.uses > 0}

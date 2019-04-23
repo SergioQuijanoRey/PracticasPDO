@@ -115,7 +115,7 @@ class Dice {
     /**
      * Determines which player will start the match randomly
      * @param nPlayers number of players
-     * @return such player (an integer in [0, nPlayers-1]
+     * @return such player (an integer in [0, nPlayers-1])
      */
     public int whoStarts(int nPlayers) {
         return generator.nextInt(nPlayers);
