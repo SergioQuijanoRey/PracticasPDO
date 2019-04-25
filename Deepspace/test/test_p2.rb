@@ -108,7 +108,6 @@ class TestP2
 			puts "UI version: #{ui_damage_test}"
 			puts ""
 
-			#WIP mianfg -- he llegado hasta aquí
 			puts "Adjusting the Specific Damage"
 			srink_damage_test = type_damage_test.adjust([WeaponType::LASER, WeaponType::MISSILE], ["test", "this does nothing"])
 			puts "\tAdjusted Damage: #{srink_damage_test}"
