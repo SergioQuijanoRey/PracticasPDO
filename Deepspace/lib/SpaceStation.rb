@@ -112,7 +112,6 @@ class SpaceStation
 	def setPendingDamage(d)
 		if !d.nil?
 			@pendingDamage = d.adjust(@weapons, @shieldBoosters)
-			cleanPendingDamage #WIP necessary?
 		end
 	end
 

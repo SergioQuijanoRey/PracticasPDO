@@ -55,7 +55,6 @@ class Damage
 	# @param d [Damage] instance which is going to be copied
 	# @return [Damage] a copy of the given instance
 	def self.newCopy(d)
-		# WIP - Necessary reference protection?
 		if d.nWeapons == -1
 			return newSpecificWeapons(d.weapons, d.nShields)
 		else
