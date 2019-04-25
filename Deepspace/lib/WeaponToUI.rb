@@ -3,8 +3,6 @@ module Deepspace
   
 class WeaponToUI 
 
-  # MIGUEL: por que  name  no forma parte de esta clase ?
-  
     attr_reader :type, :power, :uses
     
     def initialize(w) 
