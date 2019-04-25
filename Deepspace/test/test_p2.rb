@@ -108,7 +108,6 @@ class TestP2
 			puts "UI version: #{ui_damage_test}"
 			puts ""
 
-			#WIP mianfg -- he llegado hasta aquí
 			puts "Adjusting the Specific Damage"
 			srink_damage_test = type_damage_test.adjust([WeaponType::LASER, WeaponType::MISSILE], ["test", "this does nothing"])
 			puts "\tAdjusted Damage: #{srink_damage_test}"
@@ -165,7 +164,6 @@ class TestP2
 				puts "\tResult: #{result}"
 		end
 
-		# WIP -- Not tested properly -- Practica 3
 		puts "TEST CLASS: Space Station"
 		puts "================================================================================"
 
@@ -194,7 +192,6 @@ class TestP2
 		puts ""
 
 
-		# WIP -- Not tested properly -- Practica 3
 		puts "TEST CLASS: GameUniverse"
 		puts "================================================================================"
 		puts "Creating a Game universe"
