@@ -164,7 +164,6 @@ class TestP2
 				puts "\tResult: #{result}"
 		end
 
-		# WIP -- Not tested properly -- Practica 3
 		puts "TEST CLASS: Space Station"
 		puts "================================================================================"
 
@@ -193,7 +192,6 @@ class TestP2
 		puts ""
 
 
-		# WIP -- Not tested properly -- Practica 3
 		puts "TEST CLASS: GameUniverse"
 		puts "================================================================================"
 		puts "Creating a Game universe"
