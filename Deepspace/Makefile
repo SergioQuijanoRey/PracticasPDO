@@ -45,3 +45,6 @@ test3: ./test/test_p3.rb
 run: ./lib/PlayWithUI.rb
 		@echo "Executing main game!"
 		@ruby ./lib/PlayWithUI.rb
+	
+zip:
+	@zip -r comprimido.zip .
