@@ -87,9 +87,8 @@ class SpaceStation
 	#                   false, otherwise
 	def validState
 		if @pendingDamage.nil?
-			return false
+			return true
 		else
-			#TEST return @pendingDamage.length == 0 || @pendingDamage.hasNoEffect
 			return @pendingDamage.hasNoEffect
 		end
 	end
@@ -111,7 +110,10 @@ class SpaceStation
 	# value is stored in the object
 	# @param d [Damage] the damage to be set
 	def setPendingDamage(d)
-		@pendingDamage = d.adjust(@weapons, @shieldBoosters)
+		if !d.nil?
+			@pendingDamage = d.adjust(@weapons, @shieldBoosters)
+			cleanPendingDamage #WIP necessary?
+		end
 	end
 
 	# If pending damage has no effect, fixes the atribute to nil
@@ -168,8 +170,8 @@ class SpaceStation
 	def discardWeaponInHangar(i)
 		if !@hangar.nil?
 			@hangar.removeWeapon(i)
-		else
-			raise "WARNING! Trying to discard a weapon where no hangar is available, at SpaceStation.discardWeaponInHangar()"
+		#else
+		#	raise "WARNING! Trying to discard a weapon where no hangar is available, at SpaceStation.discardWeaponInHangar()"
 		end
 	end
 
@@ -180,8 +182,8 @@ class SpaceStation
 	def discardShieldBoosterInHangar(i)
 		if !@hangar.nil?
 			@hangar.removeShieldBooster(i)
-		else
-			raise "WARNING! Trying to discard a shield booster where no hangar is available, at SpaceStation.discardShieldBoosterInHangar()"
+		#else
+		#	raise "WARNING! Trying to discard a shield booster where no hangar is available, at SpaceStation.discardShieldBoosterInHangar()"
 		end
 	end
 
@@ -198,7 +200,6 @@ class SpaceStation
 	# is added to the collection of weapons in use
 	# @param i [Integer] index of the weapon to mount
 	def mountWeapon(i)
-		puts "Trying to SpaceStation.mountWeapon(#{i})" #TEST
 		if i >= 0 && i < @hangar.weapons.length
 			if !@hangar.nil?
 				# New weapon is deleted from the hangar
@@ -260,7 +261,7 @@ class SpaceStation
 			factor *= w.useIt
 		end
 
-		return factor
+		return @ammoPower*factor
 	end
 	
 	# Use protection shield
@@ -272,7 +273,7 @@ class SpaceStation
 			factor *= s.useIt
 		end
 
-		return factor
+		return @shieldPower*factor
 	end
 
 	# Make the operations related to the reception of an enemy's impact
@@ -284,12 +285,12 @@ class SpaceStation
 		if myProtection >= shot
 			@shieldPower -= @@SHIELDLOSSPERUNITSHOT
 			if @shieldPower < 0
-				shieldPower = 0
+				shieldPower = 0.0
 			end
 
 			return ShotResult::RESIST
 		else
-			@shieldPower = 0
+			@shieldPower = 0.0
 
 			return ShotResult::DONOTRESIST
 		end
@@ -298,7 +299,6 @@ class SpaceStation
 	# Receives a loot
 	# @param [Loot] loot to be received
 	def setLoot(loot)
-		puts "Entered setLoot" #TEST
 		dealer = CardDealer.instance # behaviour introduced by Singleton
 		h = loot.nHangars
 
@@ -349,7 +349,7 @@ class SpaceStation
 		if i >= 0 && i < size
 			s = @shieldBoosters.delete_at(i)
 			if !@pendingDamage.nil?
-				@pendingDamage.discardShieldBooster(s)
+				@pendingDamage.discardShieldBooster
 				cleanPendingDamage
 			end
 		end

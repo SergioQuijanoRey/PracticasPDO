@@ -78,12 +78,11 @@ class Hangar
 	# @return [Weapon] nil, if position is invalid or removal operation is unsuccessful;
 	#                  the weapon deleted, if removal is successful
 	def removeWeapon(w)
-		#if w >= @weapons.length || w < 0
-		#	raise "WARNING! Invalid position to specify a weapon, on Hangar.removeWeapon(w: Integer)"
-		#	return nil
-		#else
+		if w < @weapons.length && w >= 0
 			return @weapons.delete_at(w)
-		#end
+		else
+			return nil
+		end
 	end
 
 	# Adds a new shield booster to the hangar
@@ -99,17 +98,16 @@ class Hangar
 		end
 	end
 
-	# Removes a weapon from the hangar
-	# @param w [Integer] the position in which the booster that wants to be removed is located
+	# Removes a shield booster from the hangar
+	# @param s [Integer] the position in which the booster that wants to be removed is located
 	# @return [Weapon] nil, if position is invalid or removal operation is unsuccessful;
 	#                  the shield booster deleted, if removal is successful
 	def removeShieldBooster(s)
-		#if s >= @shieldBoosters.length || s < 0
-		#	raise "WARNING! Invalid position to specify a shield, on Hangar.removeShieldBooster(s: Integer)"
-		#	return nil
-		#else
+		if s < @shieldBoosters.length && s >= 0
 			return @shieldBoosters.delete_at(s)
-		#end
+		else
+			return nil
+		end
 	end
 
 	# String representation, UI version

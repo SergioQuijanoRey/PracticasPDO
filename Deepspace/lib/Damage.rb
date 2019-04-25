@@ -36,6 +36,9 @@ class Damage
 	# @param _nWeapons [Integer] number of weapons that will be lost
 	# @param _nShields [Integer] number of shields that will be lost
 	def self.newNumericWeapons(_nWeapons, _nShields)
+		# NOTA podría usarse:
+		# return new([0, _nWeapons].max, _nShields, nil)
+		# de este modo nos aseguramos que -1 distingue el tipo de constructor
 		return new(_nWeapons, _nShields, nil)
 	end
 
@@ -44,7 +47,6 @@ class Damage
 	# @param _weapons [Array<WeaponType>] array of weapons that will be lost
 	# @param _nShields [Integer] number of shields that will be lost
 	def self.newSpecificWeapons(_weapons, _nShields)
-		# WIP - Necessary reference protection?
 		return new(-1, _nShields, _weapons)
 		# -1 value for distinction
 	end
@@ -69,7 +71,11 @@ class Damage
 	# Checks whether the damage is affecting or not
 	# @return [Boolean] true, if damage has no effect; false, otherwise
 	def hasNoEffect
-		return @nShields + @nWeapons == 0
+		if @nWeapons == -1
+			return @weapons.empty? && @nShields == 0
+		else
+			return @nShields + @nWeapons == 0
+		end
 	end
 
 	# Searches the first element of WeaponType array to match a given type
@@ -106,37 +112,25 @@ class Damage
 		#   else, it has been Numeric-constructed
 		if @nWeapons == -1
 			# we compute the intersection
-			new_weapons = []
-			for weapon in @weapons
-				if arrayContainsType(w, weapon)
-					new_weapons << weapon
-				end
+			#TEST --DELETE THIS new_weapons = []
+			#for weapon in @weapons
+			#	if arrayContainsType(w, weapon)
+			#		new_weapons << weapon
+			#	end
+			#end
+
+			weapons_copy = @weapons.clone
+
+			new_weapons = w.map do |weapon|
+				weapons_copy.delete_at(weapons_copy.index(weapon.type) || weapons_copy.length)
 			end
 
-			if s.length > @nShields
-				new_nShields = @nShields
-			else
-				new_nShields = s.length
-			end
+			new_weapons.compact!
 
-			copy = Damage.newSpecificWeapons(new_weapons, new_nShields)
+			self.class.newSpecificWeapons(new_weapons, [@nShields, s.length].min)
 		else
-			if w.length > @nWeapons
-				new_nWeapons = @nWeapons
-			else
-				new_nWeapons = w.length
-			end
-
-			if s.length > @nShields
-				new_nShields = @nShields
-			else
-				new_nShields = s.length
-			end
-			
-			copy = Damage.newNumericWeapons(new_nWeapons, new_nShields)
+			self.class.newNumericWeapons([@nWeapons, w.length].min, [@nShields, s.length].min)
 		end
-
-		return copy
 	end
 
 	# Removes a given type of weapon.
@@ -144,13 +138,7 @@ class Damage
 	# instead of Specific-constructed), the number of weapons decreases by 1
 	# @param w [Weapon] the weapon whose type wants to be removed
 	def discardWeapon(w)
-		if @weapons == nil
-			if @nWeapons > 0
-				@nWeapons -= 1
-			else
-				raise "WARNING! You tried to have negative weapons at Damage.discardWeapon()"
-			end
-		else
+		if @nWeapons == -1
 			if @weapons.length != 0
 				position = @weapons.index(w.type)
 				if position != nil
@@ -158,6 +146,12 @@ class Damage
 				else
 					raise "WARNING! No weapon type match at Damage.discardWeapon()"
 				end
+			end
+		else
+			if @nWeapons > 0
+				@nWeapons -= 1
+			else
+				raise "WARNING! You tried to have negative weapons at Damage.discardWeapon()"
 			end
 		end
 	end

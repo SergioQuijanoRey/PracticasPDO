@@ -149,12 +149,9 @@ class GameUniverse
 		if state == GameState::CANNOTPLAY
 			dealer = CardDealer.instance # behaviour introduced by Singleton
 			names.each do |name|
-				puts "Init for #{name}" #TEST
 				supplies = dealer.nextSuppliesPackage
-				puts "Supplies: #{supplies.to_s}" #TEST
 				station = SpaceStation.new(name, supplies)
-				puts "Station: #{station.to_s}" #TEST
-				@spaceStations.push(station)
+				@spaceStations << station
 
 				nh = @dice.initWithNHangars
 				nw = @dice.initWithNWeapons
@@ -162,13 +159,11 @@ class GameUniverse
 
 				lo = Loot.new(0, nw, ns, nh, 0)
 				station.setLoot(lo)
-
-				puts "Station after loot set: #{station.to_s}" #TEST
 			end
 
 			nPlayers = names.length
 			@currentStationIndex = @dice.whoStarts(nPlayers)
-			@currentStation = @spaceStations.at(@currentStationIndex)
+			@currentStation = @spaceStations[@currentStationIndex]
 			@currentEnemy = dealer.nextEnemy
 
 			@gameState.next(@turns, @spaceStations.length)
@@ -185,10 +180,10 @@ class GameUniverse
 
 			if stationState
 				@currentStationIndex = ( @currentStationIndex + 1 ) \
-						% @spaceStations.size
+						% @spaceStations.length
 				@turns += 1
 
-				@currentStation = @spaceStations.at(@currentStationIndex)
+				@currentStation = @spaceStations[@currentStationIndex]
 				@currentStation.cleanUpMountedItems
 
 				dealer = CardDealer.instance # behaviour introduced by Singleton
@@ -214,6 +209,8 @@ class GameUniverse
 
 		if state == GameState::BEFORECOMBAT or GameState::INIT
 			return combatGo(@currentStation, @currentEnemy)
+		else
+			return CombatResult::NOCOMBAT
 		end
 	end
 
@@ -228,7 +225,7 @@ class GameUniverse
 			fire = enemy.fire
 			result = station.receiveShot(fire)
 
-			if ( result == ShotResult::RESIST )
+			if result == ShotResult::RESIST
 				fire = station.fire
 				result = enemy.receiveShot(fire)
 
@@ -259,7 +256,7 @@ class GameUniverse
 			end
 		else
 			aLoot = enemy.loot
-			station.setLoot = aLoot
+			station.setLoot(aLoot)
 
 			combatResult = CombatResult::STATIONWINS
 		end
