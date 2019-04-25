@@ -23,8 +23,12 @@ class Dice
 		# @!attribute [Float] Probability constant for weapons
 		@NWEAPONSPROB = 0.33
 
-		# @!attribute [Float] Probability constant for first shot
+		# @!attribute [Float] Probability constant for 
 		@FIRSTSHOTPROB = 0.5
+
+		# EXAMEN
+		# @!attribute [Float] Probability constant for penalty
+		@PENALTYPROB = 0.95
 
 		# @!attribute [Random] Random number generator
 		@generator = Random.new()
@@ -116,6 +120,24 @@ class Dice
 	# @return [Boolean] true if space station avoids the shot; false, otherwise
 	def spaceStationMoves(speed)
 		return @generator.rand < speed
+	end
+
+	# Determines if penalty has to be set
+	# @return [Boolean] whether penalty must be set or not
+	def penaltySet
+		if @generator.rand <= @PENALTYPROB
+			puts "[EXAMEN] El dado ha decidido aplicar penalización"
+			return true
+		else
+			puts "[EXAMEN] El dado ha decidido no aplicar penalización"
+			return false
+		end
+	end
+
+	# Generate penalty
+	# @return [Float] penalty
+	def generatePenalty
+		return @generator.rand(0.5..0.75)
 	end
 
 end # class Dice
