@@ -4,49 +4,29 @@
 # 	Sergio Quijano Rey
 # 	sergiquijano@gmail.com
 # Description:
-# 	Bash Script for checking unfinished files on my programming projects
-# 	Keywords that can be used (can be changed)
-# 		WIP
-# 		BUG
 
-# Parameters
+# Script Parameters
 #===============================================================================
-directories=(
-	"./lib" 
-	"./test"
-)
-
 keywords=(
-	"WIP"
-	"BUG"
-	"DEBUG"
-	"<<<<"
-	"HEAD"
-	"sergio"
+		"BUG"
+		"WIP"
+		"HEAD"
+		"<<<<"
 )
 
-# Program
-#===============================================================================
-# Going trought all the listed directories
-for dir in ${directories[@]}
-do
-	# Going trought all the files in dir
-	for file in $(ls $dir)
-	do
-		path="$dir/$file" 		# Path to file
+directories=(
+		"./lib"
+		"./test"
+)
 
-		# Cheking for keywords in files
-		for keyword in ${keywords[@]}
+for word in ${keywords[@]}
+do
+		echo "Files with $word mark:"
+		echo "================================================================================"
+		for dir in ${directories[@]}
 		do
-			# Coincidences
-			coincidence=$(cat "$path" | egrep $keyword)
-			
-			# We found a coincidence, we do not look for more coincidences, thus break
-			if [ ! "$coincidence" ] 
-			then
-				echo "File $path is not finished! It contains a $keyword mark"
-				break
-			fi
+			grep $word $dir/* -lR
 		done
-	done
+
+		echo ""
 done
