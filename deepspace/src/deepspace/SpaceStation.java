@@ -147,14 +147,6 @@ class SpaceStation {
      * @return shieldBoosters
      */
     public ArrayList<ShieldBooster> getShieldBoosters() {
-        // Reference protection
-        /*ArrayList<ShieldBooster> shields_copy = new ArrayList<>();
-        shieldBoosters.forEach(booster -> {
-            shields_copy.add(booster);
-        });
-        
-        return shields_copy;*/
-        
         return shieldBoosters;
     }
     
@@ -163,14 +155,6 @@ class SpaceStation {
      * @return weapons
      */
     public ArrayList<Weapon> getWeapons() {
-        // Reference protection
-        /*ArrayList<Weapon> weapons_copy = new ArrayList<>();
-        weapons.forEach(weapon -> {
-            weapons_copy.add(weapon);
-        });
-        
-        return weapons_copy;*/
-        
         return weapons;
     }
     
@@ -203,7 +187,7 @@ class SpaceStation {
      */
     public boolean validState() {
         if ( pendingDamage == null )
-            return false;
+            return true;
         else
             return pendingDamage.hasNoEffect();
     }
@@ -229,7 +213,8 @@ class SpaceStation {
      * @param d damage to be set
      */
     public void setPendingDamage(Damage d) {
-        pendingDamage = d.adjust(weapons, shieldBoosters);
+        if ( d != null )
+            pendingDamage = d.adjust(weapons, shieldBoosters);
     }
     
     /**
@@ -274,8 +259,7 @@ class SpaceStation {
      */
     public void receiveHangar(Hangar h) {
         if ( hangar != null )
-            // Reference protection
-            hangar = new Hangar(h);
+            hangar = h;
     }
     
     /**
@@ -376,9 +360,7 @@ class SpaceStation {
                 shieldBoosters.remove(booster);
         });
     }
-    
-    /* WIP - SE IMPLEMENTARÁN EN LA PRÁCTICA SIGUIENTE */
-    
+        
     /**
      * Makes a shot
      * @return the shot power
@@ -389,7 +371,7 @@ class SpaceStation {
         for ( Weapon w : weapons )
             factor *= w.useIt();
         
-        return factor;
+        return ammoPower*factor;
     }
     
     /**
@@ -402,7 +384,7 @@ class SpaceStation {
         for ( ShieldBooster s : shieldBoosters )
             factor *= s.useIt();
         
-        return factor;
+        return shieldPower*factor;
     }
     
     /**
@@ -416,11 +398,11 @@ class SpaceStation {
         if ( myProtection >= shot ) {
             shieldPower -= SHIELDLOSSPERUNITSHOT*shot;
             if ( shieldPower < 0 )
-                shieldPower = 0;
+                shieldPower = 0f;
             
             return ShotResult.RESIST;
         } else {
-            shieldPower = 0;
+            shieldPower = 0f;
             
             return ShotResult.DONOTRESIST;
         }

@@ -72,6 +72,14 @@ class ShieldBooster {
         return uses;
     }
     
+    /**
+     * Getter for name
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
+    
     // -------------------------------------------------------------------------
     // Setters
     // -------------------------------------------------------------------------

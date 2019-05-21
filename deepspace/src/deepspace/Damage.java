@@ -28,7 +28,7 @@ class Damage {
     /**
      * Array of weapons that will be lost
      */
-    private ArrayList<WeaponType> weapons = new ArrayList<>();
+    private ArrayList<WeaponType> weapons;
     
     // -------------------------------------------------------------------------
     // Constructors
@@ -54,10 +54,7 @@ class Damage {
     Damage(ArrayList<WeaponType> _weapons, int _nShields) {
         nWeapons = -1;  // used for distinction from types Numeric and Specific
         nShields = _nShields;
-        
-        _weapons.forEach( weapon -> {
-            weapons.add(weapon);
-        });
+        weapons = _weapons;
     }
     
     /**
@@ -67,10 +64,9 @@ class Damage {
     Damage(Damage d) {
         nWeapons = d.nWeapons;
         nShields = d.nShields;
-        
-        d.weapons.forEach( weapon -> {
-            weapons.add(weapon);
-        });
+        if ( nWeapons == -1 ) {
+            weapons = d.weapons;
+        }
     }
     
     // -------------------------------------------------------------------------
@@ -98,14 +94,6 @@ class Damage {
      * @return weapons
      */
     public ArrayList<WeaponType> getWeapons() {
-        // Reference protection
-        /*ArrayList<WeaponType> weapons_copy = new ArrayList<>();
-        
-        weapons.forEach( weapon -> {
-            weapons_copy.add(weapon);
-        });
-        
-        return weapons_copy;*/
         return weapons;
     }
     
@@ -166,6 +154,10 @@ class Damage {
         //   else, it is a Numeric-constructed object
         if ( nWeapons == - 1 ) {
             // Specific-constructed
+            
+            ArrayList<Weapon> weapons_copy = new ArrayList<>();
+            
+            //WIP -- TERMINAR
             
             ArrayList<WeaponType> new_weapons = new ArrayList<>();
             int new_nShields;

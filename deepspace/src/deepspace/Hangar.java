@@ -47,10 +47,15 @@ class Hangar {
      */
     Hangar(Hangar h) {
         maxElements = h.maxElements;
+        shieldBoosters = new ArrayList<>();
+        weapons = new ArrayList<>();
         
-        // Call to getter creates copy
-        shieldBoosters = h.shieldBoosters;
-        weapons = h.weapons;
+        for ( ShieldBooster s : h.shieldBoosters )
+            addShieldBooster(s);
+        
+        for ( Weapon w : h.weapons )
+            addWeapon(w);
+        
     }
     
     // -------------------------------------------------------------------------
@@ -70,13 +75,6 @@ class Hangar {
      * @return shieldBoosters
      */
     public ArrayList<ShieldBooster> getShieldBoosters() {
-        // Reference protection
-        /*ArrayList<ShieldBooster> shieldBoosters_copy = new ArrayList<>();
-        for ( ShieldBooster sh : shieldBoosters )
-            shieldBoosters_copy.add(sh);
-        
-        return shieldBoosters_copy;*/
-        
         return shieldBoosters;
     }
     
@@ -85,13 +83,6 @@ class Hangar {
      * @return weapons
      */
     public ArrayList<Weapon> getWeapons() {
-        // Reference protection
-        /*ArrayList<Weapon> weapons_copy = new ArrayList<>();
-        for ( Weapon weap : weapons )
-            weapons_copy.add(weap);
-        
-        return weapons_copy;*/
-        
         return weapons;
     }
     
@@ -128,10 +119,10 @@ class Hangar {
      *         the weapon, if removal is successful
      */
     public Weapon removeWeapon(int w) {
-        if ( w >= weapons.size() )
-            return null;
-        else
+        if ( w >= 0 && w < weapons.size() )
             return weapons.remove(w);
+        else
+            return null;
     }
     
     /**
@@ -154,13 +145,10 @@ class Hangar {
      *         the shield booster, if removal is successful
      */
     public ShieldBooster removeShieldBooster(int s) {
-        ShieldBooster removed;
-        if ( s >= shieldBoosters.size() )
-            removed = null;
+        if ( s >= 0 && s < shieldBoosters.size() )
+            return shieldBoosters.remove(s);
         else
-            removed = shieldBoosters.remove(s);
-        
-        return removed;
+            return null;
     }
     
     // -------------------------------------------------------------------------

@@ -52,9 +52,6 @@ class EnemyStarShip {
         ammoPower = _ammoPower;
         shieldPower = _shieldPower;
         loot = _loot;
-        // Reference protection
-        // WIP - Is this necessary?
-        /*damage = new Damage(_damage);*/
         damage = _damage;
     }
     
@@ -67,7 +64,6 @@ class EnemyStarShip {
         ammoPower = e.ammoPower;
         shieldPower = e.shieldPower;
         loot = e.loot;
-        // WIP - Reference protection necessary?
         damage = e.damage;
     }
     
@@ -104,10 +100,7 @@ class EnemyStarShip {
      * @return loot
      */
     public Loot getLoot() {
-        // Reference protection
         return loot;
-        /*return new Loot(loot.getNSupplies(), loot.getNWeapons(),
-                loot.getNShields(), loot.getNHangars(), loot.getNMedals());*/
     }
     
     /**
@@ -115,8 +108,6 @@ class EnemyStarShip {
      * @return damage
      */
     public Damage getDamage() {
-        // Reference protection
-        /*return new Damage(damage);*/
         return damage;
     }
     
