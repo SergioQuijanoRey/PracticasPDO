@@ -10,9 +10,14 @@ require_relative 'ShotResult'
 require_relative 'SpaceStation'
 require_relative 'CardDealer'
 require_relative 'EnemyStarShip'
+require_relative 'Transformation'
+#require_relative 'PowerEfficientSpaceStation'
+require_relative 'BetaPowerEfficientSpaceStation'
+require_relative 'SpaceCity'
 
 module Deepspace
 
+# Class to execute game actions
 #
 # @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
 class GameUniverse
@@ -48,6 +53,9 @@ class GameUniverse
 
 		# @!attribute [EnemyStarShip] current enemy star ship
 		@currentEnemy = nil
+
+		# @!attribute [Boolean] whether game has a space city or not
+		@haveSpaceCity = false
 	end
 
 	# Getters
@@ -256,9 +264,17 @@ class GameUniverse
 			end
 		else
 			aLoot = enemy.loot
-			station.setLoot(aLoot)
+			transformation = station.setLoot(aloot)
 
-			combatResult = CombatResult::STATIONWINS
+			if transformation == Transformation::GETEFFICIENT
+				makeStationEfficient
+				combatResult = CombatResult::STATIONWINSANDCONVERTS
+			elsif transformation == Transformation::SPACECITY
+				createSpaceCity
+				combatResult = CombatResult::STATIONWINSANDCONVERTS
+			else
+				combatResult = CombatResult::STATIONWINS
+			end
 		end
 
 		@gameState.next(@turns, @spaceStations.length)
@@ -266,6 +282,33 @@ class GameUniverse
 		return combatResult
 	end
 
+	# Create a space city in current station
+	def createSpaceCity
+		if !haveSpaceCity
+			others = []
+
+			for station in @spaceStations
+				if station != @currentStation
+					others << station
+				end
+			end
+
+			@currentStation = SpaceCity.new(@currentStation, others)
+			@spaceStations[@currentStationIndex] = @currentStation
+			@haveSpaceCity = true
+		end
+	end
+
+	# Make current station efficient or extra efficient, depending on dice
+	def makeStationEfficient
+		if @dice.extraEfficiency
+			@currentStation = BetaPowerEfficientSpaceStation.new(@currentStation)
+		else
+			@currentStation = PowerEfficientSpaceStation.new(@currentStation)
+		end
+
+		@spaceStations[@currentStationIndex] = @currentStation
+	end
 
 	# String representation, UI version
 	# ==========================================================================

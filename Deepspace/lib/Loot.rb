@@ -4,7 +4,7 @@ require_relative 'LootToUI'
 
 module Deepspace
 
-# Class to represent the loot obtained by defeating a enemy ship
+# Class to represent the loot obtained by defeating an enemy ship
 #
 # @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
 class Loot
@@ -18,7 +18,9 @@ class Loot
 	# @param _nShields [Integer] number of boosters given by a loot
 	# @param _nHangars [Integer] number of hangars given by a loot
 	# @param _nMedals [Integer] number of medals given by a loot
-	def initialize(_nSupplies, _nWeapons, _nShields, _nHangars, _nMedals)
+	# @param _getEfficient [Boolean] whether station will be converted to efficient
+	# @param _spaceCity [Boolean] whether station will be converted to city
+	def initialize(_nSupplies, _nWeapons, _nShields, _nHangars, _nMedals, _getEfficient=false, _spaceCity=false)
 		# @!attribute [Integer] number of supplies given by a loot
 		@nSupplies = _nSupplies
 
@@ -33,12 +35,19 @@ class Loot
 
 		# @!attribute [Integer] number of medals given by a loot
 		@nMedals = _nMedals
+
+		# @!attribute [Boolean] tells whether station will be converted to efficient
+		@getEfficient = _getEfficient
+
+		# @!attribute [Boolean] tells whether station will be converted to city
+		@spaceCity = _spaceCity
 	end
 
 	# Getters
 	# ==========================================================================
 
-	attr_reader :nSupplies, :nWeapons, :nShields, :nHangars, :nMedals
+	attr_reader :nSupplies, :nWeapons, :nShields, :nHangars, :nMedals,
+			:getEfficient, :spaceCity
 	
 	# String representation, UI version
 	# ==========================================================================

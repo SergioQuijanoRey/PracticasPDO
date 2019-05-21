@@ -7,6 +7,7 @@ require_relative 'HangarToUI'
 
 module Deepspace
 
+# Class to represent a certain hangar
 #
 # @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
 class Hangar

@@ -54,11 +54,22 @@ class Damage
 	# Copy constructor
 	# @param d [Damage] instance which is going to be copied
 	# @return [Damage] a copy of the given instance
-	def self.newCopy(d)
-		if d.nWeapons == -1
-			return newSpecificWeapons(d.weapons, d.nShields)
+	# --Deprecated
+	#def self.newCopy(d)
+	#	if d.nWeapons == -1
+	#		return newSpecificWeapons(d.weapons, d.nShields)
+	#	else
+	#		return newNumericWeapons(d.nWeapons, d.nShields)
+	#	end
+	#end
+
+	# Copy getter
+	# @return [Damage] a copy of the current instance
+	def copy
+		if nWeapons == -1
+			return newSpecificWeapons(weapons, nShields)
 		else
-			return newNumericWeapons(d.nWeapons, d.nShields)
+			return newNumericWeapons(nWeapons, nShields)
 		end
 	end
 

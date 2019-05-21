@@ -26,6 +26,9 @@ class Dice
 		# @!attribute [Float] Probability constant for first shot
 		@FIRSTSHOTPROB = 0.5
 
+		# @!attribute [Float] Probability constant for extra efficiency
+		@EXTRAEFFICIENCYPROB = 0.8
+
 		# @!attribute [Random] Random number generator
 		@generator = Random.new()
 	end
@@ -116,6 +119,16 @@ class Dice
 	# @return [Boolean] true if space station avoids the shot; false, otherwise
 	def spaceStationMoves(speed)
 		return @generator.rand < speed
+	end
+
+	# Determines if space station gets extra efficiency
+	# @return [Boolean] true if space station gets extra efficiency; false, otherwise
+	def extraEfficiency
+		if @generator.rand <= @EXTRAEFFICIENCYPROB
+			return true
+		else
+			return false
+		end
 	end
 
 end # class Dice

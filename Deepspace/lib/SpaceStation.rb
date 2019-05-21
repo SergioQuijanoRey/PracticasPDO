@@ -12,6 +12,7 @@ require_relative 'SpaceStationToUI'
 
 module Deepspace
 
+# Class to represent a space station a player can have
 #
 # @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
 class SpaceStation
@@ -326,6 +327,14 @@ class SpaceStation
 
 		medals = loot.nMedals
 		@nMedals += medals
+
+		if loot.efficient
+			return Transformation::GETEFFICIENT
+		elsif loot.spaceCity
+			return Transformation::SPACECITY
+		else
+			return Transformation::NOTRANSFORM
+		end
 	end
 
 	# Discards weapon in certain position from the collection of weapons in use

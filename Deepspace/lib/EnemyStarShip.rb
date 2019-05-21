@@ -7,6 +7,9 @@ require_relative 'ShotResult'
 
 module Deepspace
 
+# Represents the enemy of the game: an enemy star ship
+#
+# @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
 class EnemyStarShip
 
 	# Constructors
