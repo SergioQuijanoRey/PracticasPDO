@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# Author:
+# 	Sergio Quijano Rey
+# 	sergiquijano@gmail.com
+# Description:
+
+# Script Parameters
+#===============================================================================
+keywords=(
+		"BUG"
+		"WIP"
+		"HEAD"
+		"<<<<"
+)
+
+directories=(
+		"./lib"
+		"./test"
+)
+
+for word in ${keywords[@]}
+do
+		echo "Files with $word mark:"
+		echo "================================================================================"
+		for dir in ${directories[@]}
+		do
+			grep $word $dir/* -lR
+		done
+
+		echo ""
+done
