@@ -264,7 +264,7 @@ class GameUniverse
 			end
 		else
 			aLoot = enemy.loot
-			transformation = station.setLoot(aloot)
+			transformation = station.setLoot(aLoot)
 
 			if transformation == Transformation::GETEFFICIENT
 				makeStationEfficient

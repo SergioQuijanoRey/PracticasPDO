@@ -360,15 +360,7 @@ class SpaceStation
 	# String representation of the object
 	# @return [String] string representation
 	def to_s
-		message = "[Space Station]-> Name: #{@name}\n" \
-				+ "\tNo. Medals: #{@nMedals}, Fuel units: #{@fuelUnits.round(2)}, " \
-				+ "ammoPower: #{@ammoPower}, shieldPower: #{@shieldPower}\n" \
-				+ "\tWeapons: [#{@weapons.join(' ,')}]\n" \
-				+ "\tShieldBoosters: [#{@shieldBoosters.join(', ')}]\n" \
-				+ "\tHangar: #{@hangar}\n" \
-				+ "\tPendingDamage: #{@pendingDamage}\n" \
-				+ "-------- end of Space Station >> #{@name} << --------"
-        return message
+		getUIversion().to_s
 	end
 
 	# To UI

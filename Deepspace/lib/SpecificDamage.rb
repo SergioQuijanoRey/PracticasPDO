@@ -13,13 +13,12 @@ module Deepspace
 class SpecificDamage < Damage
 
     public_class_method :new
-    private_class_method :newNumericWeapons, :newSpecificWeapons
 
     # Class initializer
 	# @param _weapons [Array<WeaponType>] array of weapons that will be lost
 	# @param _nShields [Integer] number of shields that will be lost
     def initialize(_weapons, _nShields)
-        self.newSpecificWeapons(_weapons, _nShields)
+        super(-1, _nShields, _weapons)
     end
 
     #attr_reader :nWeapons # WIP inherited?
@@ -32,8 +31,15 @@ class SpecificDamage < Damage
 	# @return [SpecificDamage] a copy of the object adjusted as explained above
     # --Overriden
     def adjust(w, s)
-        damage = super
-        return new(damage.weapons, damage.nShields)
+        weapons_copy = @weapons.clone
+
+		new_weapons = w.map do |weapon|
+			weapons_copy.delete_at(weapons_copy.index(weapon.type) || weapons_copy.length)
+		end
+
+		new_weapons.compact!
+        
+        return self.class.new(new_weapons, [@nShields, s.length].min)
     end
 
     # Copy getter
@@ -46,7 +52,8 @@ class SpecificDamage < Damage
     # String representation of the object
     # @return [String] string representation
     def to_s
-        #WIP
+        message = "[Specific Damage] -> Shields: #{@nShields}, Weapon types: " + getWeaponInfo
+        return message
     end
 
     # To UI

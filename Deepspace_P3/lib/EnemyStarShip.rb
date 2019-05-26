@@ -77,12 +77,7 @@ class EnemyStarShip
 	# String representation of the object
 	# @return [String] string representation
 	def to_s
-		message = "[EnemyStarShip] -> Name: " + name \
-				+ ", ammoPower: " + ammoPower \
-				+ ", shieldPower: " + shieldPower \
-				+ ", Loot: " + loot.to_s \
-				+ ", Damage: " + damage.to_s
-        return message
+		getUIversion().to_s
 	end
 
 	# To UI

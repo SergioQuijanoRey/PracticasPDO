@@ -116,10 +116,7 @@ class Hangar
 	# String representation of the object
 	# @return [String] string representation
 	def to_s
-		message = "[Hangar]-> Max. elements: #{@maxElements}, " \
-				+ "Weapons: [#{@weapons.join("; ")}], " \
-				+ "Shields: [#{@shieldBoosters.join("; ")}]"
-        return message
+		getUIversion().to_s
 	end
 
 	# To UI

@@ -273,11 +273,12 @@ class GameUniverse
 	# String representation of the object
 	# @return [String] string representation
 	def to_s
-		message = "[GameUniverse] -> Game state: #{@gameState.to_s}," \
-				+ "Turns: #{@turns}, Dice: #{@dice.to_s}\n" \
-				+ "\tCurrent station: #{@currentStation.to_s}\n" \
-				+ "\tCurrent enemy: #{@currentEnemy.to_s}"
-        return message
+		#message = "[GameUniverse] -> Game state: #{@gameState.to_s}," \
+		#		+ "Turns: #{@turns}, Dice: #{@dice.to_s}\n" \
+		#		+ "\tCurrent station: #{@currentStation.to_s}\n" \
+		#		+ "\tCurrent enemy: #{@currentEnemy.to_s}"
+		#return message
+		getUIversion().to_s
 	end
 
 	# To UI

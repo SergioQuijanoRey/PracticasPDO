@@ -35,21 +35,23 @@ class Damage
 	# Initializes to use the class with a number of weapons and a number of shields
 	# @param _nWeapons [Integer] number of weapons that will be lost
 	# @param _nShields [Integer] number of shields that will be lost
-	def self.newNumericWeapons(_nWeapons, _nShields)
-		# NOTA podría usarse:
-		# return new([0, _nWeapons].max, _nShields, nil)
-		# de este modo nos aseguramos que -1 distingue el tipo de constructor
-		return new(_nWeapons, _nShields, nil)
-	end
+	# --Deprecated
+	#def self.newNumericWeapons(_nWeapons, _nShields)
+	#	# NOTA podría usarse:
+	#	# return new([0, _nWeapons].max, _nShields, nil)
+	#	# de este modo nos aseguramos que -1 distingue el tipo de constructor
+	#	return new(_nWeapons, _nShields, nil)
+	#end
 
 	# Initializer type Specific.
 	# Initializes to use the class with an array of weapons and a number of shields
 	# @param _weapons [Array<WeaponType>] array of weapons that will be lost
 	# @param _nShields [Integer] number of shields that will be lost
-	def self.newSpecificWeapons(_weapons, _nShields)
-		return new(-1, _nShields, _weapons)
-		# -1 value for distinction
-	end
+	# --Deprecated
+	#def self.newSpecificWeapons(_weapons, _nShields)
+	#	return new(-1, _nShields, _weapons)
+	#	# -1 value for distinction
+	#end
 
 	# Copy constructor
 	# @param d [Damage] instance which is going to be copied
@@ -62,16 +64,6 @@ class Damage
 	#		return newNumericWeapons(d.nWeapons, d.nShields)
 	#	end
 	#end
-
-	# Copy getter
-	# @return [Damage] a copy of the current instance
-	def copy
-		if nWeapons == -1
-			return newSpecificWeapons(weapons, nShields)
-		else
-			return newNumericWeapons(nWeapons, nShields)
-		end
-	end
 
 	# Getters
 	# ==========================================================================

@@ -61,8 +61,7 @@ class ShieldBooster
 	# String representation of the object
 	# @return [String] string representation
 	def to_s
-		message = "[ShieldBooster]-> Boost: #{@boost}, Uses: #{@uses}"
-        return message
+		getUIversion().to_s
 	end
 
 	# To UI

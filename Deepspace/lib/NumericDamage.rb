@@ -13,13 +13,12 @@ module Deepspace
 class NumericDamage < Damage
 
     public_class_method :new
-    private_class_method :newNumericWeapons, :newSpecificWeapons
 
     # Class initializer
     # @param _nWeapons [Integer] number of weapons that will be lost
 	# @param _nShields [Integer] number of shields that will be lost
     def initialize(_nWeapons, _nShields)
-        self.newNumericWeapons(_nWeapons, _nShields)
+        super(_nWeapons, _nShields, nil)
     end
 
     #attr_reader :nWeapons # WIP inherited?
@@ -32,8 +31,7 @@ class NumericDamage < Damage
 	# @return [NumericDamage] a copy of the object adjusted as explained above
     # --Overriden
     def adjust(w, s)
-        damage = super
-        return new(damage.nWeapons, damage.nShields)
+        return self.class.new([@nWeapons, w.length].min, [@nShields, s.length].min)
     end
 
     # Copy getter
@@ -46,7 +44,8 @@ class NumericDamage < Damage
     # String representation of the object
     # @return [String] string representation
     def to_s
-        #WIP
+        message = "[Numeric Damage] -> Weapons: #{@nWeapons}, Shields: #{@nShields}"
+        return message
     end
 
     # To UI

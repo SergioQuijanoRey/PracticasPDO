@@ -170,17 +170,7 @@ class Damage
 	# String representation of the object
 	# @return [String] string representation
 	def to_s
-		message = "[Damage "
-        if @nWeapons == -1
-            message = message + " (Specific-constructed)] -> " \
-                    + "Number of shields: " + nShields \
-                    + ", Weapons: " + weapons.to_s
-        else
-            message = message + " (Numeric-constructed)] -> " \
-                    + "Number of shields: " + nShields \
-					+ ", Number of weapons: " + nWeapons
-		end
-        return message
+		getUIversion().to_s
 	end
 
 	# To UI

@@ -8,7 +8,7 @@ module Deepspace
 # Class to represent an association of space stations
 #
 # @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
-class SpaceCity < Deepspace
+class SpaceCity < SpaceStation
 
     # Class initializer
     # @param _base [SpaceStation] base of space city
@@ -59,6 +59,13 @@ class SpaceCity < Deepspace
 
         return Transformation::NOTRANSFORM
         # WIP entra en este return?
+    end
+
+    # String representation of the object
+    # @return [String] string representation
+    # --Overriden
+    def to_s
+        getUIversion().to_s
     end
 
 end # class SpaceCity
