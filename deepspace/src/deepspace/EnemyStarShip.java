@@ -9,29 +9,29 @@ package deepspace;
  *
  * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
  */
-class EnemyStarShip {
+class EnemyStarShip implements SpaceFighter {
     /**
-     * Parametrizes ammunition power
+     * Parametrizes ammunition power.
      */
     private float ammoPower;
     
     /**
-     * Name of the ship
+     * Name of the ship.
      */
     private String name;
     
     /**
-     * Parametrizes shield power
+     * Parametrizes shield power.
      */
     private float shieldPower;
     
     /**
-     * Loot associated
+     * Loot associated.
      */
     private Loot loot;
     
     /**
-     * Damage associated
+     * Damage associated.
      */
     private Damage damage;
     
@@ -40,7 +40,7 @@ class EnemyStarShip {
     // -------------------------------------------------------------------------
     
     /**
-     * Class initializer
+     * Class initializer.
      * @param _name name of the ship
      * @param _ammoPower parametrizes ammunition power
      * @param _shieldPower parametrizes shield power
@@ -56,7 +56,7 @@ class EnemyStarShip {
     }
     
     /**
-     * Copy constructor
+     * Copy constructor.
      * @param e instance which is going to be copied
      */
     EnemyStarShip(EnemyStarShip e) {
@@ -72,7 +72,7 @@ class EnemyStarShip {
     // -------------------------------------------------------------------------
     
     /**
-     * Getter for name
+     * Getter for name.
      * @return name
      */
     public String getName() {
@@ -80,7 +80,7 @@ class EnemyStarShip {
     }
     
     /**
-     * Getter for ammoPower
+     * Getter for ammoPower.
      * @return ammoPower
      */
     public float getAmmoPower() {
@@ -88,7 +88,7 @@ class EnemyStarShip {
     }
     
     /**
-     * Getter for shieldPower
+     * Getter for shieldPower.
      * @return shieldPower
      */
     public float getShieldPower() {
@@ -96,7 +96,7 @@ class EnemyStarShip {
     }
     
     /**
-     * Getter for loot
+     * Getter for loot.
      * @return loot
      */
     public Loot getLoot() {
@@ -104,7 +104,7 @@ class EnemyStarShip {
     }
     
     /**
-     * Getter for damage
+     * Getter for damage.
      * @return damage
      */
     public Damage getDamage() {
@@ -112,27 +112,30 @@ class EnemyStarShip {
     }
     
     /**
-     * Returns star ship's ammoPower
+     * Returns star ship's ammoPower.
      * @return ammoPower
      */
+    @Override
     public float fire() {
         return ammoPower;
     }
     
     /**
-     * Return star ship's shieldPower
+     * Return star ship's shieldPower.
      * @return shieldPower
      */
+    @Override
     public float protection() {
         return shieldPower;
     }
     
     /**
-     * Returns whether the star ship resists a certain shot or not
+     * Returns whether the star ship resists a certain shot or not.
      * @param shot power of shot taken
-     * @return ShotResult.RESIST, if shieldPower >= shot;
-     *         ShotResult.DONOTRESIST, if shieldPower < shot
+     * @return ShotResult.RESIST, if enemy starship resists the shot;
+     *         ShotResult.DONOTRESIST, otherwise
      */
+    @Override
     public ShotResult receiveShot(float shot) {
         if ( shieldPower >= shot )
             return ShotResult.RESIST;
@@ -145,7 +148,7 @@ class EnemyStarShip {
     // -------------------------------------------------------------------------
     
     /**
-     * String representation of the object
+     * String representation of the object.
      * @return string representation
      */
     public String toString() {
@@ -157,6 +160,9 @@ class EnemyStarShip {
         return message;
     }
     
+    /**
+     * To UI.
+     */
     EnemyToUI getUIversion() {
         return new EnemyToUI(this);
     }

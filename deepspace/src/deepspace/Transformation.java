@@ -6,11 +6,12 @@
 package deepspace;
 
 /**
- * Enum to represent the result of a shot taken.
+ * Enum to control space station transformation outcomes.
  * 
  * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
  */
-public enum ShotResult {
-    DONOTRESIST,
-    RESIST
+public enum Transformation {
+    NOTRANSFORM,
+    GETEFFICIENT,
+    SPACECITY
 }

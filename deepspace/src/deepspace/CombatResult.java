@@ -6,10 +6,14 @@
 package deepspace;
 
 /**
- * Enum to control the possible combat outcomes
+ * Enum to control the possible combat outcomes.
  * 
  * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
  */
 public enum CombatResult {
-    ENEMYWINS, NOCOMBAT, STATIONESCAPES, STATIONWINS
+    ENEMYWINS,
+    NOCOMBAT,
+    STATIONESCAPES,
+    STATIONWINS,
+    STATIONWINSANDCONVERTS
 }

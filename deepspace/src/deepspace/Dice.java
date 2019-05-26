@@ -8,33 +8,38 @@ package deepspace;
 import java.util.Random;
 
 /**
- * Class to take all random decisions on the game
+ * Class to take all random decisions on the game.
  * 
  * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
  */
 class Dice {
     /**
-     * Probability constant for hangars
+     * Probability constant for hangars.
      */
     private final float NHANGARSPROB;
     
     /**
-     * Probability constat for shields
+     * Probability constant for shields.
      */
     private final float NSHIELDSPROB;
     
     /**
-     * Probability constant for weapons
+     * Probability constant for weapons.
      */
     private final float NWEAPONSPROB;
     
     /**
-     * Probability constant for first shot
+     * Probability constant for first shot.
      */
     private final float FIRSTSHOTPROB;
     
     /**
-     * Random numbers generator
+     * Probability constant for extra efficiency.
+     */
+    private final float EXTRAEFFICIENCYPROB;
+    
+    /**
+     * Random numbers generator.
      */
     private Random generator;
     
@@ -43,15 +48,18 @@ class Dice {
     // -------------------------------------------------------------------------
     
     /**
-     * Class initializer
+     * Class initializer.
      */
     Dice() {
         NHANGARSPROB = 0.25f;
         NSHIELDSPROB = 0.25f;
         NWEAPONSPROB = 0.33f;
         FIRSTSHOTPROB = 0.5f;
+        EXTRAEFFICIENCYPROB = 0.8f;
         
         generator = new Random();
+        // WIP - comparar con:
+        // generator = new Random(System.currentTimeMillis());
     }
     
     // -------------------------------------------------------------------------
@@ -113,7 +121,7 @@ class Dice {
     }
     
     /**
-     * Determines which player will start the match randomly
+     * Determines which player will start the match randomly.
      * @param nPlayers number of players
      * @return such player (an integer in [0, nPlayers-1])
      */
@@ -122,7 +130,7 @@ class Dice {
     }
     
     /**
-     * Determines who shoots first
+     * Determines who shoots first.
      * @return GameCharacter.SPACESTATION if the player shoots first, or
      * GameCharacter.ENEMYSTARSHIP if the enemy shoots first
      */
@@ -135,12 +143,24 @@ class Dice {
     }
     
     /**
-     * Determines if space station moves in order to avoid a shot
+     * Determines if space station moves in order to avoid a shot.
      * @param speed speed of the space station
      * @return true, if the space avoids the shot; false, otherwise
      */
     public boolean spaceStationMoves(float speed) {
         float prob = generator.nextFloat();
         return prob < speed;
+    }
+    
+    /**
+     * Determines if space station gets extra efficiency.
+     * @return true, if space station gets extra efficiency; false, otherwise
+     */
+    public boolean extraEfficiency() {
+        float prob = generator.nextFloat();
+        if ( prob <= EXTRAEFFICIENCYPROB )
+            return true;
+        else
+            return false;
     }
 }

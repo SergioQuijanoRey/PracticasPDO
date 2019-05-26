@@ -8,54 +8,64 @@ package deepspace;
 import java.util.ArrayList;
 
 /**
- *
+ * Represents the game, acting as the game controller.
+ * Their methods are called from Controller.java (package controller)
+ * 
  * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
  */
 public class GameUniverse {
     /**
-     * Amount of medals necessary to win the game
+     * Amount of medals necessary to win the game.
      */
     private static final int WIN = 10;
     
     /**
-     * Index of the station that is currently playing
+     * Index of the station that is currently playing.
      */
     private int currentStationIndex;
     
     /**
-     * Number of turns
+     * Number of turns.
      */
     private int turns;
     
     /**
-     * Game dice
+     * Game dice.
      */
     private Dice dice;
     
     /**
-     * Current space station
+     * Current space station.
      */
     private SpaceStation currentStation;
     
     /**
-     * Set of space stations that are playing
+     * Set of space stations that are playing.
      */
     private ArrayList<SpaceStation> spaceStations;
     
     /**
-     * Current enemy star ship
+     * Current enemy star ship.
      */
     private EnemyStarShip currentEnemy;
     
     /**
-     * Game state
+     * Game state.
      */
     private GameStateController gameState;
+    
+    /**
+     * Whether game has a space city or not.
+     */
+    private boolean haveSpaceCity;
     
     // -------------------------------------------------------------------------
     // Constructors
     // -------------------------------------------------------------------------
     
+    /**
+     * Class initializer.
+     */
     public GameUniverse() {
         currentStationIndex = -1;
         turns = 0;
@@ -64,6 +74,7 @@ public class GameUniverse {
         spaceStations = new ArrayList<>();
         currentEnemy = null;
         gameState = new GameStateController();
+        haveSpaceCity = false;
     }
     
     // -------------------------------------------------------------------------
@@ -71,7 +82,7 @@ public class GameUniverse {
     // -------------------------------------------------------------------------
     
     /**
-     * Getter for gameState
+     * Getter for gameState.
      * @return gameState
      */
     public GameState getState() {
@@ -148,7 +159,7 @@ public class GameUniverse {
      */
     public void mountWeapon(int i) {
         if ( gameState.getState() == GameState.INIT || gameState.getState() == GameState.AFTERCOMBAT )
-            currentStation.mountShieldBooster(i);
+            currentStation.mountWeapon(i);
     }
     
     // -------------------------------------------------------------------------
@@ -177,7 +188,7 @@ public class GameUniverse {
         GameState state = gameState.getState();
         
         if ( state == GameState.CANNOTPLAY ) {
-            spaceStations = new ArrayList<>(); // CUIDADO WIP
+            spaceStations = new ArrayList<>();
             CardDealer dealer = CardDealer.getInstance();
             
             for ( int i = 0; i < names.size(); i++ ) {
@@ -200,6 +211,13 @@ public class GameUniverse {
             
             gameState.next(turns, spaceStations.size());
         }
+        /* WIP
+        else{
+            System.out.println("Unexpected gamestate at GameUniverse.init()");
+            System.out.println("The game state is: " + gameState.getState());
+            System.out.println("Nothing is done!");
+        }
+        */
     }
     
     /**
@@ -251,12 +269,13 @@ public class GameUniverse {
     }
     
     /**
-     * Executes combat, according to game rules
+     * Executes combat, according to game rules.
      * @param station station in combat
      * @param enemy enemy in combat
      * @return combat result
      */
     CombatResult combat(SpaceStation station, EnemyStarShip enemy) {
+        // decide who starts the battle
         GameCharacter ch = dice.firstShot();
         
         boolean enemyWins;
@@ -264,43 +283,63 @@ public class GameUniverse {
         ShotResult result;
         CombatResult combatResult;
         
-        if ( ch == GameCharacter.ENEMYSTARSHIP ) {
+        if ( ch == GameCharacter.ENEMYSTARSHIP ) {  // the enemy shoots first
+            // the enemy shoots to the station
             fire = enemy.fire();
             result = station.receiveShot(fire);
             
             if ( result == ShotResult.RESIST ) {
+                // the station resists, therefore shoots the enemy
                 fire = station.fire();
                 result = enemy.receiveShot(fire);
                 
+                // the enemy may resist or not
                 enemyWins = (result == ShotResult.RESIST);
             } else
+                // the station didn't resist the shoot, therefore enemy wins
                 enemyWins = true;
-        } else {
+        } else {                                    // the station shoots first
+            // we get the shot power from the station and see if the enemy resists
             fire = station.fire();
             result = enemy.receiveShot(fire);
             
+            // if the station can't destroy the enemy in one shot,
+            // the enemy wins directly
             enemyWins = (result == ShotResult.RESIST);
         }
         
-        if ( enemyWins ) {
+        if ( enemyWins ) {  // enemy has won, station has a chance of escaping
             float s = station.getSpeed();
             boolean moves = dice.spaceStationMoves(s);
             
             if ( !moves ) {
+                // we get the damage of the enemy and give it to the station
                 Damage damage = enemy.getDamage();
                 station.setPendingDamage(damage);
                 
+                // the station has lost
                 combatResult = CombatResult.ENEMYWINS;
             } else {
+                // the station manages to escape
                 station.move();
                 
+                // the station has escaped
                 combatResult = CombatResult.STATIONESCAPES;
             }
-        } else {
+        } else {            // station has won, enemy gives it its loot
+            // loot earned is given -- the transformation is catched
             Loot aLoot = enemy.getLoot();
-            station.setLoot(aLoot);
+            Transformation transform = station.setLoot(aLoot);
             
-            combatResult = CombatResult.STATIONWINS;
+            // we check the transformation
+            if ( transformation == Transformation.GETEFFICIENT ) {
+                makeStationEfficient();
+                combatResult = CombatResult.STATIONWINSANDCONVERTS;
+            } else if ( transformation == Transformation.SPACECITY ) {
+                createSpaceCity();
+                combatResult = CombatResult.STATIONWINSANDCONVERTS;
+            } else
+                combatResult = CombatResult.STATIONWINS;
         }
         
         gameState.next(turns, spaceStations.size());
@@ -308,12 +347,41 @@ public class GameUniverse {
         return combatResult;
     }
     
+    /**
+     * Create a space city in current station.
+     */
+    private void createSpaceCity() {
+        if ( !haveSpaceCity ) {
+            ArrayList<SpaceStation> others = new ArrayList<>();
+            
+            for ( SpaceStation station : spaceStations )
+                if ( station != currentStation )
+                    others.add(station);
+        }
+        
+        currentStation = new SpaceCity(currentStation, others);
+        spaceStations.set(currentStationIndex, currentStation);
+        haveSpaceCity = true;
+    }
+    
+    /**
+     * Make current station efficient or beta efficient, depending on dice.
+     */
+    private void makeStationEfficient() {
+        if ( dice.extraEfficiency() )
+            currentStation = new BetaPowerEfficientSpaceStation(currentStation);
+        else
+            currentStation = new PowerEfficientSpaceStation(currentStation);
+        
+        spaceStations.set(currentStationIndex, currentStation);
+    }
+    
     // -------------------------------------------------------------------------
     // String representation, UI version
     // -------------------------------------------------------------------------
     
     /**
-     * String representation of the object
+     * String representation of the object.
      * @return string representation
      */
     public String toString() {
@@ -325,10 +393,19 @@ public class GameUniverse {
     }
     
     /**
-     * To UI
+     * To UI.
      */
     public GameUniverseToUI getUIversion() {
         return new GameUniverseToUI(currentStation, currentEnemy);
+        /* WIP
+        if(currentStation != null && currentEnemy != null){
+            return new GameUniverseToUI(currentStation, currentEnemy);
+        }else{
+            System.out.println("WARNING! No currentEnemy or currentStation in GameUniverse.getUIversion()");
+            System.out.println("Trying to call GameUniverseToUI constructor, it is going to fail!");
+            return new GameUniverseToUI(currentStation, currentEnemy);
+        }
+        */
     }
     
 }

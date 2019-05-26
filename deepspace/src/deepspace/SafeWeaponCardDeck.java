@@ -6,11 +6,13 @@
 package deepspace;
 
 /**
- * Enum to represent the result of a shot taken.
- * 
- * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
+ *
+ * @author Profe
  */
-public enum ShotResult {
-    DONOTRESIST,
-    RESIST
+class SafeWeaponCardDeck extends CardDeck<Weapon> {
+    @Override
+    public Weapon next() {
+        Weapon h=(Weapon)(super.next());
+        return new Weapon(h) ;
+    }
 }

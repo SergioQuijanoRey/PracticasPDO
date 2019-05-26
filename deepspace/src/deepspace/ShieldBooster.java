@@ -10,19 +10,19 @@ package deepspace;
  * 
  * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
  */
-class ShieldBooster {
+class ShieldBooster implements CombatElement {
     /**
-     * Name of the shield booster
+     * Name of the shield booster.
      */
     private String name;
     
     /**
-     * Percentage of damage absorbed by the shield
+     * Percentage of damage absorbed by the shield.
      */
     private float boost;
     
     /**
-     * How many uses the shield booster has
+     * How many uses the shield booster has.
      */
     private int uses;
     
@@ -31,7 +31,7 @@ class ShieldBooster {
     // -------------------------------------------------------------------------
     
     /**
-     * Class initializer
+     * Class initializer.
      * @param _name name of the shield booster
      * @param _boost percentage of damage absorbed by the shield
      * @param _uses how many uses the shield booster has
@@ -43,7 +43,7 @@ class ShieldBooster {
     }
     
     /**
-     * Copy constructor
+     * Copy constructor.
      * @param s instance which is going to be copied
      */
     ShieldBooster(ShieldBooster s) {
@@ -57,7 +57,7 @@ class ShieldBooster {
     // -------------------------------------------------------------------------
     
     /**
-     * Getter for boost
+     * Getter for boost.
      * @return boost
      */
     public float getBoost() {
@@ -65,7 +65,7 @@ class ShieldBooster {
     }
     
     /**
-     * Getter for uses
+     * Getter for uses.
      * @return uses
      */
     public int getUses() {
@@ -73,7 +73,7 @@ class ShieldBooster {
     }
     
     /**
-     * Getter for name
+     * Getter for name.
      * @return name
      */
     public String getName() {
@@ -103,7 +103,7 @@ class ShieldBooster {
     // -------------------------------------------------------------------------
     
     /**
-     * String representation of the object
+     * String representation of the object.
      * @return string representation
      */
     public String toString() {
@@ -113,7 +113,7 @@ class ShieldBooster {
     }
     
     /**
-     * To UI
+     * To UI.
      */
     ShieldToUI getUIversion() {
         return new ShieldToUI(this);

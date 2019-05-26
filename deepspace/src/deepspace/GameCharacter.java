@@ -11,5 +11,6 @@ package deepspace;
  * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
  */
 public enum GameCharacter {
-    SPACESTATION, ENEMYSTARSHIP
+    SPACESTATION,
+    ENEMYSTARSHIP
 }

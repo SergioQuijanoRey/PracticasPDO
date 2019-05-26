@@ -10,24 +10,30 @@ import java.util.Iterator;
 
 /**
  * Represents damages done on a spaceship after loosing a combat.
- * They indicate which elements are going to be lost after losing the combat
+ * They indicate which elements are going to be lost after losing the combat.
+ * 
+ * A damage is composed by a number of shields to lose and:
+ *   - A number of weapons to lose (class NumericDamage)
+ *   - A list of weapons to lose (class SpecificDamage)
  * 
  * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
  */
-class Damage {
+abstract class Damage {
     /**
-     * Number of shields that will be lost
+     * Number of shields that will be lost.
      */
     private int nShields;
     
     /**
-     * Number of weapons that will be lost
+     * Number of weapons that will be lost.
      */
+    @Deprecated
     private int nWeapons;
     
     /**
      * Array of weapons that will be lost
      */
+    @Deprecated
     private ArrayList<WeaponType> weapons;
     
     // -------------------------------------------------------------------------
@@ -35,15 +41,24 @@ class Damage {
     // -------------------------------------------------------------------------
     
     /**
+     * Class initializer.
+     * @param _nShields number of shields that will be lost
+     */
+    Damage(int _nShields) {
+        nShields = _nShields;
+    }
+    
+    /*
      * Class initializer type Numeric.
      * Initializes to use the class with a number of weapons and a number of shields
      * @param _nWeapons number of weapons that will be lost
      * @param _nShields number of shields that will be lost
-     */    
+     */
+    /*
     Damage(int _nWeapons, int _nShields) {
         nWeapons = _nWeapons;
         nShields = _nShields;
-    }
+    }*/
     
     /**
      * Class initializer type Specific.
@@ -51,6 +66,7 @@ class Damage {
      * @param _weapons array of weapons that will be lost
      * @param _nShields number of shields that will be lost
      */
+    @Deprecated
     Damage(ArrayList<WeaponType> _weapons, int _nShields) {
         nWeapons = -1;  // used for distinction from types Numeric and Specific
         nShields = _nShields;
@@ -61,6 +77,7 @@ class Damage {
      * Copy constructor
      * @param d instance which is going to be copied
      */
+    @Deprecated
     Damage(Damage d) {
         nWeapons = d.nWeapons;
         nShields = d.nShields;
@@ -74,6 +91,12 @@ class Damage {
     // -------------------------------------------------------------------------
     
     /**
+     * Copy getter.
+     * @return a copy of the instance
+     */
+    public abstract Damage copy();
+    
+    /**
      * Getter for nShields
      * @return nShields
      */
@@ -85,6 +108,7 @@ class Damage {
      * Getter for nWeapons
      * @return nWeapons
      */
+    @Deprecated
     public int getNWeapons() {
         return nWeapons;
     }
@@ -93,15 +117,24 @@ class Damage {
      * Getter for weapons
      * @return weapons
      */
+    @Deprecated
     public ArrayList<WeaponType> getWeapons() {
         return weapons;
     }
     
     /**
-     * Checks whether the damage is affecting or not
+     * Checks whether the damage is affecting or not.
      * @return true, if damage has effect;
      *         false, if damage has no effect
      */
+    public abstract boolean hasNoEffect();
+    
+    /*
+     * Checks whether the damage is affecting or not.
+     * @return true, if damage has effect;
+     *         false, if damage has no effect
+     */
+    /*
     public boolean hasNoEffect() {
         if ( nWeapons == -1 )
             // Specific-constructed object
@@ -109,32 +142,7 @@ class Damage {
         else
             // Numeric-constructed object
             return nShields + nWeapons == 0;
-    }
-    
-    /**
-     * Searches the first element of WeaponType array to match a given type
-     * @param w the array of weapon types where we search
-     * @param t the type we're looking for
-     * @return position, if the element is found;
-     *         -1, if the element is not found
-     */    
-    private int arrayContainsType(ArrayList<Weapon> w, WeaponType t) {
-        Iterator<Weapon> it = w.iterator();
-        int i = 0;
-        
-        Weapon weapon_aux = (Weapon) it;
-        
-        while ( it.hasNext() && weapon_aux.getType() != t ) {
-            it.next();
-            weapon_aux = (Weapon) it;
-            i++;
-        }
-        
-        if ( it.hasNext() )
-            return i;
-        else
-            return -1;
-    }
+    }*/
     
     // -------------------------------------------------------------------------
     // Setters
@@ -148,7 +156,17 @@ class Damage {
      * @param s shields to fit
      * @return a copy of the object adjusted as explained above
      */
-    public Damage adjust(ArrayList<Weapon> w, ArrayList<ShieldBooster> s) {
+    public abstract Damage adjust(ArrayList<Weapon> w, ArrayList<ShieldBooster> s);
+    
+    /*
+     * Creates a copy of current objet where weapons and shields which are
+     * not included in arrays given as parameters are discarded. That's to say,
+     * we shrink the Damage to the parameters
+     * @param w weapons to fit
+     * @param s shields to fit
+     * @return a copy of the object adjusted as explained above
+     */
+    /*public Damage adjust(ArrayList<Weapon> w, ArrayList<ShieldBooster> s) {
         // we check how the object has been constructed:
         //   if nWeapons == -1, it is a Specific-constructed object;
         //   else, it is a Numeric-constructed object
@@ -191,7 +209,7 @@ class Damage {
             
             return new Damage(new_nWeapons, new_nShields);
         }
-    }
+    }*/
     
     /**
      * Removes a given type of weapon.
@@ -199,7 +217,15 @@ class Damage {
      * instead of Specific-construced), the number of weapons decreases by 1
      * @param w weapon whose type wants to be removed
      */
-    public void discardWeapon(Weapon w) {
+    public abstract void discardWeapon(Weapon w);
+    
+    /*
+     * Removes a given type of weapon.
+     * If a list of weapons is not available (object is Numeric-constructed
+     * instead of Specific-construced), the number of weapons decreases by 1
+     * @param w weapon whose type wants to be removed
+     */
+    /*public void discardWeapon(Weapon w) {
         if ( nWeapons == -1 ) {
             // object is Specific-constructed
             if ( weapons.size() != 0 ) {
@@ -212,10 +238,10 @@ class Damage {
             if ( nWeapons > 0 )
                 nWeapons--;
         }
-    }
+    }*/
     
     /**
-     * Reduces by 1 the number of shield boosters to be removed
+     * Reduces by 1 the number of shield boosters to be removed.
      */
     public void discardShieldBooster() {
         if ( nShields > 0 )
@@ -227,10 +253,16 @@ class Damage {
     // -------------------------------------------------------------------------
     
     /**
+     * String representation of the object.
+     * @return string representation
+     */
+    public abstract String toString();
+    
+    /*
      * String representation of the object
      * @return string representation
      */
-    public String toString() {
+    /*public String toString() {
         String message = "[Damage ";
         if ( nWeapons == -1 )
             message = message + " (Specific-constructed)] -> "
@@ -241,12 +273,12 @@ class Damage {
                     + "Number of shields: " + nShields
                     + ", Number of weapons: " + nWeapons;
         return message;
-    }
+    }*/
     
-    /**
-     * To UI
+    /*
+     * To UI.
      */
-    DamageToUI getUIversion() {
+    /*DamageToUI getUIversion() {
         return new DamageToUI(this);
-    }
+    }*/
 }

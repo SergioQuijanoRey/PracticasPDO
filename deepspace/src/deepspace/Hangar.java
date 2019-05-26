@@ -8,22 +8,24 @@ package deepspace;
 import java.util.ArrayList;
 
 /**
- *
+ * Represents a certain hangar. A hangar is a container of shield boosters and
+ * weapons, with maximum capacity
+ * 
  * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
  */
 class Hangar {
     /**
-     * Maximum number of shields and weapons --combined-- the hangar can have
+     * Maximum number of shields and weapons --combined-- the hangar can have.
      */
     private int maxElements;
     
     /**
-     * Array of shield boosters the hangar has
+     * Array of shield boosters the hangar has.
      */
     private ArrayList<ShieldBooster> shieldBoosters;
     
     /**
-     * Array of weapons the hangar has
+     * Array of weapons the hangar has.
      */
     private ArrayList<Weapon> weapons;
     

@@ -13,57 +13,57 @@ import java.util.ArrayList;
  */
 class SpaceStation {
     /**
-     * Maximum fuel quantity that a space station can have
+     * Maximum fuel quantity that a space station can have.
      */
     private static final float MAXFUEL = 100f;
     
     /**
-     * Shield units lost per each shot unit taken
+     * Shield units lost per each shot unit taken.
      */
     private static final float SHIELDLOSSPERUNITSHOT = 0.1f;
     
     /**
-     * Parametrizes ammunition power
+     * Parametrizes ammunition power.
      */
     private float ammoPower;
     
     /**
-     * Parametrizes fuel units
+     * Parametrizes fuel units.
      */
     private float fuelUnits;
     
     /**
-     * Name of the station
+     * Name of the station.
      */
     private String name;
     
     /**
-     * Number of medals
+     * Number of medals.
      */
     private int nMedals;
     
     /**
-     * Parametrizes shield power
+     * Parametrizes shield power.
      */
     private float shieldPower;
     
     /**
-     * Pending damage
+     * Pending damage.
      */
     private Damage pendingDamage;
     
     /**
-     * Array of weapons
+     * Array of weapons.
      */
     private ArrayList<Weapon> weapons;
     
     /**
-     * Array of shield boosters
+     * Array of shield boosters.
      */
     private ArrayList<ShieldBooster> shieldBoosters;
     
     /**
-     * Hangar
+     * Hangar.
      */
     private Hangar hangar;
     
@@ -72,7 +72,7 @@ class SpaceStation {
     // -------------------------------------------------------------------------
     
     /**
-     * Class initializer
+     * Class initializer.
      * @param _name name of the station
      * @param _supplies starting fuel units, weapons and shields
      */
@@ -90,12 +90,28 @@ class SpaceStation {
         receiveSupplies(_supplies);
     }
     
+    /**
+     * Copy constructor.
+     * @param station instance which is going to be copied
+     */
+    SpaceStation(SpaceStation station) {
+        name = station.name;
+        ammoPower = station.ammoPower;
+        fuelUnits = station.fuelUnits;
+        nMedals = station.nMedals;
+        shieldPower = station.shieldPower;
+        weapons = station.weapons;
+        shieldBoosters = station.shieldBoosters;
+        pendingDamage = station.pendingDamage;
+        hangar = station.hangar;
+    }
+    
     // -------------------------------------------------------------------------
     // Getters
     // -------------------------------------------------------------------------
     
     /**
-     * Getter for name
+     * Getter for name.
      * @return name
      */
     public String getName() {
@@ -103,7 +119,7 @@ class SpaceStation {
     }
     
     /**
-     * Getter for ammoPower
+     * Getter for ammoPower.
      * @return ammoPower
      */
     public float getAmmoPower() {
@@ -111,7 +127,7 @@ class SpaceStation {
     }
     
     /**
-     * Getter for fuelUnits
+     * Getter for fuelUnits.
      * @return fuelUnits
      */
     public float getFuelUnits() {
@@ -119,7 +135,7 @@ class SpaceStation {
     }
     
     /**
-     * Getter for hangar
+     * Getter for hangar.
      * @return hangar
      */
     public Hangar getHangar() {
@@ -127,7 +143,7 @@ class SpaceStation {
     }
     
     /**
-     * Getter nMedals
+     * Getter nMedals.
      * @return nMedals
      */
     public int getNMedals() {
@@ -135,7 +151,7 @@ class SpaceStation {
     }
     
     /**
-     * Getter for pendingDamage
+     * Getter for pendingDamage.
      * @return pendingDamage
      */
     public Damage getPendingDamage() {
@@ -143,7 +159,7 @@ class SpaceStation {
     }
     
     /**
-     * Getter for shieldBoosters
+     * Getter for shieldBoosters.
      * @return shieldBoosters
      */
     public ArrayList<ShieldBooster> getShieldBoosters() {
@@ -151,7 +167,7 @@ class SpaceStation {
     }
     
     /**
-     * Getter for weapons
+     * Getter for weapons.
      * @return weapons
      */
     public ArrayList<Weapon> getWeapons() {
@@ -159,7 +175,7 @@ class SpaceStation {
     }
     
     /**
-     * Getter for shieldPower
+     * Getter for shieldPower.
      * @return shieldPower
      */
     public float getShieldPower() {
@@ -197,7 +213,7 @@ class SpaceStation {
     // -------------------------------------------------------------------------
     
     /**
-     * Assigns the fuel of the space station
+     * Assigns the fuel of the space station.
      * @param f fuel value to be assigned
      */
     private void assignFuelValue(float f) {
@@ -209,7 +225,7 @@ class SpaceStation {
     
     /**
      * Adjusts certain damage to some weapon and shieldBoosters lists, and its
-     * value is stored in the object
+     * value is stored in the object.
      * @param d damage to be set
      */
     public void setPendingDamage(Damage d) {
@@ -218,7 +234,7 @@ class SpaceStation {
     }
     
     /**
-     * If pending damage has no effect, fixes the atribute to null
+     * If pending damage has no effect, fixes the atribute to null.
      */
     private void cleanPendingDamage() {
         if ( pendingDamage != null )
@@ -227,7 +243,7 @@ class SpaceStation {
     }
     
     /**
-     * Tries to add a weapon to the hangar
+     * Tries to add a weapon to the hangar.
      * @param w the weapon to add
      * @return true, if the weapon is successfully added;
      *         false, if the operation fails
@@ -240,7 +256,7 @@ class SpaceStation {
     }
     
     /**
-     * Tries to add a shield booster to the hangar
+     * Tries to add a shield booster to the hangar.
      * @param s the shield booster to add
      * @return true, if the shield booster is successfully added;
      *         false, if the operation fails
@@ -263,7 +279,7 @@ class SpaceStation {
     }
     
     /**
-     * Discards current hangar
+     * Discards current hangar.
      */
     public void discardHangar() {
         hangar = null;
@@ -271,7 +287,7 @@ class SpaceStation {
     
     /**
      * If a hangar is available, it discards a weapon from it, in a certain
-     * position
+     * position.
      * @param i index where the weapon that wants to be discarded is located in
      * the hangar
      */
@@ -282,7 +298,7 @@ class SpaceStation {
     
     /**
      * If a hangar is available, it discards a shield booster from it, in a
-     * certain position
+     * certain position.
      * @param i index where the shield booster that wants to be discarded is
      * located in the hangar
      */
@@ -292,7 +308,7 @@ class SpaceStation {
     }
     
     /**
-     * Shot, shield and fuel power increase by a certain supplies package
+     * Shot, shield and fuel power increase by a certain supplies package.
      * @param s the supplies to add
      */
     public void receiveSupplies(SuppliesPackage s) {
@@ -338,7 +354,7 @@ class SpaceStation {
     }
     
     /**
-     * The spaceship moves
+     * The spaceship moves.
      */
     public void move() {
         fuelUnits -= fuelUnits*getSpeed();
@@ -347,7 +363,7 @@ class SpaceStation {
     }
     
     /**
-     * Deletes all mounted weapons and mounted shields with no uses left
+     * Deletes all mounted weapons and mounted shields with no uses left.
      */
     public void cleanUpMountedItems() {
         weapons.forEach(weapon -> {
@@ -362,7 +378,7 @@ class SpaceStation {
     }
         
     /**
-     * Makes a shot
+     * Make a shot.
      * @return the shot power
      */
     public float fire() {
@@ -375,7 +391,7 @@ class SpaceStation {
     }
     
     /**
-     * Use protection shield
+     * Use protection shield.
      * @return the shield's energy
      */
     public float protection() {
@@ -388,9 +404,9 @@ class SpaceStation {
     }
     
     /**
-     * Makes the operations related to the reception of an enemy's impact
+     * Makes the operations related to the reception of an enemy's impact.
      * @param shot enemy's impact shot power
-     * @return true, if the shield resisted the impact; else, otherwise
+     * @return result of shot received
      */
     public ShotResult receiveShot(float shot) {
         float myProtection = protection();
@@ -409,10 +425,10 @@ class SpaceStation {
     }
     
     /**
-     * Receives a loot
+     * Receives a loot.
      * @param loot loot to be received
      */
-    public void setLoot(Loot loot) {
+    public Transformation setLoot(Loot loot) {
         CardDealer dealer = CardDealer.getInstance();
         int h = loot.getNHangars();
         
@@ -441,10 +457,18 @@ class SpaceStation {
         
         int medals = loot.getNMedals();
         nMedals += medals;
+        
+        if ( loot.getEfficient() )
+            return Transformation.GETEFFICIENT;
+        else
+            if ( loot.spaceCity() )
+                return Transformation.SPACECITY;
+            else
+                return Transformation.NOTRANSFORM;
     }
     
     /**
-     * Discards weapon in certain position from the collection of weapons in use
+     * Discards weapon in certain position from the collection of weapons in use.
      * @param i index where the weapon that wants to be discarded is located
      */
     public void discardWeapon(int i) {
@@ -459,7 +483,7 @@ class SpaceStation {
     }
     
     /**
-     * Discards shield in certain position from the collection of weapons in use
+     * Discards shield in certain position from the collection of weapons in use.
      * @param i index where the shield that wants to be discarded is located
      */
     public void discardShieldBooster(int i) {
@@ -478,7 +502,7 @@ class SpaceStation {
     // -------------------------------------------------------------------------
     
     /**
-     * String representation of the object
+     * String representation of the object.
      * @return string representation
      */
     public String toString() {
@@ -496,7 +520,7 @@ class SpaceStation {
     }
     
     /**
-     * To UI
+     * To UI.
      */
     public SpaceStationToUI getUIversion() {
         return new SpaceStationToUI(this);

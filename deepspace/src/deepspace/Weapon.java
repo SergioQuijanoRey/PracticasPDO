@@ -11,19 +11,19 @@ package deepspace;
  * 
  * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
  */
-class Weapon {
+class Weapon implements CombatElement {
     /**
-     * Name of weapon
+     * Name of weapon.
      */
     private String name;
     
     /**
-     * Type of weapon
+     * Type of weapon.
      */
     private WeaponType type;
     
     /**
-     * Number of uses of weapon
+     * Number of uses of weapon.
      */
     private int uses;
     
@@ -32,7 +32,7 @@ class Weapon {
     // -------------------------------------------------------------------------
     
     /**
-     * Class initializer
+     * Class initializer.
      * @param _name name of weapon
      * @param _type type of weapon
      * @param _uses number of uses of weapon
@@ -44,7 +44,7 @@ class Weapon {
     }
     
     /**
-     * Copy constructor
+     * Copy constructor.
      * @param w instance which is going to be copied
      */
     Weapon(Weapon w) {
@@ -58,7 +58,7 @@ class Weapon {
     // -------------------------------------------------------------------------
     
     /**
-     * Getter for type
+     * Getter for type.
      * @return type
      */
     public WeaponType getType() {
@@ -66,7 +66,7 @@ class Weapon {
     }
     
     /**
-     * Getter for uses
+     * Getter for uses.
      * @return uses
      */
     public int getUses() {
@@ -74,7 +74,7 @@ class Weapon {
     }
     
     /**
-     * Get type's power
+     * Get type's power.
      * @return type's power
      */
     public float power() {
@@ -104,7 +104,7 @@ class Weapon {
     // -------------------------------------------------------------------------
     
     /**
-     * String representation of the object
+     * String representation of the object.
      * @return string representation
      */
     public String toString() {
@@ -116,7 +116,7 @@ class Weapon {
     }
     
     /**
-     * To UI
+     * To UI.
      */
     WeaponToUI getUIversion() {
         return new WeaponToUI(this);
