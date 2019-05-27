@@ -15,7 +15,7 @@ class SpecificDamage < Damage
     public_class_method :new
 
     # Class initializer
-	# @param _weapons [Array<WeaponType>] array of weapons that will be lost
+	# @param _weapons [Array<WeaponType>] array of types of weapons that will be lost
 	# @param _nShields [Integer] number of shields that will be lost
     def initialize(_weapons, _nShields)
         super(-1, _nShields, _weapons)

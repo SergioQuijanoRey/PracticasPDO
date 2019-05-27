@@ -298,6 +298,7 @@ class SpaceStation
 
 	# Receives a loot
 	# @param [Loot] loot to be received
+	# @return [Transformation] WIP MODIFICAR URGENTE
 	def setLoot(loot)
 		dealer = CardDealer.instance # behaviour introduced by Singleton
 		h = loot.nHangars

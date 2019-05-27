@@ -34,6 +34,9 @@ class BetaPowerEfficientSpaceStation < PowerEfficientSpaceStation
         end
     end
 
+    # String representation
+    # WIP
+
 end # class BetaPowerEfficientSpaceStation
 
 end # module Deepspace

@@ -299,7 +299,7 @@ class GameUniverse
 		end
 	end
 
-	# Make current station efficient or extra efficient, depending on dice
+	# Make current station efficient or beta efficient, depending on dice
 	def makeStationEfficient
 		if @dice.extraEfficiency
 			@currentStation = BetaPowerEfficientSpaceStation.new(@currentStation)

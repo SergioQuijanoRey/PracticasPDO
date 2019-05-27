@@ -12,13 +12,14 @@ class SpaceCity < SpaceStation
 
     # Class initializer
     # @param _base [SpaceStation] base of space city
-    # @param _rest [Array<SpaceStation>] rest of space cities
+    # @param _rest [Array<SpaceStation>] rest of space cities (collaborators)
     def initialize(_base, _rest)
+        super(_base)
         
         # @!attribute [SpaceStation] base of space city
         @base = _base
 
-        # @!attribute [Array<SpaceStation>] rest of space cities
+        # @!attribute [Array<SpaceStation>] rest of space cities (collaborators)
         @collaborators = _rest
 
     end

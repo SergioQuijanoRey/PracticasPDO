@@ -19,6 +19,7 @@ class PowerEfficientSpaceStation < SpaceStation
     # @param station [SpaceStation] basic space station to convert to efficient
     # --Overriden
     def initialize(station)
+        # WIP URGENTE MODIFICAR
         # WIP - otra forma de hacerlo sin usar SuppliesPackage ?
         #       Creía bastante importante el usar el super aquí...
         super(station.name, SuppliesPackage.new(station.ammoPower, station.fuelUnits, station.shieldPower))
