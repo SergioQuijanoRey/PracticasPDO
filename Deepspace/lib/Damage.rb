@@ -108,32 +108,33 @@ class Damage
 	# @param w [Array<Weapon>] weapons to fit
 	# @param s [Array<ShieldBooster>] shields to fit
 	# @return [Damage] a copy of the object adjusted as explained above
-	def adjust(w, s)
-		# we check which new the object has been constructed with:
-		#   if weapons == -1, it has been Specific-constructed
-		#   else, it has been Numeric-constructed
-		if @nWeapons == -1
-			# we compute the intersection
-			#TEST --DELETE THIS new_weapons = []
-			#for weapon in @weapons
-			#	if arrayContainsType(w, weapon)
-			#		new_weapons << weapon
-			#	end
-			#end
-
-			weapons_copy = @weapons.clone
-
-			new_weapons = w.map do |weapon|
-				weapons_copy.delete_at(weapons_copy.index(weapon.type) || weapons_copy.length)
-			end
-
-			new_weapons.compact!
-
-			self.class.newSpecificWeapons(new_weapons, [@nShields, s.length].min)
-		else
-			self.class.newNumericWeapons([@nWeapons, w.length].min, [@nShields, s.length].min)
-		end
-	end
+	# --Deprecated
+	#def adjust(w, s)
+	#	# we check which new the object has been constructed with:
+	#	#   if weapons == -1, it has been Specific-constructed
+	#	#   else, it has been Numeric-constructed
+	#	if @nWeapons == -1
+	#		# we compute the intersection
+	#		#TEST --DELETE THIS new_weapons = []
+	#		#for weapon in @weapons
+	#		#	if arrayContainsType(w, weapon)
+	#		#		new_weapons << weapon
+	#		#	end
+	#		#end
+	#
+	#		weapons_copy = @weapons.clone
+	#
+	#		new_weapons = w.map do |weapon|
+	#			weapons_copy.delete_at(weapons_copy.index(weapon.type) || weapons_copy.length)
+	#		end
+	#
+	#		new_weapons.compact!
+	#
+	#		self.class.newSpecificWeapons(new_weapons, [@nShields, s.length].min)
+	#	else
+	#		self.class.newNumericWeapons([@nWeapons, w.length].min, [@nShields, s.length].min)
+	#	end
+	#end
 
 	# Removes a given type of weapon.
 	# If a list of weapon types is not available (object is Numeric-constructed
