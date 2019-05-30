@@ -6,3 +6,9 @@
 ## Ficheros cambiados por completo
 
 * `SpecificDamage.java`
+* `SpaceCity.java`
+* `SpaceStation.java`
+
+## Cambios de metodos
+
+* `GameUniverse.toString()`

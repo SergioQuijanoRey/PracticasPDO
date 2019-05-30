@@ -1,15 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package deepspace;
 
 /**
- * Represents damages done on a spaceship after loosing a combat.
- * They indicate which elements are going to be lost after losing the combat
+ * Represents a BetaPowerEfficientSpaceStation
+ * It is the same as a PowerEfficientSpaceStation but with a chance of shooting 
+ * with an extra factor
  * 
- * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
+ * @author Miguel Ángel Fernández Gutiérrez
+ * @author Sergio Quijano Rey
  */
 public class BetaPowerEfficientSpaceStation extends PowerEfficientSpaceStation {
     /**

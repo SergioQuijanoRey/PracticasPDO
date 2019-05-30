@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package deepspace;
 
 /**
@@ -17,7 +12,8 @@ package deepspace;
  *  - PowerEfficientSpaceStation or BetaPowerEfficientSpaceStation
  *  - SpaceCity
  * 
- * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
+ * @author Miguel Ángel Fernández Gutiérrez
+ * @author Sergio Quijano Rey
  */
 class Loot {
     /**
@@ -80,7 +76,7 @@ class Loot {
     }
     
     /**
-     * Class initializer.
+     * Class initializer without efficient and spaceCity
      * @param _nSupplies number of supplies given by a loot
      * @param _nWeapons number of boosters given by a loot
      * @param _nShields number of shields given by a loot
@@ -165,13 +161,16 @@ class Loot {
      * String representation of the object.
      * @return string representation
      */
-    public String toString() {
-        String message = "[Loot] -> Supplies: " + nSupplies
-                + ", Weapons: " + nWeapons
-                + ", Shields: " + nShields
-                + ", Hangars: " + nHangars
-                + ", Medals: " + nMedals;
-        return message;
+    @Override
+    public String toString(){
+        return  "Loot(nSupplies = " + nSupplies + 
+                ", nWeapons = " + nWeapons + 
+                ", nShields = " + nShields + 
+                ", nHangars = " + nHangars + 
+                ", nMedals = " + nMedals + 
+                ", getEfficient = " + efficient + 
+                ", spaceCity = " + spaceCity + 
+                ")"; 
     }
     
     /**
