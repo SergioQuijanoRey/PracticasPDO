@@ -196,6 +196,19 @@ public class TestP4 {
         System.out.println("");
     }
 
+    static void testLoot(){
+        System.out.println("Testing Loot");
+        System.out.println("================================================================================");
+
+        Loot test_loot = new Loot(1, 2, 3, 4, 5, false, false);
+        System.out.println("The created loot is: " + test_loot);
+        System.out.println("");
+
+        System.out.println("The UI version is: " + test_loot.getUIversion());
+        System.out.println("");
+
+    }
+
     public static void main(String[] args){
         //testNumericDamage();
         System.out.println("");
@@ -219,7 +232,12 @@ public class TestP4 {
         System.out.println("");
         System.out.println("");
         
-        testBetaPowerEfficientStation();
+        //testBetaPowerEfficientStation();
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        testLoot();
         System.out.println("");
         System.out.println("");
         System.out.println("");
