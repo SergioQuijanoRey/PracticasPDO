@@ -82,13 +82,14 @@ public class HangarPanel extends javax.swing.JPanel {
 
     ArrayList<Integer> getSelectedWeapons() {
         ArrayList<Integer> selectedWeaponsInHangar = new ArrayList<>();
-        int i = 0;
+        int i = 0, j = 0;
         for ( Component c: jpHangarCards.getComponents() ) {
             if ( isWeaponView.get(i) ) {
                 if ( ((WeaponView) c).isSelected() )
-                    selectedWeaponsInHangar.add(i);
-                i++;
+                    selectedWeaponsInHangar.add(j);
+                j++;
             }
+            i++;
         }
         
         return selectedWeaponsInHangar;
@@ -96,13 +97,14 @@ public class HangarPanel extends javax.swing.JPanel {
     
     ArrayList<Integer> getSelectedShieldBoosters() {
         ArrayList<Integer> selectedShieldBoostersInHangar = new ArrayList<>();
-        int i = 0;
+        int i = 0, j = 0;
         for ( Component c: jpHangarCards.getComponents() ) {
             if ( !isWeaponView.get(i) ) {
                 if ( ((ShieldView) c).isSelected() )
-                    selectedShieldBoostersInHangar.add(i);
-                i++;
+                    selectedShieldBoostersInHangar.add(j);
+                j++;
             }
+            i++;
         }
         
         return selectedShieldBoostersInHangar;
