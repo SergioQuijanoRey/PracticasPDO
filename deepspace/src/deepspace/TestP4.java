@@ -177,6 +177,25 @@ public class TestP4 {
         
     }
 
+    static void testBetaPowerEfficientStation(){
+        System.out.println("Testing BetaPowerEfficientSpaceStation");
+        System.out.println("================================================================================");
+        
+        SuppliesPackage base = new SuppliesPackage(1.1111f, 2.222f, 3.333f);
+        SpaceStation test_station = new SpaceStation("sergio", base);
+        BetaPowerEfficientSpaceStation test_beta = new BetaPowerEfficientSpaceStation(test_station);
+        System.out.println("The created BetaPowerEfficientSpaceStation is " + test_beta);
+
+        System.out.println("Firing a few times");
+        for(int i = 0; i < 5; i++){
+            System.out.println("\nThe station fires: " + test_beta.fire());
+        }
+        System.out.println("");
+
+        System.out.println("The Ui version of the station is " + test_beta.getUIversion());
+        System.out.println("");
+    }
+
     public static void main(String[] args){
         //testNumericDamage();
         System.out.println("");
@@ -196,6 +215,11 @@ public class TestP4 {
 
         // BUG -- El setLoot lanza warnings que no deberia
         //testPowerEfficientStation();
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        
+        testBetaPowerEfficientStation();
         System.out.println("");
         System.out.println("");
         System.out.println("");
