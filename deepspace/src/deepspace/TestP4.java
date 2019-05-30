@@ -159,12 +159,13 @@ public class TestP4 {
         System.out.println("");
         System.out.println("");
 
-        testSpecificDamage();
+        //testSpecificDamage();
         System.out.println("");
         System.out.println("");
         System.out.println("");
 
-        //testSpaceCity();
+        // Bug -- No se añade el loot de forma correcta
+        testSpaceCity();
         System.out.println("");
         System.out.println("");
         System.out.println("");
