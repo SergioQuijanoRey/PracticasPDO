@@ -91,7 +91,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
         jbNextTurn.setEnabled(Controller.getInstance().getState() != GameState.BEFORECOMBAT);
         jbCombat.setEnabled(Controller.getInstance().getState() != GameState.BEFORECOMBAT);
         
-        TitledBorder border = new TitledBorder("MOSTRAR ESTADO ESTACIÓN (CIUDAD, BETA...)");
+        TitledBorder border = new TitledBorder("");
         jpCurrentStation.setBorder(border);
         
         setButtons();
@@ -100,6 +100,13 @@ public class MainWindow extends javax.swing.JFrame implements View {
     }
     
     public void setButtons() {
+        // buttons for Mount, Discard, Discard entire Hangar
+        if ( Controller.getInstance().getUIversion() == null ) {
+            System.out.println("NULLED");
+            jbDiscardComplete.setEnabled(true);
+            jbMount.setEnabled(true);
+            jbDiscard.setEnabled(true);
+        } else
         if ( Controller.getInstance().getUIversion().getCurrentStation().getHangar().getWeapons().isEmpty()
                 && Controller.getInstance().getUIversion().getCurrentStation().getHangar().getShieldBoosters().isEmpty() ) {
             jbDiscardComplete.setEnabled(false);
@@ -115,6 +122,8 @@ public class MainWindow extends javax.swing.JFrame implements View {
             jbDiscard.setEnabled(true);
         }
         
+        // buttons for Combat, Next Turn
+        // WIP        
     }
     
     @Override
@@ -200,16 +209,18 @@ public class MainWindow extends javax.swing.JFrame implements View {
         jbMount = new javax.swing.JButton();
         jbDiscard = new javax.swing.JButton();
         jbDiscardComplete = new javax.swing.JButton();
+        jlAuthor1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jbInfo.setText("Info.");
+        jbInfo.setText("Información");
         jbInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbInfoActionPerformed(evt);
             }
         });
 
+        jbNextTurn.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jbNextTurn.setText("Siguiente turno →");
         jbNextTurn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,7 +228,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
             }
         });
 
-        jlDeepspace.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jlDeepspace.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jlDeepspace.setText("Deepspace");
 
         jlVersion.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -234,11 +245,11 @@ public class MainWindow extends javax.swing.JFrame implements View {
         jpCurrentStation.setBorder(javax.swing.BorderFactory.createTitledBorder("Estación actual"));
 
         jlAuthor.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jlAuthor.setText("Miguel Ángel Fernández Gutiérrez · Sergio Quijano Rey");
+        jlAuthor.setText("Miguel Ángel Fernández Gutiérrez");
 
         jpCurrentEnemy.setBorder(javax.swing.BorderFactory.createTitledBorder("Enemigo actual"));
 
-        jbExit.setText("Salir");
+        jbExit.setText("Salir del juego");
         jbExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbExitActionPerformed(evt);
@@ -266,6 +277,9 @@ public class MainWindow extends javax.swing.JFrame implements View {
             }
         });
 
+        jlAuthor1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jlAuthor1.setText("Sergio Quijano Rey");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -288,20 +302,18 @@ public class MainWindow extends javax.swing.JFrame implements View {
                                 .addComponent(jlDeepspace)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jlVersion))
-                            .addComponent(jlAuthor))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jlAuthor)
+                            .addComponent(jlAuthor1))
+                        .addGap(0, 104, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jbCombat, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jbNextTurn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jbInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jpCurrentEnemy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jbInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jpCurrentEnemy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbCombat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbNextTurn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -315,24 +327,22 @@ public class MainWindow extends javax.swing.JFrame implements View {
                             .addComponent(jlVersion))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlAuthor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jpCurrentEnemy, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlAuthor1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addComponent(jpCurrentEnemy, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbNextTurn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jbInfo)
-                                    .addComponent(jbExit)))
-                            .addComponent(jbCombat, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jpCurrentStation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbCombat, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbDiscard)
-                            .addComponent(jbMount)
-                            .addComponent(jbDiscardComplete))))
+                        .addComponent(jbNextTurn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpCurrentStation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbDiscard)
+                    .addComponent(jbMount)
+                    .addComponent(jbDiscardComplete)
+                    .addComponent(jbInfo)
+                    .addComponent(jbExit))
                 .addContainerGap())
         );
 
@@ -421,6 +431,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
     private javax.swing.JButton jbMount;
     private javax.swing.JToggleButton jbNextTurn;
     private javax.swing.JLabel jlAuthor;
+    private javax.swing.JLabel jlAuthor1;
     private javax.swing.JLabel jlDeepspace;
     private javax.swing.JLabel jlVersion;
     private javax.swing.JPanel jpCurrentEnemy;

@@ -58,10 +58,10 @@ public class CurrentStationView extends javax.swing.JPanel {
         DamageToUI damage = station.getPendingDamage();
         if ( damage != null ) {
             jlDamageShields.setText(Integer.toString(damage.getNShields()));
-            jlDamageWeapons.setText(damage.getWeaponInfo());
+            jtaDamageWeapons.setText(damage.getWeaponInfo());
         } else {
             jlDamageShields.setText("0!!!!! WIP");
-            jlDamageWeapons.setText("0!!!!!");
+            jtaDamageWeapons.setText("0!!!!!");
         }     
         
         repaint();
@@ -106,14 +106,17 @@ public class CurrentStationView extends javax.swing.JPanel {
         jlDamageShieldsLabel = new javax.swing.JLabel();
         jlDamageWeaponsLabel = new javax.swing.JLabel();
         jlDamageShields = new javax.swing.JLabel();
-        jlDamageWeapons = new javax.swing.JLabel();
+        jsDamageWeapons = new javax.swing.JScrollPane();
+        jtaDamageWeapons = new javax.swing.JTextArea();
         jpWeapon = new javax.swing.JPanel();
         jpShield = new javax.swing.JPanel();
         jpHangar = new javax.swing.JPanel();
 
+        jlName.setBackground(new java.awt.Color(204, 204, 204));
         jlName.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jlName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jlName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlName.setText("name");
+        jlName.setOpaque(true);
 
         jlAmmoPowerLabel.setText("Potencia de ataque");
 
@@ -144,8 +147,16 @@ public class CurrentStationView extends javax.swing.JPanel {
         jlDamageShields.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jlDamageShields.setText("sh");
 
-        jlDamageWeapons.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jlDamageWeapons.setText("we");
+        jsDamageWeapons.setBorder(null);
+        jsDamageWeapons.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        jtaDamageWeapons.setEditable(false);
+        jtaDamageWeapons.setBackground(new java.awt.Color(238, 238, 238));
+        jtaDamageWeapons.setColumns(20);
+        jtaDamageWeapons.setRows(5);
+        jtaDamageWeapons.setText("we");
+        jtaDamageWeapons.setBorder(null);
+        jsDamageWeapons.setViewportView(jtaDamageWeapons);
 
         javax.swing.GroupLayout jpPendingDamageLayout = new javax.swing.GroupLayout(jpPendingDamage);
         jpPendingDamage.setLayout(jpPendingDamageLayout);
@@ -158,8 +169,10 @@ public class CurrentStationView extends javax.swing.JPanel {
                     .addComponent(jlDamageWeaponsLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpPendingDamageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlDamageWeapons, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                    .addComponent(jlDamageShields, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jpPendingDamageLayout.createSequentialGroup()
+                        .addComponent(jlDamageShields)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jsDamageWeapons, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpPendingDamageLayout.setVerticalGroup(
@@ -170,10 +183,10 @@ public class CurrentStationView extends javax.swing.JPanel {
                     .addComponent(jlDamageShieldsLabel)
                     .addComponent(jlDamageShields))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpPendingDamageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jpPendingDamageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlDamageWeaponsLabel)
-                    .addComponent(jlDamageWeapons))
-                .addContainerGap(48, Short.MAX_VALUE))
+                    .addComponent(jsDamageWeapons, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jpWeapon.setBorder(javax.swing.BorderFactory.createTitledBorder("Potenciadores de fuego"));
@@ -198,11 +211,11 @@ public class CurrentStationView extends javax.swing.JPanel {
                                     .addComponent(jlShieldPowerLabel)
                                     .addComponent(jlFuelUnitsLabel)
                                     .addComponent(jlNMedalsLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 26, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jlShieldPower, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlAmmoPower, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
                                     .addComponent(jlFuelUnits, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jlShieldPower, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jlAmmoPower, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
                                     .addComponent(jlNMedals, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(jlName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -217,8 +230,8 @@ public class CurrentStationView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jlName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jlAmmoPowerLabel)
@@ -233,7 +246,7 @@ public class CurrentStationView extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jlShieldPower)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jlFuelUnits)
+                                .addComponent(jlFuelUnits, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jlNMedals))))
                     .addComponent(jpPendingDamage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -242,7 +255,7 @@ public class CurrentStationView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpShield, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpHangar, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                .addComponent(jpHangar, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -253,7 +266,6 @@ public class CurrentStationView extends javax.swing.JPanel {
     private javax.swing.JLabel jlAmmoPowerLabel;
     private javax.swing.JLabel jlDamageShields;
     private javax.swing.JLabel jlDamageShieldsLabel;
-    private javax.swing.JLabel jlDamageWeapons;
     private javax.swing.JLabel jlDamageWeaponsLabel;
     private javax.swing.JLabel jlFuelUnits;
     private javax.swing.JLabel jlFuelUnitsLabel;
@@ -266,5 +278,7 @@ public class CurrentStationView extends javax.swing.JPanel {
     private javax.swing.JPanel jpPendingDamage;
     private javax.swing.JPanel jpShield;
     private javax.swing.JPanel jpWeapon;
+    private javax.swing.JScrollPane jsDamageWeapons;
+    private javax.swing.JTextArea jtaDamageWeapons;
     // End of variables declaration//GEN-END:variables
 }

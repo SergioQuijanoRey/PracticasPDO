@@ -34,8 +34,9 @@ public class CurrentEnemyView extends javax.swing.JPanel {
         jlLootMedals.setText(Integer.toString(enemy.getLoot().getnMedals()));
         jlLootShields.setText(Integer.toString(enemy.getLoot().getnShields()));
         jlLootWeapons.setText(Integer.toString(enemy.getLoot().getnWeapons()));
-        jlShieldPower.setText(Integer.toString(enemy.getDamage().getNShields()));
-        jlShieldPower.setText(enemy.getDamage().getWeaponInfo());
+        jlDamageShields.setText(Integer.toString(enemy.getDamage().getNShields()));
+        jtaDamageWeapons.setText(enemy.getDamage().getWeaponInfo());
+        jtaDamageWeapons.setWrapStyleWord(true);
         
         repaint();
     }
@@ -67,7 +68,8 @@ public class CurrentEnemyView extends javax.swing.JPanel {
         jlDamageShieldsLabel = new javax.swing.JLabel();
         jlDamageWeaponsLabel = new javax.swing.JLabel();
         jlDamageShields = new javax.swing.JLabel();
-        jlDamageWeapons = new javax.swing.JLabel();
+        jsDamageWeapons = new javax.swing.JScrollPane();
+        jtaDamageWeapons = new javax.swing.JTextArea();
 
         jlName.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jlName.setText("name");
@@ -160,8 +162,16 @@ public class CurrentEnemyView extends javax.swing.JPanel {
         jlDamageShields.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jlDamageShields.setText("we");
 
-        jlDamageWeapons.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jlDamageWeapons.setText("sh");
+        jsDamageWeapons.setBorder(null);
+
+        jtaDamageWeapons.setEditable(false);
+        jtaDamageWeapons.setBackground(new java.awt.Color(238, 238, 238));
+        jtaDamageWeapons.setColumns(20);
+        jtaDamageWeapons.setLineWrap(true);
+        jtaDamageWeapons.setRows(5);
+        jtaDamageWeapons.setText("sh");
+        jtaDamageWeapons.setToolTipText("");
+        jsDamageWeapons.setViewportView(jtaDamageWeapons);
 
         javax.swing.GroupLayout jpDamageLayout = new javax.swing.GroupLayout(jpDamage);
         jpDamage.setLayout(jpDamageLayout);
@@ -175,7 +185,7 @@ public class CurrentEnemyView extends javax.swing.JPanel {
                 .addGap(44, 44, 44)
                 .addGroup(jpDamageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlDamageShields)
-                    .addComponent(jlDamageWeapons))
+                    .addComponent(jsDamageWeapons, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpDamageLayout.setVerticalGroup(
@@ -186,12 +196,13 @@ public class CurrentEnemyView extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpDamageLayout.createSequentialGroup()
                         .addComponent(jlDamageShields)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlDamageWeapons))
+                        .addComponent(jsDamageWeapons, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpDamageLayout.createSequentialGroup()
                         .addComponent(jlDamageShieldsLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlDamageWeaponsLabel)))
-                .addContainerGap(98, Short.MAX_VALUE))
+                        .addComponent(jlDamageWeaponsLabel)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -246,7 +257,6 @@ public class CurrentEnemyView extends javax.swing.JPanel {
     private javax.swing.JLabel jlAmmoPowerLabel;
     private javax.swing.JLabel jlDamageShields;
     private javax.swing.JLabel jlDamageShieldsLabel;
-    private javax.swing.JLabel jlDamageWeapons;
     private javax.swing.JLabel jlDamageWeaponsLabel;
     private javax.swing.JLabel jlLootHangar;
     private javax.swing.JLabel jlLootHangarLabel;
@@ -261,5 +271,7 @@ public class CurrentEnemyView extends javax.swing.JPanel {
     private javax.swing.JLabel jlShieldPowerLabel;
     private javax.swing.JPanel jpDamage;
     private javax.swing.JPanel jpLoot;
+    private javax.swing.JScrollPane jsDamageWeapons;
+    private javax.swing.JTextArea jtaDamageWeapons;
     // End of variables declaration//GEN-END:variables
 }

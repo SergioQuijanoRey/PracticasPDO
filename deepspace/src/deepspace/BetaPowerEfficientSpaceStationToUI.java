@@ -17,7 +17,7 @@ public class BetaPowerEfficientSpaceStationToUI extends PowerEfficientSpaceStati
     
   @Override
   public String getName () {
-    return super.getName() + " (beta)";
+    return super.getName() + " (BETA)";
   }
     
 }
