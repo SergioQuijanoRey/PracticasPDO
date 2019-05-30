@@ -24,17 +24,13 @@ public class WeaponPanel extends javax.swing.JPanel {
     }
     
     public void setWeapon(SpaceStationToUI station) {
-        System.out.println("Setting weapon panel...");
-        
         jpWeaponCards.removeAll();
         ArrayList<WeaponToUI> weapons = station.getWeapons();
-        System.out.println("Size of weapons selected: "+Integer.toString(weapons.size()));
         WeaponView weaponView;
         for ( WeaponToUI w : weapons ) {
             weaponView = new WeaponView();
             weaponView.setWeapon(w);
             jpWeaponCards.add(weaponView);
-            System.out.println("Adding weapon to flow layout. Info: "+Integer.toString(w.hashCode()));
         }
         
         repaint();

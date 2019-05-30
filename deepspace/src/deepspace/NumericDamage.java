@@ -8,10 +8,11 @@ package deepspace;
 import java.util.ArrayList;
 
 /**
- * Numeric Damage is a damage composed by the number of shields and weapons to lose
+ * Numeric Damage is a damage composed by
+ *  - the number of shields to lose
+ *  - the number of weapons to lose
  *
- * @author Miguel Ángel Fernández Gutiérrez
- * @author Sergio Quijano Rey
+ * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
  */
 public class NumericDamage extends Damage {
     /**
@@ -33,15 +34,6 @@ public class NumericDamage extends Damage {
         nWeapons = _nWeapons;
     }
     
-    /**
-     * Copy constructor.
-     * @param d instance which is going to be copied
-     */
-    NumericDamage(NumericDamage d) {
-        super(d);
-        nWeapons = d.nWeapons;
-    }
-    
     // -------------------------------------------------------------------------
     // Getters
     // -------------------------------------------------------------------------
@@ -59,7 +51,6 @@ public class NumericDamage extends Damage {
      * Getter for nWeapons.
      * @return nWeapons
      */
-    @Override
     public int getNWeapons() {
         return nWeapons;
     }

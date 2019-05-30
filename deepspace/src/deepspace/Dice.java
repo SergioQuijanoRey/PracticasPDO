@@ -58,8 +58,6 @@ class Dice {
         EXTRAEFFICIENCYPROB = 0.8f;
         
         generator = new Random();
-        // WIP - comparar con:
-        // generator = new Random(System.currentTimeMillis());
     }
     
     // -------------------------------------------------------------------------

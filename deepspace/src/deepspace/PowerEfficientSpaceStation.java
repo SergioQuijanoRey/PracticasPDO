@@ -47,10 +47,17 @@ public class PowerEfficientSpaceStation extends SpaceStation {
     public Transformation setLoot(Loot loot) {
         Transformation trans = super.setLoot(loot);
         
-        if ( trans == Transformation.GETEFFICIENT )
-            return Transformation.GETEFFICIENT;
-        else
+        if ( trans == Transformation.SPACECITY )
             return Transformation.NOTRANSFORM;
+        else
+            return trans;
     }
     
+    /**
+     * To UI.
+     */
+    @Override
+    public PowerEfficientSpaceStationToUI getUIversion() {
+        return new PowerEfficientSpaceStationToUI(this);
+    }
 }

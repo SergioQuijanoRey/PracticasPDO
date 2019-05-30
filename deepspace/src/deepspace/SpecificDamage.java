@@ -5,63 +5,64 @@ import java.util.stream.Collectors;
 
 /**
  * SpecificDamage is a damage composed by 
- *  - The number of shields to loose
- *  - A list of Weapon Types to loose
+ *  - the number of shields to lose
+ *  - a list of weapon types to lose
  *
- * @author Sergio Quijano Rey
- * @author Miguel Angel
- * */
+ * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
+ */
 class SpecificDamage extends Damage{
-    // Private Attributes
-    //==========================================================================
-    ArrayList<WeaponType> weapons;  // The list of weapons to loose
-
-    // Constructors
-    //==========================================================================
     /**
-     * Constructor of the class
-     * @param wl, the list of weapon types to loose
-     * @param s, the number of shields to loose
-     * */
-    public SpecificDamage(ArrayList<WeaponType> wl, int s){
-        super(s);
-        if(wl != null){
-            weapons = new ArrayList<>(wl);      // Secure copy
-        }else{
-            weapons = new ArrayList<>(0);       // Security check
-        }
+     * Array of types of weapons that will be lost.
+     */
+    ArrayList<WeaponType> weapons;
+
+    // -------------------------------------------------------------------------
+    // Constructors
+    // -------------------------------------------------------------------------
+    
+    /**
+     * Class initializer.
+     * @param _weapons array of types of weapons that will be lost
+     * @param _nShields number of shields that will be lost
+     */
+    public SpecificDamage(ArrayList<WeaponType> _weapons, int _nShields){
+        super(_nShields);
+        if( _weapons != null )
+            weapons = new ArrayList<>(_weapons);    // Secure copy
+        else
+            weapons = new ArrayList<>(0);           // Security check
     }
 
     /**
-     * Copy constructor
-     * @param other, the other SpecificDamage to copy
-     * */
+     * Copy constructor.
+     * @param other instance which is going to be copied
+     */
     public SpecificDamage(SpecificDamage other){
         this(other.getWeapons(), other.getNShields());
 
     }
 
+    // -------------------------------------------------------------------------
+    // Getters
+    // -------------------------------------------------------------------------
+    
     /**
-     * Creates a copy of the damage object
-     *
-     * @return a copy of this object
-     * */
+     * Copy getter.
+     * @return a copy of the instance
+     */
     @Override
     public SpecificDamage copy(){
         return new SpecificDamage(this);
     }
-
-    // GETTERS
-    //==========================================================================
-
+    
     /**
      * Getter for weapons
      * @return a copy (secure return) of weapons
-     * */
+     **/
     public ArrayList<WeaponType> getWeapons(){
-        if(weapons != null){
+        if ( weapons != null )
             return new ArrayList<WeaponType>(weapons);
-        }else{
+        else {
             System.out.println("Returning null weapons at Damage.getWeapons()");
             System.out.println("Returning instead an empty ArrayList<WeaponType>");
             return new ArrayList<WeaponType>(0);
@@ -72,21 +73,20 @@ class SpecificDamage extends Damage{
      * Checks if the damage has no effect
      * @return true, if the damage has no effect
      *         false, if the damage has an effect
-     * */
+     **/
     @Override
     public boolean hasNoEffect(){
-        if(weapons != null){
+        if ( weapons != null )
             return weapons.size() == 0 && getNShields() == 0;
-        }else{
+        else
             return getNShields() == 0;
-        }
     }
 
     
     /**
      * Get the string representation of the object
      * @return the string representation
-     * */
+     **/
     @Override
     public String toString(){
         return  "Damage(" +
@@ -105,8 +105,10 @@ class SpecificDamage extends Damage{
         return new SpecificDamageToUI(this);
     }
    
-    // SETTERS
-    //==========================================================================
+    // -------------------------------------------------------------------------
+    // Setters
+    // -------------------------------------------------------------------------
+    
     /**
      * Adjusts the damage to a given weapons and shields
      * The number of shields is decreased depending of the given list of shields
@@ -115,7 +117,7 @@ class SpecificDamage extends Damage{
      * @param w, the list of weapons to adjust
      * @param s, the list of shields to adjust
      * @return a new SpecificDamage adjusted as specified above
-     * */
+     **/
     @Override
     public SpecificDamage adjust(ArrayList<Weapon> w, ArrayList<ShieldBooster> s){
         // New number of shields is get, as much shields lost as s indicates

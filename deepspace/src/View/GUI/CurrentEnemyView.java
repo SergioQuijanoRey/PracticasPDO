@@ -19,13 +19,8 @@ public class CurrentEnemyView extends javax.swing.JPanel {
     public CurrentEnemyView() {
         initComponents();
     }
-
-    EnemyToUI enemy;
     
-    void setEnemy(EnemyToUI en) {
-        System.out.println("Setting enemy...");
-        
-        enemy = en;
+    void setEnemy(EnemyToUI enemy) {
         jlAmmoPower.setText(Float.toString(enemy.getAmmoPower()));
         jlShieldPower.setText(Float.toString(enemy.getShieldPower()));
         jlName.setText(enemy.getName());

@@ -1,173 +1,215 @@
 package deepspace;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors; // For filtering an ArrayList
+import java.util.stream.Collectors;     // filtering an ArrayList
 
 /**
- * Class to represent a Space Station
+ * Class to represent a space station
  *
- * @author Miguel Angel Fernandez
- * @author Sergio Quijano Rey
+ * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
  * */
-class SpaceStation implements SpaceFighter{
-    // Class Attributes
-    //==========================================================================
-    private static final int MAXFUEL = 100;                         //< The max ammount of fuel that the space station can have
-    private static final float SHIELDLOSSPERUNITSHOT = (float)0.1;  //< The shield loss when an unit of shot power is received
-
-    // Instance Attributes
-    //==========================================================================
-    private float ammoPower;                            //< The ammo power of the space station
-    private float fuelUnits;                            //< The fuel units left
-    private String name;                                //< The name of the space station
-    private int nMedals;                                //< The number of medals that the space station have
-    private float shieldPower;                          //< The power of the space station's shield
-    private Damage pendingDamage;                       //< The pending damage done to the space station
-    private ArrayList<Weapon> weapons;                  //< The mounted weapons of the space station
-    private ArrayList<ShieldBooster> shieldBoosters;    //< The mounted shieldBoosters of the space station
-    private Hangar hangar;                              //< The hangar which holds unmounted shields and weapons
-    
-    // Constructors
-    //==========================================================================
+class SpaceStation implements SpaceFighter {
     /**
-     * @brief The constructor of the class
-     * @param n, the name of the space station
-     * @param supplies, the starting supplies package with ammoPower, shieldPower and fuelUnits
-     * */
-    SpaceStation(String n, SuppliesPackage supplies){
-        // The name given as a parameter
-        name = n;
+     * Maximum fuel quantity that a space station can have.
+     */
+    private static final int MAXFUEL = 100;
 
-        // Default values for all the attributes
-        ammoPower = (float)0.0;
-        fuelUnits = (float)0.0;
+    /**
+     * Shield units lost per each shot unit taken.
+     */
+    private static final float SHIELDLOSSPERUNITSHOT = 0.1f;
+    
+    /**
+     * Parametrizes ammunition power.
+     */
+    private float ammoPower;
+    
+    /**
+     * Parametrizes fuel units.
+     */
+    private float fuelUnits;
+    
+    /**
+     * Name of the station.
+     */
+    private String name;
+    
+    /**
+     * Number of medals.
+     */
+    private int nMedals;
+    
+    /**
+     * Parametrizes shield power.
+     */
+    private float shieldPower;
+    
+    /**
+     * Pending damage.
+     */
+    private Damage pendingDamage;
+    
+    /**
+     * Array of weapons.
+     */
+    private ArrayList<Weapon> weapons;
+    
+    /**
+     * Array of shield boosters.
+     */
+    private ArrayList<ShieldBooster> shieldBoosters;
+    
+    /**
+     * Hangar.
+     */
+    private Hangar hangar;
+    
+    // -------------------------------------------------------------------------
+    // Constructors
+    // -------------------------------------------------------------------------
+    
+    /**
+     * Class initializer.
+     * @param _name name of the station
+     * @param _supplies starting fuel units, weapons and shields
+     */
+    SpaceStation(String _name, SuppliesPackage _supplies){
+        name = _name;
+        ammoPower = 0f;
+        fuelUnits = 0f;
         nMedals = 0;
-        shieldPower = (float)0.0;
+        shieldPower = 0f;
+        weapons = new ArrayList<>();
+        shieldBoosters = new ArrayList<>();
         pendingDamage = null;
-        weapons = new ArrayList<>(0);
-        shieldBoosters = new ArrayList<>(0);
         hangar = null;
-
-        // We add the supplies given as a parameter -- WIP overridable method call on constructor, may lead to bugs
-        receiveSupplies(supplies);
+        
+        receiveSupplies(_supplies);
     }
 
     /**
-     * Copy contructor
-     * @param other, the object to copy
-     * */
+     * Copy constructor.
+     * @param station instance which is going to be copied
+     */
     SpaceStation(SpaceStation other){
-        // This elements do not need to be copied securely
+        // this element needs to be copied securely
         ammoPower = other.ammoPower;
         fuelUnits = other.fuelUnits;
         name = other.name;
         nMedals = other.nMedals;
         shieldPower = other.shieldPower;
 
-        // This elements need a secure copy
-        if(other.pendingDamage != null){
+        // secure copy
+        if ( other.pendingDamage != null )
             pendingDamage = other.pendingDamage.copy();
-        }
-        if(other.weapons != null){
+        if ( other.weapons != null )
             weapons = new ArrayList<>(other.weapons);
-        }
-        if(other.shieldBoosters != null){
+        if ( other.shieldBoosters != null )
             shieldBoosters = new ArrayList<>(other.shieldBoosters);
-        }
-        if(other.hangar != null){
-            hangar = new Hangar(other.hangar);
-        }       
+        if ( other.hangar != null )
+            hangar = new Hangar(other.hangar);       
     }
-
+    
+    // -------------------------------------------------------------------------
     // Getters
-    //==========================================================================
+    // -------------------------------------------------------------------------
+    
     /**
-     * @brief ammoPower getter
-     * */
-    public float getAmmoPower(){
-        return ammoPower;
-    }
-
-    /**
-     * @brief fuelUnits getter
-     * */
-    public float getFuelUnits(){
-        return fuelUnits;
-    }
-
-    /**
-     * @brief hangar getter
-     * */
-    public Hangar getHangar(){
-        return hangar;
-    }
-
-    /**
-     * @brief name getter
-     * */
-    public String getName(){
+     * Getter for name.
+     * @return name
+     */
+    public String getName() {
         return name;
     }
-
+    
     /**
-     * @brief nMedals getter
-     * */
-    public int getNMedals(){
+     * Getter for ammoPower.
+     * @return ammoPower
+     */
+    public float getAmmoPower() {
+        return ammoPower;
+    }
+    
+    /**
+     * Getter for fuelUnits.
+     * @return fuelUnits
+     */
+    public float getFuelUnits() {
+        return fuelUnits;
+    }
+    
+    /**
+     * Getter for hangar.
+     * @return hangar
+     */
+    public Hangar getHangar() {
+        return hangar;
+    }
+    
+    /**
+     * Getter nMedals.
+     * @return nMedals
+     */
+    public int getNMedals() {
         return nMedals;
     }
-
+    
     /**
-     * @brief pendingDamage getter
-     * */
-    public Damage getPendingDamage(){
+     * Getter for pendingDamage.
+     * @return pendingDamage
+     */
+    public Damage getPendingDamage() {
         return pendingDamage;
     }
-
+    
     /**
-     * @brief shieldBoosters getter
-     * */
-    public ArrayList<ShieldBooster> getShieldBoosters(){
-        // Copy return
-        return new ArrayList<>(shieldBoosters);
+     * Getter for shieldBoosters.
+     * @return shieldBoosters
+     */
+    public ArrayList<ShieldBooster> getShieldBoosters() {
+        return shieldBoosters;
     }
-
+    
     /**
-     * @brief weapons getter
-     * */
-    public ArrayList<Weapon> getWeapons(){
-        // Copỳ return
-        return new ArrayList<>(weapons);
+     * Getter for weapons.
+     * @return weapons
+     */
+    public ArrayList<Weapon> getWeapons() {
+        return weapons;
     }
-
+    
     /**
-     * @brief shieldPower getter
-     * */
-    public float getShieldPower(){
+     * Getter for shieldPower.
+     * @return shieldPower
+     */
+    public float getShieldPower() {
         return shieldPower;
     }
-
+    
     /**
-     * @brief returns the speed of the space station
-     *        This speed is the fraction between fuelUnits and MAXFUEL
-     *        Therefore, speed is in [0, 1] interval
-     * */
-    public float getSpeed(){
-        return fuelUnits / MAXFUEL;
+     * Gets the speed of the space station.
+     * Speed is calculated as fraction of fuel units and max fuel possible
+     * @return percentage of speed, that's to say, a number in [0, 1]
+     */    
+    public float getSpeed() {
+        if ( MAXFUEL == 0 ) {
+            throw new IllegalArgumentException("Zero division at SpaceStation.getSpeed(): MAXFUEL cannot be zero");
+            //return 0f;
+        } else
+            return fuelUnits / MAXFUEL;
     }
-
+    
     /**
-     * @brief Checks wether or not the space station is on a valid state
-     *        Valid state means no pending damage or pending damage with no effect
-     * @return true, if the space station is on a valid state
-     *         false, if the space station is not on a valid state
-     * */
-    public boolean validState(){
-        if(pendingDamage == null){
+     * Checks the state of the space ship.
+     * Valid state means no pending damage or pending damage with no effect
+     * @return true, if the space ship is on a valid state;
+     *         false, otherwise
+     */
+    public boolean validState() {
+        if ( pendingDamage == null )
             return true;
-        }else{
+        else
             return pendingDamage.hasNoEffect();
-        }
-
     }
 
     /**

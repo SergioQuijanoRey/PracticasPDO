@@ -1,102 +1,89 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package deepspace;
 
 import java.util.ArrayList;
 
 /**
- * A class to represent a SpaceCity
- * A SpaceCity is a set of SpaceStations with a base SpaceStation which act together
  *
- * @author Sergio Quijano Rey
- * @author Miguel Angel Fernandez
- * */
-class SpaceCity extends SpaceStation{
-    // Private Attributes
-    //==========================================================================
-    private SpaceStation base;                      // The leader Space Station
-    private ArrayList<SpaceStation> collaborators;  // The set of Space Stations, they don't contain the base Space Station
-
-    // Constructors
-    //==========================================================================
+ * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
+ */
+public class SpaceCity extends SpaceStation {
     /**
-     * Constructor of the SpaceCity
-     *
-     * @param _base, the base SpaceStation
-     * @param _collaborators, the set of SpaceStations
-     * */
-    public SpaceCity(SpaceStation _base, ArrayList<SpaceStation> _collaborators){
-        super(_base);                                       // The basic space station needs to be constructed
-        base = new SpaceStation(_base);                     // Secure copy
-        collaborators = new ArrayList<>(_collaborators);    // Secure copy
+     * Base of space city.
+     */
+    private SpaceStation base;
+    
+    /**
+     * Rest of space cities (collaborators).
+     */
+    private ArrayList<SpaceStation> collaborators;
+    
+    /**
+     * Class intializer.
+     * @param _base base of space city
+     * @param _rest rest of space cities (collaborators)
+     */
+    SpaceCity(SpaceStation _base, ArrayList<SpaceStation> _rest) {
+        super(_base);
+        base = _base;
+        collaborators = _rest;
     }
-
-    // Getters
-    //==========================================================================
+    
     /**
-     * Getter for the collaborators
-     * @return a copy of the collaborators
-     * */
-    public ArrayList<SpaceStation> getCollaborators(){
-        return new ArrayList<>(collaborators);  // Secure copy
+     * Getter for collaborators.
+     * @return collaborators
+     */
+    public ArrayList<SpaceStation> getCollaborators() {
+        return collaborators;
     }
-
+    
     /**
-     * Method to fire
-     * All the SpaceStations fires at the same time to get a more powerful attack
-     * @return the power of the group shot
-     * */
+     * Makes all space stations shoot at the same time.
+     * @return all accumulated shot power
+     */
     @Override
-    public float fire(){
-        float power = base.fire();
-
-        for(SpaceStation station : collaborators){
-            power = power * station.fire();
-        }
-
-        return power;
-    }
-
-    /**
-     * Method to protect
-     * All the SpaceStations protect at the same time to get a more powerful protection
-     * @return the power of the group protection
-     * */
-    @Override
-    public float protection(){
-        float power = base.protection();
-
-        for(SpaceStation station : collaborators){
-            power = power * station.protection();
-        }
-
-        return power;
-    }
-
-    /**
-     * Gets the string representation
-     * @return the string representation
-     * */
-    @Override
-    public String toString(){
-        return  "SPACECITY[[\n" + 
-                "\t\tbase: " + super.toString() + 
-                "\t\tcollaborators: " + collaborators +
-                "\n]]";
+    public float fire() {
+        float power = super.fire();
         
+        for ( SpaceStation station : collaborators )
+            power += station.fire();
+        
+        return power;
     }
-
-    // Setters
-    //==========================================================================
+    
     /**
-     * The space city receives a loot
-     * We avoid making a transformation if the loot contains one
-     *
-     * @param lo, the loot to receive
-     *
-     * BUG -- No añade el loot a la base de forma correcta
-     * */
+     * Uses all protection shields from all stations at the same time.
+     * @return all accumulated shield energy
+     */
     @Override
-    public Transformation setLoot(Loot lo){
-        base.setLoot(lo);
+    public float protection() {
+        float energy = super.protection();
+        
+        for ( SpaceStation station : collaborators )
+            energy += station.protection();
+        
+        return energy;
+    }
+    
+    /**
+     * Receives a loot.
+     * @param loot loot to be received
+     */
+    @Override
+    public Transformation setLoot(Loot loot) {
+        super.setLoot(loot);
         return Transformation.NOTRANSFORM;
+    }
+    
+    /**
+     * To UI.
+     */
+    @Override
+    public SpaceCityToUI getUIversion() {
+        return new SpaceCityToUI(this);
     }
 }

@@ -24,8 +24,6 @@ public class ShieldPanel extends javax.swing.JPanel {
     }
     
     public void setShield(SpaceStationToUI station) {
-        System.out.println("Setting shield panel...");
-        
         jpShieldCards.removeAll();
         ArrayList<ShieldToUI> shieldBoosters = station.getShieldBoosters();
         ShieldView shieldView;

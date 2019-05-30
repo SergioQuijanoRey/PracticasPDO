@@ -20,7 +20,7 @@ public class HangarPanel extends javax.swing.JPanel {
 
     /**
      * Auxiliar array to distinguish between WeaponView and ShieldView in
-     * jpHangarCards' panel components.
+     * jpHangarCards' panel components. Avoid use of instanceof
      *  - isWeaponView[i] is true if jpHangarCards[i] is of type WeaponView
      *  - isWeaponView[i] is false if jpHangarCards[i] is of type WeaponView
      */
@@ -38,7 +38,6 @@ public class HangarPanel extends javax.swing.JPanel {
     
     public void setHangar(SpaceStationToUI station) {
         HangarToUI hangar = station.getHangar();
-        System.out.println("Setting hangar panel...");
         jpHangarCards.removeAll();
         isWeaponView.clear();
         
@@ -70,7 +69,6 @@ public class HangarPanel extends javax.swing.JPanel {
             
             int value = (int) ( (hangar_weapons.size()+hangar_shieldBoosters.size()) * 100 / hangar.getMaxElements() );
             jpbHangarAmount.setValue(value);
-            System.out.println("Setting value to " + Integer.toString(value));
         } else {
             jlHangarPlaces.setText("0 lugares");
             jpbHangarAmount.setValue(0);

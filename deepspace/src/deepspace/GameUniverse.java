@@ -254,7 +254,7 @@ public class GameUniverse {
      */
     public CombatResult combat() {
         GameState state = gameState.getState();
-        
+
         if ( state == GameState.BEFORECOMBAT || state == GameState.INIT ) {
             return combat(currentStation, currentEnemy);
         } else {
@@ -351,9 +351,11 @@ public class GameUniverse {
             for ( SpaceStation station : spaceStations )
                 if ( station != currentStation )
                     others.add(station);
-        
+            
             currentStation = new SpaceCity(currentStation, others);
-            spaceStations.set(currentStationIndex, currentStation);
+            spaceStations.remove(currentStationIndex);
+            spaceStations.add(currentStationIndex, currentStation);
+            //spaceStations.set(currentStationIndex, currentStation);
             haveSpaceCity = true;
         }
     }
@@ -362,10 +364,10 @@ public class GameUniverse {
      * Make current station efficient or beta efficient, depending on dice.
      */
     private void makeStationEfficient() {
+        currentStation = new PowerEfficientSpaceStation(currentStation);
+        
         if ( dice.extraEfficiency() )
             currentStation = new BetaPowerEfficientSpaceStation(currentStation);
-        else
-            currentStation = new PowerEfficientSpaceStation(currentStation);
         
         spaceStations.set(currentStationIndex, currentStation);
     }

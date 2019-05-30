@@ -80,6 +80,7 @@ public class Controller {
                     view.wonGameMessage();
                     System.exit(0);
                 }
+                break;
             case NOCOMBAT:
                 view.noCombatMessage();
                 break;

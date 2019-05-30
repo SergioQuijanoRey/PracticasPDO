@@ -10,7 +10,6 @@ package deepspace;
  * 
  * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
  */
-// WIP public o package?
 public interface SpaceFighter {
     /**
      * Make a shot.

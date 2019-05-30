@@ -22,28 +22,24 @@
                   <Component id="jpWeapon" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jlAmmoPowerLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlShieldPowerLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlFuelUnitsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlNMedalsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" pref="26" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jlShieldPower" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="jlAmmoPower" alignment="1" pref="179" max="32767" attributes="0"/>
-                                  <Component id="jlFuelUnits" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jlNMedals" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Component id="jlName" max="32767" attributes="0"/>
+                          <Component id="jlAmmoPowerLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlShieldPowerLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlFuelUnitsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlNMedalsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" pref="26" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jlShieldPower" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jlAmmoPower" alignment="1" pref="179" max="32767" attributes="0"/>
+                          <Component id="jlFuelUnits" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jlNMedals" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jpPendingDamage" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jpShield" max="32767" attributes="0"/>
                   <Component id="jpHangar" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jlName" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -52,13 +48,17 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+              <Component id="jlName" min="-2" pref="28" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jlName" min="-2" pref="28" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jpPendingDamage" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="jlAmmoPowerLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jlShieldPowerLabel" min="-2" max="-2" attributes="0"/>
@@ -67,7 +67,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jlNMedalsLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="jlAmmoPower" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jlShieldPower" min="-2" max="-2" attributes="0"/>
@@ -78,14 +78,13 @@
                           </Group>
                       </Group>
                   </Group>
-                  <Component id="jpPendingDamage" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Component id="jpWeapon" min="-2" pref="200" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jpShield" min="-2" pref="200" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jpHangar" pref="218" max="32767" attributes="0"/>
+              <Component id="jpHangar" pref="213" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -197,10 +196,13 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jlDamageWeaponsLabel" min="-2" max="-2" attributes="0"/>
-                      <Component id="jsDamageWeapons" min="-2" pref="57" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jlDamageWeaponsLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="19" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="jsDamageWeapons" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
