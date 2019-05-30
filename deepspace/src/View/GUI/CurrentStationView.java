@@ -5,15 +5,9 @@
  */
 package View.GUI;
 
-import Controller.ControllerText;
 import deepspace.DamageToUI;
-import deepspace.HangarToUI;
-import deepspace.ShieldToUI;
 import deepspace.SpaceStationToUI;
-import deepspace.WeaponToUI;
-import java.awt.Component;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -43,7 +37,6 @@ public class CurrentStationView extends javax.swing.JPanel {
     SpaceStationToUI station;
     
     void setStation(SpaceStationToUI st) {
-        System.out.println("Setting station...");
         station = st;
         jlAmmoPower.setText(Float.toString(station.getAmmoPower()));
         jlFuelUnits.setText(Float.toString(station.getFuelUnits()));
@@ -58,10 +51,14 @@ public class CurrentStationView extends javax.swing.JPanel {
         DamageToUI damage = station.getPendingDamage();
         if ( damage != null ) {
             jlDamageShields.setText(Integer.toString(damage.getNShields()));
-            jtaDamageWeapons.setText(damage.getWeaponInfo());
+            String damageWeaponInfo = damage.getWeaponInfo();
+            if ( damageWeaponInfo.equals("") )
+                jtaDamageWeapons.setText("0");
+            else
+                jtaDamageWeapons.setText(damageWeaponInfo);
         } else {
-            jlDamageShields.setText("0!!!!! WIP");
-            jtaDamageWeapons.setText("0!!!!!");
+            jlDamageShields.setText("0");
+            jtaDamageWeapons.setText("0");
         }     
         
         repaint();

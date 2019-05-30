@@ -121,10 +121,10 @@ public class Controller {
         if ( ( places & WEAPON ) == WEAPON )
             for ( int i : weapons )
                 model.discardWeapon(i);
-        else if ( ( places & SHIELD ) == SHIELD )
+        if ( ( places & SHIELD ) == SHIELD )
             for ( int i : shields )
                 model.discardShieldBooster(i);
-        else if ( ( places & HANGAR ) == HANGAR ) {
+        if ( ( places & HANGAR ) == HANGAR ) {
             for ( int i : weapons )
                 model.discardWeaponInHangar(i);
             for ( int i : shields )

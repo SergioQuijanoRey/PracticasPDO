@@ -8,10 +8,8 @@ package View.GUI;
 import View.View;
 import Controller.Controller;
 import deepspace.GameState;
-import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.border.TitledBorder;
 
 /**
  *
@@ -86,15 +84,27 @@ public class MainWindow extends javax.swing.JFrame implements View {
     
     @Override
     public void updateView() {
+        GameState state = Controller.getInstance().getState();
         currentStationView.setStation(Controller.getInstance().getUIversion().getCurrentStation());
         currentEnemyView.setEnemy(Controller.getInstance().getUIversion().getCurrentEnemy());
-        jbNextTurn.setEnabled(Controller.getInstance().getState() != GameState.BEFORECOMBAT);
-        jbCombat.setEnabled(Controller.getInstance().getState() != GameState.BEFORECOMBAT);
         
-        TitledBorder border = new TitledBorder("");
-        jpCurrentStation.setBorder(border);
+        // enable or disable buttons
+        jbCombat.setEnabled(state != GameState.AFTERCOMBAT);
+        jbDiscard.setEnabled(state != GameState.BEFORECOMBAT);
+        jbDiscardComplete.setEnabled(state != GameState.BEFORECOMBAT);
+        jbMount.setEnabled(state != GameState.BEFORECOMBAT);
+        jbNextTurn.setEnabled(state != GameState.BEFORECOMBAT);
         
-        jbNextTurn.setEnabled(false);
+        // enable or disable enemy panel
+        jpCurrentEnemy.setVisible((state != GameState.BEFORECOMBAT) && (state != GameState.INIT));
+        
+        if ( state == GameState.INIT )
+            jbNextTurn.setEnabled(false);
+
+        //TitledBorder border = new TitledBorder("");
+        //jpCurrentStation.setBorder(border);
+        
+        //jbNextTurn.setEnabled(false);
         
         //setButtons();
         repaint();
@@ -213,6 +223,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
         jbDiscard = new javax.swing.JButton();
         jbDiscardComplete = new javax.swing.JButton();
         jlAuthor1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -283,6 +294,19 @@ public class MainWindow extends javax.swing.JFrame implements View {
         jlAuthor1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jlAuthor1.setText("Sergio Quijano Rey");
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.MatteBorder(null), "Atajos de teclado"));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 192, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -297,27 +321,23 @@ public class MainWindow extends javax.swing.JFrame implements View {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jbDiscardComplete))
                     .addComponent(jpCurrentStation, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jbInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpCurrentEnemy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbCombat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbNextTurn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlDeepspace)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jlVersion))
-                            .addComponent(jlAuthor)
-                            .addComponent(jlAuthor1))
-                        .addGap(0, 104, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jbInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jpCurrentEnemy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbCombat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbNextTurn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addComponent(jlDeepspace)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jlVersion))
+                    .addComponent(jlAuthor)
+                    .addComponent(jlAuthor1)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,8 +352,10 @@ public class MainWindow extends javax.swing.JFrame implements View {
                         .addComponent(jlAuthor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlAuthor1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                        .addComponent(jpCurrentEnemy, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addComponent(jpCurrentEnemy, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jbCombat, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -353,17 +375,13 @@ public class MainWindow extends javax.swing.JFrame implements View {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbNextTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNextTurnActionPerformed
-        // WIP botón next turn: deshabilitar/habilitar
-        boolean canContinue = Controller.getInstance().nextTurn();
-        if ( canContinue )
-            updateView();
+        Controller.getInstance().nextTurn();
+        updateView();
     }//GEN-LAST:event_jbNextTurnActionPerformed
 
     private void jbCombatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCombatActionPerformed
         Controller.getInstance().combat();
         updateView();
-        jbCombat.setEnabled(false);
-        jbNextTurn.setEnabled(true);
     }//GEN-LAST:event_jbCombatActionPerformed
 
     private void jbExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExitActionPerformed
@@ -381,9 +399,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
 
     private void jbDiscardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDiscardActionPerformed
         Controller.getInstance().discard(Controller.HANGAR, currentStationView.getSelectedWeaponsInHangar(), currentStationView.getSelectedShieldBoostersInHangar());
-        Controller.getInstance().discard(Controller.WEAPON, currentStationView.getSelectedWeapons(), new ArrayList<Integer>());
-        // WIP - pasar esto o null?
-        Controller.getInstance().discard(Controller.SHIELD, new ArrayList<Integer>(), currentStationView.getSelectedShieldBoosters());
+        Controller.getInstance().discard(Controller.WEAPON + Controller.SHIELD, currentStationView.getSelectedWeapons(), currentStationView.getSelectedShieldBoosters());
         updateView();
     }//GEN-LAST:event_jbDiscardActionPerformed
 
@@ -430,6 +446,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbCombat;
     private javax.swing.JButton jbDiscard;
     private javax.swing.JButton jbDiscardComplete;
