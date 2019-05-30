@@ -21,8 +21,9 @@ public class DeepspaceGUI {
      * @param args command-line arguments
      */
     public static void main(String[] args) {
+        View view;
         GameUniverse model = new GameUniverse();
-        View view = MainWindow.getInstance();
+        view = MainWindow.getInstance();
         Controller controller = Controller.getInstance();
         controller.setModelView(model, view);
         controller.start();

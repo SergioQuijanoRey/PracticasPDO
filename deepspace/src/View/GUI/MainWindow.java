@@ -86,7 +86,6 @@ public class MainWindow extends javax.swing.JFrame implements View {
     
     @Override
     public void updateView() {
-        System.out.println("Called MainWindow.updateView()");
         currentStationView.setStation(Controller.getInstance().getUIversion().getCurrentStation());
         currentEnemyView.setEnemy(Controller.getInstance().getUIversion().getCurrentEnemy());
         jbNextTurn.setEnabled(Controller.getInstance().getState() != GameState.BEFORECOMBAT);
@@ -94,6 +93,28 @@ public class MainWindow extends javax.swing.JFrame implements View {
         
         TitledBorder border = new TitledBorder("MOSTRAR ESTADO ESTACIÓN (CIUDAD, BETA...)");
         jpCurrentStation.setBorder(border);
+        
+        setButtons();
+        repaint();
+        revalidate();
+    }
+    
+    public void setButtons() {
+        if ( Controller.getInstance().getUIversion().getCurrentStation().getHangar().getWeapons().isEmpty()
+                && Controller.getInstance().getUIversion().getCurrentStation().getHangar().getShieldBoosters().isEmpty() ) {
+            jbDiscardComplete.setEnabled(false);
+            jbMount.setEnabled(false);
+            if ( Controller.getInstance().getUIversion().getCurrentStation().getWeapons().isEmpty()
+                && Controller.getInstance().getUIversion().getCurrentStation().getShieldBoosters().isEmpty() )
+                jbDiscard.setEnabled(false);
+            else
+                jbDiscard.setEnabled(true);
+        } else {
+            jbDiscardComplete.setEnabled(true);
+            jbMount.setEnabled(true);
+            jbDiscard.setEnabled(true);
+        }
+        
     }
     
     @Override
@@ -154,6 +175,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
     
     @Override
     public void noCombatMessage() {
+        //jbCombat.setEnabled(false);
         JOptionPane.showMessageDialog(this, "No puedes combatir en este momento", "Deepspace", JOptionPane.ERROR_MESSAGE);
     }
     
@@ -250,14 +272,14 @@ public class MainWindow extends javax.swing.JFrame implements View {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbMount)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbDiscard)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jbDiscardComplete))
-                    .addComponent(jpCurrentStation, javax.swing.GroupLayout.PREFERRED_SIZE, 739, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpCurrentStation, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -276,7 +298,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jbNextTurn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jbInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                                        .addComponent(jbInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jpCurrentEnemy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -294,7 +316,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlAuthor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jpCurrentEnemy, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
+                        .addComponent(jpCurrentEnemy, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -336,13 +358,15 @@ public class MainWindow extends javax.swing.JFrame implements View {
     }//GEN-LAST:event_jbInfoActionPerformed
 
     private void jbMountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMountActionPerformed
-        Controller.getInstance().mount(currentStationView.getSelectedWeapons(), currentStationView.getSelectedShieldBoosters());
+        Controller.getInstance().mount(currentStationView.getSelectedWeaponsInHangar(), currentStationView.getSelectedShieldBoostersInHangar());
         updateView();
     }//GEN-LAST:event_jbMountActionPerformed
 
     private void jbDiscardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDiscardActionPerformed
-        Controller.getInstance().discard(Controller.WEAPON, currentStationView.getSelectedWeaponsInHangar(), currentStationView.getSelectedShieldBoostersInHangar());
-        Controller.getInstance().discard(Controller.WEAPON, currentStationView.getSelectedWeaponsInHangar(), currentStationView.getSelectedShieldBoostersInHangar());
+        Controller.getInstance().discard(Controller.HANGAR, currentStationView.getSelectedWeaponsInHangar(), currentStationView.getSelectedShieldBoostersInHangar());
+        Controller.getInstance().discard(Controller.WEAPON, currentStationView.getSelectedWeapons(), new ArrayList<Integer>());
+        // WIP - pasar esto o null?
+        Controller.getInstance().discard(Controller.SHIELD, new ArrayList<Integer>(), currentStationView.getSelectedShieldBoosters());
         updateView();
     }//GEN-LAST:event_jbDiscardActionPerformed
 

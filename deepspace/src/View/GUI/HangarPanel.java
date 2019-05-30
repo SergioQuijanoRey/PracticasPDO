@@ -7,6 +7,7 @@ package View.GUI;
 
 import deepspace.HangarToUI;
 import deepspace.ShieldToUI;
+import deepspace.SpaceStationToUI;
 import deepspace.WeaponToUI;
 import java.awt.Component;
 import java.util.ArrayList;
@@ -26,7 +27,8 @@ public class HangarPanel extends javax.swing.JPanel {
         
     }
     
-    public void setHangar(HangarToUI hangar) {
+    public void setHangar(SpaceStationToUI station) {
+        HangarToUI hangar = station.getHangar();
         System.out.println("Setting hangar panel...");
         jpHangarCards.removeAll();
         
@@ -46,6 +48,7 @@ public class HangarPanel extends javax.swing.JPanel {
                 weaponView = new WeaponView();
                 weaponView.setWeapon(w);
                 jpHangarCards.add(weaponView);
+                
             }
             for ( ShieldToUI s : hangar_shieldBoosters ) {
                 shieldView = new ShieldView();
@@ -82,8 +85,8 @@ public class HangarPanel extends javax.swing.JPanel {
         ArrayList<Integer> selectedShieldBoostersInHangar = new ArrayList<>();
         int i = 0;
         for ( Component c: jpHangarCards.getComponents() ) {
-            if ( c instanceof WeaponView )
-                if ( ((WeaponView) c).isSelected() )
+            if ( c instanceof ShieldView )
+                if ( ((ShieldView) c).isSelected() )
                     selectedShieldBoostersInHangar.add(i);
             i++;
         }
@@ -116,13 +119,13 @@ public class HangarPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jlHangarPlaces, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jpbHangarAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jpbHangarAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(

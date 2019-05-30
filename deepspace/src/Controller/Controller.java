@@ -119,10 +119,8 @@ public class Controller {
         invertArray(shields);
         
         if ( ( places & WEAPON ) == WEAPON )
-            for ( int i : weapons ) {
+            for ( int i : weapons )
                 model.discardWeapon(i);
-                System.out.println("Descartando arma "+((Integer)i).toString());
-            }
         else if ( ( places & SHIELD ) == SHIELD )
             for ( int i : shields )
                 model.discardShieldBooster(i);

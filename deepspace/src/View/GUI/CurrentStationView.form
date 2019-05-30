@@ -19,7 +19,6 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jpHangar" max="32767" attributes="0"/>
                   <Component id="jpWeapon" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -44,6 +43,7 @@
                       <Component id="jpPendingDamage" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jpShield" max="32767" attributes="0"/>
+                  <Component id="jpHangar" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -81,11 +81,11 @@
                   <Component id="jpPendingDamage" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jpWeapon" min="-2" pref="170" max="-2" attributes="0"/>
+              <Component id="jpWeapon" min="-2" pref="200" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jpShield" min="-2" pref="170" max="-2" attributes="0"/>
+              <Component id="jpShield" min="-2" pref="200" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jpHangar" pref="203" max="32767" attributes="0"/>
+              <Component id="jpHangar" pref="224" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
