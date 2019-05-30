@@ -24,7 +24,7 @@ module Deepspace
     def next ()
       if (!@ready) then
         @ready=true;
-        shuffle();
+        #shuffle(); WIP
       end
         
       card=@cards.delete_at(0);
@@ -32,7 +32,7 @@ module Deepspace
       
       @count+=1
       if (@count==@cards.size()) then
-        shuffle();
+        #shuffle(); WIP
         @count=0;
       end
         

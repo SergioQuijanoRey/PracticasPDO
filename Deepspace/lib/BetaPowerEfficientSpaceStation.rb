@@ -1,7 +1,8 @@
 #encoding:utf-8
 
-require_relative "Dice"
+require_relative 'Dice'
 require_relative 'PowerEfficientSpaceStation'
+require_relative 'BetaPowerEfficientSpaceStationToUI'
 
 module Deepspace
 
@@ -35,7 +36,16 @@ class BetaPowerEfficientSpaceStation < PowerEfficientSpaceStation
     end
 
     # String representation
-    # WIP
+    # @return [String] string representation
+    def to_s
+        message = "(Beta) " + super
+        return message
+    end
+
+    # To UI
+    def getUIversion
+        return BetaPowerEfficientSpaceStationToUI.new(self)
+    end
 
 end # class BetaPowerEfficientSpaceStation
 

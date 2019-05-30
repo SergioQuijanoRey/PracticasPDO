@@ -134,6 +134,14 @@ class CardDealer
     end
     
     def createEnemies() 
+        # WIP
+        transformLoot0=Loot.new(1,1,1,0,1,true,false)
+        transformLoot1=Loot.new(1,1,1,0,1,false,true)
+        lowDamage0=NumericDamage.new(1,1)
+
+        @enemies.add(EnemyStarShip.new("ENA",0,0,transformLoot0,lowDamage0));
+        @enemies.add(EnemyStarShip.new("ENB",0,0,transformLoot1,lowDamage0));
+
         regularLoot0=Loot.new(1,2,1,1,1)
         regularLoot1=Loot.new(1,1,2,1,1)
         badLoot=Loot.new(1,1,1,0,1)

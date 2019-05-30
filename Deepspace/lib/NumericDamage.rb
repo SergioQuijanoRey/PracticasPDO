@@ -24,7 +24,7 @@ class NumericDamage < Damage
         @nWeapons = _nWeapons
     end
 
-    attr_reader :nShields
+    attr_reader :nWeapons
 
     # Checks whether the damage is affecting or not
 	# @return [Boolean] true, if damage has no effect; false, otherwise
@@ -48,7 +48,7 @@ class NumericDamage < Damage
     # @return [NumericDamage] a copy of the current instance
     # --Overriden
     def copy
-        return new(@nWeapons, @nShields)
+        return self.class.new(@nWeapons, @nShields)
     end
 
     # Removes a given type of weapon.

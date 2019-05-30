@@ -21,7 +21,7 @@ class SpecificDamage < Damage
         super(_nShields)
 
         # @!attribute [Array<WeaponType>] array of types of weapons that will be lost
-        @weapons 
+        @weapons  = []
     end
 
     attr_reader :weapons
@@ -75,7 +75,7 @@ class SpecificDamage < Damage
     # @return [SpecificDamage] a copy of the current instance
     # --Overriden
     def copy
-        return new(weapons, nShields)
+        return self.class.new(weapons, nShields)
     end
 
     # Removes a given type of weapon.
@@ -91,6 +91,7 @@ class SpecificDamage < Damage
             end
         end
     end
+
     # String representation of the object
     # @return [String] string representation
     def to_s

@@ -2,6 +2,7 @@
 
 require_relative 'SpaceStation'
 require_relative 'Transformation'
+require_relative 'PowerEfficientSpaceStationToUI'
 #require_relative 'SuppliesPackage'
 
 
@@ -19,15 +20,7 @@ class PowerEfficientSpaceStation < SpaceStation
     # @param station [SpaceStation] basic space station to convert to efficient
     # --Overriden
     def initialize(station)
-        # WIP URGENTE MODIFICAR
-        # WIP - otra forma de hacerlo sin usar SuppliesPackage ?
-        #       Creía bastante importante el usar el super aquí...
-        super(station.name, SuppliesPackage.new(station.ammoPower, station.fuelUnits, station.shieldPower))
-        @nMedals = station.nMedals
-        @pendingDamage = station.pendingDamage
-        @weapons = station.weapons
-        @shieldBoosters = station.shieldBoosters
-        @hangar = station.hangar
+        copy(station)
     end
     
     # Makes a shot
@@ -35,6 +28,7 @@ class PowerEfficientSpaceStation < SpaceStation
     # --Overriden
     def fire
         return super*@@EFFICIENCYFACTOR
+        # WIP COMPROBAR QUE ES @@EFFICIENCYFACTOR DE ESTA CLASE
     end
 
     # Use protection shield

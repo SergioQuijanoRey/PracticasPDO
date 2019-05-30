@@ -25,7 +25,7 @@ class Damage
 	# Getters
 	# ==========================================================================
 
-	attr_reader :nWeapons, :nShields, :weapons
+	attr_reader :nShields
 
 	# Checks whether the damage is affecting or not
 	# @return [Boolean] true, if damage has no effect; false, otherwise

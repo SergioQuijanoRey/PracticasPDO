@@ -97,6 +97,38 @@ class SpaceStation
 	# Setters
 	# ==========================================================================
 
+	# Makes copy
+	# @param other [SpaceStation] instance to copy
+	def copy(other)
+		@name = other.name
+		@ammoPower = other.ammoPower
+		@shieldPower = other.shieldPower
+		@fuelUnits = other.fuelUnits
+		@nMedals = other.nMedals
+
+		if !other.hangar.nil?
+			@hangar = Hangar.newCopy(other.hangar)
+		else
+			@hangar = nil
+		end
+
+		if !other.pendingDamage.nil?
+			@pendingDamage = other.pendingDamage.copy
+		else
+			@pendingDamage = nil 
+		end
+
+		@shieldBoosters = []
+		for s in other.shieldBoosters
+			@shieldBoosters << ShieldBooster.newCopy(s)
+		end
+
+		@weapons = []
+		for w in other.weapons
+			@weapons << Weapon.newCopy(w)
+		end
+	end
+
 	# Assigns the fuel of the space station
 	# @param f [Float] fuel value to be assigned
 	def assignFuelValue(f)

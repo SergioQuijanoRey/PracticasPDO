@@ -1,6 +1,7 @@
 #encoding:utf-8
 
 require_relative 'SpaceStation'
+require_relative 'SpaceCityToUI'
 
 
 module Deepspace
@@ -14,7 +15,7 @@ class SpaceCity < SpaceStation
     # @param _base [SpaceStation] base of space city
     # @param _rest [Array<SpaceStation>] rest of space cities (collaborators)
     def initialize(_base, _rest)
-        super(_base)
+        copy(_base)
         
         # @!attribute [SpaceStation] base of space city
         @base = _base
@@ -59,7 +60,6 @@ class SpaceCity < SpaceStation
         super
 
         return Transformation::NOTRANSFORM
-        # WIP entra en este return?
     end
 
     # String representation of the object
@@ -67,6 +67,11 @@ class SpaceCity < SpaceStation
     # --Overriden
     def to_s
         getUIversion().to_s
+    end
+
+    # To UI
+    def getUIversion
+        return SpaceCityToUI.new(self)
     end
 
 end # class SpaceCity

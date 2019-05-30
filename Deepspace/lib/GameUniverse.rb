@@ -284,7 +284,7 @@ class GameUniverse
 
 	# Create a space city in current station
 	def createSpaceCity
-		if !haveSpaceCity
+		if !@haveSpaceCity
 			others = []
 
 			for station in @spaceStations
