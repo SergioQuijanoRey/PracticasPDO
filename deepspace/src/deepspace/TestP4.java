@@ -154,7 +154,7 @@ public class TestP4 {
     }
 
     public static void main(String[] args){
-        testNumericDamage();
+        //testNumericDamage();
         System.out.println("");
         System.out.println("");
         System.out.println("");
@@ -164,7 +164,7 @@ public class TestP4 {
         System.out.println("");
         System.out.println("");
 
-        testSpaceCity();
+        //testSpaceCity();
         System.out.println("");
         System.out.println("");
         System.out.println("");

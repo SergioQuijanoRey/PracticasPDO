@@ -1,169 +1,169 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package deepspace;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.stream.Collectors;
 
 /**
+ * SpecificDamage is a damage composed by 
+ *  - The number of shields to loose
+ *  - A list of Weapon Types to loose
  *
- * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
- */
-public class SpecificDamage extends Damage {
-    /**
-     * Array of types of weapons that will be lost.
-     */
-    private ArrayList<WeaponType> weapons;
-    
-    // -------------------------------------------------------------------------
+ * @author Sergio Quijano Rey
+ * @author Miguel Angel
+ * */
+class SpecificDamage extends Damage{
+    // Private Attributes
+    //==========================================================================
+    ArrayList<WeaponType> weapons;  // The list of weapons to loose
+
     // Constructors
-    // -------------------------------------------------------------------------
-    
+    //==========================================================================
     /**
-     * Class initializer.
-     * @param _weapons array of types of weapons that will be lost
-     * @param _nShields number of shields that will be lost
-     */
-    SpecificDamage(ArrayList<WeaponType> _weapons, int _nShields) {
-        super(_nShields);
-        weapons = _weapons;
+     * Constructor of the class
+     * @param wl, the list of weapon types to loose
+     * @param s, the number of shields to loose
+     * */
+    public SpecificDamage(ArrayList<WeaponType> wl, int s){
+        super(s);
+        if(wl != null){
+            weapons = new ArrayList<>(wl);      // Secure copy
+        }else{
+            weapons = new ArrayList<>(0);       // Security check
+        }
     }
-    
-    /**
-     * Copy constructor.
-     * @param d instance which is going to be copied
-     */
-    SpecificDamage(SpecificDamage d) {
-        super(d);
-        weapons = d.weapons;
-    }
-    
-    // -------------------------------------------------------------------------
-    // Getters
-    // -------------------------------------------------------------------------
-    
-    /**
-     * Copy getter.
-     * @return a copy of the instance
-     */
-    public SpecificDamage copy() {
-        ArrayList<WeaponType> weapon_copy = new ArrayList<>();
-        for ( WeaponType wt : weapons )
-            weapon_copy.add(wt);
-        
-        return new SpecificDamage(weapon_copy, getNShields());
-    }
-    /**
-     * Getter for weapons.
-     * @return weapons
-     */
-    public ArrayList<WeaponType> getWeapons() {
-        return weapons;
-    }
-    
-    /**
-     * Checks whether the damage is affecting or not.
-     * @return true, if damage has effect;
-     *         false, if damage has no effect
-     */
-    @Override
-    public boolean hasNoEffect() {
-        return getNShields() + weapons.size() == 0;
-    }
-    
-    // -------------------------------------------------------------------------
-    // Setters
-    // -------------------------------------------------------------------------
 
     /**
-     * Searches the first element of WeaponType array to match a given type
-     * @param w the array of weapon types where we search
-     * @param t the type we're looking for
-     * @return position, if the element is found;
-     *         -1, if the element is not found
-     */   
-    private int arrayContainsType(ArrayList<Weapon> w, WeaponType t) {
-        Iterator<Weapon> it = w.iterator();
-        int i = 0;
-        
-        Weapon weapon_aux = (Weapon) it;
-        
-        while ( it.hasNext() && weapon_aux.getType() != t ) {
-            it.next();
-            weapon_aux = (Weapon) it;
-            i++;
-        }
-        
-        if ( it.hasNext() )
-            return i;
-        else
-            return -1;
+     * Copy constructor
+     * @param other, the other SpecificDamage to copy
+     * */
+    public SpecificDamage(SpecificDamage other){
+        this(other.getWeapons(), other.getNShields());
+
     }
-    
+
     /**
-     * Creates a copy of current objet where weapons and shields which are
-     * not included in arrays given as parameters are discarded. That's to say,
-     * we shrink the Damage to the parameters
-     * @param w weapons to fit
-     * @param s shields to fit
-     * @return a copy of the object adjusted as explained above
-     */
+     * Creates a copy of the damage object
+     *
+     * @return a copy of this object
+     * */
     @Override
-    public SpecificDamage adjust(ArrayList<Weapon> w, ArrayList<ShieldBooster> s) {
-        int new_nShields;
-        
-        if ( s.size() > getNShields() )
-            new_nShields = getNShields();
-        else
-            new_nShields = s.size();
-        
-        ArrayList<WeaponType> new_weapons = new ArrayList<>();
-        
-        for ( WeaponType wt : weapons )
-            if ( arrayContainsType(w, wt) != -1 ) {
-                new_weapons.add(wt);
-            }
-        
-        return new SpecificDamage(new_weapons, new_nShields);
+    public SpecificDamage copy(){
+        return new SpecificDamage(this);
     }
-    
+
+    // GETTERS
+    //==========================================================================
+
     /**
-     * Removes a given type of weapon.
-     * The number of weapons decreases by 1
-     * @param w weapon whose type wants to be removed
-     */
-    @Override
-    public void discardWeapon(Weapon w) {
-        if ( weapons.size() != 0 ) {
-            int position = weapons.indexOf(w.getType());
-            if ( position != -1 )
-                weapons.remove(position);
+     * Getter for weapons
+     * @return a copy (secure return) of weapons
+     * */
+    public ArrayList<WeaponType> getWeapons(){
+        if(weapons != null){
+            return new ArrayList<WeaponType>(weapons);
+        }else{
+            System.out.println("Returning null weapons at Damage.getWeapons()");
+            System.out.println("Returning instead an empty ArrayList<WeaponType>");
+            return new ArrayList<WeaponType>(0);
         }
     }
-    
-    // -------------------------------------------------------------------------
-    // String representation, UI version
-    // -------------------------------------------------------------------------
-    
+
     /**
-     * String representation of the object.
-     * @return string representation
-     */
-    public String toString() {
-        String message = "[NumericDamage] -> "
-                + "Number of shields: " + getNShields()
-                + ", Weapons: " + weapons.toString();
-        return message;
-    }
-    
-    /**
-     * To UI.
-     */
+     * Checks if the damage has no effect
+     * @return true, if the damage has no effect
+     *         false, if the damage has an effect
+     * */
     @Override
-    public SpecificDamageToUI getUIversion() {
+    public boolean hasNoEffect(){
+        if(weapons != null){
+            return weapons.size() == 0 && getNShields() == 0;
+        }else{
+            return getNShields() == 0;
+        }
+    }
+
+    
+    /**
+     * Get the string representation of the object
+     * @return the string representation
+     * */
+    @Override
+    public String toString(){
+        return  "Damage(" +
+                "weapons = " + weapons +
+                ", nShields = " + getNShields() +
+                ")";
+    }
+
+    /**
+     * Gets the UI version of the object
+     *
+     * @return the UI version of the object
+     * */
+    @Override
+    public SpecificDamageToUI getUIversion(){
         return new SpecificDamageToUI(this);
+    }
+   
+    // SETTERS
+    //==========================================================================
+    /**
+     * Adjusts the damage to a given weapons and shields
+     * The number of shields is decreased depending of the given list of shields
+     * The weapons which are not the same type as given as a parameter are removed
+     *
+     * @param w, the list of weapons to adjust
+     * @param s, the list of shields to adjust
+     * @return a new SpecificDamage adjusted as specified above
+     * */
+    @Override
+    public SpecificDamage adjust(ArrayList<Weapon> w, ArrayList<ShieldBooster> s){
+        // New number of shields is get, as much shields lost as s indicates
+        int new_shields = Math.min(s.size(), getNShields());
+
+            // New weapon_type list is get
+            ArrayList<WeaponType> new_weapon_types = new ArrayList<WeaponType>(0);
+
+            for(WeaponType wt : weapons){
+                if(arrayContainsType(w, wt) != -1){ // The weapon type is in the w array
+                    new_weapon_types.add(wt);
+                }
+            }
+
+        return new SpecificDamage(new_weapon_types, new_shields);
+    }
+
+    /**
+     * A given weapon is discarded from the Damage
+     *
+     * @param w, the weapon to discard
+     * */
+    @Override
+    public void discardWeapon(Weapon w){
+        weapons = new ArrayList<WeaponType>(weapons.stream().filter(wtype -> wtype != w.getType()).collect(Collectors.toList()));
+
+    }
+    
+    // AUXILIAR
+    //==========================================================================
+    
+    /**
+     * Searchs the first weapon with the same type as given type through parameter
+     * 
+     * @param w, the weapon array where to make the search
+     * @param t, the weapon type to search
+     * @return  the position, if the weapon is found
+     *          -1, if the weapon is not found
+     * */
+    private int arrayContainsType(ArrayList<Weapon> w, WeaponType t){
+        int position = -1;
+
+        for(int i = 0; i < w.size() && position == -1; i++){
+            if(w.get(i).getType() == t){
+                position = i;
+            }
+        }
+
+        return position;
     }
 }
