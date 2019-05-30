@@ -1,9 +1,6 @@
 /**
  * @file SpaceStation.java
  * @author Sergio Quijano Rey
- *
- * WIP -- He cambiado los Arrays por ArrayList -- Puede que haya roto cosas
- * WIP -- Hay que testear de forma correcta en la practica 3
  * */
 
 package deepspace;
@@ -49,11 +46,11 @@ class SpaceStation implements SpaceFighter{
         nMedals = 0;
         shieldPower = (float)0.0;
         pendingDamage = null;
-        weapons = new ArrayList<Weapon>(0);
-        shieldBoosters = new ArrayList<ShieldBooster>(0);
+        weapons = new ArrayList<>(0);
+        shieldBoosters = new ArrayList<>(0);
         hangar = null;
 
-        // We add the supplies given as a parameter
+        // We add the supplies given as a parameter -- WIP overridable method call on constructor, may lead to bugs
         receiveSupplies(supplies);
     }
 
@@ -70,11 +67,18 @@ class SpaceStation implements SpaceFighter{
         shieldPower = other.shieldPower;
 
         // This elements need a secure copy
-        pendingDamage = new PendingDamage(other.pendingDamage); 
-        weapons = new ArrayList<>(other.weapons);
-        shieldBoosters = new ArrayList<>(other.shieldBoosters);
-        hangar = new Hangar(other.hangar);
-
+        if(other.pendingDamage != null){
+            pendingDamage = other.pendingDamage.copy();
+        }
+        if(other.weapons != null){
+            weapons = new ArrayList<>(other.weapons);
+        }
+        if(other.shieldBoosters != null){
+            shieldBoosters = new ArrayList<>(other.shieldBoosters);
+        }
+        if(other.hangar != null){
+            hangar = new Hangar(other.hangar);
+        }       
     }
 
     // Getters
@@ -126,7 +130,7 @@ class SpaceStation implements SpaceFighter{
      * */
     public ArrayList<ShieldBooster> getShieldBoosters(){
         // Copy return
-        return new ArrayList<ShieldBooster>(shieldBoosters);
+        return new ArrayList<>(shieldBoosters);
     }
 
     /**
@@ -134,7 +138,7 @@ class SpaceStation implements SpaceFighter{
      * */
     public ArrayList<Weapon> getWeapons(){
         // Copỳ return
-        return new ArrayList<Weapon>(weapons);
+        return new ArrayList<>(weapons);
     }
 
     /**
@@ -203,6 +207,8 @@ class SpaceStation implements SpaceFighter{
      * The elements are stored with their respective methods
      * @param loot, the loot which is received
      * @return the transformation that the loot indicates (may be NOTRANSFORM)
+     *
+     * BUG -- no funciona como deberiBUG
      * */
     public Transformation setLoot(Loot loot){
         // We get a card dealer for the elements received at the loot
@@ -242,7 +248,7 @@ class SpaceStation implements SpaceFighter{
         // We return the transformation
         if(loot.getEfficient()){
             return Transformation.GETEFFICIENT;
-        }else if(loot.SpaceCity()){
+        }else if(loot.spaceCity()){
             return Transformation.SPACECITY;
         }else{
             return Transformation.NOTRANSFORM;
@@ -375,10 +381,10 @@ class SpaceStation implements SpaceFighter{
      * */
     public void cleanUpMountedItems(){
         // Cleaning weapons -- WIP programacion funcional
-        weapons = new ArrayList<Weapon>(weapons.stream().filter(weapon -> weapon.getUses() > 0).collect(Collectors.toList()));
+        weapons = new ArrayList<>(weapons.stream().filter(weapon -> weapon.getUses() > 0).collect(Collectors.toList()));
 
         // Cleaning shieldBoosters -- WIP programacion funcional
-        shieldBoosters = new ArrayList<ShieldBooster>(shieldBoosters.stream().filter(shield -> shield.getUses() > 0).collect(Collectors.toList()));
+        shieldBoosters = new ArrayList<>(shieldBoosters.stream().filter(shield -> shield.getUses() > 0).collect(Collectors.toList()));
     }
 
     /**

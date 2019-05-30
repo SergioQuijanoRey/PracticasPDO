@@ -24,7 +24,11 @@ class SpecificDamage extends Damage{
      * */
     public SpecificDamage(ArrayList<WeaponType> wl, int s){
         super(s);
-        weapons = new ArrayList<>(wl);    // Secure copy
+        if(wl != null){
+            weapons = new ArrayList<>(wl);      // Secure copy
+        }else{
+            weapons = new ArrayList<>(0);       // Security check
+        }
     }
 
     /**
@@ -70,7 +74,11 @@ class SpecificDamage extends Damage{
      * */
     @Override
     public boolean hasNoEffect(){
-        return weapons.size() == 0 && getNShields() == 0;
+        if(weapons != null){
+            return weapons.size() == 0 && getNShields() == 0;
+        }else{
+            return getNShields() == 0;
+        }
     }
 
     
@@ -82,7 +90,7 @@ class SpecificDamage extends Damage{
     public String toString(){
         return  "Damage(" +
                 "weapons = " + weapons +
-                ", nWeapons = " + getNShields() +
+                ", nShields = " + getNShields() +
                 ")";
     }
 
@@ -131,8 +139,6 @@ class SpecificDamage extends Damage{
      * */
     @Override
     public void discardWeapon(Weapon w){
-        // WIP -- Need to be tested properly
-        // We filter the weapon array
         weapons = new ArrayList<WeaponType>(weapons.stream().filter(wtype -> wtype != w.getType()).collect(Collectors.toList()));
 
     }

@@ -174,10 +174,10 @@ public class GameUniverse{
 
                 // The loot earned is given -- The transformation is catched
                 Loot aLoot = enemy.getLoot();
-                Transformation transform = station.setLoot(aLoot);
+                Transformation transformation = station.setLoot(aLoot);
 
                 // We check the transformation
-                if(transformation = Transformation.GETEFFICIENT){
+                if(transformation == Transformation.GETEFFICIENT){
                     makeStationEfficient();
                     combatResult = CombatResult.STATIONWINSANDCONVERTS;
                 }else if(transformation == Transformation.SPACECITY){
@@ -294,7 +294,7 @@ public class GameUniverse{
                 int nh = dice.initWithNHangars();
                 int nw = dice.initWithNWeapons();
                 int ns = dice.initWithNShields();
-                Loot lo = new Loot(0, nw, ns, nh, 0);
+                Loot lo = new Loot(0, nw, ns, nh, 0, false, false);
 
                 // We give to the station the random loot created for the starting
                 // weapons, shield and hangars (neither medals nor suppliesPackages
@@ -409,7 +409,7 @@ public class GameUniverse{
     private void createSpaceCity(){
         if(haveSpaceCity == false){
             // The space stations without the currentStation
-            ArrayList<SpaceStations> collaborators = new ArrayList<>(spaceStations);
+            ArrayList<SpaceStation> collaborators = new ArrayList<>(spaceStations);
             collaborators.remove(currentStationIndex);
 
             // The new spaceCity

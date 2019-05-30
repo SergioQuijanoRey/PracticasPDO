@@ -30,7 +30,7 @@ public class TestP3{
 
         // Testing add loot
         System.out.println("Adding a loot to the station");
-        Loot loot = new Loot(1, 1, 1, 1, 1);
+        Loot loot = new Loot(1, 1, 1, 1, 1, false, false);
         System.out.println("The loot is " + loot.toString());
         test_station.setLoot(loot);
         System.out.println("After adding the loot the station is " + test_station.toString());
@@ -38,7 +38,7 @@ public class TestP3{
 
         // Testing set damage
         System.out.println("We add some elements and mount them in order to get a damage");
-        loot = new Loot(1, 1, 1, 1, 1);
+        loot = new Loot(1, 1, 1, 1, 1, false, false);
         test_station.setLoot(loot);
         test_station.mountShieldBooster(0);
         test_station.mountWeapon(0);
@@ -108,7 +108,7 @@ public class TestP3{
 
         // Testing discardShieldBooster, discardWeapon
         System.out.println("We add some elements and mount them in order to discard them");
-        loot = new Loot(1, 1, 1, 1, 1);
+        loot = new Loot(1, 1, 1, 1, 1, false, false);
         test_station.setLoot(loot);
         test_station.mountShieldBooster(0);
         test_station.mountWeapon(0);
@@ -123,7 +123,7 @@ public class TestP3{
 
         // Testing discardShieldBoosterInHangar and discardWeaponInHangar
         System.out.println("We add some elements in order to discard them from the hangar");
-        loot = new Loot(1, 1, 1, 1, 1);
+        loot = new Loot(1, 1, 1, 1, 1, false, false);
         test_station.setLoot(loot);
         System.out.println("State of the station: " + test_station);
         System.out.println("Discarding a weapon from the hangar");
@@ -136,7 +136,7 @@ public class TestP3{
 
         // Testing space station actions
         System.out.println("Adding some elements and mounting them in order to make some actions");
-        loot = new Loot(1, 1, 1, 1, 1);
+        loot = new Loot(1, 1, 1, 1, 1, false, false);
         test_station.setLoot(loot);
         test_station.mountShieldBooster(0);
         test_station.mountWeapon(0);

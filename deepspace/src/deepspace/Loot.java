@@ -38,7 +38,7 @@ public class Loot{
     /**
      * Constructor of the class
      * */
-    Loot(int _nSupplies, int _nWeapons, int _nShields, int _nHangars, int _nMedals, boolean _getEfficient = false, boolean _spaceCity = false){
+    public Loot(int _nSupplies, int _nWeapons, int _nShields, int _nHangars, int _nMedals, boolean _getEfficient, boolean _spaceCity){
         nSupplies = _nSupplies;
         nWeapons = _nWeapons;
         nShields = _nShields;
@@ -84,7 +84,7 @@ public class Loot{
      * @return true, if a SpaceStation can transform to a SpaceCity
      *         false, otherwise
      * */
-    public boolean SpaceCity(){
+    public boolean spaceCity(){
         return spaceCity;
     }
 
@@ -100,12 +100,15 @@ public class Loot{
      * Gets the String representation of the object
      * @return the text representatio of the object
      * */
+    @Override
     public String toString(){
         return  "Loot(nSupplies = " + nSupplies + 
                 ", nWeapons = " + nWeapons + 
                 ", nShields = " + nShields + 
                 ", nHangars = " + nHangars + 
                 ", nMedals = " + nMedals + 
+                ", getEfficient = " + getEfficient + 
+                ", spaceCity = " + spaceCity + 
                 ")"; 
     }
 }

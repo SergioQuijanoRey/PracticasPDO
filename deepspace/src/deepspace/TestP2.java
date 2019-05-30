@@ -76,14 +76,14 @@ class TestP2{
         ArrayList<WeaponType> weapon_type_list = new ArrayList<WeaponType>(0);
         weapon_type_list.add(WeaponType.LASER);
         weapon_type_list.add(WeaponType.MISSILE);
-        Damage test_damage_a = new Damage(3, 2);
-        Damage test_damage_b = new Damage(weapon_type_list, 2);
+        Damage test_damage_a = new NumericDamage(3, 2);
+        Damage test_damage_b = new SpecificDamage(weapon_type_list, 2);
         System.out.println("First damage: " + test_damage_a.toString());
         System.out.println("Second damage: " + test_damage_b.toString());
 
         // Testing copies
-        Damage test_damage_a_copy = new Damage(test_damage_a);
-        Damage test_damage_b_copy = new Damage(test_damage_b);
+        Damage test_damage_a_copy = test_damage_a.copy();
+        Damage test_damage_b_copy = test_damage_b.copy();
         System.out.println("The copy of the first damage is: " + test_damage_a_copy);
         System.out.println("The copy of the second damage is: " + test_damage_b_copy);
 
@@ -129,8 +129,8 @@ class TestP2{
         //======================================================================
         System.out.println("Testing EnemyStarShip");
         System.out.println("================================================================================");
-        Damage test_damage = new Damage(2, 3);
-        Loot test_loot = new Loot(1, 2, 3, 4, 5);
+        Damage test_damage = new NumericDamage(2, 3);
+        Loot test_loot = new Loot(1, 2, 3, 4, 5, false, false);
         
         // Testing the constructor
         EnemyStarShip test_enemy = new EnemyStarShip("Enemy Test", (float)1.1, (float)2.2, test_loot, test_damage);

@@ -1,9 +1,11 @@
+package deepspace;
+
 /**
  * Class to represent an improved EfficientSpaceStation
  *
  * @author Sergio Quijano Rey
  * */
-class BetaPowerEfficientSpaceStation extends PowerEfficientStation{
+class BetaPowerEfficientSpaceStation extends PowerEfficientSpaceStation{
     // Private attributes
     //==========================================================================
     private final float EXTRAEFFICIENCY = (float)1.2;

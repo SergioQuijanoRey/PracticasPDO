@@ -53,7 +53,7 @@ class PowerEfficientSpaceStation extends SpaceStation{
      * */
     @Override
     public float protection(){
-        return super() * EFFICIENCYFACTOR;
+        return super.protection() * EFFICIENCYFACTOR;
     }
 
     /**

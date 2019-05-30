@@ -26,7 +26,7 @@ public class TestP1 {
         //======================================================================
         System.out.println("Testing Loot");
         System.out.println("=======================================================");
-        Loot test_loot = new Loot(10, 20, 30, 40, 50);
+        Loot test_loot = new Loot(10, 20, 30, 40, 50, false, false);
         System.out.print("The created loot is: ");
         System.out.println(test_loot.toString());
 

@@ -77,9 +77,9 @@ class SpaceCity extends SpaceStation{
     @Override
     public String toString(){
         return  "SPACECITY[[\n" + 
-                "\t\tbase: "super.toString() + 
+                "\t\tbase: " + super.toString() + 
                 "\t\tcollaborators: " + collaborators +
-                "\n]]"
+                "\n]]";
         
     }
 
@@ -88,7 +88,10 @@ class SpaceCity extends SpaceStation{
     /**
      * The space city receives a loot
      * We avoid making a transformation if the loot contains one
+     *
      * @param lo, the loot to receive
+     *
+     * BUG -- No añade el loot a la base de forma correcta
      * */
     @Override
     public Transformation setLoot(Loot lo){
