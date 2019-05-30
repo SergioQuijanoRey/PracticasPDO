@@ -153,6 +153,30 @@ public class TestP4 {
         System.out.println("");
     }
 
+    static void testPowerEfficientStation(){
+        System.out.println("Testing PowerEfficientSpaceStation");
+        System.out.println("================================================================================");
+
+        SuppliesPackage base = new SuppliesPackage(1.1111f, 2.222f, 3.333f);
+        SpaceStation test_station = new SpaceStation("sergio", base);
+        PowerEfficientSpaceStation test_power = new PowerEfficientSpaceStation(test_station);
+        System.out.print("The created power efficient station is: " + test_power);
+        System.out.println("");
+
+        System.out.println("The station fires: " + test_power.fire());
+        System.out.println("The station protects: " + test_power.protection());
+        System.out.println("State of the power efficient station: " + test_power);
+        System.out.println("");
+
+        // BUG -- Lanza warnings que no deberia
+        Loot test_loot = new Loot(1, 2, 3, 4, 5, true, true);
+        System.out.println("The station receives the loot " + test_loot);
+        Transformation test_transform = test_power.setLoot(test_loot);
+        System.out.println("Transformation returned: " + test_transform);
+        System.out.println("State of the power efficient station: " + test_power);
+        
+    }
+
     public static void main(String[] args){
         //testNumericDamage();
         System.out.println("");
@@ -165,7 +189,13 @@ public class TestP4 {
         System.out.println("");
 
         // Bug -- No se añade el loot de forma correcta
-        testSpaceCity();
+        //testSpaceCity();
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        // BUG -- El setLoot lanza warnings que no deberia
+        //testPowerEfficientStation();
         System.out.println("");
         System.out.println("");
         System.out.println("");
