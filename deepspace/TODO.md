@@ -2,9 +2,6 @@
 
 ## Testeos
 
-* GameUniverse.java
-    * No he testeado nada porque quedaba código de la siguiente practica por implementar
-* Loot
 * GameUniverse
 
 ## BUGS

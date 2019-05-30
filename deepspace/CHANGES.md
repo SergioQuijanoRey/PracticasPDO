@@ -11,3 +11,4 @@
 
 ## Cambios de metodos
 
+* `GameUniverse.toString()`

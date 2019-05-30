@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package deepspace;
 
 import java.util.ArrayList;
@@ -11,7 +6,8 @@ import java.util.ArrayList;
  * Represents the game, acting as the game controller.
  * Their methods are called from Controller.java (package controller)
  * 
- * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
+ * @author Miguel Ángel Fernández Gutiérrez
+ * @author Sergio Quijano Rey
  */
 public class GameUniverse {
     /**
@@ -211,13 +207,11 @@ public class GameUniverse {
             
             gameState.next(turns, spaceStations.size());
         }
-        /* WIP
         else{
             System.out.println("Unexpected gamestate at GameUniverse.init()");
             System.out.println("The game state is: " + gameState.getState());
             System.out.println("Nothing is done!");
         }
-        */
     }
     
     /**
@@ -384,12 +378,18 @@ public class GameUniverse {
      * String representation of the object.
      * @return string representation
      */
+    @Override
     public String toString() {
-        String message = "[GameUniverse] -> Game state: " + gameState.toString()
-                + ", Turns: " + turns + ", Dice: " + dice.toString()
-                + "\n\tCurrent station: " + currentStation.toString()
-                + "\n\tCurrent enemy: " + currentEnemy.toString();
-        return message;
+        return  "GameUniverse(\n" +
+                "\tcurrentStationIndex = " + currentStationIndex + "\n" +
+                "\tcurrentStation = " + currentStation + "\n" +
+                "\tcurrentEnemy = " + currentEnemy + "\n" +
+                "\tturns = " + turns + "\n" +
+                "\tdice = " + dice + "\n" +
+                "\tgameState = " + gameState + "\n" +
+                "\tspaceStations = " + spaceStations + "\n" +
+                "\tWIN = " + WIN + "\n" +
+                ")";
     }
     
     /**
@@ -397,15 +397,6 @@ public class GameUniverse {
      */
     public GameUniverseToUI getUIversion() {
         return new GameUniverseToUI(currentStation, currentEnemy);
-        /* WIP
-        if(currentStation != null && currentEnemy != null){
-            return new GameUniverseToUI(currentStation, currentEnemy);
-        }else{
-            System.out.println("WARNING! No currentEnemy or currentStation in GameUniverse.getUIversion()");
-            System.out.println("Trying to call GameUniverseToUI constructor, it is going to fail!");
-            return new GameUniverseToUI(currentStation, currentEnemy);
-        }
-        */
     }
     
 }

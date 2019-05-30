@@ -152,7 +152,7 @@ public class TestP4 {
         System.out.println("State of the city: " + test_city);
         System.out.println("");
     }
-
+ 
     static void testPowerEfficientStation(){
         System.out.println("Testing PowerEfficientSpaceStation");
         System.out.println("================================================================================");
@@ -209,6 +209,48 @@ public class TestP4 {
 
     }
 
+    static void testGameUniverse(){
+        System.out.println("Testing GameUniverse");
+        System.out.println("================================================================================");
+    
+        GameUniverse test_universe = new GameUniverse();
+        System.out.println("The created universe is " + test_universe);
+        System.out.println("");
+
+        System.out.println("Initializing the game with {\"Sergio\", \"Miguel\"}");
+        ArrayList<String> names = new ArrayList<>(0);
+        names.add("Sergio");
+        names.add("Miguel");
+        test_universe.init(names);
+        System.out.println("State after initializing: " + test_universe);
+        System.out.println("");
+
+        System.out.println("Combat");
+        CombatResult test_result = test_universe.combat();
+        System.out.println("Result of the combat: " + test_result);
+        System.out.println("State of the GameUniverse: " + test_universe);
+        System.out.println("");
+
+        System.out.println("Next turn:");
+        test_universe.nextTurn();
+        System.out.println("State of the GameUniverse: " + test_universe);
+        System.out.println("");
+
+        System.out.println("Combat");
+        test_result = test_universe.combat();
+        System.out.println("Result of the combat: " + test_result);
+        System.out.println("State of the GameUniverse: " + test_universe);
+        System.out.println("");
+
+        System.out.println("Next turn:");
+        test_universe.nextTurn();
+        System.out.println("State of the GameUniverse: " + test_universe);
+        System.out.println("");
+
+        System.out.println("Have a winner: " + test_universe.haveAWinner());
+
+    }
+
     public static void main(String[] args){
         //testNumericDamage();
         System.out.println("");
@@ -237,7 +279,12 @@ public class TestP4 {
         System.out.println("");
         System.out.println("");
 
-        testLoot();
+        //testLoot();
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        testGameUniverse();
         System.out.println("");
         System.out.println("");
         System.out.println("");
