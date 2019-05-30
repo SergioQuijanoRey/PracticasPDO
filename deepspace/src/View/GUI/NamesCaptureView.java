@@ -5,6 +5,7 @@
  */
 package View.GUI;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JDialog;
 
@@ -29,6 +30,17 @@ public class NamesCaptureView extends JDialog {
             }
         });
         
+    }
+    
+    void sendNames() {
+        names.clear();
+        names.add(jtName1.getText());
+        names.add(jtName2.getText());
+        if ( (Integer) jsNumPlayers.getValue() >= 3 )
+            names.add(jtName3.getText());
+        if ( (Integer) jsNumPlayers.getValue() >= 4 )
+            names.add(jtName4.getText());
+        dispose();
     }
 
     /**
@@ -70,6 +82,11 @@ public class NamesCaptureView extends JDialog {
         jbStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbStartActionPerformed(evt);
+            }
+        });
+        jbStart.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jbStartKeyPressed(evt);
             }
         });
 
@@ -176,14 +193,7 @@ public class NamesCaptureView extends JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbStartActionPerformed
-        names.clear();
-        names.add(jtName1.getText());
-        names.add(jtName2.getText());
-        if ( (Integer) jsNumPlayers.getValue() >= 3 )
-            names.add(jtName3.getText());
-        if ( (Integer) jsNumPlayers.getValue() >= 4 )
-            names.add(jtName4.getText());
-        dispose();
+        sendNames();
     }//GEN-LAST:event_jbStartActionPerformed
 
     private void jsNumPlayersStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsNumPlayersStateChanged
@@ -208,6 +218,12 @@ public class NamesCaptureView extends JDialog {
                 break;
         }
     }//GEN-LAST:event_jsNumPlayersStateChanged
+
+    private void jbStartKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbStartKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            sendNames();
+        }
+    }//GEN-LAST:event_jbStartKeyPressed
 
 
     ArrayList<String> getNames() {

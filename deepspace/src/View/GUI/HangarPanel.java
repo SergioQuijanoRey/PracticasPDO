@@ -19,18 +19,28 @@ import java.util.ArrayList;
 public class HangarPanel extends javax.swing.JPanel {
 
     /**
+     * Auxiliar array to distinguish between WeaponView and ShieldView in
+     * jpHangarCards' panel components.
+     *  - isWeaponView[i] is true if jpHangarCards[i] is of type WeaponView
+     *  - isWeaponView[i] is false if jpHangarCards[i] is of type WeaponView
+     */
+    ArrayList<Boolean> isWeaponView;
+    
+    
+    /**
      * Creates new form HangarPanel
      */
     public HangarPanel() {
         initComponents();
         
-        
+        isWeaponView = new ArrayList<>();
     }
     
     public void setHangar(SpaceStationToUI station) {
         HangarToUI hangar = station.getHangar();
         System.out.println("Setting hangar panel...");
         jpHangarCards.removeAll();
+        isWeaponView.clear();
         
         if ( hangar != null ) {
             if ( hangar.getMaxElements() == 1 )
@@ -48,12 +58,14 @@ public class HangarPanel extends javax.swing.JPanel {
                 weaponView = new WeaponView();
                 weaponView.setWeapon(w);
                 jpHangarCards.add(weaponView);
+                isWeaponView.add(true);
                 
             }
             for ( ShieldToUI s : hangar_shieldBoosters ) {
                 shieldView = new ShieldView();
                 shieldView.setShield(s);
                 jpHangarCards.add(shieldView);
+                isWeaponView.add(false);
             }
             
             int value = (int) ( (hangar_weapons.size()+hangar_shieldBoosters.size()) * 100 / hangar.getMaxElements() );
@@ -72,7 +84,7 @@ public class HangarPanel extends javax.swing.JPanel {
         ArrayList<Integer> selectedWeaponsInHangar = new ArrayList<>();
         int i = 0;
         for ( Component c: jpHangarCards.getComponents() ) {
-            if ( c instanceof WeaponView )
+            if ( isWeaponView.get(i) )
                 if ( ((WeaponView) c).isSelected() )
                     selectedWeaponsInHangar.add(i);
             i++;
@@ -85,7 +97,7 @@ public class HangarPanel extends javax.swing.JPanel {
         ArrayList<Integer> selectedShieldBoostersInHangar = new ArrayList<>();
         int i = 0;
         for ( Component c: jpHangarCards.getComponents() ) {
-            if ( c instanceof ShieldView )
+            if ( !isWeaponView.get(i) )
                 if ( ((ShieldView) c).isSelected() )
                     selectedShieldBoostersInHangar.add(i);
             i++;

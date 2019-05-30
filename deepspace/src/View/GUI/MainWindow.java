@@ -96,7 +96,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
         
         jbNextTurn.setEnabled(false);
         
-        setButtons();
+        //setButtons();
         repaint();
         revalidate();
     }

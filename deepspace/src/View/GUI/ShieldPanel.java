@@ -43,7 +43,7 @@ public class ShieldPanel extends javax.swing.JPanel {
         ArrayList<Integer> selectedShieldBoosters = new ArrayList<>();
         int i = 0;
         for ( Component c : jpShieldCards.getComponents() ) {
-            if ( ((WeaponView) c).isSelected() )
+            if ( ((ShieldView) c).isSelected() )
                 selectedShieldBoosters.add(i);
             i++;
         }
