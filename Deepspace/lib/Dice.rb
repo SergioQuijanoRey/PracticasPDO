@@ -124,11 +124,7 @@ class Dice
 	# Determines if space station gets extra efficiency
 	# @return [Boolean] true if space station gets extra efficiency; false, otherwise
 	def extraEfficiency
-		if @generator.rand <= @EXTRAEFFICIENCYPROB
-			return true
-		else
-			return false
-		end
+		return (@generator.rand <= @EXTRAEFFICIENCYPROB)
 	end
 
 end # class Dice
