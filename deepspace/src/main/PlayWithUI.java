@@ -7,7 +7,7 @@ package main;
 
 import View.DeepSpaceView;
 import View.UI.TextMainView;
-import controller.Controller;
+import ControllerDeprecated.Controller;
 import deepspace.GameUniverse;
 
 /**

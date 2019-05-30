@@ -162,7 +162,8 @@ public class SpecificDamage extends Damage {
     /**
      * To UI.
      */
-    SpecificDamageToUI getUIversion() {
+    @Override
+    public SpecificDamageToUI getUIversion() {
         return new SpecificDamageToUI(this);
     }
 }

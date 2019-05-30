@@ -332,10 +332,10 @@ public class GameUniverse {
             Transformation transform = station.setLoot(aLoot);
             
             // we check the transformation
-            if ( transformation == Transformation.GETEFFICIENT ) {
+            if ( transform == Transformation.GETEFFICIENT ) {
                 makeStationEfficient();
                 combatResult = CombatResult.STATIONWINSANDCONVERTS;
-            } else if ( transformation == Transformation.SPACECITY ) {
+            } else if ( transform == Transformation.SPACECITY ) {
                 createSpaceCity();
                 combatResult = CombatResult.STATIONWINSANDCONVERTS;
             } else
@@ -357,11 +357,11 @@ public class GameUniverse {
             for ( SpaceStation station : spaceStations )
                 if ( station != currentStation )
                     others.add(station);
-        }
         
-        currentStation = new SpaceCity(currentStation, others);
-        spaceStations.set(currentStationIndex, currentStation);
-        haveSpaceCity = true;
+            currentStation = new SpaceCity(currentStation, others);
+            spaceStations.set(currentStationIndex, currentStation);
+            haveSpaceCity = true;
+        }
     }
     
     /**

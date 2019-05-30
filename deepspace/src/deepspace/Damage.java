@@ -275,10 +275,8 @@ abstract class Damage {
         return message;
     }*/
     
-    /*
+    /**
      * To UI.
      */
-    /*DamageToUI getUIversion() {
-        return new DamageToUI(this);
-    }*/
+    abstract public DamageToUI getUIversion();
 }

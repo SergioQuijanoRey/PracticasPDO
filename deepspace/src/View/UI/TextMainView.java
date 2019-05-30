@@ -6,7 +6,7 @@
 package View.UI;
 
 import View.DeepSpaceView;
-import controller.Controller;
+import ControllerDeprecated.Controller;
 import deepspace.DamageToUI;
 import deepspace.EnemyToUI;
 import deepspace.GameState;
@@ -99,7 +99,7 @@ public class TextMainView implements DeepSpaceView {
         mountDiscardFromHangar (Operation.DISCARD, Element.SHIELD);
         break;
       case DISCARDHANGAR :
-        Controller.getInstance().discardHangar();
+        Controller.getInstance().discardHangar();   // impl
         pause ("\n ******* Hangar Completo Descartado ******* ");
         break;
       case DISCARDWEAPONS :
@@ -109,10 +109,10 @@ public class TextMainView implements DeepSpaceView {
         discardMountedElements (Element.SHIELD);
         break;
       case COMBAT :
-        Controller.getInstance().combat();
+        Controller.getInstance().combat();      // impl
         break;
       case NEXTTURN :
-        Controller.getInstance().nextTurn();
+        Controller.getInstance().nextTurn();    // impl
         break;
     }
   }

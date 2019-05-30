@@ -5,7 +5,7 @@
  */
 package View;
 
-import controller.Controller;
+import ControllerDeprecated.Controller;
 import deepspace.GameUniverse;
 import java.util.ArrayList;
 

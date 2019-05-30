@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
  */
-class SpaceStation {
+class SpaceStation implements SpaceFighter {
     /**
      * Maximum fuel quantity that a space station can have.
      */
@@ -84,7 +84,7 @@ class SpaceStation {
         shieldPower = 0f;
         weapons = new ArrayList<>();
         shieldBoosters = new ArrayList<>();
-        pendingDamage = null;
+        pendingDamage = new NumericDamage(0,0);
         hangar = null;
         
         receiveSupplies(_supplies);
