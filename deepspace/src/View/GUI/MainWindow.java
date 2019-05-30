@@ -94,33 +94,36 @@ public class MainWindow extends javax.swing.JFrame implements View {
         TitledBorder border = new TitledBorder("");
         jpCurrentStation.setBorder(border);
         
+        jbNextTurn.setEnabled(false);
+        
         setButtons();
         repaint();
         revalidate();
     }
     
     public void setButtons() {
-        // buttons for Mount, Discard, Discard entire Hangar
-        if ( Controller.getInstance().getUIversion() == null ) {
-            System.out.println("NULLED");
-            jbDiscardComplete.setEnabled(true);
-            jbMount.setEnabled(true);
-            jbDiscard.setEnabled(true);
-        } else
-        if ( Controller.getInstance().getUIversion().getCurrentStation().getHangar().getWeapons().isEmpty()
-                && Controller.getInstance().getUIversion().getCurrentStation().getHangar().getShieldBoosters().isEmpty() ) {
+        // buttons for Discard, Discard Complete, Mount
+        jbDiscard.setEnabled(false);
+        if ( Controller.getInstance().getUIversion().getCurrentStation().getHangar() == null ) {
             jbDiscardComplete.setEnabled(false);
             jbMount.setEnabled(false);
-            if ( Controller.getInstance().getUIversion().getCurrentStation().getWeapons().isEmpty()
-                && Controller.getInstance().getUIversion().getCurrentStation().getShieldBoosters().isEmpty() )
-                jbDiscard.setEnabled(false);
-            else
+            
+            if ( !Controller.getInstance().getUIversion().getCurrentStation().getWeapons().isEmpty() )
+                jbDiscard.setEnabled(true);
+            else if ( !Controller.getInstance().getUIversion().getCurrentStation().getShieldBoosters().isEmpty() )
                 jbDiscard.setEnabled(true);
         } else {
-            jbDiscardComplete.setEnabled(true);
-            jbMount.setEnabled(true);
-            jbDiscard.setEnabled(true);
-        }
+            if ( !Controller.getInstance().getUIversion().getCurrentStation().getHangar().getWeapons().isEmpty()
+                    || !Controller.getInstance().getUIversion().getCurrentStation().getHangar().getShieldBoosters().isEmpty() ) {
+                jbDiscardComplete.setEnabled(true);
+                jbMount.setEnabled(true);
+                jbDiscard.setEnabled(true);
+            } else {
+                jbDiscardComplete.setEnabled(false);
+                jbMount.setEnabled(false);
+                jbDiscard.setEnabled(false);
+            }
+        }   
         
         // buttons for Combat, Next Turn
         // WIP        
@@ -350,13 +353,17 @@ public class MainWindow extends javax.swing.JFrame implements View {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbNextTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNextTurnActionPerformed
-        Controller.getInstance().nextTurn();
-        updateView();
+        // WIP botón next turn: deshabilitar/habilitar
+        boolean canContinue = Controller.getInstance().nextTurn();
+        if ( canContinue )
+            updateView();
     }//GEN-LAST:event_jbNextTurnActionPerformed
 
     private void jbCombatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCombatActionPerformed
         Controller.getInstance().combat();
         updateView();
+        jbCombat.setEnabled(false);
+        jbNextTurn.setEnabled(true);
     }//GEN-LAST:event_jbCombatActionPerformed
 
     private void jbExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExitActionPerformed

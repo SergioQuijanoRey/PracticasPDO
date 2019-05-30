@@ -5,7 +5,7 @@
  */
 package View.GUI;
 
-import ControllerDeprecated.Controller;
+import Controller.ControllerText;
 import deepspace.DamageToUI;
 import deepspace.HangarToUI;
 import deepspace.ShieldToUI;

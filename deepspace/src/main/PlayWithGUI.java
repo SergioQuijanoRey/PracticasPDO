@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DeepspaceGUI;
+package main;
 
 import View.GUI.MainWindow;
 import Controller.Controller;
@@ -15,7 +15,7 @@ import View.View;
  * 
  * @author Miguel Ángel Fernández Gutiérrez, Sergio Quijano Rey
  */
-public class DeepspaceGUI {
+public class PlayWithGUI {
     /**
      * Main for Deepspace GUI.
      * @param args command-line arguments

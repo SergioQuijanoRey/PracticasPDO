@@ -7,7 +7,7 @@ package main;
 
 import View.DeepSpaceView;
 import View.UI.TextMainView;
-import ControllerDeprecated.Controller;
+import Controller.ControllerText;
 import deepspace.GameUniverse;
 
 /**
@@ -19,7 +19,7 @@ public class PlayWithUI {
         DeepSpaceView ui;
         GameUniverse game = new GameUniverse();
         ui = TextMainView.getInstance();
-        Controller controller = Controller.getInstance();
+        ControllerText controller = ControllerText.getInstance();
         controller.setModelView(game,ui);
         controller.start();   
     }

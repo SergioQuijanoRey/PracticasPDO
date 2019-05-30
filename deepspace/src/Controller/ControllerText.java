@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ControllerDeprecated;
+package Controller;
 
 import View.DeepSpaceView;
 import deepspace.CombatResult;
@@ -17,8 +17,8 @@ import java.util.Collections;
  *
  * @author profe
  */
-public class Controller {
-    private static final Controller instance = new Controller();
+public class ControllerText {
+    private static final ControllerText instance = new ControllerText();
     
     public static final int WEAPON = 0x1;
     public static final int SHIELD = 0x2;
@@ -26,9 +26,9 @@ public class Controller {
     private GameUniverse game;
     private DeepSpaceView view;
     
-    private Controller () {}
+    private ControllerText () {}
     
-    public static Controller getInstance () {
+    public static ControllerText getInstance () {
       return instance;
     }
     

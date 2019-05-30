@@ -6,7 +6,7 @@
 package View.UI;
 
 import View.DeepSpaceView;
-import ControllerDeprecated.Controller;
+import Controller.ControllerText;
 import deepspace.DamageToUI;
 import deepspace.EnemyToUI;
 import deepspace.GameState;
@@ -78,7 +78,7 @@ public class TextMainView implements DeepSpaceView {
   private void processCommand (Command command) { // Devolvia  Command
     switch (command) {
       case EXIT :
-        Controller.getInstance().finish(0);
+        ControllerText.getInstance().finish(0);
         break;
       case SHOWSTATION :
         showMessageln (showStation (gameUI.getCurrentStation()));
@@ -99,7 +99,7 @@ public class TextMainView implements DeepSpaceView {
         mountDiscardFromHangar (Operation.DISCARD, Element.SHIELD);
         break;
       case DISCARDHANGAR :
-        Controller.getInstance().discardHangar();   // impl
+        ControllerText.getInstance().discardHangar();   // impl
         pause ("\n ******* Hangar Completo Descartado ******* ");
         break;
       case DISCARDWEAPONS :
@@ -109,10 +109,10 @@ public class TextMainView implements DeepSpaceView {
         discardMountedElements (Element.SHIELD);
         break;
       case COMBAT :
-        Controller.getInstance().combat();      // impl
+        ControllerText.getInstance().combat();      // impl
         break;
       case NEXTTURN :
-        Controller.getInstance().nextTurn();    // impl
+        ControllerText.getInstance().nextTurn();    // impl
         break;
     }
   }
@@ -144,8 +144,8 @@ public class TextMainView implements DeepSpaceView {
 
   @Override
   public void updateView() {
-    gameUI = Controller.getInstance().getUIversion();
-    state = Controller.getInstance().getState();
+    gameUI = ControllerText.getInstance().getUIversion();
+    state = ControllerText.getInstance().getState();
   }
 
   @Override
@@ -242,15 +242,15 @@ public class TextMainView implements DeepSpaceView {
         switch (element) {
             case WEAPON :
               if (operation == Operation.MOUNT)
-                  Controller.getInstance().mount(elements,noElements);
+                  ControllerText.getInstance().mount(elements,noElements);
               else
-                  Controller.getInstance().discard(Controller.HANGAR, elements, noElements);
+                  ControllerText.getInstance().discard(ControllerText.HANGAR, elements, noElements);
               break;
             case SHIELD :
               if (operation == Operation.MOUNT)
-                  Controller.getInstance().mount (noElements,elements);
+                  ControllerText.getInstance().mount (noElements,elements);
               else
-                  Controller.getInstance().discard(Controller.HANGAR, noElements, elements);
+                  ControllerText.getInstance().discard(ControllerText.HANGAR, noElements, elements);
               break;
         }
         updateView();
@@ -347,10 +347,10 @@ public class TextMainView implements DeepSpaceView {
         }
         switch (element) {
             case WEAPON :
-              Controller.getInstance().discard(Controller.WEAPON, elements, noElements);
+              ControllerText.getInstance().discard(ControllerText.WEAPON, elements, noElements);
               break;
             case SHIELD :
-              Controller.getInstance().discard(Controller.SHIELD, noElements, elements);
+              ControllerText.getInstance().discard(ControllerText.SHIELD, noElements, elements);
               break;
         }
         updateView();
