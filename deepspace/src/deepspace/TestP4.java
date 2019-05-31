@@ -25,7 +25,7 @@ public class TestP4 {
         System.out.println("");
 
         System.out.println("Creating a copy of the numeric damage");
-        NumericDamage test_numeric_copy = new NumericDamage(test_numeric);
+        NumericDamage test_numeric_copy = test_numeric.copy();
         System.out.println("State of the copy: " + test_numeric_copy);
         System.out.println("");
 
